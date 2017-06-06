@@ -13,33 +13,40 @@
     {% endif %}
 
     <div class="col-12">
-        <table class="table">
-            <thead class="thead-default">
-            <tr>
-                <th>Shift Title</th>
-                <th>Starts</th>
-                <th>Ends</th>
-                <th>Description</th>
-                <th>People needed</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for shift in plan.shifts %}
+        {% if plan.shifts is not empty %}
+            <table class="table">
+                <thead class="thead-default">
                 <tr>
-                    <th scope="row">{{ shift.title }}</th>
-                    <td>{{ shift.start|date('h:m') }}</td>
-                    <td>{{ shift.end|date('h:m') }}</td>
-                    <td>{{ shift.description }}</td>
-                    <td>
-                        <ol>
-                        {% for person in 0..shift.numberPeople %}
-                            <li><a href="#">Sign in</a> </li>
-                        {% endfor %}
-                        </ol>
-                    </td>
+                    <th>Shift Title</th>
+                    <th>Starts</th>
+                    <th>Ends</th>
+                    <th>Description</th>
+                    <th>People needed</th>
                 </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                {% for shift in plan.shifts %}
+                    <tr>
+                        <th scope="row">{{ shift.title }}</th>
+                        <td>{{ shift.start|date('h:m') }}</td>
+                        <td>{{ shift.end|date('h:m') }}</td>
+                        <td>{{ shift.description }}</td>
+                        <td>
+                            <ol>
+                            {% for person in 0..shift.numberPeople %}
+                                <li><a href="#">Sign in</a> </li>
+                            {% endfor %}
+                            </ol>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <div class="alert alert-warning" role="alert">
+                <strong>Warning!</strong> No shifts defined
+            </div>
+            <img class="img-fluid." src="https://media.giphy.com/media/MmFVEhDzF0UUw/giphy.gif">
+        {% endif %}
     </div>
 {% endblock %}
