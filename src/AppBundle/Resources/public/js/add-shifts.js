@@ -2,8 +2,8 @@ $(function() {
     var $collectionHolder;
 
     // setup an "add a shift" link
-    var $addShiftLink = $('<a href="#" class="add_shift_link">Add a shift</a>');
-    var $newLinkLi = $('<li></li>').append($addShiftLink);
+    var $addShiftLink = $('<a href="#" class="add_shift_link"><i class="fa fa-plus-square" aria-hidden="true"></i> Add a shift</a>');
+    var $newLinkLi = $('<div></div>').append($addShiftLink);
 
         // Get the ul that holds the collection of shifts
         $collectionHolder = $('ul.shifts');

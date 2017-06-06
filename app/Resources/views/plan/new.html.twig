@@ -1,24 +1,27 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Plan creation</h1>
+    <div class="col-12">
+        <h1>New Event Plan</h1>
+    </div>
 
-    {{ form_start(form) }}
-        {{ form_row(form.title) }}
+    <div class="col-12">
+        {{ form_start(form) }}
+        <div class="form-group">
+            {{ form_label(form.title) }}
+            {{ form_errors(form.title) }}
+            {{ form_widget(form.title) }}
+        </div>
         {{ form_row(form.date) }}
         {{ form_row(form.description) }}
         <hr>
+        <h3>Shifts</h3>
         <ul class="shifts" data-prototype="{{ form_widget(form.shifts.vars.prototype)|e('html_attr') }}">
             {% for shift in form.shifts %}
                 <li>{{ form_widget(shift) }}</li>
             {% endfor %}
         </ul>
         <input class="btn btn-primary" type="submit" value="Create" />
-    {{ form_end(form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('plan_index') }}">Back to the list</a>
-        </li>
-    </ul>
+        {{ form_end(form) }}
+    </div>
 {% endblock %}
