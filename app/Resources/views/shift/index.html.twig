@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Shifts list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Numberpeople</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for shift in shifts %}
+            <tr>
+                <td><a href="{{ path('shift_show', { 'id': shift.id }) }}">{{ shift.id }}</a></td>
+                <td>{{ shift.title }}</td>
+                <td>{{ shift.description }}</td>
+                <td>{% if shift.start %}{{ shift.start|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if shift.end %}{{ shift.end|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ shift.numberPeople }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('shift_show', { 'id': shift.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('shift_edit', { 'id': shift.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('shift_new') }}">Create a new shift</a>
+        </li>
+    </ul>
+{% endblock %}
