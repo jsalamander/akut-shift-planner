@@ -21,6 +21,7 @@
                     <th>Starts</th>
                     <th>Ends</th>
                     <th>Description</th>
+                    <th>People needed</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -30,6 +31,13 @@
                         <td>{{ shift.start|date('h:m') }}</td>
                         <td>{{ shift.end|date('h:m') }}</td>
                         <td>{{ shift.description }}</td>
+                        <td>
+                            <ol>
+                            {% for person in 0..shift.numberPeople %}
+                                <li><a href="#">Sign in</a> </li>
+                            {% endfor %}
+                            </ol>
+                        </td>
                     </tr>
                 {% endfor %}
                 </tbody>
