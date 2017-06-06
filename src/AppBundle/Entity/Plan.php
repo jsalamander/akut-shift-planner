@@ -136,27 +136,27 @@ class Plan
     }
 
     /**
-     * Add product
+     * Add shift
      *
-     * @param \AppBundle\Entity\Shift $product
+     * @param \AppBundle\Entity\Shift $shift
      *
      * @return Plan
      */
-    public function addShift(\AppBundle\Entity\Shift $product)
+    public function addShift(\AppBundle\Entity\Shift $shift)
     {
-        $this->shifts[] = $product;
+        $this->shifts[] = $shift;
 
         return $this;
     }
 
     /**
-     * Remove product
+     * Remove shift
      *
-     * @param \AppBundle\Entity\Shift $product
+     * @param \AppBundle\Entity\Shift $shift
      */
-    public function removeShift(\AppBundle\Entity\Shift $product)
+    public function removeShift(\AppBundle\Entity\Shift $shift)
     {
-        $this->shifts->removeElement($product);
+        $this->shifts->removeElement($shift);
     }
 
     /**

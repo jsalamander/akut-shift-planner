@@ -14,10 +14,15 @@ class PlanType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('title')->add('date')->add('description')
+        $builder
+            ->add('title')
+            ->add('date')
+            ->add('description')
             ->add('shifts', CollectionType::class, array(
-            'entry_type' => ShiftType::class
-        ));
+                'entry_type' => ShiftType::class,
+                'allow_add' => true,
+                'by_reference' => false,
+            ));
     }
     
     /**

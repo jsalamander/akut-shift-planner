@@ -42,9 +42,6 @@ class PlanController extends Controller
     public function newAction(Request $request)
     {
         $plan = new Plan();
-        $shift = new Shift();
-        $shift->setPlan($plan);
-        $plan->getShifts()->add($shift);
 
         $form = $this->createForm('AppBundle\Form\PlanType', $plan);
         $form->handleRequest($request);
