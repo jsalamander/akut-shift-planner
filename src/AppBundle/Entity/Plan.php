@@ -144,6 +144,7 @@ class Plan
      */
     public function addShift(\AppBundle\Entity\Shift $shift)
     {
+        $shift->setPlan($this);
         $this->shifts[] = $shift;
 
         return $this;
