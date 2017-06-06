@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Plan
@@ -42,6 +43,15 @@ class Plan
      */
     private $description;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Shift", mappedBy="plan")
+     */
+    private $products;
+
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -124,5 +134,38 @@ class Plan
     {
         return $this->description;
     }
-}
 
+    /**
+     * Add product
+     *
+     * @param \AppBundle\Entity\Shift $product
+     *
+     * @return Plan
+     */
+    public function addProduct(\AppBundle\Entity\Shift $product)
+    {
+        $this->products[] = $product;
+
+        return $this;
+    }
+
+    /**
+     * Remove product
+     *
+     * @param \AppBundle\Entity\Shift $product
+     */
+    public function removeProduct(\AppBundle\Entity\Shift $product)
+    {
+        $this->products->removeElement($product);
+    }
+
+    /**
+     * Get products
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProducts()
+    {
+        return $this->products;
+    }
+}

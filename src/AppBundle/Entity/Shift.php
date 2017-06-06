@@ -58,6 +58,13 @@ class Shift
 
 
     /**
+     * @ORM\ManyToOne(targetEntity="Plan", inversedBy="shifts")
+     * @ORM\JoinColumn(name="plan_id", referencedColumnName="id")
+     */
+    private $plan;
+
+
+    /**
      * Get id
      *
      * @return int
@@ -186,5 +193,28 @@ class Shift
     {
         return $this->numberPeople;
     }
-}
 
+    /**
+     * Set plan
+     *
+     * @param \AppBundle\Entity\Plan $plan
+     *
+     * @return Shift
+     */
+    public function setPlan(\AppBundle\Entity\Plan $plan = null)
+    {
+        $this->plan = $plan;
+
+        return $this;
+    }
+
+    /**
+     * Get plan
+     *
+     * @return \AppBundle\Entity\Plan
+     */
+    public function getPlan()
+    {
+        return $this->plan;
+    }
+}
