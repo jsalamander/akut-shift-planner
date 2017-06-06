@@ -42,6 +42,11 @@ class Person
      */
     private $phone;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Shift", inversedBy="people")
+     * @ORM\JoinColumn(name="shift_id", referencedColumnName="id")
+     */
+    private $shift;
 
     /**
      * Get id
@@ -124,5 +129,28 @@ class Person
     {
         return $this->phone;
     }
-}
 
+    /**
+     * Set shift
+     *
+     * @param \AppBundle\Entity\Shift $shift
+     *
+     * @return Person
+     */
+    public function setShift(\AppBundle\Entity\Shift $shift = null)
+    {
+        $this->shift = $shift;
+
+        return $this;
+    }
+
+    /**
+     * Get shift
+     *
+     * @return \AppBundle\Entity\Shift
+     */
+    public function getShift()
+    {
+        return $this->shift;
+    }
+}

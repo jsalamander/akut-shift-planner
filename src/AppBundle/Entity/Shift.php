@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Shift
@@ -62,6 +63,16 @@ class Shift
      * @ORM\JoinColumn(name="plan_id", referencedColumnName="id")
      */
     private $plan;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Shift", mappedBy="plan")
+     */
+    private $people;
+
+    public function __construct()
+    {
+        $this->people = new ArrayCollection();
+    }
 
 
     /**
@@ -216,5 +227,39 @@ class Shift
     public function getPlan()
     {
         return $this->plan;
+    }
+
+    /**
+     * Add person
+     *
+     * @param \AppBundle\Entity\Shift $person
+     *
+     * @return Shift
+     */
+    public function addPerson(\AppBundle\Entity\Shift $person)
+    {
+        $this->people[] = $person;
+
+        return $this;
+    }
+
+    /**
+     * Remove person
+     *
+     * @param \AppBundle\Entity\Shift $person
+     */
+    public function removePerson(\AppBundle\Entity\Shift $person)
+    {
+        $this->people->removeElement($person);
+    }
+
+    /**
+     * Get people
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPeople()
+    {
+        return $this->people;
     }
 }
