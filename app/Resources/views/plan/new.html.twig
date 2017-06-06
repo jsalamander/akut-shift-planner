@@ -16,7 +16,7 @@
         {{ form_row(form.description) }}
         <hr>
         <h3>Shifts</h3>
-        <ul class="shifts" data-prototype="{{ form_widget(form.shifts.vars.prototype)|e('html_attr') }}">
+        <ul class="shifts list-unstyled" data-prototype="{{ form_widget(form.shifts.vars.prototype)|e('html_attr') }}">
             {% for shift in form.shifts %}
                 <li>{{ form_widget(shift) }}</li>
             {% endfor %}

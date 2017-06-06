@@ -21,6 +21,7 @@ $(function() {
 
             // add a new shift form (see next code block)
             addShiftForm($collectionHolder, $newLinkLi);
+            addDatePicker();
         });
 });
 
@@ -41,4 +42,10 @@ function addShiftForm($collectionHolder, $newLinkLi) {
     // Display the form in the page in an li, before the "Add a shift" link li
     var $newFormLi = $('<li></li>').append(newForm);
     $newLinkLi.before($newFormLi);
+}
+
+function addDatePicker() {
+    $('.datepicker').each(function (index, value) {
+        $(value).datepicker();
+    });
 }
