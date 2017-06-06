@@ -24,6 +24,10 @@
         </tbody>
     </table>
 
+    {% for shift in plan.shifts %}
+        <li>{{ shift.title }}</li>
+    {% endfor %}
+
     <ul>
         <li>
             <a href="{{ path('plan_index') }}">Back to the list</a>

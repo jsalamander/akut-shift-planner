@@ -44,13 +44,13 @@ class Plan
     private $description;
 
     /**
-     * @ORM\OneToMany(targetEntity="Shift", mappedBy="plan")
+     * @ORM\OneToMany(targetEntity="Shift", mappedBy="plan", cascade={"persist"})
      */
-    private $products;
+    private $shifts;
 
     public function __construct()
     {
-        $this->products = new ArrayCollection();
+        $this->shifts = new ArrayCollection();
     }
 
     /**
@@ -142,9 +142,9 @@ class Plan
      *
      * @return Plan
      */
-    public function addProduct(\AppBundle\Entity\Shift $product)
+    public function addShift(\AppBundle\Entity\Shift $product)
     {
-        $this->products[] = $product;
+        $this->shifts[] = $product;
 
         return $this;
     }
@@ -154,9 +154,9 @@ class Plan
      *
      * @param \AppBundle\Entity\Shift $product
      */
-    public function removeProduct(\AppBundle\Entity\Shift $product)
+    public function removeShift(\AppBundle\Entity\Shift $product)
     {
-        $this->products->removeElement($product);
+        $this->shifts->removeElement($product);
     }
 
     /**
@@ -164,8 +164,12 @@ class Plan
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getProducts()
+    public function getShifts()
     {
-        return $this->products;
+        return $this->shifts;
+    }
+
+    public function __toString() {
+        return $this->title;
     }
 }

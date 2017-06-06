@@ -262,4 +262,8 @@ class Shift
     {
         return $this->people;
     }
+
+    public function __toString() {
+        return $this->title;
+    }
 }

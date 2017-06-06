@@ -13,7 +13,7 @@ class ShiftType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('title')->add('description')->add('start')->add('end')->add('numberPeople')->add('plan');
+        $builder->add('title')->add('description')->add('start')->add('end')->add('numberPeople');
     }
     
     /**

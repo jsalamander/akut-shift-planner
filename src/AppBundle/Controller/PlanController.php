@@ -3,9 +3,11 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Plan;
+use AppBundle\Entity\Shift;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Plan controller.
@@ -40,6 +42,10 @@ class PlanController extends Controller
     public function newAction(Request $request)
     {
         $plan = new Plan();
+        $shift = new Shift();
+        $shift->setPlan($plan);
+        $plan->getShifts()->add($shift);
+
         $form = $this->createForm('AppBundle\Form\PlanType', $plan);
         $form->handleRequest($request);
 

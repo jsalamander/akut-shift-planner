@@ -4,7 +4,13 @@
     <h1>Plan creation</h1>
 
     {{ form_start(form) }}
-        {{ form_widget(form) }}
+        {{ form_row(form.title) }}
+        {{ form_row(form.date) }}
+        {{ form_row(form.description) }}
+        <hr>
+        {% for shift in form.shifts %}
+            <li>{{ form_widget(shift) }}</li>
+        {% endfor %}
         <input type="submit" value="Create" />
     {{ form_end(form) }}
 

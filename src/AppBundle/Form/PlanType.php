@@ -5,6 +5,7 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class PlanType extends AbstractType
 {
@@ -13,7 +14,10 @@ class PlanType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('title')->add('date')->add('description');
+        $builder->add('title')->add('date')->add('description')
+            ->add('shifts', CollectionType::class, array(
+            'entry_type' => ShiftType::class
+        ));
     }
     
     /**
