@@ -1,47 +1,45 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="row">
-        <div class="col-12 d-flex justify-content-end">
-            <h1 class="mr-auto p-2">{{ plan.title }}</h1>
-            <h6 class="p-2">{% if plan.date %}{{ plan.date|date('d.m.Y') }}{% endif %}</h6>
-        </div>
-        {% if plan.description %}
-            <div class="col-12">
-                <h6>Description</h6>
-                {{ plan.description }}
-            </div>
-        {% endif %}
-
+    <div class="col-12 d-flex justify-content-end">
+        <h1 class="mr-auto p-2">{{ plan.title }}</h1>
+        <h6 class="p-2">{% if plan.date %}{{ plan.date|date('d.m.Y') }}{% endif %}</h6>
+    </div>
+    {% if plan.description %}
         <div class="col-12">
-            <table class="table">
-                <thead class="thead-default">
-                <tr>
-                    <th>Shift Title</th>
-                    <th>Starts</th>
-                    <th>Ends</th>
-                    <th>Description</th>
-                    <th>People needed</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for shift in plan.shifts %}
-                    <tr>
-                        <th scope="row">{{ shift.title }}</th>
-                        <td>{{ shift.start|date('h:m') }}</td>
-                        <td>{{ shift.end|date('h:m') }}</td>
-                        <td>{{ shift.description }}</td>
-                        <td>
-                            <ol>
-                            {% for person in 0..shift.numberPeople %}
-                                <li><a href="#">Sign in</a> </li>
-                            {% endfor %}
-                            </ol>
-                        </td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+            <h6>Description</h6>
+            {{ plan.description }}
         </div>
+    {% endif %}
+
+    <div class="col-12">
+        <table class="table">
+            <thead class="thead-default">
+            <tr>
+                <th>Shift Title</th>
+                <th>Starts</th>
+                <th>Ends</th>
+                <th>Description</th>
+                <th>People needed</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for shift in plan.shifts %}
+                <tr>
+                    <th scope="row">{{ shift.title }}</th>
+                    <td>{{ shift.start|date('h:m') }}</td>
+                    <td>{{ shift.end|date('h:m') }}</td>
+                    <td>{{ shift.description }}</td>
+                    <td>
+                        <ol>
+                        {% for person in 0..shift.numberPeople %}
+                            <li><a href="#">Sign in</a> </li>
+                        {% endfor %}
+                        </ol>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
     </div>
 {% endblock %}
