@@ -15,3 +15,7 @@ a:hover {
     background-color: #cc5902;
     border-color: #cc5902;
 }
+
+.main-row {
+    margin-top: 1rem;
+}
