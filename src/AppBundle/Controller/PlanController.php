@@ -81,6 +81,24 @@ class PlanController extends Controller
     }
 
     /**
+     * Creates a new plan by a template.
+     *
+     * @Route("/new-by-template", name="plan_new_by_template")
+     * @Method({"GET", "POST"})
+     */
+    public function newByTemplateAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $plans = $em->getRepository('AppBundle:Plan')->findBy(
+            array('isTemplate' => true )
+        );
+
+        return $this->render('plan/new-by-template.html.twig', array(
+            'plans' => $plans,
+        ));
+    }
+
+    /**
      * Finds and displays a plan entity.
      *
      * @Route("/{id}", name="plan_show")
