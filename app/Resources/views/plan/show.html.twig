@@ -33,14 +33,17 @@
                         <td>{{ shift.description }}</td>
                         <td>
                             <ol>
-                                {% set foo = shift.numberPeople - (shift.people|length) %}
-                                {{ foo }}
-                            {% for person in 1..foo %}
-                                <li><a href="{{ path('person_new', { 'shift': shift.id }) }}">Sign in</a> </li>
-                            {% endfor %}
+                                {% set count = shift.numberPeople - (shift.people|length) %}
+
                                 {% for person in shift.people %}
                                     <li>{{ person.name }}</li>
                                 {% endfor %}
+
+                                {% if count != 0 %}
+                                    {% for person in 1..count %}
+                                        <li><a href="{{ path('person_new', { 'shift': shift.id }) }}">Sign in</a> </li>
+                                    {% endfor %}
+                                {% endif %}
                             </ol>
                         </td>
                     </tr>
