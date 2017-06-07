@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="jumbotron col-12">
+        <h1 class="display-3">Schicht-Plan.ch</h1>
+        <p class="lead">This is a simple shift planning tool inspired by <a href="https://schichtplan.immerda.ch">schichtplan.immerda.ch</a></p>
+        <hr class="my-4">
+        <p>To create shit plan templates you have to log in below</p>
+        <p class="lead">
+            <a class="btn btn-md btn-primary" href="#" role="button">Create a shift plan</a>
+            or
+            <a class="btn btn-md btn-primary" href="{{ path('login') }}" role="button">Login</a>
+        </p>
+    </div>
+{% endblock %}
