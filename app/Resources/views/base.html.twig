@@ -38,7 +38,9 @@
                     </ul>
                 {% endif %}
             </div>
-            {% if is_granted('ROLE_ADMIN') %}<a class="nav-link pull-right" href="{{ path('logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i></a>{% endif %}
+            {% if is_granted('ROLE_ADMIN') %}<a class="nav-link pull-right" href="{{ path('logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i></a>{% else %}
+                <a href="{{ path('plan_new') }}"><i class="fa fa-plus" aria-hidden="true"></i></a>
+            {% endif %}
         </nav>
         <div class="container">
             <div class="row main-row">
