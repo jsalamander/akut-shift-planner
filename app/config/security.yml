@@ -34,7 +34,8 @@ security:
                 target: /
 
     access_control:
-            # require ROLE_ADMIN for /admin*
             - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
             - { path: ^/$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+            - { path: ^/plan/new-by-template$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+            - { path: ^/plan/[\d]*$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
             - { path: ^/, roles: ROLE_ADMIN }
