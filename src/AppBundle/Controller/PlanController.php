@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
 /**
  * Plan controller.
@@ -94,13 +95,26 @@ class PlanController extends Controller
             array('isTemplate' => true )
         );
 
+        $classes = 'form-control';
         $form = $this->createFormBuilder()
             ->add('Templates', ChoiceType::class, array(
                 'choices' => $plans,
                 'choice_label' => function($plan, $key, $index) {
                     return $plan->getTitle();
                 },
-                'attr'  => array('class' => 'form-control')
+                'attr'  => array('class' => $classes)
+            ))
+            ->add('title', null, array(
+                'attr'  => array('class' => $classes),
+                'label' => 'New Titel'
+            )
+            )->add('date', DateTimeType::class, array(
+                'attr'  => array('class' => $classes . ' datepicker'),
+                'html5' => false,
+                'widget' => 'single_text'
+            ))
+            ->add('description', null, array(
+                'attr'  => array('class' => $classes)
             ))
             ->getForm();
 
@@ -108,9 +122,16 @@ class PlanController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $plan = $form->getData()['Templates'];
+            $title = $form->getData()['title'];
+            $description = $form->getData()['description'];
+            $date = $form->getData()['date'];
+
             $clone = clone $plan;
             $clone->setIsTemplate(false);
-            
+            $clone->setTitle($title);
+            $clone->setDate($date);
+            $clone->setDescription($description);
+
             $em->persist($clone);
             $em->flush();
 

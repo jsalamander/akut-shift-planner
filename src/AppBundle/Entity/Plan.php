@@ -88,6 +88,18 @@ class Plan
     }
 
     /**
+     * Set id
+     *
+     * @return int
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
      * Set title
      *
      * @param string $title
@@ -196,5 +208,19 @@ class Plan
 
     public function __toString() {
         return $this->title;
+    }
+
+    public function __clone() {
+        if ($this->id) {
+            $this->setId(null);
+
+            $mClone = new ArrayCollection();
+            foreach ($this->shifts as $item) {
+                $itemClone = clone $item;
+                $itemClone->setPlan($this);
+                $mClone->add($itemClone);
+            }
+            $this->shifts = $mClone;
+        }
     }
 }
