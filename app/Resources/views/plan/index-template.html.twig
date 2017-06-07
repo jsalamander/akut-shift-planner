@@ -11,7 +11,6 @@
             <thead class="thead-default">
             <tr>
                 <th>Title</th>
-                <th>Date</th>
                 <th>Description</th>
                 <th>Actions</th>
             </tr>
@@ -20,7 +19,6 @@
             {% for plan in plans %}
                 <tr>
                     <th><a href="{{ path('plan_show', { 'id': plan.id }) }}">{{ plan.title }}</a></th>
-                    <td>{% if plan.date %}{{ plan.date|date('d.m.Y H:i') }}{% endif %}</td>
                     <td>{{ plan.description }}</td>
                     <td><a href="{{ path('plan_edit', { 'id': plan.id }) }}">edit</a></td>
                 </tr>
