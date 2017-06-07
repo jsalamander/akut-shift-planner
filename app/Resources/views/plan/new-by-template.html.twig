@@ -6,9 +6,12 @@
     </div>
 
     <div class="col-12">
-        {% for plan in plans %}
-            {{ plan.title }}
-        {% endfor %}
-        <input class="btn btn-primary" type="submit" value="Create" />
+
+        {{ form_start(form) }}
+        <div class="form-group">
+            {{ form_widget(form) }}
+        </div>
+        <input class="btn btn-primary" type="submit" value="Choose" />
+        {{ form_end(form) }}
     </div>
 {% endblock %}

@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 /**
  * Plan controller.
@@ -93,8 +94,33 @@ class PlanController extends Controller
             array('isTemplate' => true )
         );
 
+        $form = $this->createFormBuilder()
+            ->add('Templates', ChoiceType::class, array(
+                'choices' => $plans,
+                'choice_label' => function($plan, $key, $index) {
+                    return $plan->getTitle();
+                },
+                'attr'  => array('class' => 'form-control')
+            ))
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $plan = $form->getData()['Templates'];
+            $clone = clone $plan;
+            $clone->setIsTemplate(false);
+            
+            $em->persist($clone);
+            $em->flush();
+
+            return $this->redirectToRoute('plan_show', array('id' => $clone->getId()));
+        }
+
+
         return $this->render('plan/new-by-template.html.twig', array(
             'plans' => $plans,
+            'form' => $form->createView()
         ));
     }
 
