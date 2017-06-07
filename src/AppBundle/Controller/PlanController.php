@@ -26,7 +26,10 @@ class PlanController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $plans = $em->getRepository('AppBundle:Plan')->findAll();
+        $plans = $em->getRepository('AppBundle:Plan')->findBy(
+            array('isTemplate' => false ),
+            array('date' => 'ASC')
+        );
 
         return $this->render('plan/index.html.twig', array(
             'plans' => $plans,
@@ -43,7 +46,7 @@ class PlanController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $plans = $em->getRepository('AppBundle:Plan')->findBy(array('isTemplate' => true ));;
+        $plans = $em->getRepository('AppBundle:Plan')->findBy(array('isTemplate' => true ));
 
         return $this->render('plan/index-template.html.twig', array(
             'plans' => $plans,
