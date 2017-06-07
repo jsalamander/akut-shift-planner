@@ -5,6 +5,8 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TimeType;
+
 
 class ShiftType extends AbstractType
 {
@@ -22,14 +24,12 @@ class ShiftType extends AbstractType
             ->add('description', null, array(
                 'attr'  => array('class' => $classes)
             ))
-            ->add('start', null, array(
-                'attr'  => array('class' => $classes . ' datepicker'),
-                'html5' => false,
+            ->add('start', TimeType::class, array(
+                'attr'  => array('class' => $classes),
                 'widget' => 'single_text'
             ))
-            ->add('end', null, array(
-                'attr'  => array('class' => $classes . ' datepicker'),
-                'html5' => false,
+            ->add('end', TimeType::class, array(
+                'attr'  => array('class' => $classes),
                 'widget' => 'single_text'
             ))
             ->add('numberPeople', null, array(

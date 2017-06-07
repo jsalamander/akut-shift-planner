@@ -9,6 +9,7 @@
         <div class="col-12">
             <h6>Description</h6>
             {{ plan.description }}
+            <a class="pull-right" href="{{ path('plan_edit', { 'id': plan.id }) }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>
         </div>
     {% endif %}
 
@@ -28,8 +29,8 @@
                 {% for shift in plan.shifts %}
                     <tr>
                         <th scope="row">{{ shift.title }}</th>
-                        <td>{{ shift.start|date('h:m') }}</td>
-                        <td>{{ shift.end|date('h:m') }}</td>
+                        <td>{{ shift.start|date('H:i') }}</td>
+                        <td>{{ shift.end|date('H:i') }}</td>
                         <td>{{ shift.description }}</td>
                         <td>
                             <ol>
