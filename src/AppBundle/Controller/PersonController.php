@@ -55,7 +55,7 @@ class PersonController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($person);
             $em->flush();
-            
+
             $planId = $shift->getPlan()->getId();
             return $this->redirectToRoute('plan_show', array('id' => $planId));
         }

@@ -1,10 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="col-12">
-        <h1>Event List</h1>
-        <a href="{{ path('plan_new') }}"><i class="fa pull-right fa-3x fa-plus-square" aria-hidden="true"></i></a>
+    <div class="col-12 d-flex justify-content-end">
+        <h1 class="mr-auto p-2">Event List</h1>
+        <a href="{{ path('plan_new') }}"><i class="fa p2 fa-3x fa-plus-square" aria-hidden="true"></i></a>
+    </div>
 
+    <div class="col-12">
+        {% if plans is not empty %}
         <table class="table">
             <thead class="thead-default">
             <tr>
@@ -23,5 +26,10 @@
             {% endfor %}
             </tbody>
         </table>
+        {% else %}
+            <div class="alert alert-warning" role="alert">
+                <strong>Warning!</strong> No upcoming event plans.
+            </div>
+        {% endif %}
     </div>
 {% endblock %}
