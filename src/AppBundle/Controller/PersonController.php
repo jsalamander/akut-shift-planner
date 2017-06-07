@@ -40,6 +40,13 @@ class PersonController extends Controller
     public function newAction(Request $request)
     {
         $person = new Person();
+
+        $shift = $this->getDoctrine()
+            ->getRepository('AppBundle:Shift')
+            ->find(intval($request->get('shift')));
+        $shift->getPeople()->add($person);
+
+        $person->setShift($shift);
         $form = $this->createForm('AppBundle\Form\PersonType', $person);
         $form->handleRequest($request);
 

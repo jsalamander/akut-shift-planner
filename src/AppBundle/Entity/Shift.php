@@ -65,7 +65,7 @@ class Shift
     private $plan;
 
     /**
-     * @ORM\OneToMany(targetEntity="Shift", mappedBy="plan")
+     * @ORM\OneToMany(targetEntity="Person", mappedBy="shift")
      */
     private $people;
 
@@ -232,11 +232,11 @@ class Shift
     /**
      * Add person
      *
-     * @param \AppBundle\Entity\Shift $person
+     * @param \AppBundle\Entity\Person $person
      *
      * @return Shift
      */
-    public function addPerson(\AppBundle\Entity\Shift $person)
+    public function addPerson(\AppBundle\Entity\Person $person)
     {
         $this->people[] = $person;
 
@@ -246,9 +246,9 @@ class Shift
     /**
      * Remove person
      *
-     * @param \AppBundle\Entity\Shift $person
+     * @param \AppBundle\Entity\Person $person
      */
-    public function removePerson(\AppBundle\Entity\Shift $person)
+    public function removePerson(\AppBundle\Entity\Person $person)
     {
         $this->people->removeElement($person);
     }
