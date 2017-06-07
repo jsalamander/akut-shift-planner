@@ -5,13 +5,18 @@
         <h1>New event plan by template</h1>
     </div>
 
-    <div class="col-12">
-
-        {{ form_start(form) }}
-        <div class="form-group">
-            {{ form_widget(form) }}
+    {% if plans is not empty %}
+        <div class="col-12">
+            {{ form_start(form) }}
+            <div class="form-group">
+                {{ form_widget(form) }}
+            </div>
+            <input class="btn btn-primary" type="submit" value="Choose" />
+            {{ form_end(form) }}
         </div>
-        <input class="btn btn-primary" type="submit" value="Choose" />
-        {{ form_end(form) }}
-    </div>
+    {% else %}
+        <div class="alert alert-warning col-12" role="alert">
+            <strong>Warning!</strong> No predefined templates.
+        </div>
+    {% endif%}
 {% endblock %}
