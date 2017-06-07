@@ -41,9 +41,10 @@ class PersonController extends Controller
     {
         $person = new Person();
 
+        $shiftId = $request->get('shift');
         $shift = $this->getDoctrine()
             ->getRepository('AppBundle:Shift')
-            ->find(intval($request->get('shift')));
+            ->find(intval($shiftId));
         $shift->getPeople()->add($person);
 
         $person->setShift($shift);
@@ -54,8 +55,9 @@ class PersonController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($person);
             $em->flush();
-
-            return $this->redirectToRoute('person_show', array('id' => $person->getId()));
+            
+            $planId = $shift->getPlan()->getId();
+            return $this->redirectToRoute('plan_show', array('id' => $planId));
         }
 
         return $this->render('person/new.html.twig', array(
