@@ -33,7 +33,7 @@
                         <td>{{ shift.description }}</td>
                         <td>
                             <ol>
-                            {% for person in 0..shift.numberPeople %}
+                            {% for person in 1..shift.numberPeople %}
                                 <li><a href="{{ path('person_new', { 'shift': shift.id }) }}">Sign in</a> </li>
                             {% endfor %}
                                 {% for person in shift.people %}
