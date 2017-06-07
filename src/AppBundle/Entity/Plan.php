@@ -48,10 +48,34 @@ class Plan
      */
     private $shifts;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="is_template", type="boolean", nullable=true)
+     */
+    private $isTemplate;
+
     public function __construct()
     {
         $this->shifts = new ArrayCollection();
     }
+
+    /**
+     * @return int
+     */
+    public function getIsTemplate()
+    {
+        return $this->isTemplate;
+    }
+
+    /**
+     * @param int $isTemplate
+     */
+    public function setIsTemplate($isTemplate)
+    {
+        $this->isTemplate = $isTemplate;
+    }
+
 
     /**
      * Get id

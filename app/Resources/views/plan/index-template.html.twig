@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="col-12 d-flex justify-content-end">
+        <h1 class="mr-auto p-2">Master Templates</h1>
+    </div>
+
+    <div class="col-12">
+        {% if plans is not empty %}
+        <table class="table">
+            <thead class="thead-default">
+            <tr>
+                <th>Title</th>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for plan in plans %}
+                <tr>
+                    <th><a href="{{ path('plan_show', { 'id': plan.id }) }}">{{ plan.title }}</a></th>
+                    <td>{% if plan.date %}{{ plan.date|date('d.m.Y H:i') }}{% endif %}</td>
+                    <td>{{ plan.description }}</td>
+                    <td><a href="{{ path('plan_edit', { 'id': plan.id }) }}">edit</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+            <div class="alert alert-warning" role="alert">
+                <strong>Warning!</strong> No upcoming event plans.
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -11,9 +11,10 @@
             {{ form_label(form.title) }}
             {{ form_errors(form.title) }}
             {{ form_widget(form.title) }}
-        </div>
         {{ form_row(form.date) }}
         {{ form_row(form.description) }}
+        {{ form_row(form.isTemplate) }}
+        </div>
         <hr>
         <h3>Shifts</h3>
         <ul class="shifts list-unstyled" data-prototype="{{ form_widget(form.shifts.vars.prototype)|e('html_attr') }}">

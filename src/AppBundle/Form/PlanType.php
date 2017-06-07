@@ -28,6 +28,10 @@ class PlanType extends AbstractType
             ->add('description', null, array(
                 'attr'  => array('class' => $classes)
             ))
+            ->add('isTemplate', null, array(
+                'attr'  => array('class' => $classes),
+                'label' => 'Can this plan used as a template for future plans?'
+            ))
             ->add('shifts', CollectionType::class, array(
                 'entry_type' => ShiftType::class,
                 'allow_add' => true,

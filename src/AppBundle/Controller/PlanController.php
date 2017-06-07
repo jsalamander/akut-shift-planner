@@ -34,6 +34,23 @@ class PlanController extends Controller
     }
 
     /**
+     * Lists all template plans.
+     *
+     * @Route("/templates", name="plan_tempalte_index")
+     * @Method("GET")
+     */
+    public function indexTemplateAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $plans = $em->getRepository('AppBundle:Plan')->findBy(array('isTemplate' => true ));;
+
+        return $this->render('plan/index-template.html.twig', array(
+            'plans' => $plans,
+        ));
+    }
+
+    /**
      * Creates a new plan entity.
      *
      * @Route("/new", name="plan_new")

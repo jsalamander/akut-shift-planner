@@ -1,21 +1,33 @@
 {% extends 'base.html.twig' %}
+    {% block body %}
+        <div class="col-12">
+            <h1>Edit Template</h1>
+        </div>
 
-{% block body %}
-    <h1>Plan edit</h1>
-
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
-    {{ form_end(edit_form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('plan_index') }}">Back to the list</a>
-        </li>
-        <li>
+        <div class="col-12">
+            {{ form_start(edit_form) }}
+            <div class="form_edit-group">
+                {{ form_label(edit_form.title) }}
+                {{ form_errors(edit_form.title) }}
+                {{ form_widget(edit_form.title) }}
+                {{ form_row(edit_form.date) }}
+                {{ form_row(edit_form.description) }}
+                {{ form_row(edit_form.isTemplate) }}
+            </div>
+            <hr>
+            <h3>Shifts</h3>
+            <ul class="shifts list-unstyled" data-prototype="{{ form_widget(edit_form.shifts.vars.prototype)|e('html_attr') }}">
+                {% for shift in edit_form.shifts %}
+                    <li>{{ form_widget(shift) }}</li>
+                    <hr>
+                {% endfor %}
+            </ul>
+            <input class="btn btn-primary" type="submit" value="Save" />
+            {{ form_end(edit_form) }}
+        </div>
+        <div class="col-12">
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+            <input class="btn btn-sm btn-danger pull-right" type="submit" value="Delete">
             {{ form_end(delete_form) }}
-        </li>
-    </ul>
+        </div>
 {% endblock %}
