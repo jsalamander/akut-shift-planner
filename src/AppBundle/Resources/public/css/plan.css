@@ -1,3 +1,10 @@
-.shifts {
-    padding-left: 0px;
+.shifts li {
+    padding: 0.5rem;
+    background-color: rgba(253, 245, 154, 0.32);
+    margin-top: 0.5rem;
+    border-radius: 10px;
+}
+
+.shifts li:nth-child(even)  {
+    background-color: rgba(255, 210, 175, 0.73);
 }
