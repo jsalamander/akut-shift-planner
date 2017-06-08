@@ -41,7 +41,11 @@
 
                                 {% if count != 0 %}
                                     {% for person in 1..count %}
-                                        <li><a href="{{ path('person_new', { 'shift': shift.id }) }}">Sign in</a> </li>
+                                        {% if not plan.isTemplate %}
+                                            <li><a href="{{ path('person_new', { 'shift': shift.id }) }}">Sign in</a> </li>
+                                        {% else %}
+                                            <li>Person</li>
+                                        {% endif %}
                                     {% endfor %}
                                 {% endif %}
                             </ol>
