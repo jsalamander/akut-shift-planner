@@ -55,9 +55,34 @@ class Plan
      */
     private $isTemplate;
 
+    /**
+     * @var password Hash
+     *
+     * Is used for people without a login, so they can see/edit the details
+     ** @ORM\GeneratedValue(strategy="UUID")
+     * @ORM\Column(name="passoword", type="string", length=255,  nullable=true)
+     */
+    private $password;
+
     public function __construct()
     {
         $this->shifts = new ArrayCollection();
+    }
+
+    /**
+     * @return password
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * @param password $password
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
     }
 
     /**
