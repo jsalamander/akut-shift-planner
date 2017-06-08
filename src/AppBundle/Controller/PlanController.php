@@ -77,7 +77,7 @@ class PlanController extends Controller
             $plan->setPassword($password);
             $em->persist($plan);
             $em->flush();
-            $session->set($plan->getId(), $password);
+            $session->set($plan->getId() . "first-time", $password);
 
             return $this->redirectToRoute('plan_show',array('id' => $plan->getId()));
         }
@@ -142,7 +142,7 @@ class PlanController extends Controller
 
             $em->persist($clone);
             $em->flush();
-            $session->set($clone->getId(), $password);
+            $session->set($clone->getId() . "first-time", $password);
 
             return $this->redirectToRoute('plan_show', array('id' => $clone->getId()));
         }

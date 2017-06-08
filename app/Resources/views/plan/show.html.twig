@@ -13,9 +13,9 @@
         <div class="col-12">
             <blockquote class="blockquote">{{ plan.description }}</blockquote>
             {% if is_granted('ROLE_ADMIN') %}<a class="pull-right" href="{{ path('plan_edit', { 'id': plan.id }) }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>{% endif %}
-            {% if app.session.get(plan.id) is not empty %}
+            {% if app.session.get(plan.id ~ 'first-time') is not empty %}
                 <div class="alert alert-info" role="alert">
-                    <strong>Important!</strong> Save this password: <b>{{ app.session.get(plan.id) }}</b> <br>You'll need it to access the plan details.
+                    <strong>Important!</strong> Save this password: <b>{{ plan.password }}</b> <br>You'll need it to access the plan details.
                 </div>
             {% endif %}
         </div>
@@ -49,10 +49,14 @@
                                 {% set count = shift.numberPeople - (shift.people|length) %}
 
                                 {% for person in shift.people %}
-                                    {% if showDetails %}
-                                        <li>{{ person.name }}</li>
+                                    {% if not plan.isTemplate %}
+                                        {% if showDetails %}
+                                            <li>{{ person.name }}</li>
+                                        {% else %}
+                                            <li>{{ person.alias }}</li>
+                                        {% endif %}
                                     {% else %}
-                                        <li>{{ person.alias }}</li>
+                                        <li>Person</li>
                                     {% endif %}
                                 {% endfor %}
 
