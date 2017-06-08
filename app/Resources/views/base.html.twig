@@ -24,12 +24,6 @@
                 <ul class="navbar-nav">
                 {% if is_granted('ROLE_ADMIN') %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('plan_new') }}"><i class="fa fa-map" aria-hidden="true"></i> New plan</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('plan_new_by_template') }}"><i class="fa fa-id-card-o" aria-hidden="true"></i> New plan by template</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" href="{{ path('plan_index') }}"><i class="fa fa-list" aria-hidden="true"></i> All plans</a>
                         </li>
                         <li class="nav-item">
