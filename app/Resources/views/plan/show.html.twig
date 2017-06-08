@@ -12,7 +12,15 @@
         </div>
     {% endif %}
 
+    {% if app.session.get('show_details_plan_id') == plan.id  %}
+        {% set showDetails=true %}
+    {% endif %}
+
     <div class="col-12">
+        {% if showDetails is not defined%}
+            <a id="passwordPrompt" href="#" class="pull-right"><i class="fa fa-eye" aria-hidden="true"></i> Show details</a>
+        {% endif %}
+
         {% if plan.shifts is not empty %}
             <table class="table">
                 <thead class="thead-default">
@@ -36,7 +44,11 @@
                                 {% set count = shift.numberPeople - (shift.people|length) %}
 
                                 {% for person in shift.people %}
-                                    <li>{{ person.alias }}</li>
+                                    {% if showDetails is defined%}
+                                        <li>{{ person.name }}</li>
+                                    {% else %}
+                                        <li>{{ person.alias }}</li>
+                                    {% endif %}
                                 {% endfor %}
 
                                 {% if count != 0 %}
@@ -60,5 +72,26 @@
             </div>
             <img class="img-fluid." src="https://media.giphy.com/media/MmFVEhDzF0UUw/giphy.gif">
         {% endif %}
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="passwordShowModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}

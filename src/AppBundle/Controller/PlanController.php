@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
  * Plan controller.
@@ -61,7 +62,7 @@ class PlanController extends Controller
      * @Route("/new", name="plan_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, SessionInterface $session)
     {
         $plan = new Plan();
 
@@ -70,8 +71,10 @@ class PlanController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $plan->setPassword(random_bytes(15));
             $em->persist($plan);
             $em->flush();
+            $session->set('show_details_plan_id', $plan->getId());
 
             return $this->redirectToRoute('plan_show', array('id' => $plan->getId()));
         }
@@ -88,7 +91,7 @@ class PlanController extends Controller
      * @Route("/new-by-template", name="plan_new_by_template")
      * @Method({"GET", "POST"})
      */
-    public function newByTemplateAction(Request $request)
+    public function newByTemplateAction(Request $request, SessionInterface $session)
     {
         $em = $this->getDoctrine()->getManager();
         $plans = $em->getRepository('AppBundle:Plan')->findBy(
@@ -131,9 +134,11 @@ class PlanController extends Controller
             $clone->setTitle($title);
             $clone->setDate($date);
             $clone->setDescription($description);
+            $clone->setPassword(random_bytes(15));
 
             $em->persist($clone);
             $em->flush();
+            $session->set('show_details_plan_id', $clone->getId());
 
             return $this->redirectToRoute('plan_show', array('id' => $clone->getId()));
         }
@@ -151,8 +156,9 @@ class PlanController extends Controller
      * @Route("/{id}", name="plan_show")
      * @Method("GET")
      */
-    public function showAction(Plan $plan)
+    public function showAction(Plan $plan, SessionInterface $session)
     {
+
         $deleteForm = $this->createDeleteForm($plan);
 
         return $this->render('plan/show.html.twig', array(

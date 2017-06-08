@@ -56,11 +56,10 @@ class Plan
     private $isTemplate;
 
     /**
-     * @var password Hash
+     * @var string
      *
      * Is used for people without a login, so they can see/edit the details
-     ** @ORM\GeneratedValue(strategy="UUID")
-     * @ORM\Column(name="passoword", type="string", length=255,  nullable=true)
+     * @ORM\Column(name="password", type="string", length=15, nullable=true)
      */
     private $password;
 
