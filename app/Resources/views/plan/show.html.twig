@@ -7,8 +7,7 @@
     </div>
     {% if plan.description %}
         <div class="col-12">
-            <h6>Description</h6>
-            {{ plan.description }}
+            <blockquote class="blockquote">{{ plan.description }}</blockquote>
             {% if is_granted('ROLE_ADMIN') %}<a class="pull-right" href="{{ path('plan_edit', { 'id': plan.id }) }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>{% endif %}
         </div>
     {% endif %}

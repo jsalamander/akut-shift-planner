@@ -21,8 +21,8 @@
             </button>
             <a class="navbar-brand" href="{{ path('homepage') }}"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
             <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
                 {% if is_granted('ROLE_ADMIN') %}
-                    <ul class="navbar-nav">
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path('plan_new') }}"><i class="fa fa-map" aria-hidden="true"></i> New plan</a>
                         </li>
@@ -35,12 +35,19 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path('plan_tempalte_index') }}"><i class="fa fa-list-alt" aria-hidden="true"></i> Templates</a>
                         </li>
-                    </ul>
                 {% endif %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="{{ path('plan_new') }}" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="{{ path('plan_new') }}">New</a>
+                            <a class="dropdown-item" href="{{ path('plan_new_by_template') }}">New by template</a>
+                        </div>
+                    </li>
+                </ul>
             </div>
-            {% if is_granted('ROLE_ADMIN') %}<a class="nav-link pull-right" href="{{ path('logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i></a>{% else %}
-                <a href="{{ path('plan_new') }}"><i class="fa fa-plus" aria-hidden="true"></i></a>
-            {% endif %}
+            {% if is_granted('ROLE_ADMIN') %}<a class="nav-link pull-right" href="{{ path('logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i></a>{% endif %}
         </nav>
         <div class="container">
             <div class="row main-row">
