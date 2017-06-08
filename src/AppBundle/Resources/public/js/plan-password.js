@@ -1,3 +1,5 @@
 $(function() {
-    //$('#passwordShowModel').modal('show');
+    $('#passwordPrompt').click(function (e) {
+        $('#getPasswordModel').modal('show');
+    });
 });
