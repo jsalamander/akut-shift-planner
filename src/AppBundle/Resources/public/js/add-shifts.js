@@ -22,6 +22,7 @@ $(function() {
             // add a new shift form (see next code block)
             addShiftForm($collectionHolder, $newLinkLi);
             addDatePicker();
+            addCross();
         });
 });
 
@@ -47,5 +48,12 @@ function addShiftForm($collectionHolder, $newLinkLi) {
 function addDatePicker() {
     $('.datepicker').each(function (index, value) {
         $(value).datepicker();
+    });
+}
+
+function addCross(){
+    $('.shifts > li').last().prepend('<i class="fa close fa-times pull-right" aria-hidden="true"></i>');
+    $('.close').click(function (e) {
+        $(this).parent().remove();
     });
 }

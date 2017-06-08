@@ -20,9 +20,6 @@
         <hr>
         <h3>Shifts</h3>
         <ul class="shifts list-unstyled" data-prototype="{{ form_widget(form.shifts.vars.prototype)|e('html_attr') }}">
-            {% for shift in form.shifts %}
-                <li>{{ form_widget(shift) }}</li>
-            {% endfor %}
         </ul>
         <input class="btn btn-primary" type="submit" value="Create" />
         {{ form_end(form) }}
