@@ -37,7 +37,7 @@ security:
             - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
             - { path: ^/$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
             - { path: ^/plan/new-by-template$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-            - { path: ^/plan/[\d]*$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+            - { path: ^/plan/[\d]+$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
             - { path: ^/plan/new$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
             - { path: ^/person/new, roles: IS_AUTHENTICATED_ANONYMOUSLY }
             - { path: ^/, roles: ROLE_ADMIN }
