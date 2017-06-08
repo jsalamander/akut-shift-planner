@@ -70,18 +70,19 @@ class PlanController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $password = bin2hex(random_bytes(15));
             $em = $this->getDoctrine()->getManager();
-            $plan->setPassword(random_bytes(15));
+            $plan->setPassword($password);
             $em->persist($plan);
             $em->flush();
-            $session->set('show_details_plan_id', $plan->getId());
+            $session->set($plan->getId(), $password);
 
-            return $this->redirectToRoute('plan_show', array('id' => $plan->getId()));
+            return $this->redirectToRoute('plan_show',array('id' => $plan->getId()));
         }
 
         return $this->render('plan/new.html.twig', array(
             'plan' => $plan,
-            'form' => $form->createView(),
+            'form' => $form->createView()
         ));
     }
 
@@ -128,17 +129,18 @@ class PlanController extends Controller
             $title = $form->getData()['title'];
             $description = $form->getData()['description'];
             $date = $form->getData()['date'];
+            $password = bin2hex(random_bytes(15));
 
             $clone = clone $plan;
             $clone->setIsTemplate(false);
             $clone->setTitle($title);
             $clone->setDate($date);
             $clone->setDescription($description);
-            $clone->setPassword(random_bytes(15));
+            $clone->setPassword($password);
 
             $em->persist($clone);
             $em->flush();
-            $session->set('show_details_plan_id', $clone->getId());
+            $session->set($clone->getId(), $password);
 
             return $this->redirectToRoute('plan_show', array('id' => $clone->getId()));
         }
@@ -156,14 +158,12 @@ class PlanController extends Controller
      * @Route("/{id}", name="plan_show")
      * @Method("GET")
      */
-    public function showAction(Plan $plan, SessionInterface $session)
+    public function showAction(Plan $plan)
     {
-
         $deleteForm = $this->createDeleteForm($plan);
-
         return $this->render('plan/show.html.twig', array(
             'plan' => $plan,
-            'delete_form' => $deleteForm->createView(),
+            'delete_form' => $deleteForm->createView()
         ));
     }
 
