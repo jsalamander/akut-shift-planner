@@ -7,6 +7,8 @@ use AppBundle\Entity\Shift;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -156,14 +158,35 @@ class PlanController extends Controller
      * Finds and displays a plan entity.
      *
      * @Route("/{id}", name="plan_show")
-     * @Method("GET")
+     * @Method({"GET", "POST"})
      */
-    public function showAction(Plan $plan)
+    public function showAction(Plan $plan, Request $request, SessionInterface $session)
     {
+        $passwordForm = $this->createFormBuilder()
+            ->add('password', PasswordType::class, array(
+                'attr'  => array('class' => 'form-control')
+            ))
+            ->getForm();
+
+        $passwordForm->handleRequest($request);
         $deleteForm = $this->createDeleteForm($plan);
+
+        $showDetails = false;
+        if ($passwordForm->isSubmitted()) {
+            $pw = $passwordForm->getData()['password'];
+            if ($plan->getPassword() !== $pw ) {
+                $passwordForm->get('password')->addError(new FormError('Wrong Password'));
+            } elseif ($passwordForm->isValid() && $plan->getPassword() === $pw) {
+                $showDetails = true;
+                $session->set($plan->getId(), $plan->getPassword());
+            }
+        }
+
         return $this->render('plan/show.html.twig', array(
             'plan' => $plan,
-            'delete_form' => $deleteForm->createView()
+            'delete_form' => $deleteForm->createView(),
+            'password_form' => $passwordForm->createView(),
+            'showDetails' => $showDetails
         ));
     }
 

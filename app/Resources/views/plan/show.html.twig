@@ -22,7 +22,7 @@
     {% endif %}
 
     <div class="col-12">
-        {% if showDetails is not defined%}
+        {% if not showDetails%}
             <a id="passwordPrompt" href="#" class="pull-right"><i class="fa fa-eye" aria-hidden="true"></i> Show details</a>
         {% endif %}
 
@@ -49,7 +49,7 @@
                                 {% set count = shift.numberPeople - (shift.people|length) %}
 
                                 {% for person in shift.people %}
-                                    {% if showDetails is defined%}
+                                    {% if showDetails %}
                                         <li>{{ person.name }}</li>
                                     {% else %}
                                         <li>{{ person.alias }}</li>
@@ -79,24 +79,32 @@
         {% endif %}
     </div>
 
-    <!-- Modal -->
+    {{ form_start(password_form) }}
     <div class="modal fade" id="getPasswordModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Password</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Show Shift Details</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    Get password here
+                    {{ form_label(password_form.password) }}
+                    {{ form_widget(password_form.password) }}
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Submit</button>
+                    <input class="btn btn-primary" type="submit" value="Submit" />
                 </div>
             </div>
         </div>
     </div>
+    {% if password_form.password.vars.errors[0] is defined %}
+        <div class="col-12">
+            <div class="alert alert-danger">
+                <strong>Oh snap!</strong> {{ password_form.password.vars.errors[0].message }}
+            </div>
+        </div>
+    {% endif %}
+    {{ form_end(password_form) }}
 {% endblock %}
