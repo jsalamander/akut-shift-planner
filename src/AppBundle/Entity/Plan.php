@@ -55,9 +55,33 @@ class Plan
      */
     private $isTemplate;
 
+    /**
+     * @var string
+     *
+     * Is used for people without a login, so they can see/edit the details
+     * @ORM\Column(name="password", type="string", length=36, nullable=true)
+     */
+    private $password;
+
     public function __construct()
     {
         $this->shifts = new ArrayCollection();
+    }
+
+    /**
+     * @return password
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * @param password $password
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
     }
 
     /**

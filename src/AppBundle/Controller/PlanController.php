@@ -7,9 +7,12 @@ use AppBundle\Entity\Shift;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
  * Plan controller.
@@ -61,7 +64,7 @@ class PlanController extends Controller
      * @Route("/new", name="plan_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, SessionInterface $session)
     {
         $plan = new Plan();
 
@@ -69,16 +72,19 @@ class PlanController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $password = bin2hex(random_bytes(15));
             $em = $this->getDoctrine()->getManager();
+            $plan->setPassword($password);
             $em->persist($plan);
             $em->flush();
+            $session->set($plan->getId() . "first-time", $password);
 
-            return $this->redirectToRoute('plan_show', array('id' => $plan->getId()));
+            return $this->redirectToRoute('plan_show',array('id' => $plan->getId()));
         }
 
         return $this->render('plan/new.html.twig', array(
             'plan' => $plan,
-            'form' => $form->createView(),
+            'form' => $form->createView()
         ));
     }
 
@@ -88,7 +94,7 @@ class PlanController extends Controller
      * @Route("/new-by-template", name="plan_new_by_template")
      * @Method({"GET", "POST"})
      */
-    public function newByTemplateAction(Request $request)
+    public function newByTemplateAction(Request $request, SessionInterface $session)
     {
         $em = $this->getDoctrine()->getManager();
         $plans = $em->getRepository('AppBundle:Plan')->findBy(
@@ -125,15 +131,18 @@ class PlanController extends Controller
             $title = $form->getData()['title'];
             $description = $form->getData()['description'];
             $date = $form->getData()['date'];
+            $password = bin2hex(random_bytes(15));
 
             $clone = clone $plan;
             $clone->setIsTemplate(false);
             $clone->setTitle($title);
             $clone->setDate($date);
             $clone->setDescription($description);
+            $clone->setPassword($password);
 
             $em->persist($clone);
             $em->flush();
+            $session->set($clone->getId() . "first-time", $password);
 
             return $this->redirectToRoute('plan_show', array('id' => $clone->getId()));
         }
@@ -149,15 +158,35 @@ class PlanController extends Controller
      * Finds and displays a plan entity.
      *
      * @Route("/{id}", name="plan_show")
-     * @Method("GET")
+     * @Method({"GET", "POST"})
      */
-    public function showAction(Plan $plan)
+    public function showAction(Plan $plan, Request $request, SessionInterface $session)
     {
+        $passwordForm = $this->createFormBuilder()
+            ->add('password', PasswordType::class, array(
+                'attr'  => array('class' => 'form-control')
+            ))
+            ->getForm();
+
+        $passwordForm->handleRequest($request);
         $deleteForm = $this->createDeleteForm($plan);
+
+        $showDetails = false;
+        if ($passwordForm->isSubmitted()) {
+            $pw = $passwordForm->getData()['password'];
+            if ($plan->getPassword() !== $pw ) {
+                $passwordForm->get('password')->addError(new FormError('Wrong Password'));
+            } elseif ($passwordForm->isValid() && $plan->getPassword() === $pw) {
+                $showDetails = true;
+                $session->set($plan->getId(), $plan->getPassword());
+            }
+        }
 
         return $this->render('plan/show.html.twig', array(
             'plan' => $plan,
             'delete_form' => $deleteForm->createView(),
+            'password_form' => $passwordForm->createView(),
+            'showDetails' => $showDetails
         ));
     }
 

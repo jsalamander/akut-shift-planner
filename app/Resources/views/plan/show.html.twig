@@ -1,18 +1,37 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    {% if app.session.get(plan.id) is not empty %}
+        {% set showDetails=true %}
+    {% endif %}
+
+    {% if app.session.get(plan.id ~ 'first-time') is not empty %}
+        {% set showDetails=true %}
+    {% endif %}
+
     <div class="col-12 d-flex justify-content-end">
         <h1 class="mr-auto p-2">{{ plan.title }}</h1>
         <h6 class="p-2">{% if plan.date %}{{ plan.date|date('d.m.Y') }}{% endif %}</h6>
     </div>
+    <div class="col-12">
+        {% if is_granted('ROLE_ADMIN') %}<a class="pull-right" href="{{ path('plan_edit', { 'id': plan.id }) }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>{% endif %}
+    </div>
     {% if plan.description %}
         <div class="col-12">
             <blockquote class="blockquote">{{ plan.description }}</blockquote>
-            {% if is_granted('ROLE_ADMIN') %}<a class="pull-right" href="{{ path('plan_edit', { 'id': plan.id }) }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>{% endif %}
+            {% if app.session.get(plan.id ~ 'first-time') is not empty %}
+                <div class="alert alert-info col-12" role="alert">
+                    <strong>Important!</strong> Save this password: <b>{{ plan.password }}</b> <br>You'll need it to access the plan details.
+                </div>
+            {% endif %}
         </div>
     {% endif %}
 
     <div class="col-12">
+        {% if not (showDetails or is_granted('ROLE_ADMIN'))%}
+            <a id="passwordPrompt" href="#" class="pull-right"><i class="fa fa-eye" aria-hidden="true"></i> Show details</a>
+        {% endif %}
+
         {% if plan.shifts is not empty %}
             <table class="table">
                 <thead class="thead-default">
@@ -36,7 +55,20 @@
                                 {% set count = shift.numberPeople - (shift.people|length) %}
 
                                 {% for person in shift.people %}
-                                    <li>{{ person.alias }}</li>
+                                    {% if not plan.isTemplate %}
+                                        {% if (showDetails or is_granted('ROLE_ADMIN')) %}
+                                            <li>{{ person.name }}
+                                                <ul>
+                                                    {% if person.email %}<li>Email: {{ person.email }}</li>{% endif %}
+                                                    {% if person.phone %}<li>phone: {{ person.phone }}</li>{% endif %}
+                                                </ul>
+                                            </li>
+                                        {% else %}
+                                            <li>{{ person.alias }}</li>
+                                        {% endif %}
+                                    {% else %}
+                                        <li>Person</li>
+                                    {% endif %}
                                 {% endfor %}
 
                                 {% if count != 0 %}
@@ -61,4 +93,33 @@
             <img class="img-fluid." src="https://media.giphy.com/media/MmFVEhDzF0UUw/giphy.gif">
         {% endif %}
     </div>
+
+    {{ form_start(password_form) }}
+    <div class="modal fade" id="getPasswordModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Show Shift Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{ form_label(password_form.password) }}
+                    {{ form_widget(password_form.password) }}
+                </div>
+                <div class="modal-footer">
+                    <input class="btn btn-primary" type="submit" value="Submit" />
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if password_form.password.vars.errors[0] is defined %}
+        <div class="col-12">
+            <div class="alert alert-danger">
+                <strong>Oh snap!</strong> {{ password_form.password.vars.errors[0].message }}
+            </div>
+        </div>
+    {% endif %}
+    {{ form_end(password_form) }}
 {% endblock %}
