@@ -57,7 +57,8 @@
                                 {% for person in shift.people %}
                                     {% if not plan.isTemplate %}
                                         {% if (showDetails or is_granted('ROLE_ADMIN')) %}
-                                            <li>{{ person.name }}
+                                            <li>{{ person.name }} {% if is_granted('ROLE_ADMIN') %}<a href="{{ path('person_edit',{ 'id': person.id }) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>{% endif %}
+
                                                 <ul>
                                                     {% if person.email %}<li>Email: {{ person.email }}</li>{% endif %}
                                                     {% if person.phone %}<li>phone: {{ person.phone }}</li>{% endif %}

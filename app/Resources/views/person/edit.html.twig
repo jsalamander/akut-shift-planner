@@ -1,21 +1,26 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Person edit</h1>
+    <div class="col-12">
+        <h1>Edit {{ person.name }}</h1>
+    </div>
 
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
-    {{ form_end(edit_form) }}
+    <div class="col-12">
+        {{ form_start(edit_form) }}
+        <div class="form-group">
+            {{ form_row(edit_form.name) }}
+            {{ form_row(edit_form.alias) }}
+            {{ form_row(edit_form.email) }}
+            {{ form_row(edit_form.phone) }}
+        </div>
 
-    <ul>
-        <li>
-            <a href="{{ path('person_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+        <input class="btn btn-primary" type="submit" value="Edit"/>
+        {{ form_end(edit_form) }}
+    </div>
+
+    <div class="col-12">
+        {{ form_start(delete_form) }}
+        <input class="btn btn-danger btn-sm pull-right" type="submit" value="Delete">
+        {{ form_end(delete_form) }}
+    </div>
 {% endblock %}

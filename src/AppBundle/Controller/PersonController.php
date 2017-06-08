@@ -97,7 +97,7 @@ class PersonController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('person_edit', array('id' => $person->getId()));
+            return $this->redirectToRoute('plan_show', array('id' => $person->getShift()->getPlan()->getId()));
         }
 
         return $this->render('person/edit.html.twig', array(
@@ -124,7 +124,7 @@ class PersonController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('person_index');
+        return $this->redirectToRoute('plan_show', array('id' => $person->getShift()->getPlan()->getId()));
     }
 
     /**
