@@ -75,7 +75,7 @@
                                 {% if count != 0 %}
                                     {% for person in 1..count %}
                                         {% if not plan.isTemplate %}
-                                            <li><a class="text-nowrap" href="{{ path('person_new', { 'shift': shift.id }) }}">Sign in</a> </li>
+                                            <li><a class="text-nowrap" href="{{ path('person_new', { 'shift': shift.id }) }}">Enroll</a> </li>
                                         {% else %}
                                             <li>Person</li>
                                         {% endif %}
