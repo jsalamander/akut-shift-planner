@@ -36,7 +36,7 @@
                                 {% set count = shift.numberPeople - (shift.people|length) %}
 
                                 {% for person in shift.people %}
-                                    <li>{{ person.name }}</li>
+                                    <li>{{ person.alias }}</li>
                                 {% endfor %}
 
                                 {% if count != 0 %}

@@ -31,6 +31,13 @@ class Person
     /**
      * @var string
      *
+     * @ORM\Column(name="alias", type="string", length=255)
+     */
+    private $alias;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="email", type="string", length=255, nullable=true)
      */
     private $email;
@@ -152,5 +159,21 @@ class Person
     public function getShift()
     {
         return $this->shift;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAlias()
+    {
+        return $this->alias;
+    }
+
+    /**
+     * @param string $alias
+     */
+    public function setAlias($alias)
+    {
+        $this->alias = $alias;
     }
 }

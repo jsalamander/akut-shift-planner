@@ -17,7 +17,12 @@ class PersonType extends AbstractType
 
         $builder
             ->add('name', null, array(
-                'attr'  => array('class' => $classes)
+                'attr'  => array('class' => $classes),
+                'label' => 'Name (visible for creator only)'
+            ))
+            ->add('alias', null, array(
+                'attr'  => array('class' => $classes),
+                'label' => 'Alias (public)'
             ))
             ->add('email', null, array(
                 'attr'  => array('class' => $classes)
