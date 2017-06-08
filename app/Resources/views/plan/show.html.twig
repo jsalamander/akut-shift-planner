@@ -28,7 +28,7 @@
     {% endif %}
 
     <div class="col-12">
-        {% if not showDetails%}
+        {% if not (showDetails or is_granted('ROLE_ADMIN'))%}
             <a id="passwordPrompt" href="#" class="pull-right"><i class="fa fa-eye" aria-hidden="true"></i> Show details</a>
         {% endif %}
 
@@ -56,8 +56,8 @@
 
                                 {% for person in shift.people %}
                                     {% if not plan.isTemplate %}
-                                        {% if showDetails %}
-                                            <li>{{ person.name }}:
+                                        {% if (showDetails or is_granted('ROLE_ADMIN')) %}
+                                            <li>{{ person.name }}
                                                 <ul>
                                                     {% if person.email %}<li>Email: {{ person.email }}</li>{% endif %}
                                                     {% if person.phone %}<li>phone: {{ person.phone }}</li>{% endif %}
