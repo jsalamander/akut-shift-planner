@@ -5,6 +5,8 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 
 class PersonType extends AbstractType
 {
@@ -16,19 +18,23 @@ class PersonType extends AbstractType
         $classes = 'form-control';
 
         $builder
-            ->add('name', null, array(
+            ->add('name', TextType::class, array(
                 'attr'  => array('class' => $classes),
-                'label' => 'Name (visible for creator only)'
+                'label' => 'Name (visible for creator only)',
+                'required' => true
             ))
-            ->add('alias', null, array(
+            ->add('alias', TextType::class, array(
                 'attr'  => array('class' => $classes),
-                'label' => 'Alias (public)'
+                'label' => 'Alias (public)',
+                'required' => true
             ))
-            ->add('email', null, array(
-                'attr'  => array('class' => $classes)
+            ->add('email', EmailType::class, array(
+                'attr'  => array('class' => $classes),
+                'required' => false
             ))
-            ->add('phone', null, array(
-                'attr'  => array('class' => $classes)
+            ->add('phone', TextType::class, array(
+                'attr'  => array('class' => $classes),
+                'required' => false
             ));
     }
     

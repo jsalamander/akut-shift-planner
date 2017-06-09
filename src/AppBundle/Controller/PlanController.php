@@ -208,7 +208,7 @@ class PlanController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em->flush();
 
-            return $this->redirectToRoute('plan_edit', array('id' => $plan->getId()));
+            return $this->redirectToRoute('plan_show', array('id' => $plan->getId()));
         }
 
         return $this->render('plan/edit.html.twig', array(
