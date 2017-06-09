@@ -41,6 +41,7 @@ class PlanType extends AbstractType
             ->add('shifts', CollectionType::class, array(
                 'entry_type' => ShiftType::class,
                 'allow_add' => true,
+                'allow_delete' => true,
                 'by_reference' => false,
                 'label' => false,
                 'required' => true

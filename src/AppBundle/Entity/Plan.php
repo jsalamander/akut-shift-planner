@@ -228,6 +228,7 @@ class Plan
     public function removeShift(\AppBundle\Entity\Shift $shift)
     {
         $this->shifts->removeElement($shift);
+        $shift->setPlan(null);
     }
 
     /**

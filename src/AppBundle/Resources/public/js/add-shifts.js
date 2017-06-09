@@ -24,6 +24,14 @@ $(function() {
         addDatePicker();
         addCross();
     });
+    $('.shifts > li').each(function (key, el) {
+      $(el).prepend('<i class="fa close fa-times pull-right" aria-hidden="true"></i>');
+    })
+    $('.close').each(function (key, el) {
+        $(el).click(function (e) {
+            $(this).parent().remove();
+        });
+    })
 });
 
 function addShiftForm($collectionHolder, $newLinkLi) {
