@@ -12,7 +12,9 @@
                 {{ form_widget(edit_form.title) }}
                 {{ form_row(edit_form.date) }}
                 {{ form_row(edit_form.description) }}
-                {{ form_row(edit_form.isTemplate) }}
+                <div style="display: none">
+                    {{ form_row(edit_form.isTemplate) }}
+                </div>
             </div>
             <hr>
             <h3>Shifts</h3>
