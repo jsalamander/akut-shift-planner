@@ -10,7 +10,7 @@
     {% endif %}
 
     <div class="col-12 d-flex justify-content-end">
-        <h1 class="mr-auto p-2">{{ plan.title }}</h1>
+        <h1 class="mr-auto p-2">{% if plan.isTemplate %}Template:{% endif %} {{ plan.title }}</h1>
         <h6 class="p-2">{% if plan.date %}{{ plan.date|date('d.m.Y') }}{% endif %}</h6>
     </div>
     <div class="col-12">

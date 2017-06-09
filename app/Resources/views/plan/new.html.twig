@@ -8,9 +8,7 @@
     <div class="col-12">
         {{ form_start(form) }}
         <div class="form-group">
-            {{ form_label(form.title) }}
-            {{ form_errors(form.title) }}
-            {{ form_widget(form.title) }}
+            {{ form_row(form.title) }}
             {{ form_row(form.date) }}
             {{ form_row(form.description) }}
             <div {% if not is_granted('ROLE_ADMIN') %}style="display:none"{% endif %}>
@@ -19,7 +17,15 @@
         </div>
         <hr>
         <h3>Shifts</h3>
+        {% if form.vars.errors is not empty %}
+            <div class="alert alert-danger">
+                {{ form_errors(form) }}
+            </div>
+        {% endif %}
         <ul class="shifts list-unstyled" data-prototype="{{ form_widget(form.shifts.vars.prototype)|e('html_attr') }}">
+            {% for shift in form.shifts %}
+                <li>{{ form_widget(shift) }}</li>
+            {% endfor %}
         </ul>
         <input class="btn btn-primary" type="submit" value="Create" />
         {{ form_end(form) }}

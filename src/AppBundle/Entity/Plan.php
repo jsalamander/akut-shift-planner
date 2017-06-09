@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Plan
@@ -44,6 +45,15 @@ class Plan
     private $description;
 
     /**
+     * @Assert\Count(
+     *      min = 1,
+     *      max = 100,
+     *      minMessage = "You need at least {{ limit }} shift",
+     *      maxMessage = "We don't allow more than 100 shifts"
+     * )
+     *
+     * @Assert\Valid
+     *
      * @ORM\OneToMany(targetEntity="Shift", mappedBy="plan", cascade={"persist"})
      */
     private $shifts;
@@ -218,6 +228,7 @@ class Plan
     public function removeShift(\AppBundle\Entity\Shift $shift)
     {
         $this->shifts->removeElement($shift);
+        $shift->setPlan(null);
     }
 
     /**

@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Shift
@@ -52,6 +53,12 @@ class Shift
 
     /**
      * @var int
+     *  @Assert\Range(
+     *      min = 1,
+     *      max = 100,
+     *      minMessage = "You need at least {{ limit }} person per shift",
+     *      maxMessage = "Really a shift with more than 100 people??? nah"
+     * )
      *
      * @ORM\Column(name="numberPeople", type="integer")
      */

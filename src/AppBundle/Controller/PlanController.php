@@ -4,10 +4,12 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Plan;
 use AppBundle\Entity\Shift;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -119,7 +121,7 @@ class PlanController extends Controller
                 'html5' => false,
                 'widget' => 'single_text'
             ))
-            ->add('description', null, array(
+            ->add('description', TextareaType::class, array(
                 'attr'  => array('class' => $classes)
             ))
             ->getForm();
@@ -198,14 +200,15 @@ class PlanController extends Controller
      */
     public function editAction(Request $request, Plan $plan)
     {
+        $em = $this->getDoctrine()->getManager();
         $deleteForm = $this->createDeleteForm($plan);
         $editForm = $this->createForm('AppBundle\Form\PlanType', $plan);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $em->flush();
 
-            return $this->redirectToRoute('plan_edit', array('id' => $plan->getId()));
+            return $this->redirectToRoute('plan_show', array('id' => $plan->getId()));
         }
 
         return $this->render('plan/edit.html.twig', array(
@@ -228,6 +231,14 @@ class PlanController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            foreach ($plan->getShifts() as $shift) {
+                $em->remove($shift);
+                foreach ($shift->getPeople() as $person) {
+                    $em->remove($person);
+                }
+            }
+
             $em->remove($plan);
             $em->flush();
         }
