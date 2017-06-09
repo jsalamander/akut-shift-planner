@@ -35,7 +35,7 @@ class PlanType extends AbstractType
             ))
             ->add('isTemplate', CheckboxType::class, array(
                 'attr'  => array('class' => $classes),
-                'label' => 'Can this plan used as a template for future plans?',
+                'label' => 'Is this plan a template?',
                 'required' => false
             ))
             ->add('shifts', CollectionType::class, array(

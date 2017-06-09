@@ -230,6 +230,14 @@ class PlanController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            foreach ($plan->getShifts() as $shift) {
+                $em->remove($shift);
+                foreach ($shift->getPeople() as $person) {
+                    $em->remove($person);
+                }
+            }
+
             $em->remove($plan);
             $em->flush();
         }
