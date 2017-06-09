@@ -24,10 +24,6 @@ $(function() {
         addDatePicker();
         addCross();
     });
-
-    addShiftForm($collectionHolder, $newLinkLi);
-    addDatePicker();
-    addCross();
 });
 
 function addShiftForm($collectionHolder, $newLinkLi) {
