@@ -5,25 +5,29 @@ $(function() {
     var $addShiftLink = $('<a href="#" class="add_shift_link"><i class="fa fa-plus-square" aria-hidden="true"></i> Add a shift</a>');
     var $newLinkLi = $('<div></div>').append($addShiftLink);
 
-        // Get the ul that holds the collection of shifts
-        $collectionHolder = $('ul.shifts');
+    // Get the ul that holds the collection of shifts
+    $collectionHolder = $('ul.shifts');
 
-        // add the "add a shift" anchor and li to the shifts ul
-        $collectionHolder.append($newLinkLi);
+    // add the "add a shift" anchor and li to the shifts ul
+    $collectionHolder.append($newLinkLi);
 
-        // count the current form inputs we have (e.g. 2), use that as the new
-        // index when inserting a new item (e.g. 2)
-        $collectionHolder.data('index', $collectionHolder.find(':input').length);
+    // count the current form inputs we have (e.g. 2), use that as the new
+    // index when inserting a new item (e.g. 2)
+    $collectionHolder.data('index', $collectionHolder.find(':input').length);
 
-        $addShiftLink.on('click', function(e) {
-            // prevent the link from creating a "#" on the URL
-            e.preventDefault();
+    $addShiftLink.on('click', function(e) {
+        // prevent the link from creating a "#" on the URL
+        e.preventDefault();
 
-            // add a new shift form (see next code block)
-            addShiftForm($collectionHolder, $newLinkLi);
-            addDatePicker();
-            addCross();
-        });
+        // add a new shift form (see next code block)
+        addShiftForm($collectionHolder, $newLinkLi);
+        addDatePicker();
+        addCross();
+    });
+
+    addShiftForm($collectionHolder, $newLinkLi);
+    addDatePicker();
+    addCross();
 });
 
 function addShiftForm($collectionHolder, $newLinkLi) {

@@ -6,6 +6,10 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class PlanType extends AbstractType
 {
@@ -17,26 +21,29 @@ class PlanType extends AbstractType
         $classes = 'form-control';
 
         $builder
-            ->add('title', null, array(
+            ->add('title', TextType::class, array(
                 'attr'  => array('class' => $classes)
             ))
-            ->add('date', null, array(
+            ->add('date', DateType::class, array(
                 'attr'  => array('class' => $classes . ' datepicker'),
                 'html5' => false,
                 'widget' => 'single_text'
             ))
-            ->add('description', null, array(
-                'attr'  => array('class' => $classes)
-            ))
-            ->add('isTemplate', null, array(
+            ->add('description', TextareaType::class, array(
                 'attr'  => array('class' => $classes),
-                'label' => 'Can this plan used as a template for future plans?'
+                'required' => false
+            ))
+            ->add('isTemplate', CheckboxType::class, array(
+                'attr'  => array('class' => $classes),
+                'label' => 'Can this plan used as a template for future plans?',
+                'required' => false
             ))
             ->add('shifts', CollectionType::class, array(
                 'entry_type' => ShiftType::class,
                 'allow_add' => true,
                 'by_reference' => false,
-                'label' => false
+                'label' => false,
+                'required' => true
             ));
     }
     

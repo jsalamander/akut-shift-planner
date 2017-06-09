@@ -8,9 +8,7 @@
     <div class="col-12">
         {{ form_start(form) }}
         <div class="form-group">
-            {{ form_label(form.title) }}
-            {{ form_errors(form.title) }}
-            {{ form_widget(form.title) }}
+            {{ form_row(form.title) }}
             {{ form_row(form.date) }}
             {{ form_row(form.description) }}
             <div {% if not is_granted('ROLE_ADMIN') %}style="display:none"{% endif %}>
