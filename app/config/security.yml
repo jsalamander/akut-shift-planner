@@ -40,4 +40,7 @@ security:
             - { path: '^/plan/[0-9A-Za-z\-]{36}$', roles: IS_AUTHENTICATED_ANONYMOUSLY }
             - { path: ^/plan/new$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
             - { path: ^/person/new, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+            - { path: ^/_error/404, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+            - { path: ^/_error/403, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+            - { path: ^/_error, roles: IS_AUTHENTICATED_ANONYMOUSLY }
             - { path: ^/, roles: ROLE_ADMIN }
