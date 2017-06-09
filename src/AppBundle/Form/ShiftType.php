@@ -6,6 +6,9 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 
 class ShiftType extends AbstractType
@@ -18,22 +21,27 @@ class ShiftType extends AbstractType
         $classes = 'form-control';
 
         $builder
-            ->add('title', null, array(
-                'attr'  => array('class' => $classes)
+            ->add('title', TextType::class, array(
+                'attr'  => array('class' => $classes),
+                'required' => true
             ))
-            ->add('description', null, array(
-                'attr'  => array('class' => $classes)
+            ->add('description', TextareaType::class, array(
+                'attr'  => array('class' => $classes),
+                'required' => true
             ))
             ->add('start', TimeType::class, array(
                 'attr'  => array('class' => $classes),
-                'widget' => 'single_text'
+                'widget' => 'single_text',
+                'required' => true
             ))
             ->add('end', TimeType::class, array(
                 'attr'  => array('class' => $classes),
-                'widget' => 'single_text'
+                'widget' => 'single_text',
+                'required' => true
             ))
-            ->add('numberPeople', null, array(
-                'attr'  => array('class' => $classes)
+            ->add('numberPeople', IntegerType::class, array(
+                'attr'  => array('class' => $classes),
+                'required' => true
             ));
     }
     

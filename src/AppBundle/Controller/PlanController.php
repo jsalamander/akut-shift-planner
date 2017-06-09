@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -120,7 +121,7 @@ class PlanController extends Controller
                 'html5' => false,
                 'widget' => 'single_text'
             ))
-            ->add('description', null, array(
+            ->add('description', TextareaType::class, array(
                 'attr'  => array('class' => $classes)
             ))
             ->getForm();
