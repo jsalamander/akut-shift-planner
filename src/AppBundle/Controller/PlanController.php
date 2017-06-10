@@ -294,6 +294,15 @@ class PlanController extends Controller
                     )
                 ),
                 'text/html'
+            )->addPart(
+                $this->renderView(
+                    'email/plan-password.txt.twig',
+                    array(
+                        'password' => $password,
+                        'plan_id' => $plan->getId()
+                    )
+                ),
+                'text/plain'
             );
         $mailer->send($message);
     }
