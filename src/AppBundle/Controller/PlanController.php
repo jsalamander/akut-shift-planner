@@ -66,7 +66,7 @@ class PlanController extends Controller
      * @Route("/new", name="plan_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request, SessionInterface $session)
+    public function newAction(Request $request, SessionInterface $session, \Swift_Mailer $mailer)
     {
         $plan = new Plan();
 
@@ -80,6 +80,7 @@ class PlanController extends Controller
             $em->persist($plan);
             $em->flush();
             $session->set($plan->getId() . "first-time", $password);
+            $this->sendPlanPasswordViaMail($mailer, 'jan.friedli@gmx.ch', 'asdf');
 
             return $this->redirectToRoute('plan_show',array('id' => $plan->getId()));
         }
@@ -260,5 +261,27 @@ class PlanController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+
+    /**
+     * Send the plan password via email to the creator so they
+     * can access the plan later
+     *
+     * @param \Swift_Mailer $mailer
+     * @param $password
+     */
+    private function sendPlanPasswordViaMail(\Swift_Mailer $mailer, $recipient, $password) {
+        $message = new \Swift_Message('Your Access Details');
+
+        $message->setFrom('no-reply@schicht-plan.ch')
+            ->setTo($recipient)
+            ->setBody(
+                $this->renderView(
+                    'email/plan-password.html.twig',
+                    array('password' => $password)
+                ),
+                'text/html'
+            );
+        $mailer->send($message);
     }
 }
