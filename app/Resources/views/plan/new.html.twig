@@ -11,6 +11,7 @@
             {{ form_row(form.title) }}
             {{ form_row(form.date) }}
             {{ form_row(form.description) }}
+            {{ form_row(form.email) }}
             <div {% if not is_granted('ROLE_ADMIN') %}style="display:none"{% endif %}>
                 {{ form_row(form.isTemplate) }}
             </div>

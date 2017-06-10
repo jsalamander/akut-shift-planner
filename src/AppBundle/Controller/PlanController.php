@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 
 /**
  * Plan controller.
@@ -80,7 +81,7 @@ class PlanController extends Controller
             $em->persist($plan);
             $em->flush();
             $session->set($plan->getId() . "first-time", $password);
-            $this->sendPlanPasswordViaMail($mailer, 'jan.friedli@gmx.ch', 'asdf');
+            $this->sendPlanPasswordViaMail($mailer, $plan->getEmail(), $password);
 
             return $this->redirectToRoute('plan_show',array('id' => $plan->getId()));
         }
@@ -97,7 +98,7 @@ class PlanController extends Controller
      * @Route("/new-by-template", name="plan_new_by_template")
      * @Method({"GET", "POST"})
      */
-    public function newByTemplateAction(Request $request, SessionInterface $session)
+    public function newByTemplateAction(Request $request, SessionInterface $session, \Swift_Mailer $mailer)
     {
         $em = $this->getDoctrine()->getManager();
         $plans = $em->getRepository('AppBundle:Plan')->findBy(
@@ -111,7 +112,8 @@ class PlanController extends Controller
                 'choice_label' => function($plan, $key, $index) {
                     return $plan->getTitle();
                 },
-                'attr'  => array('class' => $classes)
+                'attr'  => array('class' => $classes),
+                'label' => 'Choose template to be used'
             ))
             ->add('title', null, array(
                 'attr'  => array('class' => $classes),
@@ -121,6 +123,11 @@ class PlanController extends Controller
                 'attr'  => array('class' => $classes . ' datepicker'),
                 'html5' => false,
                 'widget' => 'single_text'
+            ))
+            ->add('email', EmailType::class, array(
+                'attr'  => array('class' => $classes),
+                'required' => true,
+                'label' => 'Email (password and link will be sent there)'
             ))
             ->add('description', TextareaType::class, array(
                 'attr'  => array('class' => $classes)
@@ -134,6 +141,7 @@ class PlanController extends Controller
             $title = $form->getData()['title'];
             $description = $form->getData()['description'];
             $date = $form->getData()['date'];
+            $email = $form->getData()['email'];
             $password = bin2hex(random_bytes(15));
 
             $clone = clone $plan;
@@ -142,10 +150,12 @@ class PlanController extends Controller
             $clone->setDate($date);
             $clone->setDescription($description);
             $clone->setPassword($password);
+            $clone->setEmail($email);
 
             $em->persist($clone);
             $em->flush();
             $session->set($clone->getId() . "first-time", $password);
+            $this->sendPlanPasswordViaMail($mailer, $clone->getEmail(), $password);
 
             return $this->redirectToRoute('plan_show', array('id' => $clone->getId()));
         }

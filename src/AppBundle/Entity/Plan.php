@@ -73,6 +73,13 @@ class Plan
      */
     private $password;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=255,)
+     */
+    private $email;
+
     public function __construct()
     {
         $this->shifts = new ArrayCollection();
@@ -232,7 +239,7 @@ class Plan
     }
 
     /**
-     * Get products
+     * Get shifts
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -240,6 +247,24 @@ class Plan
     {
         return $this->shifts;
     }
+
+    /**
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
+
 
     public function __toString() {
         return $this->title;

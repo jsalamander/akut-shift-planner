@@ -3,6 +3,7 @@
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -32,6 +33,11 @@ class PlanType extends AbstractType
             ->add('description', TextareaType::class, array(
                 'attr'  => array('class' => $classes),
                 'required' => false
+            ))
+            ->add('email', EmailType::class, array(
+                'attr'  => array('class' => $classes),
+                'required' => true,
+                'label' => 'Email (password and link will be sent there)'
             ))
             ->add('isTemplate', CheckboxType::class, array(
                 'attr'  => array('class' => $classes),
