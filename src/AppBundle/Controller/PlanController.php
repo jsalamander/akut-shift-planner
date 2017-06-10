@@ -281,29 +281,31 @@ class PlanController extends Controller
      * @param $password
      */
     private function sendPlanPasswordViaMail(\Swift_Mailer $mailer, $plan, $password) {
-        $message = new \Swift_Message('Your Access Details');
+        if (!$plan->getIsTemplate()) {
+            $message = new \Swift_Message('Your Access Details');
 
-        $message->setFrom('no-reply@schicht-plan.ch')
-            ->setTo($plan->getEmail())
-            ->setBody(
-                $this->renderView(
-                    'email/plan-password.html.twig',
-                    array(
-                        'password' => $password,
-                        'plan_id' => $plan->getId()
-                    )
-                ),
-                'text/html'
-            )->addPart(
-                $this->renderView(
-                    'email/plan-password.txt.twig',
-                    array(
-                        'password' => $password,
-                        'plan_id' => $plan->getId()
-                    )
-                ),
-                'text/plain'
-            );
-        $mailer->send($message);
+            $message->setFrom('no-reply@schicht-plan.ch')
+                ->setTo($plan->getEmail())
+                ->setBody(
+                    $this->renderView(
+                        'email/plan-password.html.twig',
+                        array(
+                            'password' => $password,
+                            'plan_id' => $plan->getId()
+                        )
+                    ),
+                    'text/html'
+                )->addPart(
+                    $this->renderView(
+                        'email/plan-password.txt.twig',
+                        array(
+                            'password' => $password,
+                            'plan_id' => $plan->getId()
+                        )
+                    ),
+                    'text/plain'
+                );
+            $mailer->send($message);
+        }
     }
 }

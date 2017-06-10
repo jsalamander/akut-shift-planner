@@ -12,7 +12,10 @@
             {{ form_row(form.date) }}
             {{ form_row(form.email) }}
             {{ form_row(form.description) }}
-            <div {% if not is_granted('ROLE_ADMIN') %}style="display:none"{% endif %}>
+        </div>
+
+        <div {% if not is_granted('ROLE_ADMIN') %}style="display:none"{% endif %}>
+            <div class="form-check">
                 {{ form_row(form.isTemplate) }}
             </div>
         </div>
