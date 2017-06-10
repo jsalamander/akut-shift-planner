@@ -31,4 +31,31 @@ class DefaultController extends Controller
     {
 
     }
+
+    /**
+     * @Route("/lost-plan-pass", name="recover_plan_password")
+     */
+    public function lostPlanPasswordAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $form = $this->createForm('AppBundle\Form\RecoverPlanPasswordType');
+        $form->handleRequest($request);
+
+        $plan = $em->getRepository('AppBundle:Plan')->find($request->get('plan'));
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            if($plan->getEmail() === $form->getData()['email']) {
+                die;
+            }
+        }
+
+        return $this->render('default/lost-plan-password.html.twig',
+            array(
+                'form' => $form->createView()
+            )
+        );
+    }
+
 }

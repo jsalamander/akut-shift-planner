@@ -102,6 +102,7 @@
                     {{ form_widget(password_form.password) }}
                 </div>
                 <div class="modal-footer">
+                    <a href="{{ path('recover_plan_password', { 'plan': plan.id }) }}">Lost the Password?</a>
                     <input class="btn btn-primary" type="submit" value="Submit" />
                 </div>
             </div>
