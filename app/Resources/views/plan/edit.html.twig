@@ -12,6 +12,9 @@
                 {{ form_widget(edit_form.title) }}
                 {{ form_row(edit_form.date) }}
                 {{ form_row(edit_form.description) }}
+                <div {% if plan.isTemplate %}style="display: none"{% endif %}>
+                {{ form_row(edit_form.email) }}
+                </div>
                 <div style="display: none">
                     {{ form_row(edit_form.isTemplate) }}
                 </div>
