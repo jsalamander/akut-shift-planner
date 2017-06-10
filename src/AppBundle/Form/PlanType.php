@@ -40,7 +40,7 @@ class PlanType extends AbstractType
                 'label' => 'Email (password and link will be sent there)'
             ))
             ->add('isTemplate', CheckboxType::class, array(
-                'attr'  => array('class' => $classes . ' form-check-input'),
+                'attr'  => array('class' => $classes),
                 'label' => 'Is this plan a template?',
                 'required' => false
             ))
