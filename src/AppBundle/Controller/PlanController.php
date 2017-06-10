@@ -80,8 +80,8 @@ class PlanController extends Controller
             $plan->setPassword($password);
             $em->persist($plan);
             $em->flush();
-            $session->set($plan->getId() . "first-time", $password);
-            $this->sendPlanPasswordViaMail($mailer, $plan->getEmail(), $password);
+            $session->set($plan->getId(), true);
+            $this->sendPlanPasswordViaMail($mailer, $plan, $password);
 
             return $this->redirectToRoute('plan_show',array('id' => $plan->getId()));
         }
@@ -154,8 +154,8 @@ class PlanController extends Controller
 
             $em->persist($clone);
             $em->flush();
-            $session->set($clone->getId() . "first-time", $password);
-            $this->sendPlanPasswordViaMail($mailer, $clone->getEmail(), $password);
+            $session->set($clone->getId(), true);
+            $this->sendPlanPasswordViaMail($mailer, $clone, $password);
 
             return $this->redirectToRoute('plan_show', array('id' => $clone->getId()));
         }
@@ -280,15 +280,18 @@ class PlanController extends Controller
      * @param \Swift_Mailer $mailer
      * @param $password
      */
-    private function sendPlanPasswordViaMail(\Swift_Mailer $mailer, $recipient, $password) {
+    private function sendPlanPasswordViaMail(\Swift_Mailer $mailer, $plan, $password) {
         $message = new \Swift_Message('Your Access Details');
 
         $message->setFrom('no-reply@schicht-plan.ch')
-            ->setTo($recipient)
+            ->setTo($plan->getEmail())
             ->setBody(
                 $this->renderView(
                     'email/plan-password.html.twig',
-                    array('password' => $password)
+                    array(
+                        'password' => $password,
+                        'plan_id' => $plan->getId()
+                    )
                 ),
                 'text/html'
             );

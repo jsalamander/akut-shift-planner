@@ -1,11 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {% if app.session.get(plan.id) is not empty %}
-        {% set showDetails=true %}
-    {% endif %}
-
-    {% if app.session.get(plan.id ~ 'first-time') is not empty %}
+    
+    {% if app.session.get(plan.id) %}
         {% set showDetails=true %}
     {% endif %}
 
@@ -19,11 +16,6 @@
     {% if plan.description %}
         <div class="col-12">
             <blockquote class="blockquote">{{ plan.description }}</blockquote>
-            {% if app.session.get(plan.id ~ 'first-time') is not empty %}
-                <div class="alert alert-info col-12" role="alert">
-                    <strong>Important!</strong> Save this password: <b>{{ plan.password }}</b> <br>You'll need it to access the plan details.
-                </div>
-            {% endif %}
         </div>
     {% endif %}
 
