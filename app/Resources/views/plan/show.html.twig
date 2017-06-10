@@ -8,7 +8,7 @@
 
     <div class="col-12 d-flex justify-content-end">
         <h1 class="mr-auto p-2">{% if plan.isTemplate %}Template:{% endif %} {{ plan.title }}</h1>
-        <h6 class="p-2">{% if plan.date %}{{ plan.date|date('d.m.Y') }}{% endif %}</h6>
+        {% if not plan.isTemplate %}<h6 class="p-2">{% if plan.date %}{{ plan.date|date('d.m.Y') }}{% endif %}</h6>{% endif %}
     </div>
     <div class="col-12">
         {% if is_granted('ROLE_ADMIN') %}<a class="pull-right" href="{{ path('plan_edit', { 'id': plan.id }) }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>{% endif %}

@@ -10,7 +10,9 @@
                 {{ form_label(edit_form.title) }}
                 {{ form_errors(edit_form.title) }}
                 {{ form_widget(edit_form.title) }}
+                <div {% if plan.isTemplate %}style="display: none"{% endif %}>
                 {{ form_row(edit_form.date) }}
+                </div>
                 {{ form_row(edit_form.description) }}
                 <div {% if plan.isTemplate %}style="display: none"{% endif %}>
                 {{ form_row(edit_form.email) }}

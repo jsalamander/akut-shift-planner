@@ -28,7 +28,8 @@ class PlanType extends AbstractType
             ->add('date', DateType::class, array(
                 'attr'  => array('class' => $classes . ' datepicker'),
                 'html5' => false,
-                'widget' => 'single_text'
+                'widget' => 'single_text',
+                'required' => false
             ))
             ->add('description', TextareaType::class, array(
                 'attr'  => array('class' => $classes),
