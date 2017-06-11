@@ -69,7 +69,7 @@ class Plan
      * Indicates if this plan should be open for the public
      * @var int
      *
-     * @ORM\Column(name="is_public", type="boolean")
+     * @ORM\Column(name="is_public", type="boolean", nullable=true)
      */
     private $isPublic;
 

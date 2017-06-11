@@ -95,7 +95,14 @@ class PlanController extends Controller
     {
         $plan = new Plan();
 
-        $form = $this->createForm('AppBundle\Form\PlanType', $plan);
+        if ($this->getUser()) {
+            $form = $this->createForm('AppBundle\Form\PlanType', $plan);
+            $template = 'plan/new.html.twig';
+        } else {
+            $form = $this->createForm('AppBundle\Form\PlanUnauthenticatedType', $plan);
+            $template = 'plan/new-unauth.html.twig';
+        }
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -108,7 +115,7 @@ class PlanController extends Controller
             return $this->redirectToRoute('plan_show',array('id' => $plan->getId()));
         }
 
-        return $this->render('plan/new.html.twig', array(
+        return $this->render($template, array(
             'plan' => $plan,
             'form' => $form->createView()
         ));

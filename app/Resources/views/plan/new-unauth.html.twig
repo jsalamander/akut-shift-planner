@@ -9,16 +9,9 @@
         {{ form_start(form) }}
         <div class="form-group">
             {{ form_row(form.title) }}
-            <div>
-                {{ form_row(form.date) }}
-            </div>
+            {{ form_row(form.date) }}
             {{ form_row(form.description) }}
-            <div>
-                {{ form_row(form.isTemplate) }}
-                <div style="display: none;">
-                    {{ form_row(form.isPublic) }}
-                </div>
-            </div>
+            {{ form_row(form.email) }}
         </div>
         <hr>
         <h3>{% trans %}shifts{% endtrans %}</h3>

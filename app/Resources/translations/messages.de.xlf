@@ -126,7 +126,7 @@
             </trans-unit>
             <trans-unit id="email_label">
                 <source>email_label</source>
-                <target>Email (Passwort und Link werden an diese Adresse geschickt)</target>
+                <target>Email (Link wird an diese Adresse geschickt)</target>
             </trans-unit>
             <trans-unit id="is_template">
                 <source>is_template</source>

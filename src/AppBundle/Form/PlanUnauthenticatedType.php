@@ -10,9 +10,8 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
-class PlanType extends AbstractType
+class PlanUnauthenticatedType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -30,7 +29,7 @@ class PlanType extends AbstractType
                 'attr'  => array('class' => $classes . ' datepicker'),
                 'html5' => false,
                 'widget' => 'single_text',
-                'required' => true,
+                'required' => false,
                 'label' => 'date'
             ))
             ->add('description', TextareaType::class, array(
@@ -38,15 +37,10 @@ class PlanType extends AbstractType
                 'required' => false,
                 'label' => 'description'
             ))
-            ->add('isTemplate', CheckboxType::class, array(
+            ->add('email', EmailType::class, array(
                 'attr'  => array('class' => $classes),
-                'label' => 'is_template',
-                'required' => false
-            ))
-            ->add('isPublic', CheckboxType::class, array(
-                'attr'  => array('class' => $classes),
-                'label' => 'is_public',
-                'required' => false
+                'required' => false,
+                'label' => 'email_label'
             ))
             ->add('shifts', CollectionType::class, array(
                 'entry_type' => ShiftType::class,
