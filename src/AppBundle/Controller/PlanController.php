@@ -135,7 +135,7 @@ class PlanController extends Controller
 
         $classes = 'form-control';
         $form = $this->createFormBuilder()
-            ->add('Templates', ChoiceType::class, array(
+            ->add('templates', ChoiceType::class, array(
                 'choices' => $plans,
                 'choice_label' => function($plan, $key, $index) {
                     return $plan->getTitle();
@@ -155,7 +155,7 @@ class PlanController extends Controller
             ))
             ->add('email', EmailType::class, array(
                 'attr'  => array('class' => $classes),
-                'required' => true,
+                'required' => false,
                 'label' => 'email_label'
             ))
             ->add('description', TextareaType::class, array(
@@ -167,25 +167,22 @@ class PlanController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $plan = $form->getData()['Templates'];
+            $plan = $form->getData()['templates'];
             $title = $form->getData()['title'];
             $description = $form->getData()['description'];
             $date = $form->getData()['date'];
             $email = $form->getData()['email'];
-            $password = bin2hex(random_bytes(15));
 
             $clone = clone $plan;
             $clone->setIsTemplate(false);
             $clone->setTitle($title);
             $clone->setDate($date);
             $clone->setDescription($description);
-            $clone->setPassword($password);
             $clone->setEmail($email);
 
             $em->persist($clone);
             $em->flush();
             $session->set($clone->getId(), true);
-            $this->sendPlanPasswordViaMail($mailer, $clone, $password);
 
             return $this->redirectToRoute('plan_show', array('id' => $clone->getId()));
         }
