@@ -74,6 +74,14 @@
                 <source>create_shift_plan</source>
                 <target>Schichtplan erstellen</target>
             </trans-unit>
+            <trans-unit id="username">
+                <source>username</source>
+                <target>Benutzername</target>
+            </trans-unit>
+            <trans-unit id="password">
+                <source>password</source>
+                <target>Passwort</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

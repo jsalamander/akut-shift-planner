@@ -2,24 +2,24 @@
 
 {% block body %}
     <div class="col-12">
-        <h1>Login</h1>
+        <h1>{% trans %}login{% endtrans %}</h1>
         {% if error %}
             <div class="alert alert-danger" role="alert">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
         {% endif %}
 
         <form action="{{ path('login') }}" method="post">
             <div class="form-group">
-                <label for="username">Username:</label>
+                <label for="username">{% trans %}username{% endtrans %}</label>
                 <input class="form-control" type="text" id="username" name="_username" value="{{ last_username }}" />
             </div>
 
             <div class="form-group">
-                <label for="password">Password:</label>
+                <label for="password">{% trans %}password{% endtrans %}</label>
                 <input class="form-control" type="password" id="password" name="_password" />
             </div>
 
             <input type="hidden" name="_target_path" value="/plan" />
-            <button class="btn btn-primary" type="submit">login</button>
+            <button class="btn btn-primary" type="submit">{% trans %}login{% endtrans %}</button>
         </form>
     </div>
 {% endblock %}
