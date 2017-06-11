@@ -193,7 +193,8 @@ class PlanController extends Controller
     {
         $passwordForm = $this->createFormBuilder()
             ->add('password', PasswordType::class, array(
-                'attr'  => array('class' => 'form-control')
+                'attr'  => array('class' => 'form-control'),
+                'label' => 'password'
             ))
             ->getForm();
 

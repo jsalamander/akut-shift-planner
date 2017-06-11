@@ -11,7 +11,7 @@
         {% if not plan.isTemplate %}<h6 class="p-2">{% if plan.date %}{{ plan.date|date('d.m.Y') }}{% endif %}</h6>{% endif %}
     </div>
     <div class="col-12">
-        {% if is_granted('ROLE_ADMIN') %}<a class="pull-right" href="{{ path('plan_edit', { 'id': plan.id }) }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>{% endif %}
+        {% if is_granted('ROLE_ADMIN') %}<a class="pull-right" href="{{ path('plan_edit', { 'id': plan.id }) }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> {% trans %}edit{% endtrans %}</a>{% endif %}
     </div>
     {% if plan.description %}
         <div class="col-12">
@@ -21,18 +21,18 @@
 
     <div class="col-12">
         {% if not (showDetails or is_granted('ROLE_ADMIN'))%}
-            <a id="passwordPrompt" href="#" class="pull-right"><i class="fa fa-eye" aria-hidden="true"></i> Show details</a>
+            <a id="passwordPrompt" href="#" class="pull-right"><i class="fa fa-eye" aria-hidden="true"></i> {% trans %}show_details{% endtrans %}</a>
         {% endif %}
 
         {% if plan.shifts is not empty %}
             <table style="width: 100%" class="table table-responsive ">
                 <thead class="thead-default">
                 <tr>
-                    <th>Shift Title</th>
-                    <th>Starts</th>
-                    <th>Ends</th>
-                    <th>Description</th>
-                    <th>People needed</th>
+                    <th>{% trans %}title{% endtrans %}</th>
+                    <th>{% trans %}start{% endtrans %}</th>
+                    <th>{% trans %}end{% endtrans %}</th>
+                    <th>{% trans %}description{% endtrans %}</th>
+                    <th>{% trans %}people_needed{% endtrans %}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -52,8 +52,8 @@
                                             <li>{{ person.name }} {% if is_granted('ROLE_ADMIN') %}<a href="{{ path('person_edit',{ 'id': person.id }) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>{% endif %}
 
                                                 <ul>
-                                                    {% if person.email %}<li>Email: {{ person.email }}</li>{% endif %}
-                                                    {% if person.phone %}<li>phone: {{ person.phone }}</li>{% endif %}
+                                                    {% if person.email %}<li>{% trans %}email{% endtrans %}: <a href="mailto:{{ person.email }}?Subject=Kontakt Schichtplan: {{ plan.title }} " target="_top">{{ person.email }}</a></li>{% endif %}
+                                                    {% if person.phone %}<li>{% trans %}phone{% endtrans %}: {{ person.phone }}</li>{% endif %}
                                                 </ul>
                                             </li>
                                         {% else %}
@@ -67,9 +67,9 @@
                                 {% if count != 0 %}
                                     {% for person in 1..count %}
                                         {% if not plan.isTemplate %}
-                                            <li><a class="text-nowrap" href="{{ path('person_new', { 'shift': shift.id }) }}">Enroll</a> </li>
+                                            <li><a class="text-nowrap" href="{{ path('person_new', { 'shift': shift.id }) }}">{% trans %}enroll{% endtrans %}</a> </li>
                                         {% else %}
-                                            <li>Person</li>
+                                            <li>{% trans %}person{% endtrans %}</li>
                                         {% endif %}
                                     {% endfor %}
                                 {% endif %}
@@ -81,7 +81,7 @@
             </table>
         {% else %}
             <div class="alert alert-warning" role="alert">
-                <strong>Warning!</strong> No shifts defined
+                <strong>{% trans %}warning{% endtrans %}!</strong> {% trans %}no_shifts_defined{% endtrans %}
             </div>
             <img class="img-fluid." src="https://media.giphy.com/media/MmFVEhDzF0UUw/giphy.gif">
         {% endif %}
@@ -92,7 +92,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Show Shift Details</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">{% trans %}show_shift_details{% endtrans %}</h5>
                     <span class="close-cross" aria-label="Close">
                         <a href="#"><i class="fa fa-times" aria-hidden="true"></i></a>
                     </span>
@@ -102,8 +102,8 @@
                     {{ form_widget(password_form.password) }}
                 </div>
                 <div class="modal-footer">
-                    <a href="{{ path('recover_plan_password', { 'plan': plan.id }) }}">Lost the Password?</a>
-                    <input class="btn btn-primary" type="submit" value="Submit" />
+                    <a href="{{ path('recover_plan_password', { 'plan': plan.id }) }}">{% trans %}lost_password{% endtrans %}</a>
+                    <input class="btn btn-primary" type="submit" value="{% trans %}submit{% endtrans %}" />
                 </div>
             </div>
         </div>
@@ -111,7 +111,7 @@
     {% if password_form.password.vars.errors[0] is defined %}
         <div class="col-12">
             <div class="alert alert-danger">
-                <strong>Oh snap!</strong> {{ password_form.password.vars.errors[0].message }}
+                <strong>{% trans %}oh_snap{% endtrans %}</strong> {{ password_form.password.vars.errors[0].message }}
             </div>
         </div>
     {% endif %}

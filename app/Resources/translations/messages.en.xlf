@@ -180,6 +180,50 @@
                 <source>delete</source>
                 <target>Delete</target>
             </trans-unit>
+            <trans-unit id="people_needed">
+                <source>people_needed</source>
+                <target>Enroll</target>
+            </trans-unit>
+            <trans-unit id="show_details">
+                <source>show_details</source>
+                <target>Show details</target>
+            </trans-unit>
+            <trans-unit id="enroll">
+                <source>enroll</source>
+                <target>enroll</target>
+            </trans-unit>
+            <trans-unit id="no_shifts_defined">
+                <source>no_shifts_defined</source>
+                <target>No shifts defined</target>
+            </trans-unit>
+            <trans-unit id="email">
+                <source>email</source>
+                <target>Email</target>
+            </trans-unit>
+            <trans-unit id="phone">
+                <source>phone</source>
+                <target>Phone</target>
+            </trans-unit>
+            <trans-unit id="person">
+                <source>person</source>
+                <target>Person</target>
+            </trans-unit>
+            <trans-unit id="show_shift_details">
+                <source>show_shift_details</source>
+                <target>Show shift details</target>
+            </trans-unit>
+            <trans-unit id="lost_password">
+                <source>lost_password</source>
+                <target>Lost your password?</target>
+            </trans-unit>
+            <trans-unit id="submit">
+                <source>submit</source>
+                <target>Submit</target>
+            </trans-unit>
+            <trans-unit id="oh_snap">
+                <source>oh_snap</source>
+                <target>Oops!</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
