@@ -67,8 +67,8 @@
                 <target>Schicht Planung</target>
             </trans-unit>
             <trans-unit id="home_description">
-            <source>home_description</source>
-            <target>Einfaches Schichtplanungs Tool inspiriert durch</target>
+                <source>home_description</source>
+                <target>Einfaches Schichtplanungs Tool inspiriert durch</target>
             </trans-unit>
             <trans-unit id="create_shift_plan">
                 <source>create_shift_plan</source>
@@ -81,6 +81,44 @@
             <trans-unit id="password">
                 <source>password</source>
                 <target>Passwort</target>
+            </trans-unit>
+            <trans-unit id="story">
+                <source>story</source>
+                <target>Idee</target>
+            </trans-unit>
+            <trans-unit id="story_text">
+                <source>story_text</source>
+                <target>
+                    <![CDATA[
+                    Schicht-Plan.ch wurde für das <a href="http://akut-thun.ch">AKuT</a> in Thun entwickelt.<br>
+                    Die Idee war ein Schichtplan Tool, dass einem erlaubt Vorlagen zu speichern, damit externe schnell und einfach einen Schichtplan erstellen können.
+                    ]]>
+                </target>
+            </trans-unit>
+            <trans-unit id="credits">
+                <source>credits</source>
+                <target>Credits</target>
+            </trans-unit>
+            <trans-unit id="credits_text">
+                <source>credits_text</source>
+                <target>
+                    <![CDATA[
+                    Entwickelt durch <a href="mailto:jan.friedli@gmx.ch?Subject=Schicht-Plan.ch" target="_top">Jan Friedli</a>.
+                    Diese Webseite wurde stark durch <a href="https://schichtplan.immerda.ch">schichtplan.immerda.ch</a> inspiriert.
+                    ]]>
+                </target>
+            </trans-unit>
+            <trans-unit id="license">
+                <source>license</source>
+                <target>Lizenz</target>
+            </trans-unit>
+            <trans-unit id="license_text">
+                <source>license_text</source>
+                <target>
+                    <![CDATA[
+                    Schicht-plan.ch unterliegt der  GNU Affero General Public License (AGPL) Lizenz.<br>
+                    ]]>
+                </target>
             </trans-unit>
         </body>
     </file>
