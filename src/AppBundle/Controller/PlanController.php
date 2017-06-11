@@ -127,24 +127,26 @@ class PlanController extends Controller
                     return $plan->getTitle();
                 },
                 'attr'  => array('class' => $classes),
-                'label' => 'Choose template to be used'
+                'label' => 'template_to_be_used'
             ))
             ->add('title', null, array(
                 'attr'  => array('class' => $classes),
-                'label' => 'New Titel'
+                'label' => 'new_title'
             )
             )->add('date', DateTimeType::class, array(
                 'attr'  => array('class' => $classes . ' datepicker'),
                 'html5' => false,
-                'widget' => 'single_text'
+                'widget' => 'single_text',
+                'label' => 'date'
             ))
             ->add('email', EmailType::class, array(
                 'attr'  => array('class' => $classes),
                 'required' => true,
-                'label' => 'Email (password and link will be sent there)'
+                'label' => 'email_label'
             ))
             ->add('description', TextareaType::class, array(
-                'attr'  => array('class' => $classes)
+                'attr'  => array('class' => $classes),
+                'label' => 'description'
             ))
             ->getForm();
 

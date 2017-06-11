@@ -156,6 +156,18 @@
                 <source>add_shift</source>
                 <target>Schicht hinzufügen</target>
             </trans-unit>
+            <trans-unit id="template_to_be_used">
+                <source>template_to_be_used</source>
+                <target>Wähle die Vorlage</target>
+            </trans-unit>
+            <trans-unit id="new_title">
+                <source>new_title</source>
+                <target>Neuer Titel</target>
+            </trans-unit>
+            <trans-unit id="new_by_template_title">
+                <source>new_by_template_title</source>
+                <target>Neuer Schichtplan anhand einer Vorlage</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

@@ -156,6 +156,22 @@
                 <source>add_shift</source>
                 <target>Add a shift</target>
             </trans-unit>
+            <trans-unit id="template_to_be_used">
+                <source>template_to_be_used</source>
+                <target>Choose template you want to use</target>
+            </trans-unit>
+            <trans-unit id="new_title">
+                <source>new_title</source>
+                <target>New Title</target>
+            </trans-unit>
+            <trans-unit id="template_to_be_used">
+                <source>template_to_be_used</source>
+                <target>Wähle die Vorlage</target>
+            </trans-unit>
+            <trans-unit id="new_by_template_title">
+                <source>new_by_template_title</source>
+                <target>New shift plan using a template</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
