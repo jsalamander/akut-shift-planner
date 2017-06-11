@@ -11,8 +11,8 @@
         <table class="table table-responsive">
             <thead class="thead-default">
             <tr>
-                <th>Title</th>
-                <th>Date</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Title', 'p.title') }} <i class="fa fa-sort" aria-hidden="true"></i></th>
+                <th>{{ knp_pagination_sortable(pagination, 'Date', 'p.date') }} <i class="fa fa-sort" aria-hidden="true"></i></th>
                 <th>Description</th>
             </tr>
             </thead>
