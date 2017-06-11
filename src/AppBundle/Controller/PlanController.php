@@ -235,6 +235,10 @@ class PlanController extends Controller
      */
     public function editAction(Request $request, Plan $plan)
     {
+        if ($plan->getUser() !== $this->getUser()) {
+            throw $this->createAccessDeniedException('You can\'t edit this plan' );
+        }
+
         $em = $this->getDoctrine()->getManager();
         $deleteForm = $this->createDeleteForm($plan);
         $editForm = $this->createForm('AppBundle\Form\PlanType', $plan);
@@ -242,7 +246,6 @@ class PlanController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em->flush();
-
             return $this->redirectToRoute('plan_show', array('id' => $plan->getId()));
         }
 
@@ -261,6 +264,10 @@ class PlanController extends Controller
      */
     public function deleteAction(Request $request, Plan $plan)
     {
+        if ($plan->getUser() !== $this->getUser()) {
+            throw $this->createAccessDeniedException('You can\'t delete this plan' );
+        }
+
         $form = $this->createDeleteForm($plan);
         $form->handleRequest($request);
 

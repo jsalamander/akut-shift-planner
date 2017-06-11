@@ -51,7 +51,6 @@ class PlanType extends AbstractType
             ->add('isPublic', CheckboxType::class, array(
                 'attr'  => array('class' => $classes),
                 'label' => 'is_public',
-                'required' => true
             ))
             ->add('shifts', CollectionType::class, array(
                 'entry_type' => ShiftType::class,
