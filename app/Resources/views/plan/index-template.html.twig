@@ -2,7 +2,7 @@
 
 {% block body %}
     <div class="col-12 d-flex justify-content-end">
-        <h1 class="mr-auto p-2">Master Templates</h1>
+        <h1 class="mr-auto p-2">{% trans %}master_templates{% endtrans %}</h1>
     </div>
 
     <div class="col-12">
@@ -10,9 +10,9 @@
         <table class="table table-responsive">
             <thead class="thead-default">
             <tr>
-                <th>{{ knp_pagination_sortable(pagination, 'Title', 'p.title') }} <i class="fa fa-sort" aria-hidden="true"></i></th>
-                <th>Description</th>
-                <th>Actions</th>
+                <th>{{ knp_pagination_sortable(pagination, 'title'|trans, 'p.title') }} <i class="fa fa-sort" aria-hidden="true"></i></th>
+                <th>{% trans %}description{% endtrans %}</th>
+                <th>{% trans %}actions{% endtrans %}</th>
             </tr>
             </thead>
             <tbody>
@@ -30,7 +30,7 @@
         </div>
         {% else %}
             <div class="alert alert-warning" role="alert">
-                <strong>Warning!</strong> No templates defined
+                <strong>{% trans %}warning{% endtrans %}</strong>{% trans %}no_templates_defined{% endtrans %}
             </div>
         {% endif %}
     </div>

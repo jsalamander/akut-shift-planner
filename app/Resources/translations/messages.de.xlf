@@ -18,6 +18,26 @@
                 <source>date</source>
                 <target>Datum</target>
             </trans-unit>
+            <trans-unit id="master_templates">
+                <source>master_templates</source>
+                <target>Globale Vorlagen</target>
+            </trans-unit>
+            <trans-unit id="actions">
+                <source>actions</source>
+                <target>Aktionen</target>
+            </trans-unit>
+            <trans-unit id="warning">
+                <source>warning</source>
+                <target>Warnung!</target>
+            </trans-unit>
+            <trans-unit id="no_templates_defined">
+                <source>no_templates_defined</source>
+                <target>Keine Vorlagen definiert</target>
+            </trans-unit>
+            <trans-unit id="no_upcoming_event_plans">
+                <source>no_upcoming_event_plans</source>
+                <target>Keine kommenden Schichtpläne</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
