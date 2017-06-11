@@ -19,15 +19,15 @@
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <a class="navbar-brand" href="{{ path('homepage') }}"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
+            <a class="navbar-brand" href="{{ path('homepage') }}"><i class="fa fa-home" aria-hidden="true"></i> {% trans %}home{% endtrans %}</a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mr-auto">
                 {% if is_granted('ROLE_ADMIN') %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('plan_index') }}"><i class="fa fa-list" aria-hidden="true"></i> Plans</a>
+                            <a class="nav-link" href="{{ path('plan_index') }}"><i class="fa fa-list" aria-hidden="true"></i> {% trans %}plans{% endtrans %}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('plan_tempalte_index') }}"><i class="fa fa-list-alt" aria-hidden="true"></i> Templates</a>
+                            <a class="nav-link" href="{{ path('plan_tempalte_index') }}"><i class="fa fa-list-alt" aria-hidden="true"></i> {% trans %}templates{% endtrans %}</a>
                         </li>
                 {% endif %}
                     <li class="nav-item dropdown">
@@ -35,8 +35,8 @@
                             <i class="fa fa-plus" aria-hidden="true"></i>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="{{ path('plan_new') }}">New</a>
-                            <a class="dropdown-item" href="{{ path('plan_new_by_template') }}">New by template</a>
+                            <a class="dropdown-item" href="{{ path('plan_new') }}">{% trans %}new{% endtrans %}</a>
+                            <a class="dropdown-item" href="{{ path('plan_new_by_template') }}">{% trans %}new_by_template{% endtrans %}</a>
                         </div>
                     </li>
                 </ul>
@@ -44,7 +44,7 @@
                     {% if is_granted('ROLE_ADMIN') %}
                         <a class="nav-link pull-right" href="{{ path('logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
                     {% else %}
-                        <li class="nav-item text-nowrap"><a class="nav-link" href="{{ path('login') }}"><i class="fa fa-sign-in" aria-hidden="true"></i> login</a></li>
+                        <li class="nav-item text-nowrap"><a class="nav-link" href="{{ path('login') }}"><i class="fa fa-sign-in" aria-hidden="true"></i> {% trans %}login{% endtrans %}</a></li>
                     {% endif %}
                     <li class="nav-item text-nowrap"><a class="nav-link" href="{{ path('about') }}"><i class="fa fa-question-circle-o" aria-hidden="true"></i></a></li>
                 </ul>

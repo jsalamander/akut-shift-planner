@@ -38,6 +38,30 @@
                 <source>no_upcoming_event_plans</source>
                 <target>No upcoming shift plans</target>
             </trans-unit>
+            <trans-unit id="home">
+                <source>home</source>
+                <target>Home</target>
+            </trans-unit>
+            <trans-unit id="plans">
+                <source>plans</source>
+                <target>Shift Plans</target>
+            </trans-unit>
+            <trans-unit id="templates">
+                <source>templates</source>
+                <target>Templates</target>
+            </trans-unit>
+            <trans-unit id="new">
+                <source>new</source>
+                <target>new</target>
+            </trans-unit>
+            <trans-unit id="new_by_template">
+                <source>new_by_template</source>
+                <target>new by template</target>
+            </trans-unit>
+            <trans-unit id="login">
+                <source>login</source>
+                <target>login</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

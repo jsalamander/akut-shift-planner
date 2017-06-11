@@ -38,6 +38,30 @@
                 <source>no_upcoming_event_plans</source>
                 <target>Keine kommenden Schichtpläne</target>
             </trans-unit>
+            <trans-unit id="home">
+                <source>home</source>
+                <target>Start</target>
+            </trans-unit>
+            <trans-unit id="plans">
+                <source>plans</source>
+                <target>Schichtpläne</target>
+            </trans-unit>
+            <trans-unit id="templates">
+                <source>templates</source>
+                <target>Vorlagen</target>
+            </trans-unit>
+            <trans-unit id="new">
+                <source>new</source>
+                <target>Neu</target>
+            </trans-unit>
+            <trans-unit id="new_by_template">
+                <source>new_by_template</source>
+                <target>Neu basierend auf Vorlage </target>
+            </trans-unit>
+            <trans-unit id="login">
+                <source>login</source>
+                <target>Einloggen</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
