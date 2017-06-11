@@ -120,6 +120,26 @@
                     ]]>
                 </target>
             </trans-unit>
+            <trans-unit id="new_shift_plan">
+                <source>new_shift_plan</source>
+                <target>New Shift Plan</target>
+            </trans-unit>
+            <trans-unit id="email_label">
+                <source>email_label</source>
+                <target>Email (password and link will be sent there)</target>
+            </trans-unit>
+            <trans-unit id="is_template">
+                <source>is_template</source>
+                <target>Is this plan a template?</target>
+            </trans-unit>
+            <trans-unit id="shifts">
+                <source>shifts</source>
+                <target>Shifts</target>
+            </trans-unit>
+            <trans-unit id="create">
+                <source>create</source>
+                <target>Create</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

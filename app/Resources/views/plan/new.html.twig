@@ -2,7 +2,7 @@
 
 {% block body %}
     <div class="col-12">
-        <h1>New Event Plan</h1>
+        <h1>{% trans %}new_shift_plan{% endtrans %}</h1>
     </div>
 
     <div class="col-12">
@@ -19,7 +19,7 @@
             </div>
         </div>
         <hr>
-        <h3>Shifts</h3>
+        <h3>{% trans %}shifts{% endtrans %}</h3>
         {% if form.vars.errors is not empty %}
             <div class="alert alert-danger">
                 {{ form_errors(form) }}
@@ -30,7 +30,7 @@
                 <li>{{ form_widget(shift) }}</li>
             {% endfor %}
         </ul>
-        <input class="btn btn-primary" type="submit" value="Create" />
+        <input class="btn btn-primary" type="submit" value="{% trans %}create{% endtrans %}" />
         {{ form_end(form) }}
     </div>
 {% endblock %}

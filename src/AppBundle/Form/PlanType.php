@@ -23,26 +23,29 @@ class PlanType extends AbstractType
 
         $builder
             ->add('title', TextType::class, array(
-                'attr'  => array('class' => $classes)
+                'attr'  => array('class' => $classes),
+                'label' => 'title'
             ))
             ->add('date', DateType::class, array(
                 'attr'  => array('class' => $classes . ' datepicker'),
                 'html5' => false,
                 'widget' => 'single_text',
-                'required' => false
+                'required' => false,
+                'label' => 'date'
             ))
             ->add('description', TextareaType::class, array(
                 'attr'  => array('class' => $classes),
-                'required' => false
+                'required' => false,
+                'label' => 'description'
             ))
             ->add('email', EmailType::class, array(
                 'attr'  => array('class' => $classes),
                 'required' => true,
-                'label' => 'Email (password and link will be sent there)'
+                'label' => 'email_label'
             ))
             ->add('isTemplate', CheckboxType::class, array(
                 'attr'  => array('class' => $classes),
-                'label' => 'Is this plan a template?',
+                'label' => 'is_template',
                 'required' => false
             ))
             ->add('shifts', CollectionType::class, array(

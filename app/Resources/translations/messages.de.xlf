@@ -120,6 +120,26 @@
                     ]]>
                 </target>
             </trans-unit>
+            <trans-unit id="new_shift_plan">
+                <source>new_shift_plan</source>
+                <target>Neuer Schichtplan</target>
+            </trans-unit>
+            <trans-unit id="email_label">
+                <source>email_label</source>
+                <target>Email (Passwort und Link werden an diese Adresse geschickt)</target>
+            </trans-unit>
+            <trans-unit id="is_template">
+                <source>is_template</source>
+                <target>Ist dieser Schichtplan eine Vorlage?</target>
+            </trans-unit>
+            <trans-unit id="shifts">
+                <source>shifts</source>
+                <target>Schichten</target>
+            </trans-unit>
+            <trans-unit id="create">
+                <source>create</source>
+                <target>Erstellen</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
