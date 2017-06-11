@@ -40,7 +40,7 @@ class PlanType extends AbstractType
             ))
             ->add('email', EmailType::class, array(
                 'attr'  => array('class' => $classes),
-                'required' => true,
+                'required' => false,
                 'label' => 'email_label'
             ))
             ->add('isTemplate', CheckboxType::class, array(

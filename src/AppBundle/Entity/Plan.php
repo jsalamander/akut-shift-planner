@@ -76,13 +76,35 @@ class Plan
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=255,)
+     * @ORM\Column(name="email", type="string", length=255, nullable=true)
      */
     private $email;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="plans")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
 
     public function __construct()
     {
         $this->shifts = new ArrayCollection();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
     }
 
     /**

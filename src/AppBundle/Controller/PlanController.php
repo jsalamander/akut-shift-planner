@@ -37,7 +37,11 @@ class PlanController extends Controller
 
         $queryBuilder = $em->getRepository('AppBundle:Plan')->createQueryBuilder('p');
 
-        $query = $queryBuilder->where('p.isTemplate = false')->orderBy('p.date', 'ASC')->getQuery();
+        $query = $queryBuilder
+            ->where('p.isTemplate = false')
+            ->andWhere('p.user =' . $this->getUser()->getId())
+            ->orderBy('p.date', 'ASC')
+            ->getQuery();
         $pagination = $paginator->paginate(
             $query,
             $request->query->getInt('page', 1),
@@ -63,7 +67,11 @@ class PlanController extends Controller
 
         $queryBuilder = $em->getRepository('AppBundle:Plan')->createQueryBuilder('p');
 
-        $query = $queryBuilder->where('p.isTemplate = true')->orderBy('p.date', 'ASC')->getQuery();
+        $query = $queryBuilder
+            ->where('p.isTemplate = true')
+            ->andWhere('p.user =' . $this->getUser()->getId())
+            ->orderBy('p.date', 'ASC')
+            ->getQuery();
         $pagination = $paginator->paginate(
             $query,
             $request->query->getInt('page', 1),
@@ -89,13 +97,11 @@ class PlanController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $password = bin2hex(random_bytes(15));
             $em = $this->getDoctrine()->getManager();
-            $plan->setPassword($password);
+            $plan->setUser($this->getUser());
             $em->persist($plan);
             $em->flush();
             $session->set($plan->getId(), true);
-            $this->sendPlanPasswordViaMail($mailer, $plan, $password);
 
             return $this->redirectToRoute('plan_show',array('id' => $plan->getId()));
         }
@@ -288,41 +294,5 @@ class PlanController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
-    }
-
-    /**
-     * Send the plan password via email to the creator so they
-     * can access the plan later
-     *
-     * @param \Swift_Mailer $mailer
-     * @param $password
-     */
-    private function sendPlanPasswordViaMail(\Swift_Mailer $mailer, $plan, $password) {
-        if (!$plan->getIsTemplate()) {
-            $message = new \Swift_Message('Your Access Details');
-
-            $message->setFrom('no-reply@schicht-plan.ch')
-                ->setTo($plan->getEmail())
-                ->setBody(
-                    $this->renderView(
-                        'email/plan-password.html.twig',
-                        array(
-                            'password' => $password,
-                            'plan_id' => $plan->getId()
-                        )
-                    ),
-                    'text/html'
-                )->addPart(
-                    $this->renderView(
-                        'email/plan-password.txt.twig',
-                        array(
-                            'password' => $password,
-                            'plan_id' => $plan->getId()
-                        )
-                    ),
-                    'text/plain'
-                );
-            $mailer->send($message);
-        }
     }
 }

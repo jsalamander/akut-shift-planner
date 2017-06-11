@@ -2,7 +2,7 @@
 <div class="col-12">
     <h1>{{ 'login'|trans([], 'messages', null) }}</h1><br>
     {% if error %}
-        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
     <form action="{{ path("fos_user_security_check") }}" method="post">
         {% if csrf_token %}

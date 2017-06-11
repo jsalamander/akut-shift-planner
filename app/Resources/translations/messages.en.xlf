@@ -248,6 +248,10 @@
                 <source>recover</source>
                 <target>Recover</target>
             </trans-unit>
+            <trans-unit id="register">
+                <source>register</source>
+                <target>Register</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
