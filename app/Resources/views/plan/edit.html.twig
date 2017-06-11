@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
     {% block body %}
         <div class="col-12">
-            <h1>Edit Template</h1>
+            <h1>{% trans %}edit{% endtrans %}</h1>
         </div>
 
         <div class="col-12">
@@ -22,19 +22,19 @@
                 </div>
             </div>
             <hr>
-            <h3>Shifts</h3>
+            <h3>{% trans %}shifts{% endtrans %}</h3>
             <ul class="shifts list-unstyled" data-prototype="{{ form_widget(edit_form.shifts.vars.prototype)|e('html_attr') }}">
                 {% for shift in edit_form.shifts %}
                     <li>{{ form_widget(shift) }}</li>
                     <hr>
                 {% endfor %}
             </ul>
-            <input class="btn btn-primary" type="submit" value="Save" />
+            <input class="btn btn-primary" type="submit" value="{% trans %}save{% endtrans %}" />
             {{ form_end(edit_form) }}
         </div>
         <div class="col-12">
             {{ form_start(delete_form) }}
-            <input class="btn btn-sm btn-danger pull-right" type="submit" value="Delete">
+            <input class="btn btn-sm btn-danger pull-right" type="submit" value="{% trans %}delete{% endtrans %}">
             {{ form_end(delete_form) }}
         </div>
 {% endblock %}

@@ -164,13 +164,21 @@
                 <source>new_title</source>
                 <target>New Title</target>
             </trans-unit>
-            <trans-unit id="template_to_be_used">
-                <source>template_to_be_used</source>
-                <target>Wähle die Vorlage</target>
-            </trans-unit>
             <trans-unit id="new_by_template_title">
                 <source>new_by_template_title</source>
                 <target>New shift plan using a template</target>
+            </trans-unit>
+            <trans-unit id="edit">
+                <source>edit</source>
+                <target>Edit</target>
+            </trans-unit>
+            <trans-unit id="save">
+                <source>save</source>
+                <target>Save</target>
+            </trans-unit>
+            <trans-unit id="delete">
+                <source>delete</source>
+                <target>Delete</target>
             </trans-unit>
         </body>
     </file>

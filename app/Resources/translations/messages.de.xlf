@@ -168,6 +168,18 @@
                 <source>new_by_template_title</source>
                 <target>Neuer Schichtplan anhand einer Vorlage</target>
             </trans-unit>
+            <trans-unit id="edit">
+                <source>edit</source>
+                <target>Editieren</target>
+            </trans-unit>
+            <trans-unit id="save">
+                <source>save</source>
+                <target>Speichern</target>
+            </trans-unit>
+            <trans-unit id="delete">
+                <source>delete</source>
+                <target>Löschen</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
