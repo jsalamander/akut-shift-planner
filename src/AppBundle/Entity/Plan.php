@@ -66,6 +66,14 @@ class Plan
     private $isTemplate;
 
     /**
+     * Indicates if this plan should be open for the public
+     * @var int
+     *
+     * @ORM\Column(name="is_public", type="boolean")
+     */
+    private $isPublic;
+
+    /**
      * @var string
      *
      * Is used for people without a login, so they can see/edit the details
@@ -90,6 +98,23 @@ class Plan
     {
         $this->shifts = new ArrayCollection();
     }
+
+    /**
+     * @return int
+     */
+    public function getIsPublic()
+    {
+        return $this->isPublic;
+    }
+
+    /**
+     * @param int $isPublic
+     */
+    public function setIsPublic($isPublic)
+    {
+        $this->isPublic = $isPublic;
+    }
+    
 
     /**
      * @return mixed

@@ -39,7 +39,8 @@ class PlanController extends Controller
 
         $query = $queryBuilder
             ->where('p.isTemplate = false')
-            ->andWhere('p.user =' . $this->getUser()->getId())
+            ->andWhere('p.user = :user')
+            ->setParameter('user', $this->getUser()->getId())
             ->orderBy('p.date', 'ASC')
             ->getQuery();
         $pagination = $paginator->paginate(
@@ -69,7 +70,8 @@ class PlanController extends Controller
 
         $query = $queryBuilder
             ->where('p.isTemplate = true')
-            ->andWhere('p.user =' . $this->getUser()->getId())
+            ->andWhere('p.user = :user')
+            ->setParameter('user', $this->getUser()->getId())
             ->orderBy('p.date', 'ASC')
             ->getQuery();
         $pagination = $paginator->paginate(
@@ -121,12 +123,8 @@ class PlanController extends Controller
     public function newByTemplateAction(Request $request, SessionInterface $session, \Swift_Mailer $mailer)
     {
         $em = $this->getDoctrine()->getManager();
-        $plans = $em->getRepository('AppBundle:Plan')->findBy(
-            array(
-                'isTemplate' => true,
-                'user' => $this->getUser()
-            )
-        );
+
+        $plans = $this->getPlans($em);
 
         $classes = 'form-control';
         $form = $this->createFormBuilder()
@@ -297,5 +295,27 @@ class PlanController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+
+    /**
+     * Select correct plans to display
+     * for the create new by template form
+     *
+     * @param $em
+     */
+    private function getPlans($em)
+    {
+        $queryBuilder = $em->getRepository('AppBundle:Plan')->createQueryBuilder('p');
+
+        $qb = $queryBuilder->where('p.isTemplate = true');
+
+        if (!$this->getUser()) {
+            $qb->andWhere('p.isPublic = true');
+        } else {
+            $qb->andWhere('p.user = :user')->setParameter('user', $this->getUser()->getId());
+            $qb->orWhere('p.isPublic = true');
+        }
+
+        return $qb->orderBy('p.title', 'ASC')->getQuery()->getResult();
     }
 }

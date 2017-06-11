@@ -16,6 +16,9 @@
             {{ form_row(form.description) }}
             <div {% if not is_granted('ROLE_USER') %}style="display:none"{% endif %}>
                 {{ form_row(form.isTemplate) }}
+                <div style="display: none;">
+                    {{ form_row(form.isPublic) }}
+                </div>
             </div>
         </div>
         <hr>

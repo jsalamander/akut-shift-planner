@@ -252,6 +252,10 @@
                 <source>register</source>
                 <target>Registieren</target>
             </trans-unit>
+            <trans-unit id="is_public">
+                <source>is_public</source>
+                <target>Ist diese Vorlage öffentlich?</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
