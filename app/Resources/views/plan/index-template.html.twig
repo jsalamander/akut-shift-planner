@@ -6,7 +6,7 @@
     </div>
 
     <div class="col-12">
-        {% if plans is not empty %}
+        {% if pagination.items is not empty%}
         <table class="table table-responsive">
             <thead class="thead-default">
             <tr>
@@ -16,7 +16,7 @@
             </tr>
             </thead>
             <tbody>
-            {% for plan in plans %}
+            {% for plan in pagination %}
                 <tr>
                     <th><a href="{{ path('plan_show', { 'id': plan.id }) }}">{{ plan.title }}</a></th>
                     <td>{{ plan.description }}</td>
@@ -25,6 +25,9 @@
             {% endfor %}
             </tbody>
         </table>
+        <div class="navigation">
+            {{ knp_pagination_render(pagination) }}
+        </div>
         {% else %}
             <div class="alert alert-warning" role="alert">
                 <strong>Warning!</strong> No templates defined

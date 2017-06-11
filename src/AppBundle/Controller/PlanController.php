@@ -55,14 +55,23 @@ class PlanController extends Controller
      * @Route("/templates", name="plan_tempalte_index")
      * @Method("GET")
      */
-    public function indexTemplateAction()
+    public function indexTemplateAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $plans = $em->getRepository('AppBundle:Plan')->findBy(array('isTemplate' => true ));
+        $paginator  = $this->get('knp_paginator');
+
+        $queryBuilder = $em->getRepository('AppBundle:Plan')->createQueryBuilder('p');
+
+        $query = $queryBuilder->where('p.isTemplate = true')->orderBy('p.date', 'ASC')->getQuery();
+        $pagination = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            10
+        );
 
         return $this->render('plan/index-template.html.twig', array(
-            'plans' => $plans,
+            'pagination' => $pagination,
         ));
     }
 
