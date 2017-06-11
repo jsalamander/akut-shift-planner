@@ -2,21 +2,15 @@
 # https://symfony.com/doc/current/security.html
 security:
 
-    # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
-            in_memory:
-                memory:
-                    users:
-                        ryan:
-                            password: $2a$12$LCY0MefVIEc3TYPHV9SNnuzOfyr2p/AXIGoQJEDs4am4JwhNz/jli
-                            roles: 'ROLE_USER'
-                        admin:
-                            password: $2a$12$cyTWeE9kpq1PjqKFiWUZFuCRPwVyAZwm4XzMZ1qPUFl7/flCM3V0G
-                            roles: 'ROLE_ADMIN'
+            fos_userbundle:
+                        id: fos_user.user_provider.username
     encoders:
-            Symfony\Component\Security\Core\User\User:
-                algorithm: bcrypt
-                cost: 12
+            FOS\UserBundle\Model\UserInterface: bcrypt
+
+    role_hierarchy:
+            ROLE_ADMIN:       ROLE_USER
+            ROLE_SUPER_ADMIN: ROLE_ADMIN
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -25,16 +19,15 @@ security:
             security: false
 
         main:
-            anonymous: ~
+            pattern: ^/
             form_login:
-                login_path: login
-                check_path: login
-            logout:
-                path:   /logout
-                target: /
+                provider: fos_userbundle
+                csrf_token_generator: security.csrf.token_manager
+            logout:       true
+            anonymous:    true
 
     access_control:
-            - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+            - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
             - { path: ^/$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
             - { path: ^/plan/new-by-template$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
             - { path: '^/plan/[0-9A-Za-z\-]{36}$', roles: IS_AUTHENTICATED_ANONYMOUSLY }
@@ -43,4 +36,6 @@ security:
             - { path: ^/_error, roles: IS_AUTHENTICATED_ANONYMOUSLY }
             - { path: ^/about, roles: IS_AUTHENTICATED_ANONYMOUSLY }
             - { path: ^/lost-plan-pass, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+            - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+            - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
             - { path: ^/, roles: ROLE_ADMIN }
