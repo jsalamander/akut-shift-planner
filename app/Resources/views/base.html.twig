@@ -22,7 +22,7 @@
             <a class="navbar-brand" href="{{ path('homepage') }}"><i class="fa fa-home" aria-hidden="true"></i> {% trans %}home{% endtrans %}</a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mr-auto">
-                {% if is_granted('ROLE_ADMIN') %}
+                {% if is_granted('ROLE_USER') %}
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path('plan_index') }}"><i class="fa fa-list" aria-hidden="true"></i> {% trans %}plans{% endtrans %}</a>
                         </li>
@@ -41,7 +41,7 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav">
-                    {% if is_granted('ROLE_ADMIN') %}
+                    {% if is_granted('ROLE_USER') %}
                         <a class="nav-link pull-right" href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
                     {% else %}
                         <li class="nav-item text-nowrap"><a class="nav-link" href="{{ path('fos_user_security_login') }}"><i class="fa fa-sign-in" aria-hidden="true"></i> {% trans %}login{% endtrans %}</a></li>

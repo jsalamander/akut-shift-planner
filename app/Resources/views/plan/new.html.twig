@@ -14,7 +14,7 @@
                 {{ form_row(form.email) }}
             </div>
             {{ form_row(form.description) }}
-            <div {% if not is_granted('ROLE_ADMIN') %}style="display:none"{% endif %}>
+            <div {% if not is_granted('ROLE_USER') %}style="display:none"{% endif %}>
                 {{ form_row(form.isTemplate) }}
             </div>
         </div>
