@@ -140,6 +140,18 @@
                 <source>create</source>
                 <target>Create</target>
             </trans-unit>
+            <trans-unit id="start">
+                <source>start</source>
+                <target>Start</target>
+            </trans-unit>
+            <trans-unit id="end">
+                <source>end</source>
+                <target>End</target>
+            </trans-unit>
+            <trans-unit id="number_people">
+                <source>number_people</source>
+                <target>Nr. of required poeple</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

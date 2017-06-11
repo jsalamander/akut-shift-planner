@@ -23,25 +23,30 @@ class ShiftType extends AbstractType
         $builder
             ->add('title', TextType::class, array(
                 'attr'  => array('class' => $classes),
-                'required' => true
+                'required' => true,
+                'label' => 'title'
             ))
             ->add('description', TextareaType::class, array(
                 'attr'  => array('class' => $classes),
-                'required' => true
+                'required' => true,
+                'label' => 'description'
             ))
             ->add('start', TimeType::class, array(
                 'attr'  => array('class' => $classes),
                 'widget' => 'single_text',
-                'required' => true
+                'required' => true,
+                'label' => 'start'
             ))
             ->add('end', TimeType::class, array(
                 'attr'  => array('class' => $classes),
                 'widget' => 'single_text',
-                'required' => true
+                'required' => true,
+                'label' => 'end'
             ))
             ->add('numberPeople', IntegerType::class, array(
                 'attr'  => array('class' => $classes),
-                'required' => true
+                'required' => true,
+                'label' => 'number_people'
             ));
     }
     
