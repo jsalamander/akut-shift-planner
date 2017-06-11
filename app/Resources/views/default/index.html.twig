@@ -3,10 +3,10 @@
 {% block body %}
     <div class="jumbotron col-12">
         <h1 class="display-3">Schicht-Plan.ch</h1>
-        <p class="lead">This is a simple shift planning tool inspired by <a href="https://schichtplan.immerda.ch">schichtplan.immerda.ch</a></p>
+        <p class="lead">{% trans %}home_description{% endtrans %} <a href="https://schichtplan.immerda.ch">schichtplan.immerda.ch</a></p>
         <hr class="my-4">
         <p class="lead">
-            <a class="btn btn-md btn-primary" href="{{ path('plan_new_by_template') }}" role="button">Create a shift plan</a>
+            <a class="btn btn-md btn-primary" href="{{ path('plan_new_by_template') }}" role="button">{% trans %}create_shift_plan{% endtrans %}</a>
         </p>
     </div>
 {% endblock %}
