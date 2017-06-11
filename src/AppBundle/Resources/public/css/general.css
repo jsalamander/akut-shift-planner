@@ -19,3 +19,16 @@ a:hover {
 .main-row {
     margin-top: 1rem;
 }
+
+.page-item.active .page-link {
+    background-color: #fe7101;
+    border-color: #fe7101;
+}
+
+.page-link  {
+    color: #fe7101;
+}
+
+.page-link:hover  {
+    color: #fe7101;
+}
