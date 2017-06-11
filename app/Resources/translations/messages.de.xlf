@@ -152,6 +152,10 @@
                 <source>number_people</source>
                 <target>Benötigte Personen</target>
             </trans-unit>
+            <trans-unit id="add_shift">
+                <source>add_shift</source>
+                <target>Schicht hinzufügen</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
