@@ -122,7 +122,10 @@ class PlanController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $plans = $em->getRepository('AppBundle:Plan')->findBy(
-            array('isTemplate' => true )
+            array(
+                'isTemplate' => true,
+                'user' => $this->getUser()
+            )
         );
 
         $classes = 'form-control';
