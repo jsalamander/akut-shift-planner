@@ -17,7 +17,7 @@ class RecoverPlanPasswordType extends AbstractType
         $builder
             ->add('email', EmailType::class, array(
                 'attr'  => array('class' => 'form-control'),
-                'label' => 'Your Email'
+                'label' => 'email'
             ));
     }
 

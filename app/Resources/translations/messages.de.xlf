@@ -232,6 +232,22 @@
                 <source>label_alias</source>
                 <target>Alias (öffentlich)</target>
             </trans-unit>
+            <trans-unit id="recover_password_title">
+                <source>recover_password_title</source>
+                <target>Passwort erneut senden</target>
+            </trans-unit>
+            <trans-unit id="check_email">
+                <source>check_email</source>
+                <target>Überprüfe deine Email Inbox</target>
+            </trans-unit>
+            <trans-unit id="back">
+                <source>back</source>
+                <target>Zurück</target>
+            </trans-unit>
+            <trans-unit id="recover">
+                <source>recover</source>
+                <target>Senden</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
