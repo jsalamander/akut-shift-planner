@@ -41,7 +41,7 @@ class PlanController extends Controller
         $pagination = $paginator->paginate(
             $query,
             $request->query->getInt('page', 1),
-            2
+            10
         );
 
         return $this->render('plan/index.html.twig', array(
