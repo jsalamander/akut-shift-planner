@@ -20,21 +20,23 @@ class PersonType extends AbstractType
         $builder
             ->add('name', TextType::class, array(
                 'attr'  => array('class' => $classes),
-                'label' => 'Name (visible for creator only)',
+                'label' => 'label_name',
                 'required' => true
             ))
             ->add('alias', TextType::class, array(
                 'attr'  => array('class' => $classes),
-                'label' => 'Alias (public)',
+                'label' => 'label_alias',
                 'required' => true
             ))
             ->add('email', EmailType::class, array(
                 'attr'  => array('class' => $classes),
-                'required' => false
+                'required' => false,
+                'label' => 'email'
             ))
             ->add('phone', TextType::class, array(
                 'attr'  => array('class' => $classes),
-                'required' => false
+                'required' => false,
+                'label' => 'phone'
             ));
     }
     

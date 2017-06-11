@@ -224,6 +224,14 @@
                 <source>oh_snap</source>
                 <target>Oops!</target>
             </trans-unit>
+            <trans-unit id="label_name">
+                <source>label_name</source>
+                <target>Name (nur für Ersteller_in sichtbar)</target>
+            </trans-unit>
+            <trans-unit id="label_alias">
+                <source>label_alias</source>
+                <target>Alias (öffentlich)</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

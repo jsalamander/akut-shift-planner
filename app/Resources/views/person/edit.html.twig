@@ -14,13 +14,13 @@
             {{ form_row(edit_form.phone) }}
         </div>
 
-        <input class="btn btn-primary" type="submit" value="Edit"/>
+        <input class="btn btn-primary" type="submit" value="{% trans %}edit{% endtrans %}"/>
         {{ form_end(edit_form) }}
     </div>
 
     <div class="col-12">
         {{ form_start(delete_form) }}
-        <input class="btn btn-danger btn-sm pull-right" type="submit" value="Delete">
+        <input class="btn btn-danger btn-sm pull-right" type="submit" value="{% trans %}delete{% endtrans %}">
         {{ form_end(delete_form) }}
     </div>
 {% endblock %}
