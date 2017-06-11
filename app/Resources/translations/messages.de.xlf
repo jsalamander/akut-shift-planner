@@ -1,22 +1,22 @@
 <?xml version="1.0"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-    <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+    <file source-language="de" target-language="de" datatype="plaintext" original="file.ext">
         <body>
             <trans-unit id="event_list">
                 <source>event_list</source>
-                <target>Event Plan List</target>
+                <target>Schichtplan Liste</target>
             </trans-unit>
             <trans-unit id="description">
                 <source>description</source>
-                <target>Description</target>
+                <target>Beschrieb</target>
             </trans-unit>
             <trans-unit id="title">
                 <source>title</source>
-                <target>Title</target>
+                <target>Titel</target>
             </trans-unit>
             <trans-unit id="date">
                 <source>date</source>
-                <target>Date</target>
+                <target>Datum</target>
             </trans-unit>
         </body>
     </file>
