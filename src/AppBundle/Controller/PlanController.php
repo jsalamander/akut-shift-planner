@@ -10,13 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
 
 /**
  * Plan controller.
@@ -94,7 +88,6 @@ class PlanController extends Controller
      */
     public function newAction(
         Request $request,
-        SessionInterface $session,
         FormStrategyService $formService
     ) {
         $form = $this->createForm($formService->getFormType());
@@ -105,7 +98,6 @@ class PlanController extends Controller
             $plan = $formService->createPlan($form->getData());
             $em->persist($plan);
             $em->flush();
-            $session->set($plan->getId(), true);
 
             return $this->redirectToRoute('plan_show',array('id' => $plan->getId()));
         }
@@ -121,7 +113,7 @@ class PlanController extends Controller
      * @Route("/new-by-template", name="plan_new_by_template")
      * @Method({"GET", "POST"})
      */
-    public function newByTemplateAction(Request $request, SessionInterface $session, FormStrategyService $formService)
+    public function newByTemplateAction(Request $request, FormStrategyService $formService)
     {
         $em = $this->getDoctrine()->getManager();
         $form = $this->createForm($formService->getByTemplateFormType());
@@ -131,7 +123,6 @@ class PlanController extends Controller
             $plan = $formService->handleSpecificFieldsByTemplate($form->getData());
             $em->persist($plan);
             $em->flush();
-            $session->set($plan->getId(), true);
 
             return $this->redirectToRoute('plan_show', array('id' => $plan->getId()));
         }
@@ -147,7 +138,7 @@ class PlanController extends Controller
      * @Route("/{id}", name="plan_show")
      * @Method({"GET", "POST"})
      */
-    public function showAction(Plan $plan, Request $request, SessionInterface $session)
+    public function showAction(Plan $plan, Request $request)
     {
         $passwordForm = $this->createFormBuilder()
             ->add('password', PasswordType::class, array(
@@ -159,22 +150,15 @@ class PlanController extends Controller
         $passwordForm->handleRequest($request);
         $deleteForm = $this->createDeleteForm($plan);
 
-        $showDetails = false;
         if ($passwordForm->isSubmitted()) {
             $pw = $passwordForm->getData()['password'];
-            if ($plan->getPassword() !== $pw ) {
-                $passwordForm->get('password')->addError(new FormError('Wrong Password'));
-            } elseif ($passwordForm->isValid() && $plan->getPassword() === $pw) {
-                $showDetails = true;
-                $session->set($plan->getId(), $plan->getPassword());
-            }
+            var_dump($pw);die;
         }
 
         return $this->render('plan/show.html.twig', array(
             'plan' => $plan,
             'delete_form' => $deleteForm->createView(),
             'password_form' => $passwordForm->createView(),
-            'showDetails' => $showDetails
         ));
     }
 
