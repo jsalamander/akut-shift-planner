@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Plan;
 use AppBundle\Entity\Shift;
+use AppBundle\Service\FormStrategyService;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -95,17 +96,13 @@ class PlanController extends Controller
         Request $request,
         SessionInterface $session,
         \Swift_Mailer $mailer,
-        UserPasswordEncoderInterface $encoder
+        FormStrategyService $formService
     ) {
         $plan = new Plan();
 
-        if ($this->getUser()) {
-            $form = $this->createForm('AppBundle\Form\PlanType', $plan);
-            $template = 'plan/new.html.twig';
-        } else {
-            $form = $this->createForm('AppBundle\Form\PlanUnauthenticatedType', $plan);
-            $template = 'plan/new-unauth.html.twig';
-        }
+        $formService->createStrategy($this->getUser());
+        $form = $this->createForm($formService->getFormType(), $plan);
+
 
         $form->handleRequest($request);
 
@@ -119,7 +116,7 @@ class PlanController extends Controller
             return $this->redirectToRoute('plan_show',array('id' => $plan->getId()));
         }
 
-        return $this->render($template, array(
+        return $this->render($formService->getTwigTemplate(), array(
             'plan' => $plan,
             'form' => $form->createView()
         ));
