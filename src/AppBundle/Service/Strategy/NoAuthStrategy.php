@@ -5,11 +5,22 @@ namespace AppBundle\Service\Strategy;
 use AppBundle\Entity\Plan;
 use AppBundle\Entity\User;
 use AppBundle\Service\Strategy\FormStrategyInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * Class AuthStrategy
  */
 class NoAuthStrategy implements FormStrategyInterface {
+
+    /**
+     * @var UserPasswordEncoderInterface
+     */
+    private $encoder;
+
+    public function __construct(UserPasswordEncoderInterface $encoder)
+    {
+        $this->encoder = $encoder;
+    }
 
     public function getFormType() {
         return 'AppBundle\Form\PlanUnauthenticatedType';
@@ -27,8 +38,9 @@ class NoAuthStrategy implements FormStrategyInterface {
     {
         $newUser = new User();
         $newUser->setEmail($plan->getEmail());
-        $newUser->setPassword(password_hash ($plan->getPassword(), PASSWORD_DEFAULT));
-        $newUser->setUsername(hash('md5', $plan->getEmail()));
+        $pwHash = $this->encoder->encodePassword($newUser, $plan->getPassword());
+        $newUser->setPassword($pwHash);
+        $newUser->setUsername(bin2hex(random_bytes(100)));
         $plan->setUser($newUser);
 
         return $plan;

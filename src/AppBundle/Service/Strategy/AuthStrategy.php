@@ -3,7 +3,7 @@
 namespace AppBundle\Service\Strategy;
 
 use AppBundle\Service\Strategy\FormStrategyInterface;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**
  * Class AuthStrategy
@@ -16,10 +16,16 @@ class AuthStrategy implements FormStrategyInterface {
      */
     private $user;
 
-    public function __construct(TokenStorage $tokenStorage)
+    /**
+     * @var TokenStorageInterface
+     */
+    private $tokenStorage;
+
+    public function __construct(TokenStorageInterface $tokenStorage)
     {
         $this->tokenStorage = $tokenStorage;
         $this->user = $this->getUser();
+
     }
 
     public function getFormType() {

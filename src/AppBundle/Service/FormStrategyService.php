@@ -5,7 +5,7 @@ namespace AppBundle\Service;
 use AppBundle\Entity\User;
 use AppBundle\Service\Strategy\AuthStrategy;
 use AppBundle\Service\Strategy\NoAuthStrategy;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**
  * Strategy to decide whether to handle the form for a user or an anon
@@ -19,7 +19,7 @@ class FormStrategyService {
      */
     private $strategy = NULL;
 
-    public function __construct(AuthStrategy $authStrategy, NoAuthStrategy $noAuthStrategy, TokenStorage $tokenStorage)
+    public function __construct(AuthStrategy $authStrategy, NoAuthStrategy $noAuthStrategy, TokenStorageInterface $tokenStorage)
     {
         $this->tokenStorage = $tokenStorage;
 
