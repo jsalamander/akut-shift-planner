@@ -57,8 +57,10 @@ class UserService {
      *
      * @param $plan Plan
      * @param $password string
+     *
+     * @return bool
      */
-    public function checkOneTimeUserPassword(&$plan, $password) {
+    public function checkOneTimeUserPassword($plan, $password) {
         if ($this->encoder->isPasswordValid($plan->getUser(), $password)) {
             //authenticate
             return true;
