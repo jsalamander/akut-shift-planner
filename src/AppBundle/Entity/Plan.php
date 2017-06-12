@@ -74,21 +74,6 @@ class Plan
     private $isPublic;
 
     /**
-     * @var string
-     *
-     * Is used for people without a login, so they can see/edit the details
-     * @ORM\Column(name="password", type="string", length=255, nullable=true)
-     */
-    private $password;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="email", type="string", length=255, nullable=true)
-     */
-    private $email;
-
-    /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="plans", cascade={"persist"})
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
@@ -130,22 +115,6 @@ class Plan
     public function setUser($user)
     {
         $this->user = $user;
-    }
-
-    /**
-     * @return password
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    /**
-     * @param password $password
-     */
-    public function setPassword($password)
-    {
-        $this->password = $password;
     }
 
     /**
@@ -294,23 +263,6 @@ class Plan
     {
         return $this->shifts;
     }
-
-    /**
-     * @return string
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
-     * @param string $email
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-    }
-
 
 
     public function __toString() {

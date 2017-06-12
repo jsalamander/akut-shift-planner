@@ -19,11 +19,15 @@ class FormStrategyService {
      */
     private $strategy = NULL;
 
-    public function __construct(AuthStrategy $authStrategy, NoAuthStrategy $noAuthStrategy, TokenStorageInterface $tokenStorage)
-    {
+    public function __construct(
+        AuthStrategy $authStrategy,
+        NoAuthStrategy $noAuthStrategy,
+        TokenStorageInterface $tokenStorage,
+        UserService $userService
+    ) {
         $this->tokenStorage = $tokenStorage;
 
-        if($this->getUser()) {
+        if($userService->getUser()) {
             $this->strategy = $authStrategy;
         } else {
             $this->strategy = $noAuthStrategy;
@@ -40,24 +44,41 @@ class FormStrategyService {
     /**
      * @return string
      */
+    public function getByTemplateFormType()
+    {
+        return $this->strategy->getByTemplateFormType();
+    }
+
+    /**
+     * @return string
+     */
     public function getTwigTemplate() {
         return $this->strategy->getTwigTemplate();
     }
 
-    public function handleSpecificFields($plan) {
-        return $this->strategy->handleSpecificFields($plan);
+    /**
+     * @return string
+     */
+    public function getByTemplateTwigTemplate() {
+        return $this->strategy->getByTemplateTwigTemplate();
     }
 
-    private function getUser(){
-        if (null === $token = $this->tokenStorage->getToken()) {
-            return;
-        }
+    /**
+     * Save new user or/and make sure both entities are connected
+     *
+     * @param $formData
+     * @return \AppBundle\Entity\Plan
+     */
+    public function handleSpecificFields($formData) {
+        return $this->strategy->handleSpecificFields($formData);
+    }
 
-        if (!is_object($user = $token->getUser())) {
-            // e.g. anonymous authentication
-            return;
-        }
-
-        return $user;
+    /**
+     * @param $formData
+     * @return Plan
+     */
+    public function handleSpecificFieldsByTemplate($formData)
+    {
+        return $this->strategy->handleSpecificFieldsByTemplate($formData);
     }
 }

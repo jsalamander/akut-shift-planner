@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="col-12">
+        <h1>{% trans %}new_by_template_title{% endtrans %}</h1>
+    </div>
+
+    {% if form.templates.vars.choices is not empty %}
+        <div class="col-12">
+            {{ form_start(form) }}
+            <div class="form-group">
+                {{ form_row(form.templates) }}
+                {{ form_row(form.title) }}
+                {{ form_row(form.date) }}
+                {{ form_row(form.description) }}
+            </div>
+            <input class="btn btn-primary" type="submit" value="{% trans %}create{% endtrans %}" />
+            {{ form_end(form) }}
+        </div>
+    {% else %}
+        <div class="alert alert-warning col-12" role="alert">
+            <strong>{% trans %}warning{% endtrans %}</strong> {% trans %}no_templates_defined{% endtrans %}
+        </div>
+    {% endif%}
+{% endblock %}

@@ -104,7 +104,7 @@ class PlanController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $plan = $formService->handleSpecificFields($plan);
+            $plan = $formService->handleSpecificFields($form->getData());
             $em->persist($plan);
             $em->flush();
             $session->set($plan->getId(), true);
@@ -124,69 +124,22 @@ class PlanController extends Controller
      * @Route("/new-by-template", name="plan_new_by_template")
      * @Method({"GET", "POST"})
      */
-    public function newByTemplateAction(Request $request, SessionInterface $session)
+    public function newByTemplateAction(Request $request, SessionInterface $session, FormStrategyService $formService)
     {
         $em = $this->getDoctrine()->getManager();
-
-        $plans = $this->getPlans($em);
-
-        $classes = 'form-control';
-        $form = $this->createFormBuilder()
-            ->add('templates', ChoiceType::class, array(
-                'choices' => $plans,
-                'choice_label' => function($plan, $key, $index) {
-                    return $plan->getTitle();
-                },
-                'attr'  => array('class' => $classes),
-                'label' => 'template_to_be_used'
-            ))
-            ->add('title', null, array(
-                'attr'  => array('class' => $classes),
-                'label' => 'new_title'
-            )
-            )->add('date', DateTimeType::class, array(
-                'attr'  => array('class' => $classes . ' datepicker'),
-                'html5' => false,
-                'widget' => 'single_text',
-                'label' => 'date'
-            ))
-            ->add('email', EmailType::class, array(
-                'attr'  => array('class' => $classes),
-                'required' => false,
-                'label' => 'email_label'
-            ))
-            ->add('description', TextareaType::class, array(
-                'attr'  => array('class' => $classes),
-                'label' => 'description'
-            ))
-            ->getForm();
-
+        $form = $this->createForm($formService->getByTemplateFormType());
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $plan = $form->getData()['templates'];
-            $title = $form->getData()['title'];
-            $description = $form->getData()['description'];
-            $date = $form->getData()['date'];
-            $email = $form->getData()['email'];
-
-            $clone = clone $plan;
-            $clone->setIsTemplate(false);
-            $clone->setTitle($title);
-            $clone->setDate($date);
-            $clone->setDescription($description);
-            $clone->setEmail($email);
-
-            $em->persist($clone);
+            $plan = $formService->handleSpecificFieldsByTemplate($form->getData());
+            $em->persist($plan);
             $em->flush();
-            $session->set($clone->getId(), true);
+            $session->set($plan->getId(), true);
 
-            return $this->redirectToRoute('plan_show', array('id' => $clone->getId()));
+            return $this->redirectToRoute('plan_show', array('id' => $plan->getId()));
         }
 
-
-        return $this->render('plan/new-by-template.html.twig', array(
-            'plans' => $plans,
+        return $this->render($formService->getByTemplateTwigTemplate(), array(
             'form' => $form->createView()
         ));
     }
@@ -303,27 +256,5 @@ class PlanController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
-    }
-
-    /**
-     * Select correct plans to display
-     * for the create new by template form
-     *
-     * @param $em
-     */
-    private function getPlans($em)
-    {
-        $queryBuilder = $em->getRepository('AppBundle:Plan')->createQueryBuilder('p');
-
-        $qb = $queryBuilder->where('p.isTemplate = true');
-
-        if (!$this->getUser()) {
-            $qb->andWhere('p.isPublic = true');
-        } else {
-            $qb->andWhere('p.user = :user')->setParameter('user', $this->getUser()->getId());
-            $qb->orWhere('p.isPublic = true');
-        }
-
-        return $qb->orderBy('p.title', 'ASC')->getQuery()->getResult();
     }
 }

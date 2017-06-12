@@ -24,4 +24,20 @@ interface FormStrategyInterface {
      */
     public function handleSpecificFields($plan);
 
+    /**
+     * @return string
+     */
+    public function getByTemplateFormType();
+
+    /**
+     * @return string
+     */
+    public function getByTemplateTwigTemplate();
+
+    /**
+     * @param $formData
+     * @return Plan
+     */
+    public function handleSpecificFieldsByTemplate($formData);
+
 }

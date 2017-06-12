@@ -3,6 +3,7 @@
 namespace AppBundle\Service\Strategy;
 
 use AppBundle\Service\Strategy\FormStrategyInterface;
+use AppBundle\Service\UserService;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**
@@ -21,10 +22,10 @@ class AuthStrategy implements FormStrategyInterface {
      */
     private $tokenStorage;
 
-    public function __construct(TokenStorageInterface $tokenStorage)
+    public function __construct(TokenStorageInterface $tokenStorage, UserService $userService)
     {
         $this->tokenStorage = $tokenStorage;
-        $this->user = $this->getUser();
+        $this->user = $userService->getUser();
 
     }
 
@@ -43,28 +44,48 @@ class AuthStrategy implements FormStrategyInterface {
     }
 
     /**
-     * @param $plan
+     * @param $formData
      * @return mixed
      */
-    public function handleSpecificFields($plan)
+    public function handleSpecificFields($formData)
     {
+        $plan = $formData['plan'];
         $plan->setUser($this->user);
         return $plan;
     }
 
     /**
-     * @return mixed|void
+     * @return string
      */
-    private function getUser(){
-        if (null === $token = $this->tokenStorage->getToken()) {
-            return;
-        }
+    public function getByTemplateFormType() {
+        return 'AppBundle\Form\ByTemplate\PlanByTemplateType';
+    }
 
-        if (!is_object($user = $token->getUser())) {
-            // e.g. anonymous authentication
-            return;
-        }
+    /**
+     * @return string
+     */
+    public function getByTemplateTwigTemplate() {
+        return 'plan/by-template/new-by-template.html.twig';
+    }
 
-        return $user;
+    /**
+     * @param $formData
+     * @return Plan
+     */
+    public function handleSpecificFieldsByTemplate($formData)
+    {
+        $templatePlan = $formData['templates'];
+        $title = $formData['title'];
+        $description = $formData['description'];
+        $date = $formData['date'];
+
+        $clone = clone $templatePlan;
+        $clone->setIsTemplate(false);
+        $clone->setTitle($title);
+        $clone->setDate($date);
+        $clone->setDescription($description);
+        $clone->setUser($this->user);
+
+        return $clone;
     }
 }
