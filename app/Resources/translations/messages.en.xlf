@@ -256,6 +256,10 @@
                 <source>is_public</source>
                 <target>Make this template public?</target>
             </trans-unit>
+            <trans-unit id="repeat_password">
+                <source>repeat_password</source>
+                <target>Repeat Password</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

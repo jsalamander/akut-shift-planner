@@ -1,0 +1,23 @@
+<?php
+
+namespace AppBundle\Form\Strategy;
+
+/**
+ * Strategy to decide whether to handle the form for a user or an anon
+ * Class NewPlanFormStrategy
+ */
+class NewPlanFormStrategy {
+
+    private $strategy = NULL;
+
+    public function __construct($person = null) {
+        if($person) {
+            $this->strategy = new AuthStrategy();
+        } else {
+            $this->strategy = new NoAuthStrategy();
+        }
+    }
+    public function getForm() {
+        return $this->strategy->getForm();
+    }
+}

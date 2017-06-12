@@ -77,7 +77,7 @@ class Plan
      * @var string
      *
      * Is used for people without a login, so they can see/edit the details
-     * @ORM\Column(name="password", type="string", length=36, nullable=true)
+     * @ORM\Column(name="password", type="string", length=255, nullable=true)
      */
     private $password;
 

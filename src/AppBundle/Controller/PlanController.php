@@ -91,8 +91,12 @@ class PlanController extends Controller
      * @Route("/new", name="plan_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request, SessionInterface $session, \Swift_Mailer $mailer)
-    {
+    public function newAction(
+        Request $request,
+        SessionInterface $session,
+        \Swift_Mailer $mailer,
+        UserPasswordEncoderInterface $encoder
+    ) {
         $plan = new Plan();
 
         if ($this->getUser()) {

@@ -10,6 +10,8 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 class PlanUnauthenticatedType extends AbstractType
 {
@@ -41,6 +43,14 @@ class PlanUnauthenticatedType extends AbstractType
                 'attr'  => array('class' => $classes),
                 'required' => false,
                 'label' => 'email_label'
+            ))
+            ->add('password', RepeatedType::class, array(
+                'type' => PasswordType::class,
+                'invalid_message' => 'The password fields must match.',
+                'options' => array('attr' => array('class' => $classes)),
+                'required' => true,
+                'first_options'  => array('label' => 'password'),
+                'second_options' => array('label' => 'repeat_password'),
             ))
             ->add('shifts', CollectionType::class, array(
                 'entry_type' => ShiftType::class,

@@ -256,6 +256,10 @@
                 <source>is_public</source>
                 <target>Ist diese Vorlage öffentlich?</target>
             </trans-unit>
+            <trans-unit id="repeat_password">
+                <source>repeat_password</source>
+                <target>Passwort Wiederholung</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
