@@ -2,6 +2,12 @@
 
 {% block body %}
 
+    {% if app.user is not empty %}
+        {% set isAuth = true %}
+    {% else %}
+        {% set isAuth = false %}
+    {% endif %}
+
     <div class="col-12 d-flex justify-content-end">
         <h1 class="mr-auto p-2">{% if plan.isTemplate %}Template:{% endif %} {{ plan.title }}</h1>
         {% if not plan.isTemplate %}<h6 class="p-2">{% if plan.date %}{{ plan.date|date('d.m.Y') }}{% endif %}</h6>{% endif %}
@@ -16,7 +22,7 @@
     {% endif %}
 
     <div class="col-12">
-        {% if not (is_granted('ROLE_USER') and app.user.id == plan.user.id)%}
+        {% if not isAuth%}
             <a id="passwordPrompt" href="#" class="pull-right"><i class="fa fa-eye" aria-hidden="true"></i> {% trans %}show_details{% endtrans %}</a>
         {% endif %}
 
