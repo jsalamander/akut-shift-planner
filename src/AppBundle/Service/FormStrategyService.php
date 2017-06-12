@@ -69,8 +69,8 @@ class FormStrategyService {
      * @param $formData
      * @return \AppBundle\Entity\Plan
      */
-    public function handleSpecificFields($formData) {
-        return $this->strategy->handleSpecificFields($formData);
+    public function createPlan($formData) {
+        return $this->strategy->createPlan($formData);
     }
 
     /**

@@ -264,6 +264,19 @@ class Plan
         return $this->shifts;
     }
 
+    /**
+     * Set shifts
+     * @param $shifts
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function setShifts($shifts)
+    {
+        foreach ($shifts as $shift) {
+            $shift->setPlan($this);
+            $this->addShift($shift);
+        }
+    }
+
 
     public function __toString() {
         return $this->title;

@@ -97,14 +97,12 @@ class PlanController extends Controller
         SessionInterface $session,
         FormStrategyService $formService
     ) {
-        $plan = new Plan();
-
-        $form = $this->createForm($formService->getFormType(), $plan);
+        $form = $this->createForm($formService->getFormType());
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $plan = $formService->handleSpecificFields($form->getData());
+            $plan = $formService->createPlan($form->getData());
             $em->persist($plan);
             $em->flush();
             $session->set($plan->getId(), true);
@@ -113,7 +111,6 @@ class PlanController extends Controller
         }
 
         return $this->render($formService->getTwigTemplate(), array(
-            'plan' => $plan,
             'form' => $form->createView()
         ));
     }

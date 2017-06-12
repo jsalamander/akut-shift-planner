@@ -2,6 +2,7 @@
 
 namespace AppBundle\Service\Strategy;
 
+use AppBundle\Entity\Plan;
 use AppBundle\Service\Strategy\FormStrategyInterface;
 use AppBundle\Service\UserService;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -47,9 +48,9 @@ class AuthStrategy implements FormStrategyInterface {
      * @param $formData
      * @return mixed
      */
-    public function handleSpecificFields($formData)
+    public function createPlan($formData)
     {
-        $plan = $formData['plan'];
+        $plan = new Plan();
         $plan->setUser($this->user);
         return $plan;
     }

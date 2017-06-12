@@ -40,12 +40,22 @@ class NoAuthStrategy implements FormStrategyInterface {
      * @param $formData
      * @return Plan
      */
-    public function handleSpecificFields($formData)
+    public function createPlan($formData)
     {
-        $plan = $formData['plan'];
+        $shifts = $formData['shifts'];
+        $date = $formData['date'];
+        $title = $formData['description'];
+        $description = $formData['title'];
+
+        $plan = new Plan();
+        $plan->setDate($date);
+        $plan->setDescription($description);
+        $plan->setShifts($shifts);
+        $plan->setTitle($title);
+        
         $password = $formData['password'];
         $email = $formData['email'];
-        return $this->generateNewUserForPlan($formData, $email, $password);
+        return $this->generateNewUserForPlan($plan, $email, $password);
     }
 
     /**
