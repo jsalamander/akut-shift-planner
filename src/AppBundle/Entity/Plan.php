@@ -89,7 +89,7 @@ class Plan
     private $email;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="plans")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="plans", cascade={"persist"})
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;

@@ -18,4 +18,10 @@ interface FormStrategyInterface {
      */
     public function getTwigTemplate();
 
+    /**
+     * @param $plan
+     * @return $plan
+     */
+    public function handleSpecificFields($plan);
+
 }

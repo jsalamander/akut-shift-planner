@@ -95,20 +95,16 @@ class PlanController extends Controller
     public function newAction(
         Request $request,
         SessionInterface $session,
-        \Swift_Mailer $mailer,
         FormStrategyService $formService
     ) {
         $plan = new Plan();
 
-        $formService->createStrategy($this->getUser());
         $form = $this->createForm($formService->getFormType(), $plan);
-
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $plan->setUser($this->getUser());
+            $plan = $formService->handleSpecificFields($plan);
             $em->persist($plan);
             $em->flush();
             $session->set($plan->getId(), true);
@@ -128,7 +124,7 @@ class PlanController extends Controller
      * @Route("/new-by-template", name="plan_new_by_template")
      * @Method({"GET", "POST"})
      */
-    public function newByTemplateAction(Request $request, SessionInterface $session, \Swift_Mailer $mailer)
+    public function newByTemplateAction(Request $request, SessionInterface $session)
     {
         $em = $this->getDoctrine()->getManager();
 
