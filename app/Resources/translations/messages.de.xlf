@@ -260,6 +260,10 @@
                 <source>repeat_password</source>
                 <target>Passwort Wiederholung</target>
             </trans-unit>
+            <trans-unit id="wrong_password">
+                <source>wrong_password</source>
+                <target>Falsches Passwort</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

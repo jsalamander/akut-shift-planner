@@ -5,11 +5,13 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Plan;
 use AppBundle\Entity\Shift;
 use AppBundle\Service\FormStrategyService;
+use AppBundle\Service\UserService;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -138,7 +140,7 @@ class PlanController extends Controller
      * @Route("/{id}", name="plan_show")
      * @Method({"GET", "POST"})
      */
-    public function showAction(Plan $plan, Request $request)
+    public function showAction(Plan $plan, Request $request, UserService $userService)
     {
         $passwordForm = $this->createFormBuilder()
             ->add('password', PasswordType::class, array(
@@ -148,16 +150,18 @@ class PlanController extends Controller
             ->getForm();
 
         $passwordForm->handleRequest($request);
-        $deleteForm = $this->createDeleteForm($plan);
 
         if ($passwordForm->isSubmitted()) {
             $pw = $passwordForm->getData()['password'];
-            var_dump($pw);die;
+            $valid = $userService->checkOneTimeUserPassword($plan, $pw);
+
+            if (!$valid) {
+                $passwordForm->addError(new FormError('wrong_password'));
+            }
         }
 
         return $this->render('plan/show.html.twig', array(
             'plan' => $plan,
-            'delete_form' => $deleteForm->createView(),
             'password_form' => $passwordForm->createView(),
         ));
     }

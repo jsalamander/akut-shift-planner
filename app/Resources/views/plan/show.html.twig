@@ -110,10 +110,10 @@
             </div>
         </div>
     </div>
-    {% if password_form.password.vars.errors[0] is defined %}
+    {% if password_form.vars.errors[0] is defined %}
         <div class="col-12">
             <div class="alert alert-danger">
-                <strong>{% trans %}oh_snap{% endtrans %}</strong> {{ password_form.password.vars.errors[0].message }}
+                <strong>{% trans %}oh_snap{% endtrans %}</strong> {{ password_form.vars.errors[0].message|trans }}
             </div>
         </div>
     {% endif %}
