@@ -28,20 +28,33 @@ class AuthStrategy implements FormStrategyInterface {
 
     }
 
+    /**
+     * @return string
+     */
     public function getFormType() {
         return 'AppBundle\Form\PlanType';
     }
 
+    /**
+     * @return string
+     */
     public function getTwigTemplate(){
         return 'plan/new.html.twig';
     }
 
+    /**
+     * @param $plan
+     * @return mixed
+     */
     public function handleSpecificFields($plan)
     {
         $plan->setUser($this->user);
         return $plan;
     }
 
+    /**
+     * @return mixed|void
+     */
     private function getUser(){
         if (null === $token = $this->tokenStorage->getToken()) {
             return;

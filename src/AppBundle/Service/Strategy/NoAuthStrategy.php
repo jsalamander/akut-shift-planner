@@ -22,10 +22,16 @@ class NoAuthStrategy implements FormStrategyInterface {
         $this->encoder = $encoder;
     }
 
+    /**
+     * @return string
+     */
     public function getFormType() {
         return 'AppBundle\Form\PlanUnauthenticatedType';
     }
 
+    /**
+     * @return string
+     */
     public function getTwigTemplate(){
         return 'plan/new-unauth.html.twig';
     }
