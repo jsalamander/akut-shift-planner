@@ -108,7 +108,7 @@
                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
                     </div>
                     <div class="modal-footer">
-                        <a href="#">{% trans %}lost_password{% endtrans %}</a>
+                        <a href="{{ path('fos_user_resetting_request') }}">{% trans %}lost_password{% endtrans %}</a>
                         <input class="btn btn-primary" type="submit" value="{% trans %}submit{% endtrans %}" />
                     </div>
                 </form>

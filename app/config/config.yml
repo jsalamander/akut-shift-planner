@@ -95,3 +95,8 @@ fos_user:
     from_email:
         address: "%mailer_user%"
         sender_name: "%mailer_user%"
+    resetting:
+            email:
+                from_email:
+                    address:        no-reply@schicht-plan.ch
+                    sender_name:    Password Reset Schicht-Plan.ch
