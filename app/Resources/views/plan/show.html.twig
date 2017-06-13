@@ -2,8 +2,10 @@
 
 {% block body %}
 
-    {% if app.session.get(plan.id) %}
-        {% set showDetails=true %}
+    {% if app.user is not empty %}
+        {% set isAuth = true %}
+    {% else %}
+        {% set isAuth = false %}
     {% endif %}
 
     <div class="col-12 d-flex justify-content-end">
@@ -11,7 +13,7 @@
         {% if not plan.isTemplate %}<h6 class="p-2">{% if plan.date %}{{ plan.date|date('d.m.Y') }}{% endif %}</h6>{% endif %}
     </div>
     <div class="col-12">
-        {% if is_granted('ROLE_ADMIN') %}<a class="pull-right" href="{{ path('plan_edit', { 'id': plan.id }) }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> {% trans %}edit{% endtrans %}</a>{% endif %}
+        {% if is_granted('ROLE_USER') and app.user.id == plan.user.id %}<a class="pull-right" href="{{ path('plan_edit', { 'id': plan.id }) }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> {% trans %}edit{% endtrans %}</a>{% endif %}
     </div>
     {% if plan.description %}
         <div class="col-12">
@@ -20,7 +22,7 @@
     {% endif %}
 
     <div class="col-12">
-        {% if not (showDetails or is_granted('ROLE_ADMIN'))%}
+        {% if not isAuth%}
             <a id="passwordPrompt" href="#" class="pull-right"><i class="fa fa-eye" aria-hidden="true"></i> {% trans %}show_details{% endtrans %}</a>
         {% endif %}
 
@@ -48,8 +50,8 @@
 
                                 {% for person in shift.people %}
                                     {% if not plan.isTemplate %}
-                                        {% if (showDetails or is_granted('ROLE_ADMIN')) %}
-                                            <li>{{ person.name }} {% if is_granted('ROLE_ADMIN') %}<a href="{{ path('person_edit',{ 'id': person.id }) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>{% endif %}
+                                        {% if (is_granted('ROLE_USER') and app.user.id == plan.user.id) %}
+                                            <li>{{ person.name }} {% if is_granted('ROLE_USER') %}<a href="{{ path('person_edit',{ 'id': person.id }) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>{% endif %}
 
                                                 <ul>
                                                     {% if person.email %}<li>{% trans %}email{% endtrans %}: <a href="mailto:{{ person.email }}?Subject=Kontakt Schichtplan: {{ plan.title }} " target="_top">{{ person.email }}</a></li>{% endif %}
@@ -87,33 +89,30 @@
         {% endif %}
     </div>
 
-    {{ form_start(password_form) }}
     <div class="modal fade" id="getPasswordModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">{% trans %}show_shift_details{% endtrans %}</h5>
-                    <span class="close-cross" aria-label="Close">
-                        <a href="#"><i class="fa fa-times" aria-hidden="true"></i></a>
-                    </span>
-                </div>
-                <div class="modal-body">
-                    {{ form_label(password_form.password) }}
-                    {{ form_widget(password_form.password) }}
-                </div>
-                <div class="modal-footer">
-                    <a href="{{ path('recover_plan_password', { 'plan': plan.id }) }}">{% trans %}lost_password{% endtrans %}</a>
-                    <input class="btn btn-primary" type="submit" value="{% trans %}submit{% endtrans %}" />
-                </div>
+                <form action="{{ path("fos_user_security_check") }}" method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">{% trans %}show_shift_details{% endtrans %}</h5>
+                        <span class="close-cross" aria-label="Close">
+                            <a href="#"><i class="fa fa-times" aria-hidden="true"></i></a>
+                        </span>
+                    </div>
+                    <div class="modal-body">
+                        <label>{{ 'email'|trans }}</label>
+                        <input class="form-control" type="text" name="_username" required="required" />
+
+                        <label>{{ 'password'|trans }}</label>
+                        <input class="form-control" type="password" name="_password" required="required" />
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
+                    </div>
+                    <div class="modal-footer">
+                        <a href="{{ path('fos_user_resetting_request') }}">{% trans %}lost_password{% endtrans %}</a>
+                        <input class="btn btn-primary" type="submit" value="{% trans %}submit{% endtrans %}" />
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-    {% if password_form.password.vars.errors[0] is defined %}
-        <div class="col-12">
-            <div class="alert alert-danger">
-                <strong>{% trans %}oh_snap{% endtrans %}</strong> {{ password_form.password.vars.errors[0].message }}
-            </div>
-        </div>
-    {% endif %}
-    {{ form_end(password_form) }}
 {% endblock %}

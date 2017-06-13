@@ -66,19 +66,18 @@ class Plan
     private $isTemplate;
 
     /**
-     * @var string
+     * Indicates if this plan should be open for the public
+     * @var int
      *
-     * Is used for people without a login, so they can see/edit the details
-     * @ORM\Column(name="password", type="string", length=36, nullable=true)
+     * @ORM\Column(name="is_public", type="boolean", nullable=true)
      */
-    private $password;
+    private $isPublic;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="email", type="string", length=255,)
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="plans", cascade={"persist"})
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
-    private $email;
+    private $user;
 
     public function __construct()
     {
@@ -86,19 +85,36 @@ class Plan
     }
 
     /**
-     * @return password
+     * @return int
      */
-    public function getPassword()
+    public function getIsPublic()
     {
-        return $this->password;
+        return $this->isPublic;
     }
 
     /**
-     * @param password $password
+     * @param int $isPublic
      */
-    public function setPassword($password)
+    public function setIsPublic($isPublic)
     {
-        $this->password = $password;
+        $this->isPublic = $isPublic;
+    }
+    
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
     }
 
     /**
@@ -249,21 +265,17 @@ class Plan
     }
 
     /**
-     * @return string
+     * Set shifts
+     * @param $shifts
+     * @return \Doctrine\Common\Collections\Collection
      */
-    public function getEmail()
+    public function setShifts($shifts)
     {
-        return $this->email;
+        foreach ($shifts as $shift) {
+            $shift->setPlan($this);
+            $this->addShift($shift);
+        }
     }
-
-    /**
-     * @param string $email
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-    }
-
 
 
     public function __toString() {

@@ -126,7 +126,7 @@
             </trans-unit>
             <trans-unit id="email_label">
                 <source>email_label</source>
-                <target>Email (password and link will be sent there)</target>
+                <target>Email (link will be sent to this address)</target>
             </trans-unit>
             <trans-unit id="is_template">
                 <source>is_template</source>
@@ -247,6 +247,34 @@
             <trans-unit id="recover">
                 <source>recover</source>
                 <target>Recover</target>
+            </trans-unit>
+            <trans-unit id="register">
+                <source>register</source>
+                <target>Register</target>
+            </trans-unit>
+            <trans-unit id="is_public">
+                <source>is_public</source>
+                <target>Make this template public?</target>
+            </trans-unit>
+            <trans-unit id="repeat_password">
+                <source>repeat_password</source>
+                <target>Repeat Password</target>
+            </trans-unit>
+            <trans-unit id="wrong_password">
+                <source>wrong_password</source>
+                <target>Wrong Password</target>
+            </trans-unit>
+            <trans-unit id="username_or_email">
+                <source>username_or_email</source>
+                <target>Username or Email</target>
+            </trans-unit>
+            <trans-unit id="email_used">
+                <source>email_used</source>
+                <target>Email is in use. Login to create a new plan</target>
+            </trans-unit>
+            <trans-unit id="define_shifts">
+                <source>define_shifts</source>
+                <target>You need to define at leas one shift</target>
             </trans-unit>
         </body>
     </file>

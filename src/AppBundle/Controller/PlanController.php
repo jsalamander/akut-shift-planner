@@ -3,19 +3,16 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Plan;
-use AppBundle\Entity\Shift;
-use Doctrine\Common\Collections\ArrayCollection;
+use AppBundle\Service\FormStrategyService;
+use AppBundle\Service\UserService;
+use FOS\UserBundle\Doctrine\UserManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Translation\Translator;
 
 /**
  * Plan controller.
@@ -37,7 +34,12 @@ class PlanController extends Controller
 
         $queryBuilder = $em->getRepository('AppBundle:Plan')->createQueryBuilder('p');
 
-        $query = $queryBuilder->where('p.isTemplate = false')->orderBy('p.date', 'ASC')->getQuery();
+        $query = $queryBuilder
+            ->where('p.isTemplate = false')
+            ->andWhere('p.user = :user')
+            ->setParameter('user', $this->getUser()->getId())
+            ->orderBy('p.date', 'ASC')
+            ->getQuery();
         $pagination = $paginator->paginate(
             $query,
             $request->query->getInt('page', 1),
@@ -63,7 +65,12 @@ class PlanController extends Controller
 
         $queryBuilder = $em->getRepository('AppBundle:Plan')->createQueryBuilder('p');
 
-        $query = $queryBuilder->where('p.isTemplate = true')->orderBy('p.date', 'ASC')->getQuery();
+        $query = $queryBuilder
+            ->where('p.isTemplate = true')
+            ->andWhere('p.user = :user')
+            ->setParameter('user', $this->getUser()->getId())
+            ->orderBy('p.date', 'ASC')
+            ->getQuery();
         $pagination = $paginator->paginate(
             $query,
             $request->query->getInt('page', 1),
@@ -81,27 +88,29 @@ class PlanController extends Controller
      * @Route("/new", name="plan_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request, SessionInterface $session, \Swift_Mailer $mailer)
-    {
-        $plan = new Plan();
-
-        $form = $this->createForm('AppBundle\Form\PlanType', $plan);
+    public function newAction(
+        Request $request,
+        FormStrategyService $formService,
+        UserManager $userManager,
+        Translator $translator
+    ) {
+        $form = $this->createForm($formService->getFormType());
         $form->handleRequest($request);
 
+        if ($userManager->findUserByEmail($form->getData()['email'])) {
+            $form->get('email')->addError(new FormError($translator->trans('email_used')));
+        }
+
         if ($form->isSubmitted() && $form->isValid()) {
-            $password = bin2hex(random_bytes(15));
             $em = $this->getDoctrine()->getManager();
-            $plan->setPassword($password);
+            $plan = $formService->createPlan($form->getData());
             $em->persist($plan);
             $em->flush();
-            $session->set($plan->getId(), true);
-            $this->sendPlanPasswordViaMail($mailer, $plan, $password);
 
             return $this->redirectToRoute('plan_show',array('id' => $plan->getId()));
         }
 
-        return $this->render('plan/new.html.twig', array(
-            'plan' => $plan,
+        return $this->render($formService->getTwigTemplate(), array(
             'form' => $form->createView()
         ));
     }
@@ -112,73 +121,29 @@ class PlanController extends Controller
      * @Route("/new-by-template", name="plan_new_by_template")
      * @Method({"GET", "POST"})
      */
-    public function newByTemplateAction(Request $request, SessionInterface $session, \Swift_Mailer $mailer)
-    {
+    public function newByTemplateAction(
+        Request $request,
+        FormStrategyService $formService,
+        UserManager $userManager,
+        Translator $translator
+    ) {
         $em = $this->getDoctrine()->getManager();
-        $plans = $em->getRepository('AppBundle:Plan')->findBy(
-            array('isTemplate' => true )
-        );
-
-        $classes = 'form-control';
-        $form = $this->createFormBuilder()
-            ->add('Templates', ChoiceType::class, array(
-                'choices' => $plans,
-                'choice_label' => function($plan, $key, $index) {
-                    return $plan->getTitle();
-                },
-                'attr'  => array('class' => $classes),
-                'label' => 'template_to_be_used'
-            ))
-            ->add('title', null, array(
-                'attr'  => array('class' => $classes),
-                'label' => 'new_title'
-            )
-            )->add('date', DateTimeType::class, array(
-                'attr'  => array('class' => $classes . ' datepicker'),
-                'html5' => false,
-                'widget' => 'single_text',
-                'label' => 'date'
-            ))
-            ->add('email', EmailType::class, array(
-                'attr'  => array('class' => $classes),
-                'required' => true,
-                'label' => 'email_label'
-            ))
-            ->add('description', TextareaType::class, array(
-                'attr'  => array('class' => $classes),
-                'label' => 'description'
-            ))
-            ->getForm();
-
+        $form = $this->createForm($formService->getByTemplateFormType());
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $plan = $form->getData()['Templates'];
-            $title = $form->getData()['title'];
-            $description = $form->getData()['description'];
-            $date = $form->getData()['date'];
-            $email = $form->getData()['email'];
-            $password = bin2hex(random_bytes(15));
-
-            $clone = clone $plan;
-            $clone->setIsTemplate(false);
-            $clone->setTitle($title);
-            $clone->setDate($date);
-            $clone->setDescription($description);
-            $clone->setPassword($password);
-            $clone->setEmail($email);
-
-            $em->persist($clone);
-            $em->flush();
-            $session->set($clone->getId(), true);
-            $this->sendPlanPasswordViaMail($mailer, $clone, $password);
-
-            return $this->redirectToRoute('plan_show', array('id' => $clone->getId()));
+        if ($userManager->findUserByEmail($form->getData()['email'])) {
+            $form->get('email')->addError(new FormError($translator->trans('email_used')));
         }
 
+        if ($form->isSubmitted() && $form->isValid()) {
+            $plan = $formService->handleSpecificFieldsByTemplate($form->getData());
+            $em->persist($plan);
+            $em->flush();
 
-        return $this->render('plan/new-by-template.html.twig', array(
-            'plans' => $plans,
+            return $this->redirectToRoute('plan_show', array('id' => $plan->getId()));
+        }
+
+        return $this->render($formService->getByTemplateTwigTemplate(), array(
             'form' => $form->createView()
         ));
     }
@@ -189,7 +154,7 @@ class PlanController extends Controller
      * @Route("/{id}", name="plan_show")
      * @Method({"GET", "POST"})
      */
-    public function showAction(Plan $plan, Request $request, SessionInterface $session)
+    public function showAction(Plan $plan, Request $request, UserService $userService)
     {
         $passwordForm = $this->createFormBuilder()
             ->add('password', PasswordType::class, array(
@@ -199,24 +164,19 @@ class PlanController extends Controller
             ->getForm();
 
         $passwordForm->handleRequest($request);
-        $deleteForm = $this->createDeleteForm($plan);
 
-        $showDetails = false;
         if ($passwordForm->isSubmitted()) {
             $pw = $passwordForm->getData()['password'];
-            if ($plan->getPassword() !== $pw ) {
-                $passwordForm->get('password')->addError(new FormError('Wrong Password'));
-            } elseif ($passwordForm->isValid() && $plan->getPassword() === $pw) {
-                $showDetails = true;
-                $session->set($plan->getId(), $plan->getPassword());
+            $valid = $userService->checkOneTimeUserPassword($plan, $pw);
+
+            if (!$valid) {
+                $passwordForm->addError(new FormError('wrong_password'));
             }
         }
 
         return $this->render('plan/show.html.twig', array(
             'plan' => $plan,
-            'delete_form' => $deleteForm->createView(),
             'password_form' => $passwordForm->createView(),
-            'showDetails' => $showDetails
         ));
     }
 
@@ -228,6 +188,10 @@ class PlanController extends Controller
      */
     public function editAction(Request $request, Plan $plan)
     {
+        if ($plan->getUser() !== $this->getUser()) {
+            throw $this->createAccessDeniedException('You can\'t edit this plan' );
+        }
+
         $em = $this->getDoctrine()->getManager();
         $deleteForm = $this->createDeleteForm($plan);
         $editForm = $this->createForm('AppBundle\Form\PlanType', $plan);
@@ -235,7 +199,6 @@ class PlanController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em->flush();
-
             return $this->redirectToRoute('plan_show', array('id' => $plan->getId()));
         }
 
@@ -254,6 +217,10 @@ class PlanController extends Controller
      */
     public function deleteAction(Request $request, Plan $plan)
     {
+        if ($plan->getUser() !== $this->getUser()) {
+            throw $this->createAccessDeniedException('You can\'t delete this plan' );
+        }
+
         $form = $this->createDeleteForm($plan);
         $form->handleRequest($request);
 
@@ -288,41 +255,5 @@ class PlanController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
-    }
-
-    /**
-     * Send the plan password via email to the creator so they
-     * can access the plan later
-     *
-     * @param \Swift_Mailer $mailer
-     * @param $password
-     */
-    private function sendPlanPasswordViaMail(\Swift_Mailer $mailer, $plan, $password) {
-        if (!$plan->getIsTemplate()) {
-            $message = new \Swift_Message('Your Access Details');
-
-            $message->setFrom('no-reply@schicht-plan.ch')
-                ->setTo($plan->getEmail())
-                ->setBody(
-                    $this->renderView(
-                        'email/plan-password.html.twig',
-                        array(
-                            'password' => $password,
-                            'plan_id' => $plan->getId()
-                        )
-                    ),
-                    'text/html'
-                )->addPart(
-                    $this->renderView(
-                        'email/plan-password.txt.twig',
-                        array(
-                            'password' => $password,
-                            'plan_id' => $plan->getId()
-                        )
-                    ),
-                    'text/plain'
-                );
-            $mailer->send($message);
-        }
     }
 }
