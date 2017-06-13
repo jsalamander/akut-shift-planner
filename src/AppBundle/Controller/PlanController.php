@@ -3,16 +3,16 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Plan;
-use AppBundle\Entity\Shift;
 use AppBundle\Service\FormStrategyService;
 use AppBundle\Service\UserService;
-use Doctrine\Common\Collections\ArrayCollection;
+use FOS\UserBundle\Doctrine\UserManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Translation\Translator;
 
 /**
  * Plan controller.
@@ -90,10 +90,16 @@ class PlanController extends Controller
      */
     public function newAction(
         Request $request,
-        FormStrategyService $formService
+        FormStrategyService $formService,
+        UserManager $userManager,
+        Translator $translator
     ) {
         $form = $this->createForm($formService->getFormType());
         $form->handleRequest($request);
+
+        if ($userManager->findUserByEmail($form->getData()['email'])) {
+            $form->get('email')->addError(new FormError($translator->trans('email_used')));
+        }
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -115,11 +121,19 @@ class PlanController extends Controller
      * @Route("/new-by-template", name="plan_new_by_template")
      * @Method({"GET", "POST"})
      */
-    public function newByTemplateAction(Request $request, FormStrategyService $formService)
-    {
+    public function newByTemplateAction(
+        Request $request,
+        FormStrategyService $formService,
+        UserManager $userManager,
+        Translator $translator
+    ) {
         $em = $this->getDoctrine()->getManager();
         $form = $this->createForm($formService->getByTemplateFormType());
         $form->handleRequest($request);
+
+        if ($userManager->findUserByEmail($form->getData()['email'])) {
+            $form->get('email')->addError(new FormError($translator->trans('email_used')));
+        }
 
         if ($form->isSubmitted() && $form->isValid()) {
             $plan = $formService->handleSpecificFieldsByTemplate($form->getData());

@@ -264,6 +264,18 @@
                 <source>wrong_password</source>
                 <target>Falsches Passwort</target>
             </trans-unit>
+            <trans-unit id="username_or_email">
+                <source>username_or_email</source>
+                <target>Benutzername oder Email</target>
+            </trans-unit>
+            <trans-unit id="email_used">
+                <source>email_used</source>
+                <target>Email vergeben. Logge dich ein...</target>
+            </trans-unit>
+            <trans-unit id="define_shifts">
+                <source>define_shifts</source>
+                <target>Es muss mindestens eine Schicht geben</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

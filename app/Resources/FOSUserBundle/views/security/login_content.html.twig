@@ -10,7 +10,7 @@
         {% endif %}
 
         <div class="form-group">
-            <label for="username">{{ 'security.login.username'|trans }}</label>
+            <label for="username">{{ 'username_or_email'|trans([], 'messages', null) }}</label>
             <input class="form-control" type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
         </div>
 
@@ -29,4 +29,5 @@
 
         <input class="btn btn-primary" type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
     </form>
+    <a class="pull-right" href="{{ path('fos_user_resetting_request') }}">{{ 'lost_password'|trans([], 'messages', null) }}</a>
 </div>
