@@ -5,8 +5,5 @@
 {% block fos_user_content %}
     <div class="col-12">
         <div class="alert alert-success">{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</div>
-        {% if targetUrl %}
-            <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>
-        {% endif %}
     </div>
 {% endblock fos_user_content %}
