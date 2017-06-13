@@ -4,7 +4,7 @@ security:
 
     providers:
             fos_userbundle:
-                        id: fos_user.user_provider.username
+                        id: fos_user.user_provider.username_email
     encoders:
             FOS\UserBundle\Model\UserInterface: bcrypt
 
@@ -23,6 +23,7 @@ security:
             form_login:
                 provider: fos_userbundle
                 csrf_token_generator: security.csrf.token_manager
+                default_target_path: plan_index
             logout:       true
             anonymous:    true
 

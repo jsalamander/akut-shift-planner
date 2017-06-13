@@ -89,33 +89,30 @@
         {% endif %}
     </div>
 
-    {{ form_start(password_form) }}
     <div class="modal fade" id="getPasswordModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">{% trans %}show_shift_details{% endtrans %}</h5>
-                    <span class="close-cross" aria-label="Close">
-                        <a href="#"><i class="fa fa-times" aria-hidden="true"></i></a>
-                    </span>
-                </div>
-                <div class="modal-body">
-                    {{ form_label(password_form.password) }}
-                    {{ form_widget(password_form.password) }}
-                </div>
-                <div class="modal-footer">
-                    <a href="#">{% trans %}lost_password{% endtrans %}</a>
-                    <input class="btn btn-primary" type="submit" value="{% trans %}submit{% endtrans %}" />
-                </div>
+                <form action="{{ path("fos_user_security_check") }}" method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">{% trans %}show_shift_details{% endtrans %}</h5>
+                        <span class="close-cross" aria-label="Close">
+                            <a href="#"><i class="fa fa-times" aria-hidden="true"></i></a>
+                        </span>
+                    </div>
+                    <div class="modal-body">
+                        <label>{{ 'email'|trans }}</label>
+                        <input class="form-control" type="text" name="_username" required="required" />
+
+                        <label>{{ 'password'|trans }}</label>
+                        <input class="form-control" type="password" name="_password" required="required" />
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#">{% trans %}lost_password{% endtrans %}</a>
+                        <input class="btn btn-primary" type="submit" value="{% trans %}submit{% endtrans %}" />
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-    {% if password_form.vars.errors[0] is defined %}
-        <div class="col-12">
-            <div class="alert alert-danger">
-                <strong>{% trans %}oh_snap{% endtrans %}</strong> {{ password_form.vars.errors[0].message|trans }}
-            </div>
-        </div>
-    {% endif %}
-    {{ form_end(password_form) }}
 {% endblock %}
