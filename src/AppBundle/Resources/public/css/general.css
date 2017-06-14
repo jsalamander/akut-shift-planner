@@ -32,3 +32,7 @@ a:hover {
 .page-link:hover  {
     color: #fe7101;
 }
+
+.form-group > div > ul > li {
+    color: #A94442;
+}
