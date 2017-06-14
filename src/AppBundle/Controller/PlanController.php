@@ -102,7 +102,7 @@ class PlanController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $plan = $formService->createPlan($form->getData());
+            $plan = $formService->createPlan($form);
             $em->persist($plan);
             $em->flush();
 

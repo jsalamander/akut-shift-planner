@@ -44,25 +44,14 @@ class NoAuthStrategy implements FormStrategyInterface {
     }
 
     /**
-     * @param $formData
+     * @param $form
      * @return Plan
      */
-    public function createPlan($formData)
+    public function createPlan($form)
     {
-        $shifts = $formData['shifts'];
-        $date = $formData['date'];
-        $title = $formData['description'];
-        $description = $formData['title'];
-
-        $plan = new Plan();
-        $plan->setDate($date);
-        $plan->setDescription($description);
-        $plan->setShifts($shifts);
-        $plan->setTitle($title);
-
-        $password = $formData['password'];
-        $email = $formData['email'];
-        return $this->generateNewUserForPlan($plan, $email, $password);
+        $password = $form->get('password')->getData();
+        $email = $form->get('email')->getData();
+        return $this->generateNewUserForPlan($form->getData(), $email, $password);
     }
 
     /**
@@ -88,11 +77,10 @@ class NoAuthStrategy implements FormStrategyInterface {
      */
     private function generateNewUserForPlan($plan, $email, $password) {
         $user = $this->userManager->createUser();
-        $user->setUsername(bin2hex(random_bytes(100)));
+        $user->setUsername($email);
         $user->setEmail($email);
         $user->setPlainPassword($password);
         $user->setEnabled(true);
-        $user->setRoles(array('ROLE_ONE_TIME_USER'));
         $this->userManager->updateUser($user, true);
         $plan->setUser($user);
 

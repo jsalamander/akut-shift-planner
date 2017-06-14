@@ -75,11 +75,11 @@ class FormStrategyService {
     /**
      * Save new user or/and make sure both entities are connected
      *
-     * @param $formData
+     * @param $form
      * @return \AppBundle\Entity\Plan
      */
-    public function createPlan($formData) {
-        return $this->strategy->createPlan($formData);
+    public function createPlan($form) {
+        return $this->strategy->createPlan($form);
     }
 
     /**
