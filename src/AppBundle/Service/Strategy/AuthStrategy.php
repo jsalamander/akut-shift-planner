@@ -45,29 +45,13 @@ class AuthStrategy implements FormStrategyInterface {
     }
 
     /**
-     * @param $formData
+     * @param $form
      * @return mixed
      */
-    public function createPlan($formData)
+    public function createPlan($form)
     {
-        $plan = null;
-        if ($formData instanceof Plan) {
-            $plan = $formData;
-            $plan->setUser($this->user);
-        } else {
-            $shifts = $formData['shifts'];
-            $date = $formData['date'];
-            $title = $formData['description'];
-            $description = $formData['title'];
-
-            $plan = new Plan();
-            $plan->setDate($date);
-            $plan->setDescription($description);
-            $plan->setShifts($shifts);
-            $plan->setTitle($title);
-
-            $plan->setUser($this->user);
-        }
+        $plan = $form->getData();
+        $plan->setUser($this->user);
 
         return $plan;
     }

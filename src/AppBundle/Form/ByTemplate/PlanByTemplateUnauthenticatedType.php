@@ -43,7 +43,8 @@ class PlanByTemplateUnauthenticatedType extends AbstractType
                     return $plan->getTitle();
                 },
                 'attr'  => array('class' => $classes),
-                'label' => 'template_to_be_used'
+                'label' => 'template_to_be_used',
+                'mapped' => false
             ))
             ->add('title', null, array(
                     'attr'  => array('class' => $classes),
@@ -58,7 +59,8 @@ class PlanByTemplateUnauthenticatedType extends AbstractType
             ->add('email', EmailType::class, array(
                 'attr'  => array('class' => $classes),
                 'required' => false,
-                'label' => 'email_label'
+                'label' => 'email_label',
+                'mapped' => false
             ))
             ->add('password', RepeatedType::class, array(
                 'type' => PasswordType::class,
@@ -67,6 +69,7 @@ class PlanByTemplateUnauthenticatedType extends AbstractType
                 'required' => true,
                 'first_options'  => array('label' => 'password'),
                 'second_options' => array('label' => 'repeat_password'),
+                'mapped' => false
             ))
             ->add('description', TextareaType::class, array(
                 'attr'  => array('class' => $classes),
@@ -80,7 +83,10 @@ class PlanByTemplateUnauthenticatedType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-       //nothing
+        $resolver->setDefaults(array(
+            'data_class' => 'AppBundle\Entity\Plan',
+            'validation_groups' => array('new_from_template')
+        ));
     }
 
     /**

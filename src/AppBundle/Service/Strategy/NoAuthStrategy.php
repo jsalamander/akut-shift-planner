@@ -76,37 +76,35 @@ class NoAuthStrategy implements FormStrategyInterface {
      * @return Plan
      */
     private function generateNewUserForPlan($plan, $email, $password) {
-        $user = $this->userManager->createUser();
-        $user->setUsername($email);
-        $user->setEmail($email);
-        $user->setPlainPassword($password);
-        $user->setEnabled(true);
-        $this->userManager->updateUser($user, true);
-        $plan->setUser($user);
+        if (!$this->userManager->findUserByUsernameOrEmail($email)) {
+            $user = $this->userManager->createUser();
+            $user->setUsername($email);
+            $user->setEmail($email);
+            $user->setPlainPassword($password);
+            $user->setEnabled(true);
+            $this->userManager->updateUser($user, true);
+            $plan->setUser($user);
+        }
 
         return $plan;
     }
 
     /**
-     * @param $formData
+     * @param $form
      * @return Plan
      */
-    public function handleSpecificFieldsByTemplate($formData)
+    public function handleSpecificFieldsByTemplate($form)
     {
-        $templatePlan = $formData['templates'];
-        $title = $formData['title'];
-        $description = $formData['description'];
-        $date = $formData['date'];
-        $email = $formData['email'];
-        $password = $formData['password'];
-
-        $clone = clone $templatePlan;
+        $password = $form->get('password')->getData();
+        $email = $form->get('email')->getData();
+        $orgPlan = $form->get('templates')->getData();
+        $formPlan = $form->getData();
+        $clone = clone $orgPlan;
         $clone->setIsTemplate(false);
-        $clone->setTitle($title);
-        $clone->setDate($date);
-        $clone->setDescription($description);
+        $clone->setTitle($formPlan->getTitle());
+        $clone->setDate($formPlan->getDate());
+        $clone->setDescription($formPlan->getDescription());
         $clone = $this->generateNewUserForPlan($clone, $email, $password);
-
         return $clone;
     }
 }

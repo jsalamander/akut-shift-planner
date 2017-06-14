@@ -26,12 +26,20 @@ class Plan
     /**
      * @var string
      *
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 80,
+     *      minMessage = "The title must be at least {{ limit }} characters long",
+     *      maxMessage = "The title cannot be longer than {{ limit }} characters",
+     *      groups={"new_from_template"}
+     * )
      * @ORM\Column(name="title", type="string", length=255)
      */
     private $title;
 
     /**
      * @var \DateTime
+     * @Assert\Date(groups={"new_from_template"})
      *
      * @ORM\Column(name="date", type="datetime")
      */
@@ -40,7 +48,16 @@ class Plan
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="text", nullable=true)
+     * @Assert\NotBlank(groups={"new_from_template"})
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 300,
+     *      minMessage = "The description must be at least {{ limit }} characters long",
+     *      maxMessage = "The description cannot be longer than {{ limit }} characters",
+     *      groups={"new_from_template"}
+     * )
+     *
+     * @ORM\Column(name="description", type="text")
      */
     private $description;
 

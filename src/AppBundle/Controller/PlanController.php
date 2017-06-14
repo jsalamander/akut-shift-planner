@@ -125,16 +125,18 @@ class PlanController extends Controller
         FormStrategyService $formService,
         Translator $translator
     ) {
+        $plan = new Plan();
         $em = $this->getDoctrine()->getManager();
-        $form = $this->createForm($formService->getByTemplateFormType());
+        $form = $this->createForm($formService->getByTemplateFormType(), $plan);
         $form->handleRequest($request);
+        $userExists = $formService->userExists($form->get('email')->getData());
 
-        if ($formService->userExists($form->getData())) {
+        if ($userExists) {
             $form->get('email')->addError(new FormError($translator->trans('email_used')));
         }
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $plan = $formService->handleSpecificFieldsByTemplate($form->getData());
+            $plan = $formService->handleSpecificFieldsByTemplate($form);
             $em->persist($plan);
             $em->flush();
 
