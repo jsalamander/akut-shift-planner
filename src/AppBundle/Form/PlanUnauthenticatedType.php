@@ -2,6 +2,7 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Validator\Constraints\EmailUsed;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -43,7 +44,8 @@ class PlanUnauthenticatedType extends AbstractType
                 'attr'  => array('class' => $classes),
                 'required' => true,
                 'label' => 'email_label',
-                'mapped' => false
+                'mapped' => false,
+                'constraints' => array(new EmailUsed())
             ))
             ->add('password', RepeatedType::class, array(
                 'type' => PasswordType::class,

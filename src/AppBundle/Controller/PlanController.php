@@ -11,7 +11,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Translation\Translator;
 
 /**
  * Plan controller.
@@ -89,16 +88,11 @@ class PlanController extends Controller
      */
     public function newAction(
         Request $request,
-        FormStrategyService $formService,
-        Translator $translator
+        FormStrategyService $formService
     ) {
         $plan = new Plan();
         $form = $this->createForm($formService->getFormType(), $plan);
         $form->handleRequest($request);
-
-        if ($formService->userExists($form->get('email')->getData())) {
-            $form->get('email')->addError(new FormError($translator->trans('email_used')));
-        }
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -122,18 +116,12 @@ class PlanController extends Controller
      */
     public function newByTemplateAction(
         Request $request,
-        FormStrategyService $formService,
-        Translator $translator
+        FormStrategyService $formService
     ) {
         $plan = new Plan();
         $em = $this->getDoctrine()->getManager();
         $form = $this->createForm($formService->getByTemplateFormType(), $plan);
         $form->handleRequest($request);
-        $userExists = $formService->userExists($form->get('email')->getData());
-
-        if ($userExists) {
-            $form->get('email')->addError(new FormError($translator->trans('email_used')));
-        }
 
         if ($form->isSubmitted() && $form->isValid()) {
             $plan = $formService->handleSpecificFieldsByTemplate($form);

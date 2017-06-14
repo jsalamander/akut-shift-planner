@@ -3,7 +3,6 @@
 namespace AppBundle\Service;
 
 use AppBundle\Entity\Plan;
-use AppBundle\Entity\User;
 use AppBundle\Service\Strategy\AuthStrategy;
 use AppBundle\Service\Strategy\NoAuthStrategy;
 use FOS\UserBundle\Doctrine\UserManager;
@@ -89,19 +88,5 @@ class FormStrategyService {
     public function handleSpecificFieldsByTemplate($formData)
     {
         return $this->strategy->handleSpecificFieldsByTemplate($formData);
-    }
-
-    /**
-     * @param $email
-     * @return bool
-     */
-    public function userExists($email) {
-        if($this->strategy instanceof NoAuthStrategy) {
-            if ($this->userManager->findUserByUsernameOrEmail($email)) {
-                return true;
-            }
-        }
-
-        return false;
     }
 }

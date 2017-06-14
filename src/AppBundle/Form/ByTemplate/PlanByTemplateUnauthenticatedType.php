@@ -12,6 +12,8 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use AppBundle\Service\PlanService;
+use AppBundle\Validator\Constraints\EmailUsed;
+
 
 class PlanByTemplateUnauthenticatedType extends AbstractType
 {
@@ -60,7 +62,8 @@ class PlanByTemplateUnauthenticatedType extends AbstractType
                 'attr'  => array('class' => $classes),
                 'required' => false,
                 'label' => 'email_label',
-                'mapped' => false
+                'mapped' => false,
+                'constraints' => array(new EmailUsed(array('groups' => array('new_from_template'))))
             ))
             ->add('password', RepeatedType::class, array(
                 'type' => PasswordType::class,
