@@ -71,23 +71,20 @@ class AuthStrategy implements FormStrategyInterface {
     }
 
     /**
-     * @param $formData
+     * @param $form
      * @return Plan
      */
-    public function handleSpecificFieldsByTemplate($formData)
+    public function handleSpecificFieldsByTemplate($form)
     {
-        $templatePlan = $formData['templates'];
-        $title = $formData['title'];
-        $description = $formData['description'];
-        $date = $formData['date'];
-
-        $clone = clone $templatePlan;
+        $orgPlan = $form->get('templates')->getData();
+        $formPlan = $form->getData();
+        $clone = clone $orgPlan;
         $clone->setIsTemplate(false);
-        $clone->setTitle($title);
-        $clone->setDate($date);
-        $clone->setDescription($description);
+        $clone->setTitle($formPlan->getTitle());
+        $clone->setDate($formPlan->getDate());
+        $clone->setDescription($formPlan->getDescription());
         $clone->setUser($this->user);
-
+        
         return $clone;
     }
 }

@@ -41,7 +41,8 @@ class PlanByTemplateType extends AbstractType
                     return $plan->getTitle();
                 },
                 'attr'  => array('class' => $classes),
-                'label' => 'template_to_be_used'
+                'label' => 'template_to_be_used',
+                'mapped' => false
             ))
             ->add('title', null, array(
                     'attr'  => array('class' => $classes),
@@ -65,7 +66,10 @@ class PlanByTemplateType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        //nothing
+        $resolver->setDefaults(array(
+            'data_class' => 'AppBundle\Entity\Plan',
+            'validation_groups' => array('new_from_template')
+        ));
     }
 
     /**
