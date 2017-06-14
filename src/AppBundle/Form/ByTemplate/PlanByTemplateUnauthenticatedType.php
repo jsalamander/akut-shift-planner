@@ -76,7 +76,8 @@ class PlanByTemplateUnauthenticatedType extends AbstractType
             ))
             ->add('description', TextareaType::class, array(
                 'attr'  => array('class' => $classes),
-                'label' => 'description'
+                'label' => 'description',
+                'required' => true
             ))
             ->getForm();
     }

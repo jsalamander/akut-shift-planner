@@ -36,7 +36,8 @@ class PlanType extends AbstractType
             ->add('description', TextareaType::class, array(
                 'attr'  => array('class' => $classes),
                 'required' => false,
-                'label' => 'description'
+                'label' => 'description',
+                'required' => true
             ))
             ->add('isTemplate', CheckboxType::class, array(
                 'attr'  => array('class' => $classes),
@@ -64,7 +65,8 @@ class PlanType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Plan'
+            'data_class' => 'AppBundle\Entity\Plan',
+            'validation_groups' => array('standard')
         ));
     }
 

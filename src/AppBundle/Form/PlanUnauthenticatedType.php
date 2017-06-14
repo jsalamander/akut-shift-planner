@@ -38,7 +38,8 @@ class PlanUnauthenticatedType extends AbstractType
             ->add('description', TextareaType::class, array(
                 'attr'  => array('class' => $classes),
                 'required' => true,
-                'label' => 'description'
+                'label' => 'description',
+                'required' => true
             ))
             ->add('email', EmailType::class, array(
                 'attr'  => array('class' => $classes),
@@ -72,7 +73,8 @@ class PlanUnauthenticatedType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Plan'
+            'data_class' => 'AppBundle\Entity\Plan',
+            'validation_groups' => array('standard')
         ));
     }
 

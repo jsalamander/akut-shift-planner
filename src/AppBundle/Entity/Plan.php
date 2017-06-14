@@ -31,7 +31,7 @@ class Plan
      *      max = 80,
      *      minMessage = "The title must be at least {{ limit }} characters long",
      *      maxMessage = "The title cannot be longer than {{ limit }} characters",
-     *      groups={"new_from_template"}
+     *      groups={"new_from_template", "standard"}
      * )
      * @ORM\Column(name="title", type="string", length=255)
      */
@@ -39,7 +39,7 @@ class Plan
 
     /**
      * @var \DateTime
-     * @Assert\Date(groups={"new_from_template"})
+     * @Assert\Date(groups={"new_from_template", "standard"})
      *
      * @ORM\Column(name="date", type="datetime")
      */
@@ -48,13 +48,13 @@ class Plan
     /**
      * @var string
      *
-     * @Assert\NotBlank(groups={"new_from_template"})
+     * @Assert\NotBlank(groups={"new_from_template", "standard"})
      * @Assert\Length(
      *      min = 2,
      *      max = 300,
      *      minMessage = "The description must be at least {{ limit }} characters long",
      *      maxMessage = "The description cannot be longer than {{ limit }} characters",
-     *      groups={"new_from_template"}
+     *      groups={"new_from_template", "standard"}
      * )
      *
      * @ORM\Column(name="description", type="text")
@@ -66,7 +66,8 @@ class Plan
      *      min = 1,
      *      max = 100,
      *      minMessage = "You need at least {{ limit }} shift",
-     *      maxMessage = "We don't allow more than 100 shifts"
+     *      maxMessage = "We don't allow more than 100 shifts",
+     *      groups={"standard"}
      * )
      *
      * @Assert\Valid
