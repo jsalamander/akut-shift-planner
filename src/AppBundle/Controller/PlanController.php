@@ -31,7 +31,6 @@ class PlanController extends Controller
         $paginator  = $this->get('knp_paginator');
 
         $queryBuilder = $em->getRepository('AppBundle:Plan')->createQueryBuilder('p');
-
         $query = $queryBuilder
             ->where('p.isTemplate = false')
             ->andWhere('p.user = :user')

@@ -80,7 +80,7 @@ class Plan
      *
      * @ORM\Column(name="is_template", type="boolean", nullable=true)
      */
-    private $isTemplate;
+    private $isTemplate = false;
 
     /**
      * Indicates if this plan should be open for the public
@@ -88,7 +88,7 @@ class Plan
      *
      * @ORM\Column(name="is_public", type="boolean", nullable=true)
      */
-    private $isPublic;
+    private $isPublic = false;
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="plans", cascade={"persist"})
