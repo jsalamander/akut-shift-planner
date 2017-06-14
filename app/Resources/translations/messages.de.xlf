@@ -276,6 +276,14 @@
                 <source>define_shifts</source>
                 <target>Es muss mindestens eine Schicht geben</target>
             </trans-unit>
+            <trans-unit id="logout">
+                <source>logout</source>
+                <target>Ausloggen</target>
+            </trans-unit>
+            <trans-unit id="about">
+                <source>about</source>
+                <target>Über</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

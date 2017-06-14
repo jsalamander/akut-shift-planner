@@ -276,6 +276,14 @@
                 <source>define_shifts</source>
                 <target>You need to define at leas one shift</target>
             </trans-unit>
+            <trans-unit id="logout">
+                <source>logout</source>
+                <target>Logout</target>
+            </trans-unit>
+            <trans-unit id="about">
+                <source>about</source>
+                <target>About</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

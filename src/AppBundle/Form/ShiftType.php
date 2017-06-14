@@ -33,15 +33,15 @@ class ShiftType extends AbstractType
             ))
             ->add('start', TimeType::class, array(
                 'attr'  => array('class' => $classes),
-                'widget' => 'single_text',
                 'required' => true,
-                'label' => 'start'
+                'label' => 'start',
+                'widget' => 'single_text'
             ))
             ->add('end', TimeType::class, array(
                 'attr'  => array('class' => $classes),
                 'widget' => 'single_text',
                 'required' => true,
-                'label' => 'end'
+                'label' => 'end',
             ))
             ->add('numberPeople', IntegerType::class, array(
                 'attr'  => array('class' => $classes),
