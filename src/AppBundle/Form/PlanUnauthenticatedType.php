@@ -31,18 +31,19 @@ class PlanUnauthenticatedType extends AbstractType
                 'attr'  => array('class' => $classes . ' datepicker'),
                 'html5' => false,
                 'widget' => 'single_text',
-                'required' => false,
+                'required' => true,
                 'label' => 'date'
             ))
             ->add('description', TextareaType::class, array(
                 'attr'  => array('class' => $classes),
-                'required' => false,
+                'required' => true,
                 'label' => 'description'
             ))
             ->add('email', EmailType::class, array(
                 'attr'  => array('class' => $classes),
-                'required' => false,
-                'label' => 'email_label'
+                'required' => true,
+                'label' => 'email_label',
+                'mapped' => false
             ))
             ->add('password', RepeatedType::class, array(
                 'type' => PasswordType::class,
@@ -51,6 +52,7 @@ class PlanUnauthenticatedType extends AbstractType
                 'required' => true,
                 'first_options'  => array('label' => 'password'),
                 'second_options' => array('label' => 'repeat_password'),
+                'mapped' => false
             ))
             ->add('shifts', CollectionType::class, array(
                 'entry_type' => ShiftType::class,
@@ -67,7 +69,9 @@ class PlanUnauthenticatedType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-
+        $resolver->setDefaults(array(
+            'data_class' => 'AppBundle\Entity\Plan'
+        ));
     }
 
     /**

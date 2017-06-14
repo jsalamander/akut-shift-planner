@@ -92,10 +92,11 @@ class PlanController extends Controller
         FormStrategyService $formService,
         Translator $translator
     ) {
-        $form = $this->createForm($formService->getFormType());
+        $plan = new Plan();
+        $form = $this->createForm($formService->getFormType(), $plan);
         $form->handleRequest($request);
 
-        if ($formService->userExists($form->getData())) {
+        if ($formService->userExists($form->get('email')->getData())) {
             $form->get('email')->addError(new FormError($translator->trans('email_used')));
         }
 

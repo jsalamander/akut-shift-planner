@@ -92,12 +92,11 @@ class FormStrategyService {
     }
 
     /**
-     * @param $formData
+     * @param $email
      * @return bool
      */
-    public function userExists($formData) {
+    public function userExists($email) {
         if($this->strategy instanceof NoAuthStrategy) {
-            $email = $formData['email'];
             if ($this->userManager->findUserByUsernameOrEmail($email)) {
                 return true;
             }

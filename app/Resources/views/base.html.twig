@@ -22,7 +22,7 @@
             <a class="navbar-brand" href="{{ path('homepage') }}"><i class="fa fa-home" aria-hidden="true"></i> {% trans %}home{% endtrans %}</a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mr-auto">
-                {% if not is_granted('ROLE_ONE_TIME_USER') and is_granted('ROLE_USER') %}
+                {% if is_granted('ROLE_USER') %}
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path('plan_index') }}"><i class="fa fa-list" aria-hidden="true"></i> {% trans %}plans{% endtrans %}</a>
                         </li>
