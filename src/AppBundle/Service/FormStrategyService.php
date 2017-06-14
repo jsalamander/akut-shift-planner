@@ -2,9 +2,11 @@
 
 namespace AppBundle\Service;
 
+use AppBundle\Entity\Plan;
 use AppBundle\Entity\User;
 use AppBundle\Service\Strategy\AuthStrategy;
 use AppBundle\Service\Strategy\NoAuthStrategy;
+use FOS\UserBundle\Doctrine\UserManager;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**
@@ -19,13 +21,20 @@ class FormStrategyService {
      */
     private $strategy = NULL;
 
+    /**
+     * @var UserManager
+     */
+    private $userManager;
+
     public function __construct(
         AuthStrategy $authStrategy,
         NoAuthStrategy $noAuthStrategy,
         TokenStorageInterface $tokenStorage,
-        UserService $userService
+        UserService $userService,
+        UserManager $userManager
     ) {
         $this->tokenStorage = $tokenStorage;
+        $this->userManager = $userManager;
 
         if($userService->getUser()) {
             $this->strategy = $authStrategy;
@@ -80,5 +89,20 @@ class FormStrategyService {
     public function handleSpecificFieldsByTemplate($formData)
     {
         return $this->strategy->handleSpecificFieldsByTemplate($formData);
+    }
+
+    /**
+     * @param $formData
+     * @return bool
+     */
+    public function userExists($formData) {
+        if($this->strategy instanceof NoAuthStrategy) {
+            $email = $formData['email'];
+            if ($this->userManager->findUserByUsernameOrEmail($email)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
