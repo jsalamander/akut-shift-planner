@@ -5,7 +5,6 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Plan;
 use AppBundle\Service\FormStrategyService;
 use AppBundle\Service\UserService;
-use FOS\UserBundle\Doctrine\UserManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -91,13 +90,12 @@ class PlanController extends Controller
     public function newAction(
         Request $request,
         FormStrategyService $formService,
-        UserManager $userManager,
         Translator $translator
     ) {
         $form = $this->createForm($formService->getFormType());
         $form->handleRequest($request);
 
-        if ($userManager->findUserByEmail($form->getData()['email'])) {
+        if ($formService->userExists($form->getData())) {
             $form->get('email')->addError(new FormError($translator->trans('email_used')));
         }
 
@@ -124,14 +122,13 @@ class PlanController extends Controller
     public function newByTemplateAction(
         Request $request,
         FormStrategyService $formService,
-        UserManager $userManager,
         Translator $translator
     ) {
         $em = $this->getDoctrine()->getManager();
         $form = $this->createForm($formService->getByTemplateFormType());
         $form->handleRequest($request);
 
-        if ($userManager->findUserByEmail($form->getData()['email'])) {
+        if ($formService->userExists($form->getData())) {
             $form->get('email')->addError(new FormError($translator->trans('email_used')));
         }
 
