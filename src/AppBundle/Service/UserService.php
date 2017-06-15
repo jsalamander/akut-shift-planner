@@ -116,13 +116,14 @@ class UserService {
 
     /**
      * Send the plan link via email to the creator
+     * don't send it to logged in user
      *
      * @param Plan $plan
      * @return void
      */
     public function emailPlanLink($plan)
     {
-        if (!$plan->getIsTemplate()) {
+        if (!$plan->getIsTemplate() && !$this->getUser()) {
             $message = new \Swift_Message($this->translator->trans('email_subject'));
 
             $message->setFrom('no-reply@schicht-plan.ch')
