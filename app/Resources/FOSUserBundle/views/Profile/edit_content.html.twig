@@ -1,0 +1,15 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div class="col-12">
+    <h1>{{ 'edit_profile'|trans([], 'messages', null) }}</h1>
+    {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
+    <div class="form-group">
+        {{ form_row(form.username, {'attr': {'class': 'form-control'}}) }}
+        {{ form_row(form.email, {'attr': {'class': 'form-control'}}) }}
+        {{ form_row(form.current_password, {'attr': {'class': 'form-control'}}) }}
+        {{ form_row(form._token) }}
+    </div>
+    <input class="btn btn-primary" type="submit" value="{{ 'profile.edit.submit'|trans }}" />
+    {{ form_end(form) }}
+    <a class="pull-right" href="{{ path('fos_user_resetting_request') }}">{{ 'change_password.submit'|trans }}</a>
+</div>

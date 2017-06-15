@@ -296,6 +296,10 @@
                 <source>your_profile</source>
                 <target>Dein Profil</target>
             </trans-unit>
+            <trans-unit id="edit_profile">
+                <source>edit_profile</source>
+                <target>Profil bearbeiten</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
