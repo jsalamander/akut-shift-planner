@@ -42,7 +42,6 @@ class PlanController extends Controller
             $request->query->getInt('page', 1),
             10
         );
-
         return $this->render('plan/index.html.twig', array(
             'pagination' => $pagination,
         ));
@@ -87,7 +86,8 @@ class PlanController extends Controller
      */
     public function newAction(
         Request $request,
-        FormStrategyService $formService
+        FormStrategyService $formService,
+        UserService $userService
     ) {
         $plan = new Plan();
         $form = $this->createForm($formService->getFormType(), $plan);
@@ -99,6 +99,7 @@ class PlanController extends Controller
             $em->persist($plan);
             $em->flush();
 
+            $userService->emailPlanLink($plan);
             return $this->redirectToRoute('plan_show',array('id' => $plan->getId()));
         }
 
@@ -115,7 +116,8 @@ class PlanController extends Controller
      */
     public function newByTemplateAction(
         Request $request,
-        FormStrategyService $formService
+        FormStrategyService $formService,
+        UserService $userService
     ) {
         $plan = new Plan();
         $em = $this->getDoctrine()->getManager();
@@ -127,6 +129,7 @@ class PlanController extends Controller
             $em->persist($plan);
             $em->flush();
 
+            $userService->emailPlanLink($plan);
             return $this->redirectToRoute('plan_show', array('id' => $plan->getId()));
         }
 

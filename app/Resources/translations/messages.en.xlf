@@ -308,6 +308,10 @@
                 <source>footer_source_code</source>
                 <target>Source Code</target>
             </trans-unit>
+            <trans-unit id="email_subject">
+                <source>email_subject</source>
+                <target>New shift plan</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
