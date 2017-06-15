@@ -300,6 +300,14 @@
                 <source>edit_profile</source>
                 <target>Profil bearbeiten</target>
             </trans-unit>
+            <trans-unit id="footer_text">
+                <source>footer_text</source>
+                <target>Entwickelt von</target>
+            </trans-unit>
+            <trans-unit id="footer_source_code">
+                <source>footer_source_code</source>
+                <target>Quellcode</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

@@ -300,6 +300,14 @@
                 <source>edit_profile</source>
                 <target>Edit Profile</target>
             </trans-unit>
+            <trans-unit id="footer_text">
+                <source>footer_text</source>
+                <target>Developed by</target>
+            </trans-unit>
+            <trans-unit id="footer_source_code">
+                <source>footer_source_code</source>
+                <target>Source Code</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

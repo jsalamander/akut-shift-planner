@@ -58,6 +58,12 @@
                 {% block body %}{% endblock %}
             </div>
         </div>
+        <footer class="footer">
+            <div class="container">
+                <span class="text-muted">{{ 'footer_text'|trans }} <a href="mailto:jan.friedli@gmx.ch">Jan Friedli</a></span>
+                <span class="text-muted pull-right">{{ 'footer_source_code'|trans }}: <a href="https://github.com/fribim/akut-shift-planner">GitHub</a></span>
+            </div>
+        </footer>
         {% block javascripts %}{% endblock %}
         <script src="{{ asset('bundles/bazingajstranslation/js/translator.min.js') }}"></script>
         <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
