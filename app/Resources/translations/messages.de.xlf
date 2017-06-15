@@ -292,6 +292,10 @@
                 <source>profile</source>
                 <target>Profil</target>
             </trans-unit>
+            <trans-unit id="your_profile">
+                <source>your_profile</source>
+                <target>Dein Profil</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
