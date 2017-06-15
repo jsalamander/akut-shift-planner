@@ -284,6 +284,10 @@
                 <source>about</source>
                 <target>Über</target>
             </trans-unit>
+            <trans-unit id="done">
+                <source>done</source>
+                <target>Fertig</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
