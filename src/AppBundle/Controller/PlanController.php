@@ -98,8 +98,7 @@ class PlanController extends Controller
             $plan = $formService->createPlan($form);
             $em->persist($plan);
             $em->flush();
-
-            $userService->emailPlanLink($plan);
+            $userService->emailPlanLink($form->get('email')->getData(), $plan->getId());
             return $this->redirectToRoute('plan_show',array('id' => $plan->getId()));
         }
 
@@ -129,7 +128,7 @@ class PlanController extends Controller
             $em->persist($plan);
             $em->flush();
 
-            $userService->emailPlanLink($plan);
+            $userService->emailPlanLink($form->get('email')->getData(), $plan->getId());
             return $this->redirectToRoute('plan_show', array('id' => $plan->getId()));
         }
 

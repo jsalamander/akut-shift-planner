@@ -4,6 +4,7 @@ namespace AppBundle\Service;
 
 use AppBundle\Entity\Plan;
 use AppBundle\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -54,7 +55,8 @@ class UserService {
         Session $session,
         \Swift_Mailer $mailer,
         Translator $translator,
-        \Twig_Environment $templating
+        \Twig_Environment $templating,
+        EntityManagerInterface $em
     ) {
         $this->tokenStorage = $tokenStorage;
         $this->encoder = $encoder;
@@ -62,6 +64,7 @@ class UserService {
         $this->mailer = $mailer;
         $this->translator = $translator;
         $this->templating = $templating;
+        $this->em = $em;
     }
 
     /**
@@ -81,38 +84,6 @@ class UserService {
         return $user;
     }
 
-    /**
-     * Authenticate one time user
-     *
-     * @param $user User
-     */
-    private function authenticate($user) {
-        if ($user->hasRole('ROLE_ONE_TIME_USER')) {
-            $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
-            $this->tokenStorage->setToken($token);
-            $this->session->set('_security_main', serialize($token));
-        } else {
-            throw new AccessDeniedException('You\'re not a one time user');
-        }
-    }
-
-    /**
-     * Check if the submitted password matches the one
-     * of the corresponding/generated user
-     *
-     * @param $plan Plan
-     * @param $password string
-     *
-     * @return bool
-     */
-    public function checkOneTimeUserPassword($plan, $password) {
-        if ($this->encoder->isPasswordValid($plan->getUser(), $password)) {
-            $this->authenticate($plan->getUser());
-            return true;
-        } else {
-            return false;
-        }
-    }
 
     /**
      * Send the plan link via email to the creator
@@ -121,31 +92,35 @@ class UserService {
      * @param Plan $plan
      * @return void
      */
-    public function emailPlanLink($plan)
+    public function emailPlanLink($email, $planId)
     {
-        if (!$plan->getIsTemplate() && !$this->getUser()) {
-            $message = new \Swift_Message($this->translator->trans('email_subject'));
+        if($planId) {
+            $plan = $this->em->getRepository('AppBundle:Plan')->findOneById($planId);
 
-            $message->setFrom('no-reply@schicht-plan.ch')
-                ->setTo('jan.friedli@gmx.ch')
-                ->setBody(
-                    $this->templating->render(
-                        'email/plan-password.html.twig',
-                        array(
-                            'plan_id' => $plan->getId()
-                        )
-                    ),
-                    'text/html'
-                )->addPart(
-                    $this->templating->render(
-                        'email/plan-password.txt.twig',
-                        array(
-                            'plan_id' => $plan->getId()
-                        )
-                    ),
-                    'text/plain'
-                );
-            $this->mailer->send($message);
+            if (!$plan->getIsTemplate() && !$this->getUser()) {
+                $message = new \Swift_Message($this->translator->trans('email_subject'));
+
+                $message->setFrom('no-reply@schicht-plan.ch')
+                    ->setTo($email)
+                    ->setBody(
+                        $this->templating->render(
+                            'email/plan-password.html.twig',
+                            array(
+                                'plan_id' => $plan->getId()
+                            )
+                        ),
+                        'text/html'
+                    )->addPart(
+                        $this->templating->render(
+                            'email/plan-password.txt.twig',
+                            array(
+                                'plan_id' => $plan->getId()
+                            )
+                        ),
+                        'text/plain'
+                    );
+                $this->mailer->send($message);
+            }
         }
     }
 }

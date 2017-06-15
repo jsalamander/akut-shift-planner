@@ -250,7 +250,7 @@
             </trans-unit>
             <trans-unit id="register">
                 <source>register</source>
-                <target>Registieren</target>
+                <target>Registrieren</target>
             </trans-unit>
             <trans-unit id="is_public">
                 <source>is_public</source>
