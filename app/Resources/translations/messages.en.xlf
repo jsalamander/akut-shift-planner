@@ -288,6 +288,10 @@
                 <source>done</source>
                 <target>Done</target>
             </trans-unit>
+            <trans-unit id="profile">
+                <source>profile</source>
+                <target>Profile</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

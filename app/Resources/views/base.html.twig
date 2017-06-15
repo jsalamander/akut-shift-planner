@@ -43,6 +43,7 @@
                 </ul>
                 <ul class="navbar-nav">
                     {% if is_granted('ROLE_USER') %}
+                        <a class="nav-link pull-right" href="{{ path('fos_user_profile_show') }}"><i class="fa fa-user" aria-hidden="true"></i> {{ 'profile'|trans }}</a>
                         <a class="nav-link pull-right" href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i> {{ 'logout'|trans }}</a>
                     {% else %}
                         <li class="nav-item text-nowrap"><a class="nav-link" href="{{ path('fos_user_security_login') }}"><i class="fa fa-sign-in" aria-hidden="true"></i> {% trans %}login{% endtrans %}</a></li>
