@@ -70,6 +70,7 @@ swiftmailer:
     encryption: ssl
     port: 465
     auth_mode: login
+    spool: { type: memory }
 
 assetic:
     debug:          '%kernel.debug%'
