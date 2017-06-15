@@ -70,7 +70,9 @@ swiftmailer:
     encryption: ssl
     port: 465
     auth_mode: login
-    spool: { type: memory }
+    spool:
+        type: file
+        path: '%kernel.project_dir%/app/spool'
 
 assetic:
     debug:          '%kernel.debug%'
