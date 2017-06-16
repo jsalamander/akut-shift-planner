@@ -46,7 +46,7 @@ class PlanUnauthenticatedType extends AbstractType
                 'required' => true,
                 'label' => 'email_label',
                 'mapped' => false,
-                'constraints' => array(new EmailUsed())
+                'constraints' => array(new EmailUsed(array('groups' => array('new_from_template'))))
             ))
             ->add('password', RepeatedType::class, array(
                 'type' => PasswordType::class,
@@ -74,7 +74,7 @@ class PlanUnauthenticatedType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'AppBundle\Entity\Plan',
-            'validation_groups' => array('standard')
+            'validation_groups' => array('new_from_template')
         ));
     }
 

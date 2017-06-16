@@ -89,7 +89,8 @@ class UserService {
      * Send the plan link via email to the creator
      * don't send it to logged in user
      *
-     * @param Plan $plan
+     * @param Plan $planId
+     * @param string $email
      * @return void
      */
     public function emailPlanLink($email, $planId)
