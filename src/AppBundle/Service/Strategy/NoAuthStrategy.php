@@ -5,6 +5,7 @@ namespace AppBundle\Service\Strategy;
 use AppBundle\Entity\Plan;
 use AppBundle\Entity\User;
 use AppBundle\Service\Strategy\FormStrategyInterface;
+use AppBundle\Service\UserService;
 use FOS\UserBundle\Doctrine\UserManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -23,10 +24,19 @@ class NoAuthStrategy implements FormStrategyInterface {
      */
     private $userManager;
 
-    public function __construct(UserPasswordEncoderInterface $encoder, UserManager $userManager)
-    {
+    /**
+     * @var UserService
+     */
+    private $userService;
+
+    public function __construct(
+        UserPasswordEncoderInterface $encoder,
+        UserManager $userManager,
+        UserService $userService
+    ) {
         $this->encoder = $encoder;
         $this->userManager = $userManager;
+        $this->userService = $userService;
     }
 
     /**
@@ -83,6 +93,7 @@ class NoAuthStrategy implements FormStrategyInterface {
             $user->setPlainPassword($password);
             $user->setEnabled(true);
             $this->userManager->updateUser($user, true);
+            $this->userService->emailPlanLink($email, $plan->getId());
             $plan->setUser($user);
         }
 

@@ -86,8 +86,7 @@ class PlanController extends Controller
      */
     public function newAction(
         Request $request,
-        FormStrategyService $formService,
-        UserService $userService
+        FormStrategyService $formService
     ) {
         $plan = new Plan();
         $form = $this->createForm($formService->getFormType(), $plan);
@@ -98,7 +97,6 @@ class PlanController extends Controller
             $plan = $formService->createPlan($form);
             $em->persist($plan);
             $em->flush();
-            $userService->emailPlanLink($form->get('email')->getData(), $plan->getId());
             return $this->redirectToRoute('plan_show',array('id' => $plan->getId()));
         }
 
@@ -115,8 +113,7 @@ class PlanController extends Controller
      */
     public function newByTemplateAction(
         Request $request,
-        FormStrategyService $formService,
-        UserService $userService
+        FormStrategyService $formService
     ) {
         $plan = new Plan();
         $em = $this->getDoctrine()->getManager();
@@ -128,7 +125,6 @@ class PlanController extends Controller
             $em->persist($plan);
             $em->flush();
 
-            $userService->emailPlanLink($form->get('email')->getData(), $plan->getId());
             return $this->redirectToRoute('plan_show', array('id' => $plan->getId()));
         }
 
