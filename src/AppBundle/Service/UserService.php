@@ -89,39 +89,35 @@ class UserService {
      * Send the plan link via email to the creator
      * don't send it to logged in user
      *
-     * @param Plan $planId
+     * @param Plan $plan
      * @param string $email
      * @return void
      */
-    public function emailPlanLink($email, $planId)
+    public function emailPlanLink($email, $plan)
     {
-        if($planId) {
-            $plan = $this->em->getRepository('AppBundle:Plan')->findOneById($planId);
+        if (!$plan->getIsTemplate() && !$this->getUser()) {
+            $message = new \Swift_Message($this->translator->trans('email_subject'));
 
-            if (!$plan->getIsTemplate() && !$this->getUser()) {
-                $message = new \Swift_Message($this->translator->trans('email_subject'));
-
-                $message->setFrom('no-reply@schicht-plan.ch')
-                    ->setTo($email)
-                    ->setBody(
-                        $this->templating->render(
-                            'email/plan-password.html.twig',
-                            array(
-                                'plan_id' => $plan->getId()
-                            )
-                        ),
-                        'text/html'
-                    )->addPart(
-                        $this->templating->render(
-                            'email/plan-password.txt.twig',
-                            array(
-                                'plan_id' => $plan->getId()
-                            )
-                        ),
-                        'text/plain'
-                    );
-                $this->mailer->send($message);
-            }
+            $message->setFrom('no-reply@schicht-plan.ch')
+                ->setTo($email)
+                ->setBody(
+                    $this->templating->render(
+                        'email/plan-password.html.twig',
+                        array(
+                            'plan_id' => $plan->getId()
+                        )
+                    ),
+                    'text/html'
+                )->addPart(
+                    $this->templating->render(
+                        'email/plan-password.txt.twig',
+                        array(
+                            'plan_id' => $plan->getId()
+                        )
+                    ),
+                    'text/plain'
+                );
+            $this->mailer->send($message);
         }
     }
 }

@@ -15,7 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Plan
 {
     /**
-     * @var int
+     * @var string
      *
      * @ORM\Id
      * @ORM\Column(name="id", type="guid")
@@ -153,9 +153,9 @@ class Plan
 
 
     /**
-     * Get id
+     * Get string
      *
-     * @return int
+     * @return string
      */
     public function getId()
     {
@@ -163,9 +163,9 @@ class Plan
     }
 
     /**
-     * Set id
+     * Set id (uuid)
      *
-     * @return int
+     * @return string
      */
     public function setId($id)
     {
