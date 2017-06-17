@@ -310,7 +310,39 @@
             </trans-unit>
             <trans-unit id="email_subject">
                 <source>email_subject</source>
-                <target>Neuer Schichtplan</target>
+                <target>Neuer Schichtplan und Konto</target>
+            </trans-unit>
+            <trans-unit id="email_shift_link_title">
+                <source>email_shift_link_title</source>
+                <target>Neuer Schichtplan und Benutzer_innenkonto</target>
+            </trans-unit>
+            <trans-unit id="email_shift_link_body_html">
+                <source>email_shift_link_body_html</source>
+                <target>
+                    <![CDATA[
+                        Durch das erstellen des Schichtplans, hast du automatisch ein Benutzer_innenkonto angelegt.</b>
+                        Mit der angegebenen Email und Passwort kannst du dich einloggen und neue Schichtpläne erstellen, sowie bestehende einsehen.</b>
+                        Um herauszufinden wer sich eingeschrieben hat, sowie mehr Details (richtiger Name, Email, Telefonnummer) sehen zu können, musst du dich einloggen.</b>
+                    ]]>
+                </target>
+            </trans-unit>
+            <trans-unit id="email_shift_link_body_text">
+                <source>email_shift_link_body_text</source>
+                <target>
+                    <![CDATA[
+                        Durch das erstellen des Schichtplans, hast du automatisch ein Benutzer_innenkonto angelegt.
+                        Mit der angegebenen Email und Passwort kannst du dich einloggen und neue Schichtpläne erstellen, sowie bestehende einsehen.
+                        Um herauszufinden wer sich eingeschrieben hat, sowie mehr Details (richtiger Name, Email, Telefonnummer) sehen zu können, musst du dich einloggen.
+                    ]]>
+                </target>
+            </trans-unit>
+            <trans-unit id="email_shift_link_text">
+                <source>email_shift_link_text</source>
+                <target>Teile diesen Link, damit sich Leuete einschreiben können:</target>
+            </trans-unit>
+            <trans-unit id="email_shift_link_end">
+                <source>email_shift_link_end</source>
+                <target>Schicht-plan.ch</target>
             </trans-unit>
         </body>
     </file>

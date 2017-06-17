@@ -93,7 +93,7 @@
                     Schicht-Plan.ch was built, for the culutural center <a href="http://akut-thun.ch">AKuT</a> in Thun.<br>
                     They needed a shift planner which allowed to store templates, so external people who want to organise an event at AKuT
                     are able to crate a shift plan themselves.
-                     <]]>
+                     ]]>
                 </target>
             </trans-unit>
             <trans-unit id="credits">
@@ -310,7 +310,39 @@
             </trans-unit>
             <trans-unit id="email_subject">
                 <source>email_subject</source>
+                <target>New shift plan created!</target>
+            </trans-unit>
+            <trans-unit id="email_shift_link_title">
+                <source>email_shift_link_title</source>
                 <target>New shift plan</target>
+            </trans-unit>
+            <trans-unit id="email_shift_link_body_html">
+                <source>email_shift_link_body_html</source>
+                <target>
+                    <![CDATA[
+                        By creating a shift plan you signed up for schicht-plan.ch</b>
+                        You can use this account to create shift plans in the future.</b>
+                        To find out who enrolled for your shifts and see more details (Real name, Email, Phone number) you'll need to login.</b>
+                    ]]>
+                </target>
+            </trans-unit>
+            <trans-unit id="email_shift_link_body_text">
+                <source>email_shift_link_body_text</source>
+                <target>
+                    <![CDATA[
+                        By creating a shift plan you signed up for schicht-plan.ch</b>
+                        You can use this account to create shift plans in the future.</b>
+                        To find out who enrolled for your shifts and see more details (Real name, Email, Phone number) you'll need to login.
+                    ]]>
+                </target>
+            </trans-unit>
+            <trans-unit id="email_shift_link_text">
+                <source>email_shift_link_text</source>
+                <target>Share this link to let people enroll:</target>
+            </trans-unit>
+            <trans-unit id="email_shift_link_end">
+                <source>email_shift_link_end</source>
+                <target>Schicht-plan.ch</target>
             </trans-unit>
         </body>
     </file>
