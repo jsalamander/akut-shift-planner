@@ -116,6 +116,7 @@ class PlanController extends Controller
         FormStrategyService $formService
     ) {
         $plan = new Plan();
+
         $em = $this->getDoctrine()->getManager();
         $form = $this->createForm($formService->getByTemplateFormType(), $plan);
         $form->handleRequest($request);

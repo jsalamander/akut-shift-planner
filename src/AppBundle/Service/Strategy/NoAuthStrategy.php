@@ -8,6 +8,7 @@ use AppBundle\Service\Strategy\FormStrategyInterface;
 use AppBundle\Service\UserService;
 use FOS\UserBundle\Doctrine\UserManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Ramsey\Uuid\Uuid;
 
 /**
  * Class AuthStrategy
@@ -110,6 +111,7 @@ class NoAuthStrategy implements FormStrategyInterface {
         $orgPlan = $form->get('templates')->getData();
         $formPlan = $form->getData();
         $clone = clone $orgPlan;
+        $clone->setId(Uuid::uuid4()->toString());
         $clone->setIsTemplate(false);
         $clone->setTitle($formPlan->getTitle());
         $clone->setDate($formPlan->getDate());

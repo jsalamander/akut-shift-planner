@@ -338,7 +338,7 @@
             </trans-unit>
             <trans-unit id="email_shift_link_text">
                 <source>email_shift_link_text</source>
-                <target>Teile diesen Link, damit sich Leuete einschreiben können:</target>
+                <target>Teile diesen Link, damit sich Leute einschreiben können:</target>
             </trans-unit>
             <trans-unit id="email_shift_link_end">
                 <source>email_shift_link_end</source>
