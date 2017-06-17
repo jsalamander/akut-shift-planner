@@ -8,7 +8,6 @@ use AppBundle\Service\Strategy\FormStrategyInterface;
 use AppBundle\Service\UserService;
 use FOS\UserBundle\Doctrine\UserManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Ramsey\Uuid\Uuid;
 
 /**
  * Class AuthStrategy
@@ -88,8 +87,6 @@ class NoAuthStrategy implements FormStrategyInterface {
      */
     private function generateNewUserForPlan($plan, $email, $password) {
 
-        //since we use uuid we can generate one before it gets saved
-        $plan->setId(Uuid::uuid4()->toString());
         $user = $this->userManager->createUser();
         $user->setUsername($email);
         $user->setEmail($email);

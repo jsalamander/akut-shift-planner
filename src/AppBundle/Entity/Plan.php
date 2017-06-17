@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
+use Ramsey\Uuid\Uuid;
 
 /**
  * Plan
@@ -19,7 +20,6 @@ class Plan
      *
      * @ORM\Id
      * @ORM\Column(name="id", type="guid")
-     * @ORM\GeneratedValue(strategy="UUID")
      */
     private $id;
 
@@ -100,6 +100,7 @@ class Plan
     public function __construct()
     {
         $this->shifts = new ArrayCollection();
+        $this->setId(Uuid::uuid4()->toString());
     }
 
     /**
