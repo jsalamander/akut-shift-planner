@@ -2,7 +2,7 @@
 {% form_theme edit_form 'form/fields.html.twig' %}
     {% block body %}
         <div class="col-12">
-            <h1>{% trans %}edit{% endtrans %}<span class="pull-right badge badge-info">{{ 'template'|trans }}</span></h1>
+            <h1>{% trans %}edit{% endtrans %}{% if plan.isTemplate %}<span class="pull-right badge badge-info">{{ 'template'|trans }}</span>{% endif %}</h1>
         </div>
 
         <div class="col-12">
