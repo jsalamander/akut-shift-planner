@@ -348,6 +348,10 @@
                 <source>public</source>
                 <target>Public</target>
             </trans-unit>
+            <trans-unit id="template">
+                <source>template</source>
+                <target>Template</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

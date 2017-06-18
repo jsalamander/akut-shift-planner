@@ -2,7 +2,7 @@
 {% form_theme edit_form 'form/fields.html.twig' %}
     {% block body %}
         <div class="col-12">
-            <h1>{% trans %}edit{% endtrans %}</h1>
+            <h1>{% trans %}edit{% endtrans %}<span class="pull-right badge badge-info">{{ 'template'|trans }}</span></h1>
         </div>
 
         <div class="col-12">
@@ -13,10 +13,10 @@
                 {{ form_widget(edit_form.title) }}
                 <div {% if plan.isTemplate %}style="display: none"{% endif %}>
                     {{ form_row(edit_form.date) }}
-                    {{ form_row(edit_form.isPublic) }}
                 </div>
                 {{ form_row(edit_form.description) }}
-                <div {% if plan.isTemplate %}style="display: none"{% endif %}>
+                <div {% if not plan.isTemplate %}style="display: none"{% endif %}>
+                    {{ form_row(edit_form.isPublic) }}
                 </div>
                 <div style="display: none">
                     {{ form_row(edit_form.isTemplate) }}

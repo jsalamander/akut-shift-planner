@@ -8,9 +8,14 @@
         {% set isAuth = false %}
     {% endif %}
 
-    <div class="col-12 d-flex justify-content-end">
-        <h1 class="mr-auto p-2">{% if plan.isTemplate %}Template:{% endif %} {{ plan.title }}</h1>
-        {% if not plan.isTemplate %}<h4 class="p-2">{% if plan.date %}{{ plan.date|date('d.m.Y') }}{% endif %}</h4>{% endif %}
+    <div class="col-12 justify-content-end">
+        <h1>{{ plan.title }}
+            {% if plan.isTemplate %}
+                <span class="float-md-right badge badge-info">{{ 'template'|trans }}</span>
+            {% else %}
+            {% if not plan.isTemplate %}<span class="float-right">{% if plan.date %}{{ plan.date|date('d.m.Y') }}{% endif %}</span>{% endif %}
+            {% endif %}
+        </h1>
     </div>
     <div class="col-12">
         {% if is_granted('ROLE_USER') and app.user.id == plan.user.id %}<a class="pull-right" href="{{ path('plan_edit', { 'id': plan.id }) }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> {% trans %}edit{% endtrans %}</a>{% endif %}
