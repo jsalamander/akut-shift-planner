@@ -33,7 +33,7 @@
                 {% endif %}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="{{ path('plan_new') }}" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-plus" aria-hidden="true"></i>
+                            <i class="fa fa-plus" aria-hidden="true"></i> {{ 'create'|trans }}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="{{ path('plan_new') }}">{% trans %}new{% endtrans %}</a>
