@@ -344,6 +344,10 @@
                 <source>email_shift_link_end</source>
                 <target>Schicht-plan.ch</target>
             </trans-unit>
+            <trans-unit id="public">
+                <source>public</source>
+                <target>Public</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
