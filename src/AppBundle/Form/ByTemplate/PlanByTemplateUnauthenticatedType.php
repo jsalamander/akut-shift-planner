@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use AppBundle\Service\PlanService;
 use AppBundle\Validator\Constraints\EmailUsed;
+use Symfony\Component\Validator\Constraints\Length;
 
 
 class PlanByTemplateUnauthenticatedType extends AbstractType
@@ -72,7 +73,14 @@ class PlanByTemplateUnauthenticatedType extends AbstractType
                 'required' => true,
                 'first_options'  => array('label' => 'password'),
                 'second_options' => array('label' => 'repeat_password'),
-                'mapped' => false
+                'mapped' => false,
+                'constraints' => array(
+                    new Length(array(
+                        'groups' => array('new_from_template'),
+                        'min' => 8,
+                        'max' => 255
+                    ))
+                )
             ))
             ->add('description', TextareaType::class, array(
                 'attr'  => array('class' => $classes),

@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Validator\Constraints\Length;
 
 class PlanUnauthenticatedType extends AbstractType
 {
@@ -55,7 +56,14 @@ class PlanUnauthenticatedType extends AbstractType
                 'required' => true,
                 'first_options'  => array('label' => 'password'),
                 'second_options' => array('label' => 'repeat_password'),
-                'mapped' => false
+                'mapped' => false,
+                'constraints' => array(
+                    new Length(array(
+                        'groups' => array('new_from_template'),
+                        'min' => 8,
+                        'max' => 255
+                    ))
+                )
             ))
             ->add('shifts', CollectionType::class, array(
                 'entry_type' => ShiftType::class,
