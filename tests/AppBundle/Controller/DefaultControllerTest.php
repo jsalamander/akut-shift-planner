@@ -30,4 +30,11 @@ class DefaultControllerTest extends WebTestCase
         $this->assertContains('mailto:jan.friedli@gmx.ch', $crawler->filter('.footer span a')->attr('href'));
         $this->assertContains('https://github.com/fribim/akut-shift-planner', $crawler->filter('.footer span a')->eq(1)->attr('href'));
     }
+
+    public function testAbout() {
+        $client = static::createClient();
+        $crawler = $client->request('GET', '/about');
+        $this->assertEquals(3, $crawler->filter('h3')->count());
+        $this->assertContains('Schicht-Plan.ch', $crawler->filter('h1')->text());
+    }
 }
