@@ -15,4 +15,6 @@ This sends all the mails saved in the spool.
 
 ## Test
 
-Run the testsuite with the following comand: ´./vendor/phpunit/phpunit/phpunit´
+Run the testsuite with the following comand: ´composer test´.
+
+To run the test with an empty database: ´composer test-with-new-database´

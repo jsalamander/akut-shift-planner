@@ -56,6 +56,15 @@
         ],
         "post-update-cmd": [
             "@symfony-scripts"
+        ],
+        "test": [
+            "vendor/phpunit/phpunit/phpunit"
+        ],
+        "test-with-new-database": [
+            "@php bin/console doctrine:database:drop  --force",
+            "@php bin/console doctrine:database:create",
+            "@php bin/console doctrine:schema:update --force",
+            "vendor/phpunit/phpunit/phpunit"
         ]
     },
     "config": {
