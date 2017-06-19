@@ -4,37 +4,21 @@ namespace Tests\AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class DefaultControllerTest extends WebTestCase
+class PlanControllerTest extends WebTestCase
 {
-    public function testIndex()
+    public function testIndexWithoutAuth()
     {
         $client = static::createClient();
-        $crawler = $client->request('GET', '/');
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertContains('Schicht-Plan.ch', $crawler->filter('.jumbotron')->text());
-        $this->assertEquals(1, $crawler->filter('.jumbotron .btn')->count());
-        $this->assertContains('/plan/new', $crawler->filter('.jumbotron .btn')->attr('href'));
-    }
+        $client->request('GET', '/plan');
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertTrue(
+            $client->getResponse()->isRedirect('http://localhost/login')
+        );
 
-    public function testNavbar() {
-        $client = static::createClient();
-        $crawler = $client->request('GET', '/');
-        $this->assertEquals(4, $crawler->filter('.navbar-collapse li')->count());
-
-    }
-
-    public function testFooter() {
-        $client = static::createClient();
-        $crawler = $client->request('GET', '/');
-        $this->assertEquals(2, $crawler->filter('.footer span')->count());
-        $this->assertContains('mailto:jan.friedli@gmx.ch', $crawler->filter('.footer span a')->attr('href'));
-        $this->assertContains('https://github.com/fribim/akut-shift-planner', $crawler->filter('.footer span a')->eq(1)->attr('href'));
-    }
-
-    public function testAbout() {
-        $client = static::createClient();
-        $crawler = $client->request('GET', '/about');
-        $this->assertEquals(3, $crawler->filter('h3')->count());
-        $this->assertContains('Schicht-Plan.ch', $crawler->filter('h1')->text());
+        $client->request('GET', '/plan/templates');
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertTrue(
+            $client->getResponse()->isRedirect('http://localhost/login')
+        );
     }
 }
