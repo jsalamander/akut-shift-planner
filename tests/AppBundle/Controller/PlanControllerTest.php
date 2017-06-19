@@ -21,4 +21,11 @@ class PlanControllerTest extends WebTestCase
             $client->getResponse()->isRedirect('http://localhost/login')
         );
     }
+
+    public function testCreatePlan()
+    {
+        $client = static::createClient();
+        $client->request('GET', '/plan/new');
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+    }
 }
