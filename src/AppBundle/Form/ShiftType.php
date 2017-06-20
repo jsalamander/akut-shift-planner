@@ -56,7 +56,8 @@ class ShiftType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Shift'
+            'data_class' => 'AppBundle\Entity\Shift',
+            'validation_groups' => array('Default')
         ));
     }
 

@@ -30,7 +30,7 @@ class PlanControllerTest extends WebTestCase
 
         $form = $crawler->filter('.btn')->form(array(
             'appbundle_plan[title]' => 'test plan',
-            'appbundle_plan[date]' => '01.01.2017',
+            'appbundle_plan[date]' => '2017-06-20',
             'appbundle_plan[description]' => 'some desc',
             'appbundle_plan[email]' => 'test@test.ch',
             'appbundle_plan[password][first]' => '12345678',
@@ -48,7 +48,9 @@ class PlanControllerTest extends WebTestCase
         $crawler = $client->request($form->getMethod(), $form->getUri(), $values,
             $form->getPhpFiles());
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertEquals(0, $crawler->filter('.alert')->count());
+
     }
 
     public function testCreateWithoutShiftPlan()
@@ -59,15 +61,47 @@ class PlanControllerTest extends WebTestCase
 
         $form = $crawler->filter('.btn')->form(array(
             'appbundle_plan[title]' => 'test plan',
-            'appbundle_plan[date]' => '01.01.2017',
+            'appbundle_plan[date]' => '2017-06-20',
             'appbundle_plan[description]' => 'some desc',
-            'appbundle_plan[email]' => 'test@test.ch',
+            'appbundle_plan[email]' => 'test1@test.ch',
             'appbundle_plan[password][first]' => '12345678',
             'appbundle_plan[password][second]' => '12345678',
         ));
 
         $crawler = $client->submit($form);
+        //var_dump($crawler);die;
         $this->assertEquals(1, $crawler->filter('.alert')->count());
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+    }
+
+    public function testCreatePlanErrors()
+    {
+        $client = static::createClient();
+        $crawler = $client->request('GET', '/plan/new');
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $form = $crawler->filter('.btn')->form(array(
+            'appbundle_plan[title]' => 't',
+            'appbundle_plan[date]' => '340.01.2017',
+            'appbundle_plan[description]' => 's',
+            'appbundle_plan[email]' => 'test.test.ch',
+            'appbundle_plan[password][first]' => '1234567',
+            'appbundle_plan[password][second]' => '12345678',
+        ));
+
+        $values = $form->getPhpValues();
+
+        $values['appbundle_plan']['shifts'][0]['description'] = 'w';
+        $values['appbundle_plan']['shifts'][0]['title'] = 'w';
+        $values['appbundle_plan']['shifts'][0]['start'] = '00:00:sdf';
+        $values['appbundle_plan']['shifts'][0]['end'] = '00:0:sdf';
+        $values['appbundle_plan']['shifts'][0]['numberPeople'] = 0;
+
+        $crawler = $client->request($form->getMethod(), $form->getUri(), $values,
+            $form->getPhpFiles());
+
+        $this->assertEquals(10, $crawler->filter('.alert')->count());
+
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 }

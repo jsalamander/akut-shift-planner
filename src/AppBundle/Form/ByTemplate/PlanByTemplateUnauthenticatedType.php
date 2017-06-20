@@ -97,7 +97,7 @@ class PlanByTemplateUnauthenticatedType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'AppBundle\Entity\Plan',
-            'validation_groups' => array('new_from_template')
+            'validation_groups' => array('new_from_template', 'Default')
         ));
     }
 
