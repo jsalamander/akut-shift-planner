@@ -67,7 +67,7 @@ class Plan
      *      max = 100,
      *      minMessage = "You need at least {{ limit }} shift",
      *      maxMessage = "We don't allow more than 100 shifts",
-     *      groups={"standard"}
+     *      groups={"standard", "new_from_template"}
      * )
      *
      * @Assert\Valid
