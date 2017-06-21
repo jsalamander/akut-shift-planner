@@ -68,7 +68,10 @@ class PlanControllerTest extends WebTestCase
         $this->assertContains('bar', $crawler->filter('tr')->eq(1)->text());
         $this->assertContains('00:00', $crawler->filter('tr')->eq(1)->text());
         $this->assertContains('00:01', $crawler->filter('tr')->eq(1)->text());
+        $this->assertContains('#', $crawler->filter('#passwordPrompt')->attr('href'));
         $this->assertEquals(3, $crawler->filter('.container .text-nowrap')->count());
+        $this->assertEquals(1, $crawler->filter('.modal-content')->count());
+        $this->assertContains('/login_check', $crawler->filter('.modal-content form')->attr('action'));
 
     }
 
