@@ -13,8 +13,9 @@ A Symfony project created on June 6, 2017, 2:17 pm.
 5. Create a cron job to run `php bin/console swiftmailer:spool:send --env=prod` frequently
 This sends all the mails saved in the spool.
 
-## Test
+## Functional Test
 
 Run the testsuite with the following comand: ´composer test´.
 
-To run the test with an empty database: ´composer test-with-new-database´
+*Warning* this will delete your database and start by a fresh instance
+

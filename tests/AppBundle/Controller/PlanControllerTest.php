@@ -4,6 +4,12 @@ namespace Tests\AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
+/**
+ * Test Plan Controller from no auth perspective
+ *
+ * Class PlanControllerTest
+ * @package Tests\AppBundle\Controller
+ */
 class PlanControllerTest extends WebTestCase
 {
     public function testIndexWithoutAuth()
@@ -22,7 +28,7 @@ class PlanControllerTest extends WebTestCase
         );
     }
 
-    public function testCreatePlan()
+    public function testCreatePlanWithoutAuth()
     {
         $client = static::createClient();
         $crawler = $client->request('GET', '/plan/new');
@@ -49,11 +55,24 @@ class PlanControllerTest extends WebTestCase
             $form->getPhpFiles());
 
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertTrue($client->getResponse()->isRedirect());
         $this->assertEquals(0, $crawler->filter('.alert')->count());
+
+        //test plan_show page
+        $crawler = $client->followRedirect();
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertContains('test plan', $crawler->filter('.justify-content-end')->text());
+        $this->assertContains('20.06.2017', $crawler->filter('.justify-content-end')->text());
+        $this->assertContains('some desc', $crawler->filter('blockquote')->text());
+        $this->assertContains('foo', $crawler->filter('tr')->eq(1)->text());
+        $this->assertContains('bar', $crawler->filter('tr')->eq(1)->text());
+        $this->assertContains('00:00', $crawler->filter('tr')->eq(1)->text());
+        $this->assertContains('00:01', $crawler->filter('tr')->eq(1)->text());
+        $this->assertEquals(3, $crawler->filter('.container .text-nowrap')->count());
 
     }
 
-    public function testCreateWithoutShiftPlan()
+    public function testCreateWithoutShiftPlanWithoutAuth()
     {
         $client = static::createClient();
         $crawler = $client->request('GET', '/plan/new');
@@ -73,7 +92,7 @@ class PlanControllerTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testCreatePlanErrors()
+    public function testCreatePlanErrorsWithoutAuth()
     {
         $client = static::createClient();
         $crawler = $client->request('GET', '/plan/new');
