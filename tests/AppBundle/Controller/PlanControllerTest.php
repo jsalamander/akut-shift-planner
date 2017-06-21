@@ -72,7 +72,6 @@ class PlanControllerTest extends WebTestCase
         $this->assertEquals(3, $crawler->filter('.container .text-nowrap')->count());
         $this->assertEquals(1, $crawler->filter('.modal-content')->count());
         $this->assertContains('/login_check', $crawler->filter('.modal-content form')->attr('action'));
-
     }
 
     public function testCreateWithoutShiftPlanWithoutAuth()
