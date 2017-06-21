@@ -38,6 +38,7 @@
         "willdurand/js-translation-bundle": "^2.6"
     },
     "require-dev": {
+        "doctrine/doctrine-fixtures-bundle": "^2.3",
         "liip/functional-test-bundle": "^1.8",
         "phpunit/phpunit": "^6.1",
         "sensio/generator-bundle": "^3.0",
@@ -59,9 +60,6 @@
             "@symfony-scripts"
         ],
         "test": [
-            "@php bin/console doctrine:database:drop  --force",
-            "@php bin/console doctrine:database:create",
-            "@php bin/console doctrine:schema:update --force",
             "vendor/phpunit/phpunit/phpunit"
         ]
     },

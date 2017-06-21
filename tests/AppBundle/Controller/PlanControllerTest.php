@@ -2,7 +2,7 @@
 
 namespace Tests\AppBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Liip\FunctionalTestBundle\Test\WebTestCase;
 
 /**
  * Test Plan Controller from no auth perspective
@@ -22,6 +22,7 @@ class PlanControllerTest extends WebTestCase
         );
 
         $client->request('GET', '/plan/templates');
+
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
         $this->assertTrue(
             $client->getResponse()->isRedirect('http://localhost/login')
