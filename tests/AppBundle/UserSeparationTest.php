@@ -20,7 +20,6 @@ class UserSeparationTest extends WebTestCase
         $this->loginAs($this->fixtures->getReference('admin-user'), 'main');
         $client = $this->makeClient();
         $client->request('GET', '/plan');
-        $this->assertEquals(301, $client->getResponse()->getStatusCode());
         $crawler = $client->followRedirect();
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
@@ -32,11 +31,30 @@ class UserSeparationTest extends WebTestCase
         $this->loginAs($this->fixtures->getReference('rudolf-user'), 'main');
         $client = $this->makeClient();
         $client->request('GET', '/plan');
-        $this->assertEquals(301, $client->getResponse()->getStatusCode());
         $crawler = $client->followRedirect();
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
         $this->assertNotContains('admin plan', $crawler->filter('tbody')->text());
         $this->assertContains('rudolf plan', $crawler->filter('tbody')->text());
+    }
+
+    public function testTemplateAppearOnlyOnOwnProfileAdmin() {
+        $this->loginAs($this->fixtures->getReference('admin-user'), 'main');
+        $client = $this->makeClient();
+        $crawler = $client->request('GET', '/plan/templates');
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $this->assertContains('admin plan template', $crawler->filter('tbody')->text());
+        $this->assertNotContains('rudolf plan template', $crawler->filter('tbody')->text());
+    }
+
+    public function testTemplateAppearOnlyOnOwnProfileRudolf() {
+        $this->loginAs($this->fixtures->getReference('rudolf-user'), 'main');
+        $client = $this->makeClient();
+        $crawler =  $client->request('GET', '/plan/templates');
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $this->assertNotContains('admin plan template', $crawler->filter('tbody')->text());
+        $this->assertContains('rudolf plan template', $crawler->filter('tbody')->text());
     }
 }

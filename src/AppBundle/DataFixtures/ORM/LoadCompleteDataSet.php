@@ -34,6 +34,21 @@ class LoadCompleteDataSet extends AbstractFixture implements FixtureInterface
         $adminShift->setNumberPeople(2);
         $adminPlan->addShift($adminShift);
 
+        $adminTemplate = new Plan();
+        $adminTemplate->setDescription('hmm bli blb blu');
+        $adminTemplate->setDate(new \DateTime('1970-01-01 00:01:00'));
+        $adminTemplate->setTitle('admin plan template');
+        $adminTemplate->setUser($admin);
+        $adminTemplate->setIsTemplate(true);
+
+        $adminTemplateShift = new Shift();
+        $adminTemplateShift->setDescription('meiu asdjffs');
+        $adminTemplateShift->setTitle('admin shift template');
+        $adminTemplateShift->setStart(new \DateTime('1970-01-01 00:01:00'));
+        $adminTemplateShift->setEnd(new \DateTime('1970-01-01 00:02:00'));
+        $adminTemplateShift->setNumberPeople(2);
+        $adminTemplate->addShift($adminTemplateShift);
+
         // set 2
         $rudolf = new User();
         $rudolf->setUsername('rudolf');
@@ -56,13 +71,32 @@ class LoadCompleteDataSet extends AbstractFixture implements FixtureInterface
         $rudolfShift->setNumberPeople(2);
         $rudolfPlan->addShift($rudolfShift);
 
+        $rudolfTemplatePlan = new Plan();
+        $rudolfTemplatePlan->setDescription('hmm bli blb blu');
+        $rudolfTemplatePlan->setIsTemplate(true);
+        $rudolfTemplatePlan->setDate(new \DateTime('1970-01-01 00:01:00'));
+        $rudolfTemplatePlan->setTitle('rudolf plan template');
+        $rudolfTemplatePlan->setUser($rudolf);
 
+        $rudolfTemplateShift = new Shift();
+        $rudolfTemplateShift->setDescription('meiu asdjffs');
+        $rudolfTemplateShift->setTitle('rudolf shift template');
+        $rudolfTemplateShift->setStart(new \DateTime('1970-01-01 00:01:00'));
+        $rudolfTemplateShift->setEnd(new \DateTime('1970-01-01 00:02:00'));
+        $rudolfTemplateShift->setNumberPeople(2);
+        $rudolfTemplatePlan->addShift($rudolfTemplateShift);
+
+        //save all the things!
         $manager->persist($admin);
         $manager->persist($adminShift);
         $manager->persist($adminPlan);
+        $manager->persist($adminTemplateShift);
+        $manager->persist($adminTemplate);
         $manager->persist($rudolf);
         $manager->persist($rudolfShift);
         $manager->persist($rudolfPlan);
+        $manager->persist($rudolfTemplateShift);
+        $manager->persist($rudolfTemplatePlan);
 
         $manager->flush();
     }
