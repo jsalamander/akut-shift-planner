@@ -15,7 +15,7 @@ This sends all the mails saved in the spool.
 
 ## Functional Test
 
-Run the testsuite with the following comand: ´composer test´.
+Run the testsuite with the following command: ´composer test´.
 
-*Warning* this will delete your database and start by a fresh instance
+Info: The tests will be executed against an own sqlite database, and will not alter any data of yours.
 
