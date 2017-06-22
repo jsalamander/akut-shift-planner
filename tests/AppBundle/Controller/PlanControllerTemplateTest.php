@@ -28,25 +28,21 @@ class PlanControllerTemplateTest extends WebTestCase
             'appbundle_plan[password][second]' => '12345678',
         ));
 
-        $crawler = $client->submit($form);
+        $client->submit($form);
         $this->assertEquals(0, $crawler->filter('.alert')->count());
-
-        $client->followRedirect();
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
-        $this->assertTrue($client->getResponse()->isRedirect());
-
-        //test plan_show page
         $crawler = $client->followRedirect();
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        //test plan_show page
         $this->assertContains('test template', $crawler->filter('.justify-content-end')->text());
         $this->assertContains('20.06.2017', $crawler->filter('.justify-content-end')->text());
         $this->assertContains('some desc', $crawler->filter('blockquote')->text());
-        $this->assertContains('foo', $crawler->filter('tr')->eq(1)->text());
-        $this->assertContains('bar', $crawler->filter('tr')->eq(1)->text());
-        $this->assertContains('00:00', $crawler->filter('tr')->eq(1)->text());
+        $this->assertContains('meiu asdjffs', $crawler->filter('tr')->eq(1)->text());
+        $this->assertContains('shift', $crawler->filter('tr')->eq(1)->text());
         $this->assertContains('00:01', $crawler->filter('tr')->eq(1)->text());
+        $this->assertContains('00:02', $crawler->filter('tr')->eq(1)->text());
         $this->assertContains('#', $crawler->filter('#passwordPrompt')->attr('href'));
-        $this->assertEquals(3, $crawler->filter('.container .text-nowrap')->count());
+        $this->assertEquals(2, $crawler->filter('.container .text-nowrap')->count());
         $this->assertEquals(1, $crawler->filter('.modal-content')->count());
         $this->assertContains('/login_check', $crawler->filter('.modal-content form')->attr('action'));
     }

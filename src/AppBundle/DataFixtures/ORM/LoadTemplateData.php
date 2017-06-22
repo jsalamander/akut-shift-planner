@@ -16,14 +16,14 @@ class LoadTemplateData extends AbstractFixture implements FixtureInterface
         $template->setIsTemplate(1);
         $template->setIsPublic(1);
         $template->setDescription('hmm bli blb blu');
-        $template->setDate(new \DateTime());
+        $template->setDate(new \DateTime('1970-01-01 00:01:00'));
         $template->setTitle('yeah');
 
         $shift = new Shift();
         $shift->setDescription('meiu asdjffs');
         $shift->setTitle('shift');
-        $shift->setStart(new \DateTime());
-        $shift->setEnd(new \DateTime());
+        $shift->setStart(new \DateTime('1970-01-01 00:01:00'));
+        $shift->setEnd(new \DateTime('1970-01-01 00:02:00'));
         $shift->setNumberPeople(2);
         $template->addShift($shift);
         $this->setReference('public-plan-template', $template);
