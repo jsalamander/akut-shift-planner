@@ -6,6 +6,7 @@ use AppBundle\Entity\Plan;
 use AppBundle\Service\Strategy\FormStrategyInterface;
 use AppBundle\Service\UserService;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Ramsey\Uuid\Uuid;
 
 /**
  * Class AuthStrategy
@@ -79,6 +80,7 @@ class AuthStrategy implements FormStrategyInterface {
         $orgPlan = $form->get('templates')->getData();
         $formPlan = $form->getData();
         $clone = clone $orgPlan;
+        $clone->setId(Uuid::uuid4()->toString());
         $clone->setIsTemplate(false);
         $clone->setTitle($formPlan->getTitle());
         $clone->setDate($formPlan->getDate());

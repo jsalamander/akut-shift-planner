@@ -26,12 +26,24 @@ class Shift
     /**
      * @var string
      *
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 80,
+     *      minMessage = "The title must be at least {{ limit }} characters long",
+     *      maxMessage = "The title cannot be longer than {{ limit }} characters",
+     * )
      * @ORM\Column(name="title", type="string", length=255)
      */
     private $title;
 
     /**
      * @var string
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 80,
+     *      minMessage = "The description must be at least {{ limit }} characters long",
+     *      maxMessage = "The description cannot be longer than {{ limit }} characters",
+     * )
      *
      * @ORM\Column(name="description", type="text")
      */

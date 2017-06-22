@@ -38,6 +38,9 @@
         "willdurand/js-translation-bundle": "^2.6"
     },
     "require-dev": {
+        "doctrine/doctrine-fixtures-bundle": "^2.3",
+        "liip/functional-test-bundle": "^1.8",
+        "phpunit/phpunit": "^6.1",
         "sensio/generator-bundle": "^3.0",
         "symfony/phpunit-bridge": "^3.0"
     },
@@ -55,6 +58,9 @@
         ],
         "post-update-cmd": [
             "@symfony-scripts"
+        ],
+        "test": [
+            "vendor/phpunit/phpunit/phpunit"
         ]
     },
     "config": {

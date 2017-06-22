@@ -28,7 +28,7 @@
                             <i class="fa fa-times" aria-hidden="true"></i>
                         {% endif %}
                     </td>
-                    <td><a href="{{ path('plan_edit', { 'id': plan.id }) }}">edit</a></td>
+                    <td><a href="{{ path('plan_edit', { 'id': plan.id }) }}">{% trans %}edit{% endtrans %}</a></td>
                 </tr>
             {% endfor %}
             </tbody>

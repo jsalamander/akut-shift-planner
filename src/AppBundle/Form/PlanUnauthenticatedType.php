@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Length;
 
 class PlanUnauthenticatedType extends AbstractType
@@ -39,15 +40,17 @@ class PlanUnauthenticatedType extends AbstractType
             ->add('description', TextareaType::class, array(
                 'attr'  => array('class' => $classes),
                 'required' => true,
-                'label' => 'description',
-                'required' => true
+                'label' => 'description'
             ))
             ->add('email', EmailType::class, array(
                 'attr'  => array('class' => $classes),
                 'required' => true,
                 'label' => 'email_label',
                 'mapped' => false,
-                'constraints' => array(new EmailUsed(array('groups' => array('new_from_template'))))
+                'constraints' => array(
+                    new EmailUsed(array('groups' => array('new_from_template'))),
+                    New Email()
+                )
             ))
             ->add('password', RepeatedType::class, array(
                 'type' => PasswordType::class,
@@ -82,7 +85,6 @@ class PlanUnauthenticatedType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'AppBundle\Entity\Plan',
-            'validation_groups' => array('new_from_template')
         ));
     }
 

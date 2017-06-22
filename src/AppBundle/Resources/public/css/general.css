@@ -33,8 +33,8 @@ a:hover {
     color: #fe7101;
 }
 
-.form-group > div > ul > li {
-    color: #A94442;
+.error-list > li {
+    background-color: #F2DEDE !important;
 }
 
 html {
