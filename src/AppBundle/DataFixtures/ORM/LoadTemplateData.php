@@ -28,6 +28,23 @@ class LoadTemplateData extends AbstractFixture implements FixtureInterface
         $template->addShift($shift);
         $this->setReference('public-plan-template', $template);
 
+        $privateTemplate = new Plan();
+        $privateTemplate->setIsTemplate(1);
+        $privateTemplate->setIsPublic(0);
+        $privateTemplate->setDescription('hmm bli blb blu');
+        $privateTemplate->setDate(new \DateTime('1970-01-01 00:01:00'));
+        $privateTemplate->setTitle('private');
+
+        $secondShift = new Shift();
+        $secondShift->setDescription('meiu asdjffs');
+        $secondShift->setTitle('shift');
+        $secondShift->setStart(new \DateTime('1970-01-01 00:01:00'));
+        $secondShift->setEnd(new \DateTime('1970-01-01 00:02:00'));
+        $secondShift->setNumberPeople(2);
+        $this->setReference('public-plan-template', $template);
+        $privateTemplate->addShift($secondShift);
+
+        $manager->persist($privateTemplate);
         $manager->persist($template);
         $manager->flush();
     }

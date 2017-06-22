@@ -18,6 +18,7 @@ class PlanControllerTemplateTest extends WebTestCase
         $client = static::createClient();
         $crawler = $client->request('GET', '/plan/new-by-template');
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertNotContains('private', $crawler->filter('select')->text());
 
         $form = $crawler->filter('.btn')->form(array(
             'appbundle_plan[templates]' => 0,
