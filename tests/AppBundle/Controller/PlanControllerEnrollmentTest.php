@@ -41,4 +41,19 @@ class PlanControllerEnrollmentTest extends WebTestCase
         $this->assertContains('alias', $crawler->filter('ol > li')->eq(0)->text());
         $this->assertNotContains('private name', $crawler->filter('ol > li')->eq(0)->text());
     }
+
+    public function testErrorEnrollment()
+    {
+        $link = $this->crawler->filter('ol > li > a')->eq(0)->link();
+        $crawler = $this->client->click($link);
+        $form = $crawler->filter('.btn')->form(array(
+            'appbundle_person[name]' => 'p',
+            'appbundle_person[alias]' => 'a',
+            'appbundle_person[email]' => 'testenroll.ch',
+            'appbundle_person[phone]' => '079343134343'
+        ));
+
+        $crawler = $this->client->submit($form);
+        $this->assertEquals(3, $crawler->filter('.alert')->count());
+    }
 }
