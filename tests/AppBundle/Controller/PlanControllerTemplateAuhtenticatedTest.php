@@ -46,6 +46,11 @@ class PlanControllerTemplateAuthenticatedTest extends WebTestCase
         $this->assertContains('00:02', $this->crawler->filter('tr')->eq(1)->text());
         $this->assertEquals(0, $this->crawler->filter('#passwordPrompt')->count());
         $this->assertEquals(2, $this->crawler->filter('.container .text-nowrap')->count());
+
+        //go to overview page
+        $this->client->request('GET', '/plan');
+        $this->crawler = $this->client->followRedirect();
+        $this->assertContains('test template', $this->crawler->text());
     }
 
     public function testCreatePlanByTemplateWithError()

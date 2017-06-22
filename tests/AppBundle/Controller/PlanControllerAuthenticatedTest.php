@@ -76,6 +76,54 @@ class PlanControllerTestAuthenticated extends WebTestCase
         $this->assertContains('edit', $crawler->filter('.main-row .col-12')->eq(1)->filter('a')->attr('href'));
         $this->assertEquals(0, $crawler->filter('#passwordPrompt')->count());
         $this->assertEquals(3, $crawler->filter('.container .text-nowrap')->count());
+
+        //go to overview page
+        $this->client->request('GET', '/plan');
+        $this->crawler = $this->client->followRedirect();
+        $this->assertContains('test plan', $this->crawler->text());
+    }
+
+    public function testCreatePlanTemplate()
+    {
+        $this->crawler = $this->client->request('GET', '/plan/new');
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
+        $form = $this->crawler->filter('.btn')->form(array(
+            'appbundle_plan[title]' => 'test plan template',
+            'appbundle_plan[date]' => '2017-06-20',
+            'appbundle_plan[description]' => 'some desc',
+            'appbundle_plan[isTemplate]' => true,
+            'appbundle_plan[isPublic]' => true
+        ));
+
+        $values = $form->getPhpValues();
+
+        $values['appbundle_plan']['shifts'][0]['title'] = 'foo';
+        $values['appbundle_plan']['shifts'][0]['description'] = 'bar';
+        $values['appbundle_plan']['shifts'][0]['start'] = '00:00';
+        $values['appbundle_plan']['shifts'][0]['end'] = '00:01';
+        $values['appbundle_plan']['shifts'][0]['numberPeople'] = 3;
+
+        $this->client->request($form->getMethod(), $form->getUri(), $values, $form->getPhpFiles());
+
+        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
+        $this->assertTrue($this->client->getResponse()->isRedirect());
+        $crawler = $this->client->followRedirect();
+
+        //test plan_show page
+        $this->assertContains('test plan template', $crawler->filter('.justify-content-end')->text());
+        $this->assertContains('some desc', $crawler->filter('blockquote')->text());
+        $this->assertContains('foo', $crawler->filter('tr')->eq(1)->text());
+        $this->assertContains('bar', $crawler->filter('tr')->eq(1)->text());
+        $this->assertContains('00:00', $crawler->filter('tr')->eq(1)->text());
+        $this->assertContains('00:01', $crawler->filter('tr')->eq(1)->text());
+        $this->assertContains('edit', $crawler->filter('.main-row .col-12')->eq(1)->filter('a')->attr('href'));
+        $this->assertEquals(0, $crawler->filter('#passwordPrompt')->count());
+        $this->assertEquals(3, $crawler->filter('td > ol > li')->count());
+
+        //go to overview page
+        $this->crawler = $this->client->request('GET', '/plan/templates');
+        $this->assertContains('test plan template', $this->crawler->text());
     }
 
     public function testCreateWithoutShiftPlan()
