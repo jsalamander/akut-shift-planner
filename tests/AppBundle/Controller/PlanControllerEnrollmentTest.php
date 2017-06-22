@@ -42,6 +42,9 @@ class PlanControllerEnrollmentTest extends WebTestCase
         $this->assertNotContains('private name', $crawler->filter('ol > li')->eq(0)->text());
     }
 
+    /**
+     * TODO: validate phone number
+     */
     public function testErrorEnrollment()
     {
         $link = $this->crawler->filter('ol > li > a')->eq(0)->link();
@@ -55,5 +58,31 @@ class PlanControllerEnrollmentTest extends WebTestCase
 
         $crawler = $this->client->submit($form);
         $this->assertEquals(3, $crawler->filter('.alert')->count());
+    }
+
+    public function testFullEnrollment()
+    {
+        $this->enrollSamplePerson();
+        $this->enrollSamplePerson();
+        $this->assertContains('alias', $this->crawler->filter('ol > li')->eq(0)->text());
+        $this->assertContains('alias', $this->crawler->filter('ol > li')->eq(1)->text());
+        $this->assertEquals(0, $this->crawler->filter('ol > li > a')->count());
+    }
+
+    private function enrollSamplePerson() {
+        $link = $this->crawler->filter('ol > li > a')->eq(0)->link();
+        $this->crawler = $this->client->click($link);
+        $form = $this->crawler->filter('.btn')->form(array(
+            'appbundle_person[name]' => 'private name',
+            'appbundle_person[alias]' => 'alias',
+            'appbundle_person[email]' => 'test@enroll.ch',
+            'appbundle_person[phone]' => '079343134343'
+        ));
+
+        $this->client->submit($form);
+        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
+        $this->crawler = $this->client->followRedirect();
+        $this->assertContains('alias', $this->crawler->filter('ol > li')->eq(0)->text());
+        $this->assertNotContains('private name', $this->crawler->filter('ol > li')->eq(0)->text());
     }
 }
