@@ -6,14 +6,14 @@
     </div>
 
     <div class="col-12">
-        <div class="form-group">
-            {{ form_start(form) }}
-            {{ form_row(form.name) }}
-            {{ form_row(form.alias) }}
-            {{ form_row(form.email) }}
-            {{ form_row(form.phone) }}
-        </div>
-        <input class="btn btn-primary" type="submit" value="{% trans %}enroll{% endtrans %}" />
+        {{ form_start(form) }}
+            <div class="form-group">
+                {{ form_row(form.name) }}
+                {{ form_row(form.alias) }}
+                {{ form_row(form.email) }}
+                {{ form_row(form.phone) }}
+            </div>
+            <input class="btn btn-primary" type="submit" value="{% trans %}enroll{% endtrans %}" />
         {{ form_end(form) }}
     </div>
 
