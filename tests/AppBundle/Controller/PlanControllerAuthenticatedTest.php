@@ -124,6 +124,8 @@ class PlanControllerTestAuthenticated extends WebTestCase
         //go to overview page
         $this->crawler = $this->client->request('GET', '/plan/templates');
         $this->assertContains('test plan template', $this->crawler->text());
+        $this->assertEquals(1, $this->crawler->filter('td > a')->count());
+        $this->assertEquals('Bearbeiten', $this->crawler->filter('td > a')->eq(0)->text());
     }
 
     public function testCreateWithoutShiftPlan()
