@@ -47,21 +47,18 @@ class PlanControllerTemplateAuthenticatedTest extends WebTestCase
         $this->assertEquals(0, $this->crawler->filter('#passwordPrompt')->count());
         $this->assertEquals(2, $this->crawler->filter('.container .text-nowrap')->count());
     }
-/*
+
     public function testCreatePlanByTemplateWithError()
     {
         $form = $this->crawler->filter('.btn')->form(array(
             'appbundle_plan[templates]' => 0,
             'appbundle_plan[title]' => 't',
             'appbundle_plan[date]' => '2017-06-20ASDFSADF',
-            'appbundle_plan[description]' => 's',
-            'appbundle_plan[email]' => 'petertest.ch',
-            'appbundle_plan[password][first]' => '1234',
-            'appbundle_plan[password][second]' => '12345678'
+            'appbundle_plan[description]' => 's'
         ));
 
         $this->crawler = $this->client->submit($form);
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
-        $this->assertEquals(5, $this->crawler->filter('.alert')->count());
-    }*/
+        $this->assertEquals(3, $this->crawler->filter('.alert')->count());
+    }
 }
