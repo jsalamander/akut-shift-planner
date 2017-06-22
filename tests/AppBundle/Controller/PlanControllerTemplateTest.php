@@ -9,7 +9,8 @@ class PlanControllerTemplateTest extends WebTestCase
     public function setUp()
     {
         $this->loadFixtures(array(
-            'AppBundle\DataFixtures\ORM\LoadTemplateData'
+            'AppBundle\DataFixtures\ORM\LoadTemplateData',
+            'AppBundle\DataFixtures\ORM\LoadUserData'
         ));
     }
 
@@ -66,6 +67,29 @@ class PlanControllerTemplateTest extends WebTestCase
         $crawler = $client->submit($form);
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertEquals(5, $crawler->filter('.alert')->count());
+    }
+
+    public function testDuplicateUserError()
+    {
+
+        $client = $this->createClient();
+        $crawler = $client->request('GET', '/plan/new-by-template');
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $form = $crawler->filter('.btn')->form(array(
+            'appbundle_plan[templates]' => 0,
+            'appbundle_plan[title]' => 't',
+            'appbundle_plan[date]' => '2017-06-20ASDFSADF',
+            'appbundle_plan[description]' => 's',
+            'appbundle_plan[email]' => 'admin@admin.ch',
+            'appbundle_plan[password][first]' => '1234',
+            'appbundle_plan[password][second]' => '12345678'
+        ));
+
+        $crawler = $client->submit($form);
+        $this->assertContains('The Email "admin@admin.ch" is already in use', $crawler->text());
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        //$this->assertContains('The Email "admin@admin.ch" is already in use', $crawler->text());
     }
 
 }
