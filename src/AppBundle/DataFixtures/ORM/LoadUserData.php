@@ -2,21 +2,22 @@
 
 namespace AppBundle\DataFixtures\ORM;
 
-use AppBundle\Entity\Plan;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use AppBundle\Entity\User;
+use Doctrine\Common\DataFixtures\AbstractFixture;
 
-class LoadPlanData implements FixtureInterface
+class LoadUserData extends AbstractFixture implements FixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        $plan = new Plan();
-        $plan->setTitle('tst');
-        $plan->setDate(new \DateTime('now'));
-        $plan->setDescription('asdf');
-
-        $manager->persist($plan);
+        $admin = new User();
+        $admin->setUsername('admin');
+        $admin->setEmail('admin@admin.ch');
+        $admin->setPlainPassword('12345678');
+        $admin->setEnabled(1);
+        $this->setReference('admin-user', $admin);
+        $manager->persist($admin);
         $manager->flush();
     }
 }

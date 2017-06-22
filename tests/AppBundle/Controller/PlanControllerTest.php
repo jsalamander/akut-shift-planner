@@ -12,6 +12,12 @@ use Liip\FunctionalTestBundle\Test\WebTestCase;
  */
 class PlanControllerTest extends WebTestCase
 {
+
+    //use an empty db
+    public function setUp() {
+        $this->loadFixtures(array());
+    }
+
     public function testIndexWithoutAuth()
     {
         $client = static::createClient();
