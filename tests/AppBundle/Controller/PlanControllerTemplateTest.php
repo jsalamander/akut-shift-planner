@@ -88,8 +88,6 @@ class PlanControllerTemplateTest extends WebTestCase
 
         $crawler = $client->submit($form);
         $this->assertContains('The Email "admin@admin.ch" is already in use', $crawler->text());
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        //$this->assertContains('The Email "admin@admin.ch" is already in use', $crawler->text());
     }
 
 }
