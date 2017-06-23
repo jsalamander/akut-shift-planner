@@ -58,7 +58,7 @@ class PlanControllerTemplateAuthenticatedTest extends WebTestCase
         $form = $this->crawler->filter('.btn')->form(array(
             'appbundle_plan[templates]' => 0,
             'appbundle_plan[title]' => 't',
-            'appbundle_plan[date]' => '2017-06-20ASDFSADF',
+            'appbundle_plan[date]' => '20sadfadsf17-0safsadf6-20ASDFSADF',
             'appbundle_plan[description]' => 's'
         ));
 
