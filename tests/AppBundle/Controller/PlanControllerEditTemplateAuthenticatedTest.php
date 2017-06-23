@@ -4,7 +4,7 @@ namespace Tests\AppBundle\Controller;
 
 use Liip\FunctionalTestBundle\Test\WebTestCase;
 
-class PlanControllerEditAuthenticatedTest extends WebTestCase
+class PlanControllerEditTemplateAuthenticatedTest extends WebTestCase
 {
 
     private $crawler;
@@ -14,24 +14,24 @@ class PlanControllerEditAuthenticatedTest extends WebTestCase
     public function setUp()
     {
         $fixtures = $this->loadFixtures(array(
-            'AppBundle\DataFixtures\ORM\LoadCompleteDataSet'
+            'AppBundle\DataFixtures\ORM\LoadTemplateData'
         ))->getReferenceRepository();
 
-        $this->loginAs($fixtures->getReference('admin-user'), 'main');
+        $this->loginAs($fixtures->getReference('admin-three-user'), 'main');
         $this->client = $this->makeClient();
-        $this->crawler = $this->client->request('GET', '/plan/' . $fixtures->getReference('admin-plan')->getId());
+        $this->crawler = $this->client->request('GET', '/plan/' . $fixtures->getReference('admin-template')->getId());
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
     }
 
-    public function testEditPlan()
+    public function testEditTemplate()
     {
         $link = $this->crawler->filter('.col-12 .pull-right')->link();
         $this->crawler = $this->client->click($link);
 
         $form = $this->crawler->filter('.btn')->form(array(
-            'appbundle_plan[title]' => 'edited title',
+            'appbundle_plan[title]' => 'edited template',
             'appbundle_plan[date]' => '2019-06-20',
-            'appbundle_plan[description]' => 'new desc',
+            'appbundle_plan[description]' => 'new template desc',
         ));
 
         $values = $form->getPhpValues();
@@ -47,18 +47,19 @@ class PlanControllerEditAuthenticatedTest extends WebTestCase
         $this->client->request($form->getMethod(), $form->getUri(), $values, $form->getPhpFiles());
         $this->crawler = $this->client->followRedirect();
 
-        $this->assertContains('edited title', $this->crawler->filter('h1')->text());
-        $this->assertContains('0.06.2019', $this->crawler->filter('h1')->text());
-        $this->assertContains('new desc', $this->crawler->filter('blockquote')->text());
+        $this->assertContains('edited template', $this->crawler->filter('h1')->text());
+        $this->assertNotContains('0.06.2019', $this->crawler->filter('h1')->text());
+        $this->assertContains('new template desc', $this->crawler->filter('blockquote')->text());
         $this->assertContains('new foo', $this->crawler->filter('tbody > tr')->text());
         $this->assertContains('new shift', $this->crawler->filter('tbody > tr')->eq(1)->text());
         $this->assertContains('new new', $this->crawler->filter('tbody > tr')->eq(1)->text());
         $this->assertContains('00:05', $this->crawler->filter('tbody > tr')->eq(1)->text());
         $this->assertContains('00:10', $this->crawler->filter('tbody > tr')->eq(1)->text());
-        $this->assertContains('/person/new?shift=5', $this->crawler->filter('ol > li:nth-child(1) > a')->eq(1)->attr('href'));
+        $this->assertContains('Person', $this->crawler->filter('ol > li')->eq(0)->text());
+        $this->assertContains('Person', $this->crawler->filter('ol > li')->eq(1)->text());
     }
 
-    public function testDeletePlan()
+    public function testDeleteTemplate()
     {
         $link = $this->crawler->filter('.col-12 .pull-right')->link();
         $this->crawler = $this->client->click($link);

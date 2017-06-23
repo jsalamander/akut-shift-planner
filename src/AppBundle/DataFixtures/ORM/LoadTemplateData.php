@@ -4,6 +4,7 @@ namespace AppBundle\DataFixtures\ORM;
 
 use AppBundle\Entity\Plan;
 use AppBundle\Entity\Shift;
+use AppBundle\Entity\User;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\AbstractFixture;
@@ -12,12 +13,22 @@ class LoadTemplateData extends AbstractFixture implements FixtureInterface
 {
     public function load(ObjectManager $manager)
     {
+        $admin = new User();
+        $admin->setUsername('admin3');
+        $admin->setEmail('admin3@admin.ch');
+        $admin->setPlainPassword('12345678');
+        $admin->setEnabled(1);
+        $this->setReference('admin-three-user', $admin);
+
         $template = new Plan();
         $template->setIsTemplate(1);
         $template->setIsPublic(1);
         $template->setDescription('hmm bli blb blu');
         $template->setDate(new \DateTime('1970-01-01 00:01:00'));
         $template->setTitle('yeah');
+        $template->setUser($admin);
+        $this->setReference('admin-template', $template);
+
 
         $shift = new Shift();
         $shift->setDescription('meiu asdjffs');
