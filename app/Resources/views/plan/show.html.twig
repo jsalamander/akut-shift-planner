@@ -58,7 +58,7 @@
                                         {% if (is_granted('ROLE_USER') and app.user.id == plan.user.id) %}
                                             <li>{{ person.name }} {% if is_granted('ROLE_USER') %}<a href="{{ path('person_edit',{ 'id': person.id }) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>{% endif %}
 
-                                                <ul>
+                                                <ul id="person-details">
                                                     {% if person.email %}<li>{% trans %}email{% endtrans %}: <a href="mailto:{{ person.email }}?Subject=Kontakt Schichtplan: {{ plan.title }} " target="_top">{{ person.email }}</a></li>{% endif %}
                                                     {% if person.phone %}<li>{% trans %}phone{% endtrans %}: {{ person.phone }}</li>{% endif %}
                                                 </ul>
