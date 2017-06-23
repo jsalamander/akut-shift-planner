@@ -41,7 +41,6 @@ class PlanControllerEnrollmentAuthenticatedTest extends WebTestCase
         $this->assertContains('private name', $this->crawler->filter('ol > li')->eq(1)->text());
     }
 
-    //TODO due teste ob au editierbar si und due se modifye, ou plan mit shift
     public function testEditErrorEnrollment()
     {
         $link = $this->crawler->filter('ol > li > a')->eq(0)->link();
