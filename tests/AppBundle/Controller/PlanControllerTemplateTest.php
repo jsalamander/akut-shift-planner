@@ -58,7 +58,7 @@ class PlanControllerTemplateTest extends WebTestCase
         $form = $crawler->filter('.btn')->form(array(
             'appbundle_plan[templates]' => 0,
             'appbundle_plan[title]' => 't',
-            'appbundle_plan[date]' => '2017-06-20ASDFSADF',
+            'appbundle_plan[date]' => '20asf17-0fsd6-20ASDFSADF',
             'appbundle_plan[description]' => 's',
             'appbundle_plan[email]' => 'petertest.ch',
             'appbundle_plan[password][first]' => '1234',
@@ -67,11 +67,6 @@ class PlanControllerTemplateTest extends WebTestCase
 
         $crawler = $client->submit($form);
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        var_dump($crawler->filter('.alert')->eq(0)->text());
-        var_dump($crawler->filter('.alert')->eq(1)->text());
-        var_dump($crawler->filter('.alert')->eq(2)->text());
-        var_dump($crawler->filter('.alert')->eq(3)->text());
-        var_dump($crawler->filter('.alert')->eq(4)->text());
         $this->assertEquals(5, $crawler->filter('.alert')->count());
     }
 

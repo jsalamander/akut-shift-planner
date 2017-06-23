@@ -1,6 +1,6 @@
 Schicht-Plan.ch
 ================
-[![Build Status](https://travis-ci.org/fribim/akut-shift-planner.svg?branch=master)](https://travis-ci.org/fribim/akut-shift-planner)
+[![Build Status](https://travis-ci.org/fribim/akut-shift-planner.svg?branch=develop)](https://travis-ci.org/fribim/akut-shift-planner)
 
 ## Up and running
 
