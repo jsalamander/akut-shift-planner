@@ -58,7 +58,8 @@ class PlanByTemplateUnauthenticatedType extends AbstractType
                 'attr'  => array('class' => $classes . ' datepicker'),
                 'html5' => false,
                 'widget' => 'single_text',
-                'label' => 'date'
+                'label' => 'date',
+                'format' => 'yyyy-MM-dd'
             ))
             ->add('email', EmailType::class, array(
                 'attr'  => array('class' => $classes),

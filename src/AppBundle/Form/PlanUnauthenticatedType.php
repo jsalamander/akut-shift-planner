@@ -35,7 +35,8 @@ class PlanUnauthenticatedType extends AbstractType
                 'html5' => false,
                 'widget' => 'single_text',
                 'required' => true,
-                'label' => 'date'
+                'label' => 'date',
+                'format' => 'yyyy-MM-dd'
             ))
             ->add('description', TextareaType::class, array(
                 'attr'  => array('class' => $classes),
