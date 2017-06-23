@@ -63,4 +63,14 @@ class PlanControllerTestAuthenticated extends WebTestCase
         $this->assertContains('00:10', $this->crawler->filter('tbody > tr')->eq(1)->text());
         $this->assertContains('/person/new?shift=5', $this->crawler->filter('ol > li:nth-child(1) > a')->eq(1)->attr('href'));
     }
+
+    public function testDeletePlan()
+    {
+        $link = $this->crawler->filter('.col-12 .pull-right')->link();
+        $this->crawler = $this->client->click($link);
+        $form = $this->crawler->filter('.btn-danger')->form();
+        $this->client->submit($form);
+        $this->crawler = $this->client->followRedirect();
+        $this->assertContains('Warnung! Keine kommenden Schichtpläne', $this->crawler->filter('.alert')->text());
+    }
 }
