@@ -1,0 +1,71 @@
+<?php
+
+namespace Tests\AppBundle\Controller;
+
+use Liip\FunctionalTestBundle\Test\WebTestCase;
+
+class PlanControllerEditTemplateAuthenticatedTest extends WebTestCase
+{
+
+    private $crawler;
+
+    private $client;
+
+    public function setUp()
+    {
+        $fixtures = $this->loadFixtures(array(
+            'AppBundle\DataFixtures\ORM\LoadTemplateData'
+        ))->getReferenceRepository();
+
+        $this->loginAs($fixtures->getReference('admin-three-user'), 'main');
+        $this->client = $this->makeClient();
+        $this->crawler = $this->client->request('GET', '/plan/' . $fixtures->getReference('admin-template')->getId());
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+    }
+
+    public function testEditTemplate()
+    {
+        $link = $this->crawler->filter('.col-12 .pull-right')->link();
+        $this->crawler = $this->client->click($link);
+
+        $form = $this->crawler->filter('.btn')->form(array(
+            'appbundle_plan[title]' => 'edited template',
+            'appbundle_plan[date]' => '2019-06-20',
+            'appbundle_plan[description]' => 'new template desc',
+        ));
+
+        $values = $form->getPhpValues();
+
+        $values['appbundle_plan']['shifts'][0]['title'] = 'new foo';
+
+        $values['appbundle_plan']['shifts'][1]['title'] = 'new shift';
+        $values['appbundle_plan']['shifts'][1]['description'] = 'new new';
+        $values['appbundle_plan']['shifts'][1]['start'] = '00:05';
+        $values['appbundle_plan']['shifts'][1]['end'] = '00:10';
+        $values['appbundle_plan']['shifts'][1]['numberPeople'] = 1;
+
+        $this->client->request($form->getMethod(), $form->getUri(), $values, $form->getPhpFiles());
+        $this->crawler = $this->client->followRedirect();
+
+        $this->assertContains('edited template', $this->crawler->filter('h1')->text());
+        $this->assertNotContains('0.06.2019', $this->crawler->filter('h1')->text());
+        $this->assertContains('new template desc', $this->crawler->filter('blockquote')->text());
+        $this->assertContains('new foo', $this->crawler->filter('tbody > tr')->text());
+        $this->assertContains('new shift', $this->crawler->filter('tbody > tr')->eq(1)->text());
+        $this->assertContains('new new', $this->crawler->filter('tbody > tr')->eq(1)->text());
+        $this->assertContains('00:05', $this->crawler->filter('tbody > tr')->eq(1)->text());
+        $this->assertContains('00:10', $this->crawler->filter('tbody > tr')->eq(1)->text());
+        $this->assertContains('Person', $this->crawler->filter('ol > li')->eq(0)->text());
+        $this->assertContains('Person', $this->crawler->filter('ol > li')->eq(1)->text());
+    }
+
+    public function testDeleteTemplate()
+    {
+        $link = $this->crawler->filter('.col-12 .pull-right')->link();
+        $this->crawler = $this->client->click($link);
+        $form = $this->crawler->filter('.btn-danger')->form();
+        $this->client->submit($form);
+        $this->crawler = $this->client->followRedirect();
+        $this->assertContains('Warnung! Keine kommenden Schichtpläne', $this->crawler->filter('.alert')->text());
+    }
+}

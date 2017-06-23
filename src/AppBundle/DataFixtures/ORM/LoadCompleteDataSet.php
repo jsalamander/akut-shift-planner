@@ -25,6 +25,8 @@ class LoadCompleteDataSet extends AbstractFixture implements FixtureInterface
         $adminPlan->setDate(new \DateTime('1970-01-01 00:01:00'));
         $adminPlan->setTitle('admin plan');
         $adminPlan->setUser($admin);
+        $this->setReference('admin-plan', $adminPlan);
+
 
         $adminShift = new Shift();
         $adminShift->setDescription('meiu asdjffs');
