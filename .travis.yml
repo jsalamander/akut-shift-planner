@@ -1,0 +1,38 @@
+# Project language
+language: php
+
+# Allows use container-based infrastructure
+sudo: false
+
+# Cache composer packages so "composer install" is faster
+cache:
+  directories:
+    - $HOME/.composer/cache/files
+
+# Matrix to test in every php version
+matrix:
+  include:
+    - php: 7.0
+    - php: 7.1
+
+# Define an environment variable
+env:
+  - SYMFONY_VERSION="3.3.*"
+
+# Update composer
+before-install:
+  - composer self-update
+
+# Install composer dependencies,
+# Create database, schema and fixtures
+install:
+  - composer install
+  - cp app/config/parameters.yml.dist app/config/parameters.yml
+
+# Run script
+script:
+  - composer test
+
+# After a build, send email notification with the build results
+notifications:
+  email: jan.friedli@gmx.ch

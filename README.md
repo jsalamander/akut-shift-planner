@@ -1,8 +1,6 @@
-akut-schichtplan
+Schicht-Plan.ch
 ================
-
-A Symfony project created on June 6, 2017, 2:17 pm.
-
+[![Build Status](https://travis-ci.org/fribim/akut-shift-planner.svg?branch=develop)](https://travis-ci.org/fribim/akut-shift-planner)
 
 ## Up and running
 
