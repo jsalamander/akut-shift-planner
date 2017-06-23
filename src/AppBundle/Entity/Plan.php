@@ -39,7 +39,7 @@ class Plan
 
     /**
      * @var \DateTime
-     * @Assert\Date(groups={"new_from_template"})
+     * @Assert\Date(groups={"new_from_template", "Default"})
      *
      * @ORM\Column(name="date", type="datetime")
      */
