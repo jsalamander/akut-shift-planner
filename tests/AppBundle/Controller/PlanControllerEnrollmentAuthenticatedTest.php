@@ -15,7 +15,8 @@ class PlanControllerEnrollmentAuthenticatedTest extends WebTestCase
 
     private $client;
 
-    public function setUp() {
+    public function setUp()
+    {
         $fixtures = $this->loadFixtures(array(
             'AppBundle\DataFixtures\ORM\LoadPlanWithPeople'
         ))->getReferenceRepository();
@@ -41,18 +42,47 @@ class PlanControllerEnrollmentAuthenticatedTest extends WebTestCase
     }
 
     //TODO due teste ob au editierbar si und due se modifye, ou plan mit shift
-//    public function testEditEnrollment()
-//    {
-//        $link = $this->crawler->filter('ol > li > a')->eq(0)->link();
-//        $crawler = $this->client->click($link);
-//        $form = $crawler->filter('.btn')->form(array(
-//            'appbundle_person[name]' => 'p',
-//            'appbundle_person[alias]' => 'a',
-//            'appbundle_person[email]' => 'testenroll.ch',
-//            'appbundle_person[phone]' => '079343134343'
-//        ));
-//
-//        $crawler = $this->client->submit($form);
-//        $this->assertEquals(3, $crawler->filter('.alert')->count());
-//    }
+    public function testEditErrorEnrollment()
+    {
+        $link = $this->crawler->filter('ol > li > a')->eq(0)->link();
+        $crawler = $this->client->click($link);
+        $form = $crawler->filter('.btn')->form(array(
+            'appbundle_person[name]' => 'p',
+            'appbundle_person[alias]' => 'a',
+            'appbundle_person[email]' => 'testenroll.ch',
+            'appbundle_person[phone]' => '079343134343'
+        ));
+
+        $crawler = $this->client->submit($form);
+        $this->assertEquals(3, $crawler->filter('.alert')->count());
+    }
+
+    public function testEditEnrollment()
+    {
+        $link = $this->crawler->filter('ol > li > a')->eq(0)->link();
+        $this->crawler = $this->client->click($link);
+        $form = $this->crawler->filter('.btn')->form(array(
+            'appbundle_person[name]' => 'new name',
+            'appbundle_person[alias]' => 'new alias',
+            'appbundle_person[email]' => 'new@email.ch',
+            'appbundle_person[phone]' => '000000'
+        ));
+
+        $this->client->submit($form);
+        $this->crawler = $this->client->followRedirect();
+        $this->assertContains('new name', $this->crawler->filter('ol')->eq(0)->text());
+        $this->assertContains('new@email.ch', $this->crawler->filter('ol')->eq(0)->text());
+        $this->assertContains('000000', $this->crawler->filter('ol')->eq(0)->text());
+    }
+
+    public function testDeletePerson()
+    {
+        $link = $this->crawler->filter('ol > li > a')->eq(0)->link();
+        $this->crawler = $this->client->click($link);
+        $form = $this->crawler->filter('.btn-danger')->form();
+        $this->client->submit($form);
+        $this->crawler = $this->client->followRedirect();
+        $this->assertContains('/person/2/edit', $this->crawler->filter('td > ol > li > a')->attr('href'));
+        $this->assertContains('/person/new?shift=1', $this->crawler->filter('td > ol > li > a')->eq(1)->attr('href'));
+    }
 }
