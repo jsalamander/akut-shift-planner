@@ -67,7 +67,13 @@ class PlanControllerTemplateTest extends WebTestCase
 
         $crawler = $client->submit($form);
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertEquals(5, $crawler->filter('.alert')->count());
+        var_dump($crawler->filter('.alert')->eq(0)->text());
+        var_dump($crawler->filter('.alert')->eq(1)->text());
+        var_dump($crawler->filter('.alert')->eq(2)->text());
+        var_dump($crawler->filter('.alert')->eq(3)->text());
+        var_dump($crawler->filter('.alert')->eq(4)->text());
+        die;
+        $this->assertEquals(4, $crawler->filter('.alert')->count());
     }
 
     public function testDuplicateUserError()
