@@ -36,6 +36,7 @@ class LoadPlanWithPeople extends AbstractFixture implements FixtureInterface
         $adminShift->setEnd(new \DateTime('1970-01-01 00:02:00'));
         $adminShift->setNumberPeople(2);
         $adminPlan->addShift($adminShift);
+        $this->setReference('admin-shift', $adminShift);
 
         $personOne = new Person();
         $personOne->setAlias('alias');

@@ -44,7 +44,7 @@ class PersonController extends Controller
         $shiftId = $request->get('shift');
         $shift = $this->getDoctrine()
             ->getRepository('AppBundle:Shift')
-            ->find(intval($shiftId));
+            ->find($shiftId);
         $shift->getPeople()->add($person);
 
         $person->setShift($shift);

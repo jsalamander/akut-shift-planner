@@ -11,15 +11,17 @@ class PlanControllerEditAuthenticatedTest extends WebTestCase
 
     private $client;
 
+    private $fixtures;
+
     public function setUp()
     {
-        $fixtures = $this->loadFixtures(array(
+        $this->fixtures = $this->loadFixtures(array(
             'AppBundle\DataFixtures\ORM\LoadCompleteDataSet'
         ))->getReferenceRepository();
 
-        $this->loginAs($fixtures->getReference('admin-user'), 'main');
+        $this->loginAs($this->fixtures->getReference('admin-user'), 'main');
         $this->client = $this->makeClient();
-        $this->crawler = $this->client->request('GET', '/plan/' . $fixtures->getReference('admin-plan')->getId());
+        $this->crawler = $this->client->request('GET', '/plan/' . $this->fixtures->getReference('admin-plan')->getId());
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
     }
 
@@ -55,7 +57,7 @@ class PlanControllerEditAuthenticatedTest extends WebTestCase
         $this->assertContains('new new', $this->crawler->filter('tbody > tr')->eq(1)->text());
         $this->assertContains('00:05', $this->crawler->filter('tbody > tr')->eq(1)->text());
         $this->assertContains('00:10', $this->crawler->filter('tbody > tr')->eq(1)->text());
-        $this->assertContains('/person/new?shift=5', $this->crawler->filter('ol > li:nth-child(1) > a')->eq(1)->attr('href'));
+        $this->assertContains('/person/new?shift=', $this->crawler->filter('ol > li:nth-child(1) > a')->eq(1)->attr('href'));
     }
 
     public function testDeletePlan()
