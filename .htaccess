@@ -1,0 +1,2 @@
+AddHandler application/x-httpd-php71 .php
+RewriteOptions inherit
