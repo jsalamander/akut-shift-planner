@@ -15,13 +15,15 @@ class PlanControllerEnrollmentAuthenticatedTest extends WebTestCase
 
     private $client;
 
+    private $fixtures;
+
     public function setUp()
     {
-        $fixtures = $this->loadFixtures(array(
+        $this->fixtures = $this->loadFixtures(array(
             'AppBundle\DataFixtures\ORM\LoadPlanWithPeople'
         ))->getReferenceRepository();
-        $this->loginAs($fixtures->getReference('admin-user'), 'main');
-        $planRef = $fixtures->getReference('admin-plan');
+        $this->loginAs($this->fixtures->getReference('admin-user'), 'main');
+        $planRef = $this->fixtures->getReference('admin-plan');
         $this->client = $this->makeClient();
         $this->crawler = $this->client->request('GET', '/plan/' . $planRef->getId());
     }
@@ -82,6 +84,7 @@ class PlanControllerEnrollmentAuthenticatedTest extends WebTestCase
         $this->client->submit($form);
         $this->crawler = $this->client->followRedirect();
         $this->assertContains('/person/2/edit', $this->crawler->filter('td > ol > li > a')->attr('href'));
-        $this->assertContains('/person/new?shift=1', $this->crawler->filter('td > ol > li > a')->eq(1)->attr('href'));
+        $this->assertContains('/person/new?shift=' . $this->fixtures->getReference('admin-shift')->getId(),
+            $this->crawler->filter('td > ol > li > a')->eq(1)->attr('href'));
     }
 }
