@@ -13,8 +13,12 @@
                 {{ form_row(form.email) }}
                 {{ form_row(form.phone) }}
             </div>
+            {% if form.vars.errors[0] is defined %}
+                <div class="alert alert-danger">
+                    {{ form.vars.errors[0].message }}
+                </div>
+            {% endif %}
             <input class="btn btn-primary" type="submit" value="{% trans %}enroll{% endtrans %}" />
         {{ form_end(form) }}
     </div>
-
 {% endblock %}
