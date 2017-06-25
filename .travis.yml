@@ -36,3 +36,19 @@ script:
 # After a build, send email notification with the build results
 notifications:
   email: jan.friedli@gmx.ch
+
+addons:
+  ssh_known_hosts:  s017.cyon.net
+
+before_deploy:
+  - openssl aes-256-cbc -K $encrypted_<...>_key -iv $encrypted_<...>_iv -in deploy_rsa.enc -out /tmp/deploy_rsa -d
+  - eval "$(ssh-agent -s)"
+  - chmod 600 /tmp/deploy_rsa
+  - ssh-add /tmp/deploy_rsa
+
+deploy:
+  provider: script
+  skip_cleanup: true
+  script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR obcbtld@s017.cyon.net:/home/obcbtld/public_html/dev-schichtplan
+  on:
+    branch: master
