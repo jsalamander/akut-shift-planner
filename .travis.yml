@@ -23,6 +23,7 @@ install:
 
 script:
   - composer test
+  - rm app/config/parameters.yml
 
 notifications:
   email: jan.friedli@gmx.ch
@@ -43,11 +44,11 @@ deploy:
       branch: feature/travis-deploy
       php: 7.1
   - provider: script
-      skip_cleanup: true
-      script: ssh obcbtld@s017.cyon.net:/home/obcbtld/public_html/dev-schichtplan/akut-schicht-planner/post-deployment-dev.sh
-      on:
-        branch: feature/travis-deploy
-        php: 7.1
+    skip_cleanup: true
+    script: ssh obcbtld@s017.cyon.net:/home/obcbtld/public_html/dev-schichtplan/akut-schicht-planner/post-deployment-dev.sh
+    on:
+      branch: feature/travis-deploy
+      php: 7.1
 #  - provider: script
 #        skip_cleanup: true
 #        script: ssh obcbtld@s017.cyon.net '/home/obcbtld/public_html/schichtplan/post-deployment-prod.sh'
