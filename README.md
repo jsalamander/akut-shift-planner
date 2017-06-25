@@ -13,7 +13,9 @@ This sends all the mails saved in the spool.
 
 ## Functional Test
 
-Run the testsuite with the following command: ´composer test´.
+Run the testsuite with the following command: `composer test`.
 
 Info: The tests will be executed against an own sqlite database, and will not alter any data of yours.
 
+## Deployment
+When merging into `develop` or `master` travis automatically deploys the current code base to the corresponding environment.

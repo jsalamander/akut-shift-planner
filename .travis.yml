@@ -38,7 +38,7 @@ before_deploy:
 deploy:
   - provider: script
     skip_cleanup: true
-    script: rsync -r --delete-after --exclude=.git/ $TRAVIS_BUILD_DIR/akut-shift-planner obcbtld@s017.cyon.net:/home/obcbtld/public_html/dev-schichtplan
+    script: rsync -r --delete-after --exclude=.git/ $TRAVIS_BUILD_DIR obcbtld@s017.cyon.net:/home/obcbtld/public_html/dev-schichtplan
     on:
       branch: feature/travis-deploy
       php: 7.1
