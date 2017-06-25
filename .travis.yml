@@ -36,8 +36,13 @@ before_deploy:
   - chmod 600 /tmp/deploy_rsa
   - ssh-add /tmp/deploy_rsa
 deploy:
-  provider: script
-  skip_cleanup: true
-  script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR obcbtld@s017.cyon.net:/home/obcbtld/public_html/dev-schichtplan
-  on:
-    branch: feature/travis-deploy
+  - provider: script
+    skip_cleanup: true
+    script: scp -r . obcbtld@s017.cyon.net:/home/obcbtld/public_html/dev-schichtplan
+    on:
+      branch: feature/travis-deploy
+#  - provider: script
+#    skip_cleanup: true
+#    script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR obcbtld@s017.cyon.net:/home/obcbtld/public_html/dev-schichtplan
+#    on:
+#      branch: feature/travis-deploy
