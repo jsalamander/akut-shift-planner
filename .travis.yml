@@ -45,7 +45,7 @@ deploy:
       php: 7.1
   - provider: script
     skip_cleanup: true
-    script: ssh obcbtld@s017.cyon.net:/home/obcbtld/public_html/dev-schichtplan/akut-shift-planner/post-deployment-dev.sh
+    script: ssh obcbtld@s017.cyon.net '/home/obcbtld/public_html/dev-schichtplan/akut-shift-planner/post-deployment-dev.sh'
     on:
       branch: feature/travis-deploy
       php: 7.1
