@@ -38,8 +38,7 @@ class PersonType extends AbstractType
                 'attr'  => array('class' => $classes),
                 'required' => false,
                 'label' => 'phone'
-            ))
-            ->add('shift', HiddenType::class, array());
+            ));
     }
     
     /**

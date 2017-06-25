@@ -2,6 +2,7 @@
 
 namespace AppBundle\Validator\Constraints;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
@@ -13,13 +14,28 @@ use Symfony\Component\Validator\ConstraintValidator;
  */
 class EnrollmentValidator extends ConstraintValidator
 {
+    /**
+     * @var EntityManagerInterface
+     */
+    private $em;
 
     /**
-     * @param string $shiftId
+     * EnrollmentValidator constructor.
+     * @param EntityManagerInterface $entityManager
+     */
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->em = $entityManager;
+    }
+
+    /**
+     * @param $shiftId
      * @param Constraint $constraint
      */
     public function validate($shiftId, Constraint $constraint)
     {
+        if ($shiftId->getPeople()->count() > $shiftId->getNumberPeople()) {
             $this->context->buildViolation($constraint->message)->setParameter('{{ string }}', $shiftId)->addViolation();
+        }
     }
 }

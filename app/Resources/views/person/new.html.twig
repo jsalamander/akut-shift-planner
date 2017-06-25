@@ -13,7 +13,7 @@
                 {{ form_row(form.email) }}
                 {{ form_row(form.phone) }}
             </div>
-            {% if form.vars.errors %}
+            {% if form.vars.errors[0] is defined %}
                 <div class="alert alert-danger">
                     {{ form.vars.errors[0].message }}
                 </div>
