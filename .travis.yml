@@ -37,12 +37,26 @@ before_deploy:
   - ssh-add /tmp/deploy_rsa
 deploy:
   - provider: script
+    skip_cleanup: true
     script: scp -r $TRAVIS_BUILD_DIR obcbtld@s017.cyon.net:/home/obcbtld/public_html/dev-schichtplan
     on:
       branch: feature/travis-deploy
       php: 7.1
 #  - provider: script
-#    skip_cleanup: true
-#    script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR obcbtld@s017.cyon.net:/home/obcbtld/public_html/dev-schichtplan
-#    on:
-#      branch: feature/travis-deploy
+#      skip_cleanup: true
+#      script: scp -r $TRAVIS_BUILD_DIR obcbtld@s017.cyon.net:/home/obcbtld/public_html/schichtplan
+#      on:
+#        branch: master
+#        php: 7.1
+#  - provider: script
+#        skip_cleanup: true
+#        script: ssh obcbtld@s017.cyon.net '/home/obcbtld/public_html/schichtplan/post-deployment-prod.sh'
+#        on:
+#          branch: master
+#          php: 7.1
+#  - provider: script
+#      skip_cleanup: true
+#      script: scp -r $TRAVIS_BUILD_DIR obcbtld@s017.cyon.net '/home/obcbtld/public_html/dev-schichtplan/post-deployment-prod.sh'
+#      on:
+#        branch: development
+#        php: 7.1
