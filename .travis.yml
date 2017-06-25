@@ -38,9 +38,10 @@ before_deploy:
 deploy:
   - provider: script
     skip_cleanup: true
-    script: scp -r . obcbtld@s017.cyon.net:/home/obcbtld/public_html/dev-schichtplan
+    script: scp -r $TRAVIS_BUILD_DIR obcbtld@s017.cyon.net:/home/obcbtld/public_html/dev-schichtplan
     on:
       branch: feature/travis-deploy
+      php: 7.1
 #  - provider: script
 #    skip_cleanup: true
 #    script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR obcbtld@s017.cyon.net:/home/obcbtld/public_html/dev-schichtplan
