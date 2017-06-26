@@ -93,7 +93,7 @@
                     Schicht-Plan.ch was built, for the culutural center <a href="http://akut-thun.ch">AKuT</a> in Thun.<br>
                     They needed a shift planner which allowed to store templates, so external people who want to organise an event at AKuT
                     are able to crate a shift plan themselves.
-                     <]]>
+                     ]]>
                 </target>
             </trans-unit>
             <trans-unit id="credits">
@@ -126,7 +126,7 @@
             </trans-unit>
             <trans-unit id="email_label">
                 <source>email_label</source>
-                <target>Email (password and link will be sent there)</target>
+                <target>Email (link will be sent to this address)</target>
             </trans-unit>
             <trans-unit id="is_template">
                 <source>is_template</source>
@@ -247,6 +247,110 @@
             <trans-unit id="recover">
                 <source>recover</source>
                 <target>Recover</target>
+            </trans-unit>
+            <trans-unit id="register">
+                <source>register</source>
+                <target>Register</target>
+            </trans-unit>
+            <trans-unit id="is_public">
+                <source>is_public</source>
+                <target>Make this template public?</target>
+            </trans-unit>
+            <trans-unit id="repeat_password">
+                <source>repeat_password</source>
+                <target>Repeat Password</target>
+            </trans-unit>
+            <trans-unit id="wrong_password">
+                <source>wrong_password</source>
+                <target>Wrong Password</target>
+            </trans-unit>
+            <trans-unit id="username_or_email">
+                <source>username_or_email</source>
+                <target>Username or Email</target>
+            </trans-unit>
+            <trans-unit id="email_used">
+                <source>email_used</source>
+                <target>Email is in use. Login to create a new plan</target>
+            </trans-unit>
+            <trans-unit id="define_shifts">
+                <source>define_shifts</source>
+                <target>You need to define at leas one shift</target>
+            </trans-unit>
+            <trans-unit id="logout">
+                <source>logout</source>
+                <target>Logout</target>
+            </trans-unit>
+            <trans-unit id="about">
+                <source>about</source>
+                <target>About</target>
+            </trans-unit>
+            <trans-unit id="done">
+                <source>done</source>
+                <target>Done</target>
+            </trans-unit>
+            <trans-unit id="profile">
+                <source>profile</source>
+                <target>Profile</target>
+            </trans-unit>
+            <trans-unit id="your_profile">
+                <source>your_profile</source>
+                <target>Your Profile</target>
+            </trans-unit>
+            <trans-unit id="edit_profile">
+                <source>edit_profile</source>
+                <target>Edit Profile</target>
+            </trans-unit>
+            <trans-unit id="footer_text">
+                <source>footer_text</source>
+                <target>Developed by</target>
+            </trans-unit>
+            <trans-unit id="footer_source_code">
+                <source>footer_source_code</source>
+                <target>Source Code</target>
+            </trans-unit>
+            <trans-unit id="email_subject">
+                <source>email_subject</source>
+                <target>New shift plan created!</target>
+            </trans-unit>
+            <trans-unit id="email_shift_link_title">
+                <source>email_shift_link_title</source>
+                <target>New shift plan</target>
+            </trans-unit>
+            <trans-unit id="email_shift_link_body_html">
+                <source>email_shift_link_body_html</source>
+                <target>
+                    <![CDATA[
+                        By creating a shift plan you signed up for schicht-plan.ch</b>
+                        You can use this account to create shift plans in the future.</b>
+                        To find out who enrolled for your shifts and see more details (Real name, Email, Phone number) you'll need to login.</b>
+                    ]]>
+                </target>
+            </trans-unit>
+            <trans-unit id="email_shift_link_body_text">
+                <source>email_shift_link_body_text</source>
+                <target>
+                    <![CDATA[
+                        By creating a shift plan you signed up for schicht-plan.ch</b>
+                        You can use this account to create shift plans in the future.</b>
+                        To find out who enrolled for your shifts and see more details (Real name, Email, Phone number) you'll need to login.
+                    ]]>
+                </target>
+            </trans-unit>
+            <trans-unit id="email_shift_link_text">
+                <source>email_shift_link_text</source>
+                <target>Share this link to let people enroll:</target>
+            </trans-unit>
+            <trans-unit id="email_shift_link_end">
+                <source>email_shift_link_end</source>
+                <target>Schicht-plan.ch</target>
+            </trans-unit>
+            <trans-unit id="public">
+                <source>public</source>
+                <target>Public</target>
+            </trans-unit>
+            <trans-unit id="template">
+                <source>template</source>
+                <target>Template</target>
             </trans-unit>
         </body>
     </file>

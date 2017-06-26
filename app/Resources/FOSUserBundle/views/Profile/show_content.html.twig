@@ -1,0 +1,19 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div class="fos_user_user_show col-xs-12 col-md-6 col-lg-4">
+    <div class="card">
+        <img class="card-img-top" src="https://media.giphy.com/media/n0XxXXUWyxkm4/giphy.gif" alt="Card image cap">
+        <div class="card-block">
+            <h4 class="card-title">{{ 'your_profile'|trans([], 'messages', null) }}</h4>
+            <p class="card-text">
+                <p>
+                    <b>{{ 'profile.show.username'|trans }}:</b> {{ user.username }}
+                </p>
+                <p>
+                    <b>{{ 'profile.show.email'|trans }}:</b> {{ user.email }}
+                </p>
+            </p>
+            <a href="{{ path('fos_user_profile_edit') }}" class="btn btn-primary">{{ 'edit'|trans([], 'messages', null) }}</a>
+        </div>
+    </div>
+</div>

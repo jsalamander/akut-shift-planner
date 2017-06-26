@@ -5,11 +5,17 @@
         <h1>{% trans %}new_by_template_title{% endtrans %}</h1>
     </div>
 
-    {% if plans is not empty %}
+    {% if form.templates.vars.choices is not empty %}
         <div class="col-12">
             {{ form_start(form) }}
             <div class="form-group">
-                {{ form_widget(form) }}
+                {{ form_row(form.templates) }}
+                {{ form_row(form.title) }}
+                {{ form_row(form.date) }}
+                {{ form_row(form.email) }}
+                {{ form_row(form.password.first) }}
+                {{ form_row(form.password.second) }}
+                {{ form_row(form.description) }}
             </div>
             <input class="btn btn-primary" type="submit" value="{% trans %}create{% endtrans %}" />
             {{ form_end(form) }}

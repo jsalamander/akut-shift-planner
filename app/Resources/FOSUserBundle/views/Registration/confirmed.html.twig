@@ -1,0 +1,10 @@
+{% extends "@FOSUser/layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+    <div class="col-12">
+        <div class="alert alert-success">{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</div>
+        <a class="btn btn-md btn-primary" href="{{ path('plan_new') }}" role="button">{{ 'create_shift_plan'|trans([], 'messages', null) }} </a>
+    </div>
+{% endblock fos_user_content %}

@@ -33,15 +33,15 @@ class ShiftType extends AbstractType
             ))
             ->add('start', TimeType::class, array(
                 'attr'  => array('class' => $classes),
-                'widget' => 'single_text',
                 'required' => true,
-                'label' => 'start'
+                'label' => 'start',
+                'widget' => 'single_text'
             ))
             ->add('end', TimeType::class, array(
                 'attr'  => array('class' => $classes),
                 'widget' => 'single_text',
                 'required' => true,
-                'label' => 'end'
+                'label' => 'end',
             ))
             ->add('numberPeople', IntegerType::class, array(
                 'attr'  => array('class' => $classes),
@@ -56,7 +56,8 @@ class ShiftType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Shift'
+            'data_class' => 'AppBundle\Entity\Shift',
+            'validation_groups' => array('Default')
         ));
     }
 

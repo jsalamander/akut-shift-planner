@@ -38,6 +38,8 @@ framework:
 twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
+    form_themes:
+        - 'form/form_errors.html.twig'
 
 # Doctrine Configuration
 doctrine:
@@ -70,6 +72,9 @@ swiftmailer:
     encryption: ssl
     port: 465
     auth_mode: login
+    spool:
+        type: file
+        path: '%kernel.project_dir%/app/spool'
 
 assetic:
     debug:          '%kernel.debug%'
@@ -87,3 +92,16 @@ knp_paginator:
     template:
         pagination: KnpPaginatorBundle:Pagination:twitter_bootstrap_v4_pagination.html.twig     # sliding pagination controls template
         sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig
+
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: AppBundle\Entity\User
+    from_email:
+        address: "%mailer_user%"
+        sender_name: "%mailer_user%"
+    resetting:
+            email:
+                from_email:
+                    address:        no-reply@schicht-plan.ch
+                    sender_name:    Password Reset Schicht-Plan.ch

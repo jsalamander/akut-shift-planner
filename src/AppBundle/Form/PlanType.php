@@ -30,22 +30,23 @@ class PlanType extends AbstractType
                 'attr'  => array('class' => $classes . ' datepicker'),
                 'html5' => false,
                 'widget' => 'single_text',
-                'required' => false,
-                'label' => 'date'
+                'required' => true,
+                'label' => 'date',
+                'format' => 'yyyy-MM-dd'
             ))
             ->add('description', TextareaType::class, array(
                 'attr'  => array('class' => $classes),
                 'required' => false,
                 'label' => 'description'
             ))
-            ->add('email', EmailType::class, array(
-                'attr'  => array('class' => $classes),
-                'required' => true,
-                'label' => 'email_label'
-            ))
             ->add('isTemplate', CheckboxType::class, array(
                 'attr'  => array('class' => $classes),
                 'label' => 'is_template',
+                'required' => false
+            ))
+            ->add('isPublic', CheckboxType::class, array(
+                'attr'  => array('class' => $classes),
+                'label' => 'is_public',
                 'required' => false
             ))
             ->add('shifts', CollectionType::class, array(
@@ -64,7 +65,7 @@ class PlanType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Plan'
+            'data_class' => 'AppBundle\Entity\Plan',
         ));
     }
 

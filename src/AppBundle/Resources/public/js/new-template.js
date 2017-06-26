@@ -3,9 +3,11 @@ $(function() {
         if(this.checked) {
             hideEmailAddress();
             hideDate();
+            showIsPublic();
         } else {
             showEmailAddress();
             showDate();
+            hideIsPublic();
         }
     });
 });
@@ -29,4 +31,13 @@ function showDate() {
     $('#appbundle_plan_date').parent().css('display', '');
     $('#appbundle_plan_date').parent().parent().css('display', '');
     $('#appbundle_plan_date').val('');
+}
+
+function showIsPublic() {
+    $('#appbundle_plan_isPublic').parent().parent().css('display', '');
+}
+
+function hideIsPublic() {
+    $('#appbundle_plan_isPublic').parent().parent().css('display', 'none');
+    $('#appbundle_plan_isPublic').prop('checked', false);;
 }

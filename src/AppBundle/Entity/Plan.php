@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
+use Ramsey\Uuid\Uuid;
 
 /**
  * Plan
@@ -15,23 +16,30 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Plan
 {
     /**
-     * @var int
+     * @var string
      *
      * @ORM\Id
      * @ORM\Column(name="id", type="guid")
-     * @ORM\GeneratedValue(strategy="UUID")
      */
     private $id;
 
     /**
      * @var string
      *
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 80,
+     *      minMessage = "The title must be at least {{ limit }} characters long",
+     *      maxMessage = "The title cannot be longer than {{ limit }} characters",
+     *      groups={"new_from_template", "Default"}
+     * )
      * @ORM\Column(name="title", type="string", length=255)
      */
     private $title;
 
     /**
      * @var \DateTime
+     * @Assert\Date(groups={"new_from_template", "Default"})
      *
      * @ORM\Column(name="date", type="datetime")
      */
@@ -40,7 +48,16 @@ class Plan
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="text", nullable=true)
+     * @Assert\NotBlank(groups={"new_from_template", "Default"})
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 300,
+     *      minMessage = "The description must be at least {{ limit }} characters long",
+     *      maxMessage = "The description cannot be longer than {{ limit }} characters",
+     *      groups={"new_from_template", "Default"}
+     * )
+     *
+     * @ORM\Column(name="description", type="text")
      */
     private $description;
 
@@ -49,7 +66,7 @@ class Plan
      *      min = 1,
      *      max = 100,
      *      minMessage = "You need at least {{ limit }} shift",
-     *      maxMessage = "We don't allow more than 100 shifts"
+     *      maxMessage = "We don't allow more than 100 shifts",
      * )
      *
      * @Assert\Valid
@@ -63,42 +80,59 @@ class Plan
      *
      * @ORM\Column(name="is_template", type="boolean", nullable=true)
      */
-    private $isTemplate;
+    private $isTemplate = false;
 
     /**
-     * @var string
+     * Indicates if this plan should be open for the public
+     * @var int
      *
-     * Is used for people without a login, so they can see/edit the details
-     * @ORM\Column(name="password", type="string", length=36, nullable=true)
+     * @ORM\Column(name="is_public", type="boolean", nullable=true)
      */
-    private $password;
+    private $isPublic = false;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="email", type="string", length=255,)
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="plans", cascade={"persist"})
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
-    private $email;
+    private $user;
 
     public function __construct()
     {
         $this->shifts = new ArrayCollection();
+        $this->setId(Uuid::uuid4()->toString());
     }
 
     /**
-     * @return password
+     * @return int
      */
-    public function getPassword()
+    public function getIsPublic()
     {
-        return $this->password;
+        return $this->isPublic;
     }
 
     /**
-     * @param password $password
+     * @param int $isPublic
      */
-    public function setPassword($password)
+    public function setIsPublic($isPublic)
     {
-        $this->password = $password;
+        $this->isPublic = $isPublic;
+    }
+    
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
     }
 
     /**
@@ -119,9 +153,9 @@ class Plan
 
 
     /**
-     * Get id
+     * Get string
      *
-     * @return int
+     * @return string
      */
     public function getId()
     {
@@ -129,9 +163,9 @@ class Plan
     }
 
     /**
-     * Set id
+     * Set id (uuid)
      *
-     * @return int
+     * @return string
      */
     public function setId($id)
     {
@@ -249,21 +283,17 @@ class Plan
     }
 
     /**
-     * @return string
+     * Set shifts
+     * @param $shifts
+     * @return \Doctrine\Common\Collections\Collection
      */
-    public function getEmail()
+    public function setShifts($shifts)
     {
-        return $this->email;
+        foreach ($shifts as $shift) {
+            $shift->setPlan($this);
+            $this->addShift($shift);
+        }
     }
-
-    /**
-     * @param string $email
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-    }
-
 
 
     public function __toString() {

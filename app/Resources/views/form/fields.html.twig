@@ -1,0 +1,8 @@
+{%- block time_widget -%}
+    <div class="input-group clockpicker" {{ block('widget_container_attributes') }}>
+        <input id="{{ form.vars.id }}" name="{{ form.vars.full_name }}" type="text" class="form-control" value="09:30">
+        <span class="input-group-addon">
+            <span class="fa fa-clock-o" aria-hidden="true"></span>
+        </span>
+    </div>
+{%- endblock time_widget -%}

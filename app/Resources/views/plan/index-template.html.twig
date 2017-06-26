@@ -12,6 +12,7 @@
             <tr>
                 <th>{{ knp_pagination_sortable(pagination, 'title'|trans, 'p.title') }} <i class="fa fa-sort" aria-hidden="true"></i></th>
                 <th>{% trans %}description{% endtrans %}</th>
+                <th>{% trans %}public{% endtrans %}</th>
                 <th>{% trans %}actions{% endtrans %}</th>
             </tr>
             </thead>
@@ -20,7 +21,14 @@
                 <tr>
                     <th><a href="{{ path('plan_show', { 'id': plan.id }) }}">{{ plan.title }}</a></th>
                     <td>{{ plan.description }}</td>
-                    <td><a href="{{ path('plan_edit', { 'id': plan.id }) }}">edit</a></td>
+                    <td>
+                        {% if plan.isPublic %}
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                        {% else %}
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                        {% endif %}
+                    </td>
+                    <td><a href="{{ path('plan_edit', { 'id': plan.id }) }}">{% trans %}edit{% endtrans %}</a></td>
                 </tr>
             {% endfor %}
             </tbody>
@@ -30,7 +38,7 @@
         </div>
         {% else %}
             <div class="alert alert-warning" role="alert">
-                <strong>{% trans %}warning{% endtrans %}</strong>{% trans %}no_templates_defined{% endtrans %}
+                <strong>{% trans %}warning{% endtrans %}</strong> {% trans %}no_templates_defined{% endtrans %}
             </div>
         {% endif %}
     </div>

@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'form/fields.html.twig' %}
+{% block body %}
+    <div class="col-12">
+        <h1>{% trans %}new_shift_plan{% endtrans %}</h1>
+    </div>
+
+    <div class="col-12">
+        {{ form_start(form) }}
+        <div class="form-group">
+            {{ form_row(form.title) }}
+            {{ form_row(form.date) }}
+            {{ form_row(form.description) }}
+            {{ form_row(form.email) }}
+            {{ form_row(form.password.first) }}
+            {{ form_row(form.password.second) }}
+        </div>
+        <hr>
+        <h3>{% trans %}shifts{% endtrans %}</h3>
+        {% if form.vars.errors is not empty %}
+            {{ form_errors(form) }}
+        {% endif %}
+        <ul class="shifts list-unstyled" data-prototype="{{ form_widget(form.shifts.vars.prototype)|e('html_attr') }}">
+            {% for shift in form.shifts %}
+                <li>{{ form_widget(shift) }}</li>
+            {% endfor %}
+        </ul>
+        <input class="btn btn-primary" type="submit" value="{% trans %}create{% endtrans %}" />
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
