@@ -16,6 +16,20 @@ class UserGroupTest extends WebTestCase
         ))->getReferenceRepository();
     }
 
+    public function testGroupActions()
+    {
+        $this->loginAs($this->fixtures->getReference('admin-user'), 'main');
+        $client = $this->makeClient();
+        $client->request('GET', '/profile');
+        $crawler = $client->followRedirect();
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $this->assertContains('Gruppenaktionen', $crawler->filter('.group-card .card-title')->text());
+        $this->assertContains('Neue Gruppe', $crawler->filter('.group-card .card-text .btn')->text());
+        $this->assertContains('/group/new', $crawler->filter('.group-card .card-text .btn')->attr('href'));
+        $this->assertContains('/group/list', $crawler->filter('.group-card .card-text .btn')->eq(1)->attr('href'));
+    }
+
     public function testCreateGroup() {
         $this->loginAs($this->fixtures->getReference('admin-user'), 'main');
         $client = $this->makeClient();

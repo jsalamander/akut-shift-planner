@@ -17,3 +17,15 @@
         </div>
     </div>
 </div>
+<div class="group-card col-xs-12 col-md-6 col-lg-8">
+    <div class="card">
+        <img class="card-img-top" src="https://media.giphy.com/media/5ulj6mWwCk4rC/giphy.gif" alt="Card image cap">
+        <div class="card-block">
+            <h4 class="card-title">{{ 'group_actions'|trans([], 'messages', null) }}</h4>
+            <p class="card-text">
+                <a href="{{ path('fos_user_group_new') }}" class="btn btn-primary form-group">{{ 'group_new'|trans([], 'messages', null) }}</a>
+                <a href="{{ path('fos_user_group_list') }}" class="btn btn-primary form-group">{{ 'group_list'|trans([], 'messages', null) }}</a>
+            </p>
+        </div>
+    </div>
+</div>

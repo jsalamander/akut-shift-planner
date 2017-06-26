@@ -360,6 +360,18 @@
                 <source>list_group</source>
                 <target>Gruppen</target>
             </trans-unit>
+            <trans-unit id="group_actions">
+                <source>group_actions</source>
+                <target>Gruppenaktionen</target>
+            </trans-unit>
+            <trans-unit id="group_new">
+                <source>group_new</source>
+                <target>Neue Gruppe</target>
+            </trans-unit>
+            <trans-unit id="group_list">
+                <source>group_list</source>
+                <target>Gruppen anzeigen</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
