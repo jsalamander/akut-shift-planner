@@ -20,14 +20,28 @@ class ShiftController extends Controller
      * @Route("/", name="shift_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
+        $paginator  = $this->get('knp_paginator');
 
-        $shifts = $em->getRepository('AppBundle:Shift')->findAll();
+        $query = $em
+            ->getRepository('AppBundle:Shift')
+            ->createQueryBuilder('s')
+            ->join('s.people', 'r')
+            ->join('r.user', 'u')
+            ->where('u.id = :userId')
+            ->getQuery()
+            ->setParameter('userId', $this->getUser()->getId());
+
+        $pagination = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            10
+        );
 
         return $this->render('shift/index.html.twig', array(
-            'shifts' => $shifts,
+            'pagination' => $pagination,
         ));
     }
 
