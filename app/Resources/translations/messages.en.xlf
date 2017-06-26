@@ -356,6 +356,10 @@
                 <source>create_group</source>
                 <target>Create new group</target>
             </trans-unit>
+            <trans-unit id="list_group">
+                <source>list_group</source>
+                <target>Groups</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

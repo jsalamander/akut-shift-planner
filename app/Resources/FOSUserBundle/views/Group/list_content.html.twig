@@ -1,4 +1,5 @@
-<div class="fos_user_group_list">
+<div class="col-12">
+    <h1>{{ 'list_group'|trans([], 'messages', null) }}</h1>
     <ul>
     {% for group in groups %}
         <li><a href="{{ path('fos_user_group_show', {'groupName': group.getName()} ) }}">{{ group.getName() }}</a></li>
