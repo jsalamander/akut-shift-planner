@@ -6,6 +6,11 @@
     </div>
 
     <div class="col-12">
+        {% if pagination|length < 1%}
+            <div class="alert alert-warning" role="alert">
+                {% trans %}no_shifts{% endtrans %}
+            </div>
+        {% else %}
         <table class="table table-responsive">
             <thead class="thead-default">
             <tr>
@@ -29,10 +34,6 @@
         <div class="navigation">
             {{ knp_pagination_render(pagination) }}
         </div>
-        {% if pagination|length < 1%}
-            <div class="alert alert-warning" role="alert">
-                {% trans %}no_shifts{% endtrans %}
-            </div>
         {% endif %}
     </div>
 {% endblock %}

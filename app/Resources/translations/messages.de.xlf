@@ -356,6 +356,10 @@
                 <source>your_shifts</source>
                 <target>Deine Schichten</target>
             </trans-unit>
+            <trans-unit id="no_shifts">
+                <source>no_shifts</source>
+                <target>Du bist in keinen kommenden Schichten eingetragen</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
