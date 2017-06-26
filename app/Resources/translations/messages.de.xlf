@@ -352,6 +352,10 @@
                 <source>template</source>
                 <target>Vorlage</target>
             </trans-unit>
+            <trans-unit id="your_shifts">
+                <source>your_shifts</source>
+                <target>Deine Schichten</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
