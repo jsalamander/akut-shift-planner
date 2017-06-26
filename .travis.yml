@@ -49,13 +49,13 @@ deploy:
     on:
       branch: develop
       php: 7.1
-- provider: script
+  - provider: script
     skip_cleanup: true
     script: rsync -r --delete-after --links --exclude=.git/ --exclude=app/config/parameters.yml $TRAVIS_BUILD_DIR obcbtld@s017.cyon.net:/home/obcbtld/public_html/schichtplan
     on:
       branch: master
       php: 7.1
-- provider: script
+  - provider: script
     skip_cleanup: true
     script: ssh obcbtld@s017.cyon.net 'cd /home/obcbtld/public_html/schichtplan/akut-shift-planner; ./post-deployment-prod.sh'
     on:
