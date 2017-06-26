@@ -30,8 +30,24 @@ class ShiftControllerYourShiftTest extends WebTestCase
 
     public function testIndex()
     {
-        $crawler = $this->client->request('GET', '/plan/' . $this->fixtures->getReference('admin-plan')->getId());
+        $crawler = $this->client->request('GET',
+            '/person/new?shift=' . $this->fixtures->getReference('admin-shift')->getId());
+        $form = $crawler->filter('.btn')->form(array(
+            'appbundle_person[name]' => 'im admin',
+            'appbundle_person[alias]' => 'my alias',
+            'appbundle_person[email]' => 'email@mail.com',
+        ));
 
+        $this->client->submit($form);
+        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
+        $this->client->followRedirect();
+        $this->client->request('GET', '/shift');
+        $crawler = $this->client->followRedirect();
+        $this->assertContains('admin shift', $crawler->filter('tbody')->text());
+        $this->assertContains(
+            '/plan/' . $this->fixtures->getReference('admin-plan')->getId(),
+            $crawler->filter('tbody a')->attr('href')
+        );
     }
 
 }
