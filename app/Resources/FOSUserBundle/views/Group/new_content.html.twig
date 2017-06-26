@@ -1,8 +1,13 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-{{ form_start(form, { 'action': path('fos_user_group_new'), 'attr': { 'class': 'fos_user_group_new' } }) }}
-    {{ form_widget(form) }}
-    <div>
-        <input type="submit" value="{{ 'group.new.submit'|trans }}" />
+<div class="col-12">
+    <h1>{{ 'create_group'|trans([], 'messages', null) }}</h1>
+    {{ form_start(form, { 'action': path('fos_user_group_new'), 'attr': { 'class': 'fos_user_group_new' } }) }}
+    <div class="form-group">
+        {{ form_row(form.name, {'attr': {'class': 'form-control'}}) }}
+        {{ form_row(form._token) }}
     </div>
-{{ form_end(form) }}
+
+    <input class="btn btn-primary" type="submit" value="{{ 'group.new.submit'|trans }}" />
+    {{ form_end(form) }}
+</div>

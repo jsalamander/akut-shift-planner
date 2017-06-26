@@ -352,6 +352,10 @@
                 <source>template</source>
                 <target>Vorlage</target>
             </trans-unit>
+            <trans-unit id="create_group">
+                <source>create_group</source>
+                <target>Gruppe erstellen</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

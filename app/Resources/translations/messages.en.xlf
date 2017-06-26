@@ -352,6 +352,10 @@
                 <source>template</source>
                 <target>Template</target>
             </trans-unit>
+            <trans-unit id="create_group">
+                <source>create_group</source>
+                <target>Create new group</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
