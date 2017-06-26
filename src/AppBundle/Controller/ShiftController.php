@@ -30,7 +30,9 @@ class ShiftController extends Controller
             ->createQueryBuilder('s')
             ->join('s.people', 'r')
             ->join('r.user', 'u')
+            ->join('s.plan', 'p')
             ->where('u.id = :userId')
+            ->andWhere('p.date < CURRENT_TIMESTAMP()')
             ->getQuery()
             ->setParameter('userId', $this->getUser()->getId());
 

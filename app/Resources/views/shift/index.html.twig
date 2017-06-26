@@ -3,8 +3,8 @@
 {% block body %}
     <h1>Shifts list</h1>
 
-    <table class="table-responsive">
-        <thead>
+    <table class="table table-responsive">
+        <thead class="thead-default">
             <tr>
                 <th>Title</th>
                 <th>Description</th>
@@ -23,4 +23,12 @@
         {% endfor %}
         </tbody>
     </table>
+    <div class="navigation">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+    {% if pagination|length < 1%}
+        <div class="alert alert-warning" role="alert">
+            {% trans %}no_shifts{% endtrans %}
+        </div>
+    {% endif %}
 {% endblock %}
