@@ -26,10 +26,46 @@ class User extends BaseUser
      */
     private $plans;
 
+    /**
+     * @var $people
+     * @ORM\OneToMany(targetEntity="Person", mappedBy="user")
+     */
+    private $people;
+
     public function __construct()
     {
         parent::__construct();
         $this->plans = new ArrayCollection();
+        $this->people = new ArrayCollection();
+    }
+
+    /**
+     * @return User
+     * @param \AppBundle\Entity\Person
+     */
+    public function addPerson($person)
+    {
+        $this->people[] = $person;
+
+        return $this;
+    }
+
+    /**
+     * @param mixed $people
+     */
+    public function getPeople($people)
+    {
+        $this->people = $people;
+    }
+
+    /**
+     * Remove person (enrollment)
+     *
+     * @param \AppBundle\Entity\Person
+     */
+    public function removePerson(\AppBundle\Entity\Person $person)
+    {
+        $this->people->removeElement($person);
     }
 
     /**
