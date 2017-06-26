@@ -43,8 +43,16 @@
                 </ul>
                 <ul class="navbar-nav">
                     {% if is_granted('ROLE_USER') %}
-                        <a class="nav-link pull-right" href="{{ path('fos_user_profile_show') }}"><i class="fa fa-user" aria-hidden="true"></i> {{ 'profile'|trans }}</a>
-                        <a class="nav-link pull-right" href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i> {{ 'logout'|trans }}</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-user" aria-hidden="true"></i> {{ 'profile'|trans }}
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="{{ path('fos_user_profile_show') }}">{% trans %}profile{% endtrans %}</a>
+                                <a class="dropdown-item" href="{{ path('shift_index') }}">{% trans %}your_shifts{% endtrans %}</a>
+                            </div>
+                        </li>
+                        <li class="nav-item text-nowrap"><a class="nav-link pull-right" href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i> {{ 'logout'|trans }}</a></li>
                     {% else %}
                         <li class="nav-item text-nowrap"><a class="nav-link" href="{{ path('fos_user_security_login') }}"><i class="fa fa-sign-in" aria-hidden="true"></i> {% trans %}login{% endtrans %}</a></li>
                         <li class="nav-item text-nowrap"><a class="nav-link" href="{{ path('fos_user_registration_register') }}"><i class="fa fa-user-plus" aria-hidden="true"></i> {% trans %}register{% endtrans %}</a></li>
