@@ -7,32 +7,34 @@
 
     <div class="col-12">
         {% if pagination.items is not empty%}
-        <table class="table table-responsive">
-            <thead class="thead-default">
-            <tr>
-                <th>{{ knp_pagination_sortable(pagination, 'title'|trans, 'p.title') }} <i class="fa fa-sort" aria-hidden="true"></i></th>
-                <th>{% trans %}description{% endtrans %}</th>
-                <th>{% trans %}public{% endtrans %}</th>
-                <th>{% trans %}actions{% endtrans %}</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for plan in pagination %}
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
                 <tr>
-                    <th><a href="{{ path('plan_show', { 'id': plan.id }) }}">{{ plan.title }}</a></th>
-                    <td>{{ plan.description }}</td>
-                    <td>
-                        {% if plan.isPublic %}
-                            <i class="fa fa-check" aria-hidden="true"></i>
-                        {% else %}
-                            <i class="fa fa-times" aria-hidden="true"></i>
-                        {% endif %}
-                    </td>
-                    <td><a href="{{ path('plan_edit', { 'id': plan.id }) }}">{% trans %}edit{% endtrans %}</a></td>
+                    <th>{{ knp_pagination_sortable(pagination, 'title'|trans, 'p.title') }} <i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th>{% trans %}description{% endtrans %}</th>
+                    <th>{% trans %}public{% endtrans %}</th>
+                    <th>{% trans %}actions{% endtrans %}</th>
                 </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                {% for plan in pagination %}
+                    <tr>
+                        <th><a href="{{ path('plan_show', { 'id': plan.id }) }}">{{ plan.title }}</a></th>
+                        <td>{{ plan.description }}</td>
+                        <td>
+                            {% if plan.isPublic %}
+                                <i class="fa fa-check" aria-hidden="true"></i>
+                            {% else %}
+                                <i class="fa fa-times" aria-hidden="true"></i>
+                            {% endif %}
+                        </td>
+                        <td><a href="{{ path('plan_edit', { 'id': plan.id }) }}">{% trans %}edit{% endtrans %}</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
         <div class="navigation">
             {{ knp_pagination_render(pagination) }}
         </div>
