@@ -18,7 +18,7 @@
         </h1>
     </div>
     <div class="col-12">
-        {% if is_granted('ROLE_USER') and app.user.id == plan.user.id %}<a class="pull-right" href="{{ path('plan_edit', { 'id': plan.id }) }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> {% trans %}edit{% endtrans %}</a>{% endif %}
+        {% if is_granted('ROLE_USER') and app.user.id == plan.user.id %}<a class="pull-right" href="{{ path('plan_edit', { 'id': plan.id }) }}"><i class="fa fa-pencil" aria-hidden="true"></i> {% trans %}edit{% endtrans %}</a>{% endif %}
     </div>
     {% if plan.description %}
         <div class="col-12">
