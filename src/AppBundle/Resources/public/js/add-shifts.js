@@ -3,7 +3,7 @@ $(function() {
 
     // setup an "add a shift" link
     var linkText = Translator.trans('add_shift');
-    var $addShiftLink = $('<a href="#" class="add_shift_link"><i class="fa fa-plus-square" aria-hidden="true"></i> ' + linkText + '</a>');
+    var $addShiftLink = $('<small class="add_shift_link"><a href="#"><i class="fa fa-plus" aria-hidden="true"></i> ' + linkText + '</a></small>');
     var $newLinkLi = $('<div></div>').append($addShiftLink);
 
     // Get the ul that holds the collection of shifts
@@ -50,7 +50,7 @@ function addShiftForm($collectionHolder, $newLinkLi) {
     $collectionHolder.data('index', index + 1);
 
     // Display the form in the page in an li, before the "Add a shift" link li
-    var $newFormLi = $('<li></li>').append(newForm);
+    var $newFormLi = $('<li class="animated fadeIn"></li>').append(newForm);
     $newLinkLi.before($newFormLi);
 }
 

@@ -30,7 +30,7 @@ class PlanControllerEnrollmentAuthenticatedTest extends WebTestCase
 
     public function testSimpleEnrollment()
     {
-        $this->assertContains('/person/1/edit', $this->crawler->filter('ol > li > a')->eq(0)->attr('href'));
+        $this->assertContains('/person/1/edit', $this->crawler->filter('.edit')->attr('href'));
         $this->assertContains('private name', $this->crawler->filter('ol > li')->eq(0)->text());
         $this->assertContains('mailto:asdf@asfd.de?Subject=Kontakt Schichtplan: admin plan',
             $this->crawler->filter('#person-details li > a')->eq(0)->attr('href'));
@@ -39,13 +39,13 @@ class PlanControllerEnrollmentAuthenticatedTest extends WebTestCase
         $this->assertContains('09797873', $this->crawler->filter('#person-details:nth-child(2) li')->eq(1)->text());
         $this->assertContains('mailto:asdf@asfd.de?Subject=Kontakt Schichtplan: admin plan',
             $this->crawler->filter('#person-details li > a')->eq(1)->attr('href'));
-        $this->assertContains('/person/2/edit', $this->crawler->filter('ol > li > a')->eq(1)->attr('href'));
+        $this->assertContains('/person/2/edit', $this->crawler->filter('.edit')->eq(1)->attr('href'));
         $this->assertContains('private name', $this->crawler->filter('ol > li')->eq(1)->text());
     }
 
     public function testEditErrorEnrollment()
     {
-        $link = $this->crawler->filter('ol > li > a')->eq(0)->link();
+        $link = $this->crawler->filter('.edit')->eq(0)->link();
         $crawler = $this->client->click($link);
         $form = $crawler->filter('.btn')->form(array(
             'appbundle_person[name]' => 'p',
@@ -60,7 +60,7 @@ class PlanControllerEnrollmentAuthenticatedTest extends WebTestCase
 
     public function testEditEnrollment()
     {
-        $link = $this->crawler->filter('ol > li > a')->eq(0)->link();
+        $link = $this->crawler->filter('.edit')->eq(0)->link();
         $this->crawler = $this->client->click($link);
         $form = $this->crawler->filter('.btn')->form(array(
             'appbundle_person[name]' => 'new name',
@@ -78,13 +78,13 @@ class PlanControllerEnrollmentAuthenticatedTest extends WebTestCase
 
     public function testDeletePerson()
     {
-        $link = $this->crawler->filter('ol > li > a')->eq(0)->link();
+        $link = $this->crawler->filter('.edit')->eq(0)->link();
         $this->crawler = $this->client->click($link);
         $form = $this->crawler->filter('.btn-danger')->form();
         $this->client->submit($form);
         $this->crawler = $this->client->followRedirect();
-        $this->assertContains('/person/2/edit', $this->crawler->filter('td > ol > li > a')->attr('href'));
+        $this->assertContains('/person/2/edit', $this->crawler->filter('.edit')->attr('href'));
         $this->assertContains('/person/new?shift=' . $this->fixtures->getReference('admin-shift')->getId(),
-            $this->crawler->filter('td > ol > li > a')->eq(1)->attr('href'));
+            $this->crawler->filter('td > ol > li')->eq(1)->filter('a')->attr('href'));
     }
 }

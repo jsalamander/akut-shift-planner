@@ -69,11 +69,12 @@
         </div>
         <footer class="footer">
             <div class="container">
-                <span class="text-muted">{{ 'footer_text'|trans }} <a href="mailto:jan.friedli@gmx.ch">Jan Friedli</a></span>
-                <span class="text-muted pull-right">{{ 'footer_source_code'|trans }}: <a href="https://github.com/fribim/akut-shift-planner">GitHub</a></span>
+                <span><small>{{ 'footer_text'|trans }} <a href="mailto:jan.friedli@gmx.ch">Jan Friedli</a></small></span>
+                <span class="pull-right"><small>{{ 'footer_source_code'|trans }}: <a href="https://github.com/fribim/akut-shift-planner">GitHub</a></small></span>
             </div>
         </footer>
         {% block javascripts %}{% endblock %}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
         <script src="{{ asset('bundles/bazingajstranslation/js/translator.min.js') }}"></script>
         <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
