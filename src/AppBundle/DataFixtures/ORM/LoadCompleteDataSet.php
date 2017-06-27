@@ -37,7 +37,7 @@ class LoadCompleteDataSet extends AbstractFixture implements FixtureInterface
         $this->setReference('admin-shift', $adminShift);
 
         $adminPlanPast = new Plan();
-        $adminPlanPast->setDescription('hmm bli blb blu');
+        $adminPlanPast->setDescription('sfsadfs');
         $adminPlanPast->setDate(new \DateTime('1999-01-01 00:01:00'));
         $adminPlanPast->setTitle('admin plan past');
         $adminPlanPast->setUser($admin);
