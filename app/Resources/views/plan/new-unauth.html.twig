@@ -15,7 +15,6 @@
             {{ form_row(form.password.first) }}
             {{ form_row(form.password.second) }}
         </div>
-        <hr>
         <h3>{% trans %}shifts{% endtrans %}</h3>
         {% if form.vars.errors is not empty %}
             {{ form_errors(form) }}
