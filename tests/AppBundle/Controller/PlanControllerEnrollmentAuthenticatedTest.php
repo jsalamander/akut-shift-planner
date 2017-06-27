@@ -30,7 +30,7 @@ class PlanControllerEnrollmentAuthenticatedTest extends WebTestCase
 
     public function testSimpleEnrollment()
     {
-        $this->assertContains('/person/1/edit', $this->crawler->filter('ol > li > a')->eq(0)->attr('href'));
+        $this->assertContains('/person/1/edit', $this->crawler->filter('.edit')->attr('href'));
         $this->assertContains('private name', $this->crawler->filter('ol > li')->eq(0)->text());
         $this->assertContains('mailto:asdf@asfd.de?Subject=Kontakt Schichtplan: admin plan',
             $this->crawler->filter('#person-details li > a')->eq(0)->attr('href'));
@@ -39,7 +39,7 @@ class PlanControllerEnrollmentAuthenticatedTest extends WebTestCase
         $this->assertContains('09797873', $this->crawler->filter('#person-details:nth-child(2) li')->eq(1)->text());
         $this->assertContains('mailto:asdf@asfd.de?Subject=Kontakt Schichtplan: admin plan',
             $this->crawler->filter('#person-details li > a')->eq(1)->attr('href'));
-        $this->assertContains('/person/2/edit', $this->crawler->filter('ol > li > a')->eq(1)->attr('href'));
+        $this->assertContains('/person/2/edit', $this->crawler->filter('.edit')->eq(1)->attr('href'));
         $this->assertContains('private name', $this->crawler->filter('ol > li')->eq(1)->text());
     }
 
