@@ -93,7 +93,6 @@ class Shift
         $this->people = new ArrayCollection();
     }
 
-
     /**
      * Get id
      *

@@ -67,6 +67,6 @@ class PlanControllerEditAuthenticatedTest extends WebTestCase
         $form = $this->crawler->filter('.btn-danger')->form();
         $this->client->submit($form);
         $this->crawler = $this->client->followRedirect();
-        $this->assertContains('Warnung! Keine kommenden Schichtpläne', $this->crawler->filter('.alert')->text());
+        $this->assertNotContains('hmm bli blb blu', $this->crawler->filter('tbody')->text());
     }
 }

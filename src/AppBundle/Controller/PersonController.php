@@ -54,6 +54,10 @@ class PersonController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($person);
+            if ($this->getUser()) {
+                $this->getUser()->addPerson($person);
+                $person->setUser($this->getUser());
+            }
             $em->flush();
 
             $planId = $shift->getPlan()->getId();
@@ -62,7 +66,7 @@ class PersonController extends Controller
 
         return $this->render('person/new.html.twig', array(
             'person' => $person,
-            'form' => $form->createView(),
+            'form' => $form->createView()
         ));
     }
 

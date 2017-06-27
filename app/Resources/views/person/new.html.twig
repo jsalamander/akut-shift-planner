@@ -8,11 +8,19 @@
     <div class="col-12">
         {{ form_start(form) }}
             <div class="form-group">
-                {{ form_row(form.name) }}
-                {{ form_row(form.alias) }}
-                {{ form_row(form.email) }}
-                {{ form_row(form.phone) }}
+                {% if app.user.username is defined %}
+                    {{ form_row(form.name, {'value': app.user.username}) }}
+                    {{ form_row(form.alias, {'value': app.user.username}) }}
+                    {{ form_row(form.email, {'value': app.user.email}) }}
+                    {{ form_row(form.phone) }}
+                {% else %}
+                    {{ form_row(form.name) }}
+                    {{ form_row(form.alias) }}
+                    {{ form_row(form.email) }}
+                    {{ form_row(form.phone) }}
+                {% endif %}
             </div>
+
             {% if form.vars.errors[0] is defined %}
                 <div class="alert alert-danger">
                     {{ form.vars.errors[0].message }}

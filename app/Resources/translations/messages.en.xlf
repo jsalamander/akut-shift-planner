@@ -352,6 +352,14 @@
                 <source>template</source>
                 <target>Template</target>
             </trans-unit>
+            <trans-unit id="your_shifts">
+                <source>your_shifts</source>
+                <target>Your upcoming shifts</target>
+            </trans-unit>
+            <trans-unit id="no_shifts">
+                <source>no_shifts</source>
+                <target>You have no upcoming shifts</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

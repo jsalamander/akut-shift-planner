@@ -78,6 +78,32 @@ class Person
     private $shift;
 
     /**
+     * Used when some enrolls when being logged in
+     *
+     * @var $user
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="people")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
+
+    /**
+     * @return User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param User $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+    }
+
+
+    /**
      * Get id
      *
      * @return int
