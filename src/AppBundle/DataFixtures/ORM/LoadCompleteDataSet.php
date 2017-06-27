@@ -22,11 +22,10 @@ class LoadCompleteDataSet extends AbstractFixture implements FixtureInterface
 
         $adminPlan = new Plan();
         $adminPlan->setDescription('hmm bli blb blu');
-        $adminPlan->setDate(new \DateTime('1970-01-01 00:01:00'));
+        $adminPlan->setDate(new \DateTime('2099-01-01 00:01:00'));
         $adminPlan->setTitle('admin plan');
         $adminPlan->setUser($admin);
         $this->setReference('admin-plan', $adminPlan);
-
 
         $adminShift = new Shift();
         $adminShift->setDescription('meiu asdjffs');
@@ -36,6 +35,22 @@ class LoadCompleteDataSet extends AbstractFixture implements FixtureInterface
         $adminShift->setNumberPeople(2);
         $adminPlan->addShift($adminShift);
         $this->setReference('admin-shift', $adminShift);
+
+        $adminPlanPast = new Plan();
+        $adminPlanPast->setDescription('hmm bli blb blu');
+        $adminPlanPast->setDate(new \DateTime('1999-01-01 00:01:00'));
+        $adminPlanPast->setTitle('admin plan past');
+        $adminPlanPast->setUser($admin);
+        $this->setReference('admin-plan-past', $adminPlanPast);
+
+        $adminShiftPast = new Shift();
+        $adminShiftPast->setDescription('meiu asdjffs');
+        $adminShiftPast->setTitle('admin shift past');
+        $adminShiftPast->setStart(new \DateTime('1970-01-01 00:01:00'));
+        $adminShiftPast->setEnd(new \DateTime('1970-01-01 00:02:00'));
+        $adminShiftPast->setNumberPeople(2);
+        $adminPlanPast->addShift($adminShiftPast);
+        $this->setReference('admin-shift-past', $adminShiftPast);
 
         $adminTemplate = new Plan();
         $adminTemplate->setDescription('hmm bli blb blu');
@@ -92,7 +107,9 @@ class LoadCompleteDataSet extends AbstractFixture implements FixtureInterface
         //save all the things!
         $manager->persist($admin);
         $manager->persist($adminShift);
+        $manager->persist($adminShiftPast);
         $manager->persist($adminPlan);
+        $manager->persist($adminPlanPast);
         $manager->persist($adminTemplateShift);
         $manager->persist($adminTemplate);
         $manager->persist($rudolf);

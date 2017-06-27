@@ -32,9 +32,9 @@ class ShiftController extends Controller
             ->join('r.user', 'u')
             ->join('s.plan', 'p')
             ->where('u.id = :userId')
-            ->andWhere('p.date < CURRENT_TIMESTAMP()')
-            ->getQuery()
-            ->setParameter('userId', $this->getUser()->getId());
+            ->andWhere('p.date > CURRENT_TIMESTAMP()')
+            ->setParameter('userId', $this->getUser()->getId())
+            ->getQuery();
 
         $pagination = $paginator->paginate(
             $query,
