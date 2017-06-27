@@ -28,7 +28,7 @@ class PlanControllerTemplateAuthenticatedTest extends WebTestCase
         $form = $this->crawler->filter('.btn')->form(array(
             'appbundle_plan[templates]' => 0,
             'appbundle_plan[title]' => 'test template',
-            'appbundle_plan[date]' => '2017-06-20',
+            'appbundle_plan[date]' => '2099-06-20',
             'appbundle_plan[description]' => 'some desc'
         ));
 
@@ -38,7 +38,7 @@ class PlanControllerTemplateAuthenticatedTest extends WebTestCase
 
         //test plan_show page
         $this->assertContains('test template', $this->crawler->filter('.justify-content-end')->text());
-        $this->assertContains('20.06.2017', $this->crawler->filter('.justify-content-end')->text());
+        $this->assertContains('20.06.2099', $this->crawler->filter('.justify-content-end')->text());
         $this->assertContains('some desc', $this->crawler->filter('blockquote')->text());
         $this->assertContains('meiu asdjffs', $this->crawler->filter('tr')->eq(1)->text());
         $this->assertContains('shift', $this->crawler->filter('tr')->eq(1)->text());
@@ -58,7 +58,7 @@ class PlanControllerTemplateAuthenticatedTest extends WebTestCase
         $form = $this->crawler->filter('.btn')->form(array(
             'appbundle_plan[templates]' => 0,
             'appbundle_plan[title]' => 't',
-            'appbundle_plan[date]' => '20sadfadsf17-0safsadf6-20ASDFSADF',
+            'appbundle_plan[date]' => '2001-06-20',
             'appbundle_plan[description]' => 's'
         ));
 
