@@ -3,7 +3,8 @@ $(function() {
     $('.datepicker').datepicker({
         format: 'yyyy-mm-dd',
         startDate: start,
-        todayHighlight: true
+        todayHighlight: true,
+        autoclose: true
     });
     $('.datepicker').attr('readOnly', true)
 });
