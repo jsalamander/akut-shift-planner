@@ -1,9 +1,9 @@
 .shifts li {
     padding: 0.5rem;
-    background-color: #dcedc8;
+    background-color: rgba(3, 169, 244, 0.05);
     margin-top: 0.5rem;
 }
 
 .shifts li:nth-child(even)  {
-    background-color: #ffecb3;
+    background-color: rgba(96, 125, 139, 0.05);
 }
