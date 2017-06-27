@@ -18,4 +18,5 @@ Run the testsuite with the following command: `composer test`.
 Info: The tests will be executed against an own sqlite database, and will not alter any data of yours.
 
 ## Deployment
-When merging into `develop` or `master` travis automatically deploys the current code base to the corresponding environment.
+When merging into `develop` travis automatically deploys the test server.
+To create a production release create a `tag`. The new tag will automatically be deployed to production.
