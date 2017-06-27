@@ -24,7 +24,7 @@ function showEmailAddress() {
 
 function hideDate() {
     $('#appbundle_plan_date').parent().css('display', 'none');
-    $('#appbundle_plan_date').val('2000-01-01');
+    $('#appbundle_plan_date').val('2099-01-01');
 }
 
 function showDate() {
@@ -34,10 +34,10 @@ function showDate() {
 }
 
 function showIsPublic() {
-    $('#appbundle_plan_isPublic').parent().parent().css('display', '');
+    $('#isPublic').css('display', '');
 }
 
 function hideIsPublic() {
-    $('#appbundle_plan_isPublic').parent().parent().css('display', 'none');
-    $('#appbundle_plan_isPublic').prop('checked', false);;
+    $('#isPublic').css('display', 'none');
+    $('#isPublic input').prop('checked', false);;
 }
