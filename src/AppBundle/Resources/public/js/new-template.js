@@ -34,10 +34,10 @@ function showDate() {
 }
 
 function showIsPublic() {
-    $('#appbundle_plan_isPublic').parent().parent().css('display', '');
+    $('#isPublic').css('display', '');
 }
 
 function hideIsPublic() {
-    $('#appbundle_plan_isPublic').parent().parent().css('display', 'none');
-    $('#appbundle_plan_isPublic').prop('checked', false);;
+    $('#isPublic').css('display', 'none');
+    $('#isPublic input').prop('checked', false);;
 }
