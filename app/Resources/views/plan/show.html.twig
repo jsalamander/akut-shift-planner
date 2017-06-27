@@ -45,7 +45,7 @@
                 </thead>
                 <tbody>
                 {% for shift in plan.shifts %}
-                    <tr>
+                    <tr class="wow fadeInUp">
                         <th scope="row">{{ shift.title }}</th>
                         <td>{{ shift.start|date('H:i') }}</td>
                         <td>{{ shift.end|date('H:i') }}</td>
