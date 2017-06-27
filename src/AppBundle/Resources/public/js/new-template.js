@@ -24,7 +24,7 @@ function showEmailAddress() {
 
 function hideDate() {
     $('#appbundle_plan_date').parent().css('display', 'none');
-    $('#appbundle_plan_date').val('2000-01-01');
+    $('#appbundle_plan_date').val('2099-01-01');
 }
 
 function showDate() {
