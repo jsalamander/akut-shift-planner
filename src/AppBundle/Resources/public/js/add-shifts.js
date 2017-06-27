@@ -50,7 +50,7 @@ function addShiftForm($collectionHolder, $newLinkLi) {
     $collectionHolder.data('index', index + 1);
 
     // Display the form in the page in an li, before the "Add a shift" link li
-    var $newFormLi = $('<li></li>').append(newForm);
+    var $newFormLi = $('<li class="animated fadeIn"></li>').append(newForm);
     $newLinkLi.before($newFormLi);
 }
 

@@ -11,26 +11,28 @@
                 {% trans %}no_shifts{% endtrans %}
             </div>
         {% else %}
-        <table class="table table-responsive">
-            <thead class="thead-default">
-            <tr>
-                <th>{{ knp_pagination_sortable(pagination, 'title'|trans, 's.title') }} <i class="fa fa-sort" aria-hidden="true"></i></th>
-                <th>{{ 'description'|trans }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'start'|trans, 's.start') }} <i class="fa fa-sort" aria-hidden="true"></i></th>
-                <th>{{ knp_pagination_sortable(pagination, 'end'|trans, 's.end') }} <i class="fa fa-sort" aria-hidden="true"></i></th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for shift in pagination %}
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
                 <tr>
-                    <td><a href="{{ path('plan_show', { 'id': shift.plan.id }) }}">{{ shift.title }}</a></td>
-                    <td>{{ shift.description }}</td>
-                    <td>{% if shift.start %}{{ shift.start|date('H:i') }}{% endif %}</td>
-                    <td>{% if shift.end %}{{ shift.end|date('H:i') }}{% endif %}</td>
+                    <th>{{ knp_pagination_sortable(pagination, 'title'|trans, 's.title') }} <i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th>{{ 'description'|trans }}</th>
+                    <th>{{ knp_pagination_sortable(pagination, 'start'|trans, 's.start') }} <i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th>{{ knp_pagination_sortable(pagination, 'end'|trans, 's.end') }} <i class="fa fa-sort" aria-hidden="true"></i></th>
                 </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                {% for shift in pagination %}
+                    <tr>
+                        <td><a href="{{ path('plan_show', { 'id': shift.plan.id }) }}">{{ shift.title }}</a></td>
+                        <td>{{ shift.description }}</td>
+                        <td>{% if shift.start %}{{ shift.start|date('H:i') }}{% endif %}</td>
+                        <td>{% if shift.end %}{{ shift.end|date('H:i') }}{% endif %}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
         <div class="navigation">
             {{ knp_pagination_render(pagination) }}
         </div>
