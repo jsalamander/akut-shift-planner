@@ -14,12 +14,8 @@ matrix:
 env:
   - SYMFONY_VERSION="3.3.*"
 
-services:
-  - mysql
-
 before-install:
   - composer self-update
-  - mysql -e 'CREATE DATABASE IF NOT EXISTS symfony;'
 
 install:
   - composer install
@@ -27,7 +23,6 @@ install:
 
 script:
   - composer test
-  - rm app/config/parameters.yml
 
 notifications:
   email: jan.friedli@gmx.ch
