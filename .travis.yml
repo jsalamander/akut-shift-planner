@@ -14,6 +14,9 @@ matrix:
 env:
   - SYMFONY_VERSION="3.3.*"
 
+services:
+    - mysql
+
 before-install:
   - composer self-update
 
@@ -36,6 +39,7 @@ before_deploy:
   - eval "$(ssh-agent -s)"
   - chmod 600 /tmp/deploy_rsa
   - ssh-add /tmp/deploy_rsa
+
 deploy:
   - provider: script
     skip_cleanup: true
