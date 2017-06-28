@@ -34,9 +34,9 @@ class PlanControllerEnrollmentAuthenticatedTest extends WebTestCase
         $this->assertContains('private name', $this->crawler->filter('ol > li')->eq(0)->text());
         $this->assertContains('mailto:asdf@asfd.de?Subject=Kontakt Schichtplan: admin plan',
             $this->crawler->filter('#person-details li > a')->eq(0)->attr('href'));
-        $this->assertContains('09797873', $this->crawler->filter('#person-details li')->eq(1)->text());
+        $this->assertContains('+41 979787323', $this->crawler->filter('#person-details li')->eq(1)->text());
 
-        $this->assertContains('09797873', $this->crawler->filter('#person-details:nth-child(2) li')->eq(1)->text());
+        $this->assertContains('+41 979787323', $this->crawler->filter('#person-details:nth-child(2) li')->eq(1)->text());
         $this->assertContains('mailto:asdf@asfd.de?Subject=Kontakt Schichtplan: admin plan',
             $this->crawler->filter('#person-details li > a')->eq(1)->attr('href'));
         $this->assertContains('/person/2/edit', $this->crawler->filter('.edit')->eq(1)->attr('href'));
@@ -51,11 +51,11 @@ class PlanControllerEnrollmentAuthenticatedTest extends WebTestCase
             'appbundle_person[name]' => 'p',
             'appbundle_person[alias]' => 'a',
             'appbundle_person[email]' => 'testenroll.ch',
-            'appbundle_person[phone]' => '079343134343'
+            'appbundle_person[phone]' => '07934313433333'
         ));
 
         $crawler = $this->client->submit($form);
-        $this->assertEquals(3, $crawler->filter('.alert')->count());
+        $this->assertEquals(4, $crawler->filter('.alert')->count());
     }
 
     public function testEditEnrollment()
@@ -66,14 +66,14 @@ class PlanControllerEnrollmentAuthenticatedTest extends WebTestCase
             'appbundle_person[name]' => 'new name',
             'appbundle_person[alias]' => 'new alias',
             'appbundle_person[email]' => 'new@email.ch',
-            'appbundle_person[phone]' => '000000'
+            'appbundle_person[phone]' => '0795643243'
         ));
 
         $this->client->submit($form);
         $this->crawler = $this->client->followRedirect();
         $this->assertContains('new name', $this->crawler->filter('ol')->eq(0)->text());
         $this->assertContains('new@email.ch', $this->crawler->filter('ol')->eq(0)->text());
-        $this->assertContains('000000', $this->crawler->filter('ol')->eq(0)->text());
+        $this->assertContains('+41 79 564 32 43', $this->crawler->filter('ol')->eq(0)->text());
     }
 
     public function testDeletePerson()

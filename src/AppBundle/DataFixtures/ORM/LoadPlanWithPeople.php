@@ -9,6 +9,7 @@ use AppBundle\Entity\User;
 use AppBundle\Entity\Plan;
 use AppBundle\Entity\Shift;
 use Doctrine\Common\DataFixtures\AbstractFixture;
+use libphonenumber\PhoneNumber;
 
 class LoadPlanWithPeople extends AbstractFixture implements FixtureInterface
 {
@@ -38,10 +39,12 @@ class LoadPlanWithPeople extends AbstractFixture implements FixtureInterface
         $adminPlan->addShift($adminShift);
         $this->setReference('admin-shift', $adminShift);
 
+        $phone = new PhoneNumber();
+        $phone->setRawInput('+41979787323');
         $personOne = new Person();
         $personOne->setAlias('alias');
         $personOne->setName('private name');
-        $personOne->setPhone('09797873');
+        $personOne->setPhone($phone);
         $personOne->setEmail('asdf@asfd.de');
         $personOne->setShift($adminShift);
         $adminShift->addPerson($personOne);
@@ -49,7 +52,7 @@ class LoadPlanWithPeople extends AbstractFixture implements FixtureInterface
         $personTwo = new Person();
         $personTwo->setAlias('alias');
         $personTwo->setName('private name');
-        $personTwo->setPhone('09797873');
+        $personTwo->setPhone($phone);
         $personTwo->setEmail('asdf@asfd.de');
         $personTwo->setShift($adminShift);
         $adminShift->addPerson($personTwo);
