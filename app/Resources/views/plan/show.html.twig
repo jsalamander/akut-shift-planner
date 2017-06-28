@@ -65,7 +65,7 @@
 
                                                 <ul id="person-details">
                                                     {% if person.email %}<li>{% trans %}email{% endtrans %}: <a href="mailto:{{ person.email }}?Subject=Kontakt Schichtplan: {{ plan.title }} " target="_top">{{ person.email }}</a></li>{% endif %}
-                                                    {% if person.phone %}<li>{% trans %}phone{% endtrans %}: {{ person.phone }}</li>{% endif %}
+                                                    {% if person.phone %}<li>{% trans %}phone{% endtrans %}: {{ person.phone|phone_number_format('INTERNATIONAL') }}</li>{% endif %}
                                                 </ul>
                                             </li>
                                         {% else %}

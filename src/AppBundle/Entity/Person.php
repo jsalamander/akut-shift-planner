@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use AppBundle\Validator\Constraints as AppAssert;
+use Misd\PhoneNumberBundle\Validator\Constraints\PhoneNumber as AssertPhoneNumber;
 
 /**
  * Person
@@ -65,8 +66,8 @@ class Person
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="phone", type="string", length=255, nullable=true)
+     * @AssertPhoneNumber
+     * @ORM\Column(name="phone", type="phone_number", length=255, nullable=true)
      */
     private $phone;
 
