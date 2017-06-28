@@ -1,6 +1,6 @@
 {%- block time_widget -%}
     <div class="input-group clockpicker" {{ block('widget_container_attributes') }}>
-        <input id="{{ form.vars.id }}" name="{{ form.vars.full_name }}" type="text" class="form-control" value="09:30">
+        <input id="{{ form.vars.id }}" readonly="readOnly" name="{{ form.vars.full_name }}" type="text" class="form-control" value="{{ value }}">
     </div>
 {%- endblock time_widget -%}
 {%- block checkbox_widget -%}

@@ -33,6 +33,8 @@ class PlanControllerEditTemplateAuthenticatedTest extends WebTestCase
             'appbundle_plan[date]' => '2019-06-20',
             'appbundle_plan[description]' => 'new template desc',
         ));
+        $this->assertContains('00:01', $form->get('appbundle_plan[shifts][0][start]')->getValue());
+        $this->assertContains('00:02', $form->get('appbundle_plan[shifts][0][end]')->getValue());
 
         $values = $form->getPhpValues();
 
