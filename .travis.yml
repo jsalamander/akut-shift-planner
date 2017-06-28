@@ -15,6 +15,7 @@ env:
   - SYMFONY_VERSION="3.3.*"
 
 before-install:
+  - mysql -e 'CREATE DATABASE myapp_test;'
   - composer self-update
 
 install:
