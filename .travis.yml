@@ -2,6 +2,9 @@ language: php
 
 sudo: false
 
+cache:
+  directories:
+    - $HOME/.composer/cache/files
 
 matrix:
   include:
@@ -11,12 +14,16 @@ matrix:
 env:
   - SYMFONY_VERSION="3.3.*"
 
+services:
+    - mysql
+
 before-install:
+  - mysql -e 'CREATE DATABASE symfony;'
   - composer self-update
 
 install:
-  - composer install
   - cp app/config/parameters.yml.dist app/config/parameters.yml
+  - composer install
 
 script:
   - composer test
