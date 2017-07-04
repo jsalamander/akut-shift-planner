@@ -19,6 +19,7 @@ services:
 
 before-install:
   - composer self-update
+  - php bin/console doctrine:database:create
 
 install:
   - composer install
