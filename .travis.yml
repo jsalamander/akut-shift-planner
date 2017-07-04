@@ -18,7 +18,7 @@ services:
     - mysql
 
 before-install:
-  - php bin/console doctrine:database:create
+  - mysql -e 'create database akut-shift-planner_test'
   - composer self-update
 
 install:
