@@ -17,7 +17,7 @@ env:
 services:
     - mysql
 
-before-install:
+before_install:
   - mysql -e 'create database akut-shift-planner_test'
   - echo yolo
 
