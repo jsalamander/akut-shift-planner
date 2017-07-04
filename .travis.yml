@@ -18,8 +18,7 @@ services:
     - mysql
 
 before_install:
-  - mysql -e 'create database symfony'
-  - echo yolo
+  - mysql -e 'create database akut-shift-planner_test'
 
 install:
   - cp app/config/parameters.yml.dist app/config/parameters.yml
