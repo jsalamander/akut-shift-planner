@@ -12,7 +12,7 @@ matrix:
     - php: 7.1
 
 env:
-  - SYMFONY_VERSION="3.3.*"
+  - SYMFONY_VERSION="3.3.*" DB=mysql
 
 services:
     - mysql
@@ -22,12 +22,11 @@ before-install:
   - php bin/console doctrine:database:create
 
 install:
-  - composer install
   - cp app/config/parameters.yml.dist app/config/parameters.yml
+  - composer install
 
 script:
   - composer test
-  - rm app/config/parameters.yml
 
 notifications:
   email: jan.friedli@gmx.ch

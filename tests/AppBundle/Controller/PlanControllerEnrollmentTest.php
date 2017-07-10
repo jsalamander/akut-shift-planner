@@ -34,7 +34,7 @@ class PlanControllerEnrollmentTest extends WebTestCase
             'appbundle_person[name]' => 'private name',
             'appbundle_person[alias]' => 'alias',
             'appbundle_person[email]' => 'test@enroll.ch',
-            'appbundle_person[phone]' => '079343134343'
+            'appbundle_person[phone]' => '0795435432'
         ));
 
         $this->client->submit($form);
@@ -55,11 +55,11 @@ class PlanControllerEnrollmentTest extends WebTestCase
             'appbundle_person[name]' => 'p',
             'appbundle_person[alias]' => 'a',
             'appbundle_person[email]' => 'testenroll.ch',
-            'appbundle_person[phone]' => '079343134343'
+            'appbundle_person[phone]' => '07934123123123123123'
         ));
 
         $crawler = $this->client->submit($form);
-        $this->assertEquals(3, $crawler->filter('.alert')->count());
+        $this->assertEquals(4, $crawler->filter('.alert')->count());
     }
 
     public function testFullEnrollment()
@@ -78,7 +78,7 @@ class PlanControllerEnrollmentTest extends WebTestCase
             'appbundle_person[name]' => 'private name',
             'appbundle_person[alias]' => 'alias',
             'appbundle_person[email]' => 'test@enroll.ch',
-            'appbundle_person[phone]' => '079343134343'
+            'appbundle_person[phone]' => '0793435645'
         ));
 
         $this->client->submit($form);
@@ -97,7 +97,7 @@ class PlanControllerEnrollmentTest extends WebTestCase
             'appbundle_person[name]' => 'private name',
             'appbundle_person[alias]' => 'alias',
             'appbundle_person[email]' => 'test@enroll.ch',
-            'appbundle_person[phone]' => '079343134343'
+            'appbundle_person[phone]' => '0794564534'
         ));
 
         $this->crawler = $this->client->submit($form);

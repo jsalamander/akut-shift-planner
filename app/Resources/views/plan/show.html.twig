@@ -59,13 +59,13 @@
                                         {% if (is_granted('ROLE_USER') and app.user.id == plan.user.id) %}
                                             <li class="list-group-item flex-column align-items-start">
                                                 <div class="d-flex w-100 justify-content-between">
-                                                    <span class="mb-1">{{ person.name }}</span>
+                                                    <span class="mb-1"><b>{{ person.name }}</b></span>
                                                     <small>{% if is_granted('ROLE_USER') %}<a class="edit" href="{{ path('person_edit',{ 'id': person.id }) }}"><i class="fa fa-pencil pull-right" aria-hidden="true"></i></a>{% endif %}</small>
                                                 </div>
 
                                                 <ul id="person-details">
-                                                    {% if person.email %}<li>{% trans %}email{% endtrans %}: <a href="mailto:{{ person.email }}?Subject=Kontakt Schichtplan: {{ plan.title }} " target="_top">{{ person.email }}</a></li>{% endif %}
-                                                    {% if person.phone %}<li>{% trans %}phone{% endtrans %}: {{ person.phone }}</li>{% endif %}
+                                                    {% if person.email %}<li><i class="fa fa-envelope-o" aria-hidden="true"></i> <a href="mailto:{{ person.email }}?Subject=Kontakt Schichtplan: {{ plan.title }} " target="_top">{{ person.email }}</a></li>{% endif %}
+                                                    {% if person.phone %}<li><i class="fa fa-phone" aria-hidden="true"></i> {{ person.phone|phone_number_format('INTERNATIONAL') }}</li>{% endif %}
                                                 </ul>
                                             </li>
                                         {% else %}
