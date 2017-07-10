@@ -17,9 +17,8 @@ env:
 services:
     - mysql
 
-before-install:
-  - composer self-update
-  - php bin/console doctrine:database:create
+before_install:
+  - mysql -e 'create database symfony'
 
 install:
   - cp app/config/parameters.yml.dist app/config/parameters.yml
