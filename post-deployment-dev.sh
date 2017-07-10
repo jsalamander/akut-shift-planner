@@ -5,6 +5,4 @@ php71 bin/symfony_requirements
 php71 bin/console cache:clear --env=prod --no-debug --no-warmup
 php71 bin/console cache:warmup --env=prod
 php71 bin/console assetic:dump --env=prod --no-debug --env=prod
-php71 bin/console doctrine:database:drop --force --env=prod
-php71 bin/console doctrine:database:create --env=prod
 php71 bin/console doctrine:schema:update --force --env=prod
