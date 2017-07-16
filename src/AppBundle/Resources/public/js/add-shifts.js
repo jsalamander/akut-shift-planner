@@ -3,7 +3,7 @@ $(function() {
 
     // setup an "add a shift" link
     var linkText = Translator.trans('add_shift');
-    var $addShiftLink = $('<small class="add_shift_link"><a href="#"><i class="fa fa-plus" aria-hidden="true"></i> ' + linkText + '</a></small>');
+    var $addShiftLink = $('<a class="add_shift_link pull-right btn btn-primary btn-sm" href="#"><i class="fa fa-plus" aria-hidden="true"></i> ' + linkText + '</a>');
     var $newLinkLi = $('<div></div>').append($addShiftLink);
 
     // Get the ul that holds the collection of shifts
