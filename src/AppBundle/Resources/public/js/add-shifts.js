@@ -1,5 +1,6 @@
 $(function() {
     var $collectionHolder;
+    var isDown = false;
 
     // setup an "add a shift" link
     var linkText = Translator.trans('add_shift');
@@ -25,14 +26,18 @@ $(function() {
         addDatePicker();
         addCross();
     });
+
     $('.shifts > li').each(function (key, el) {
       $(el).prepend(cross);
-    })
+    });
+
     $('.close').each(function (key, el) {
         $(el).click(function (e) {
             $(this).parent().remove();
         });
-    })
+    });
+
+    addDragFunctionality();
 });
 
 function addShiftForm($collectionHolder, $newLinkLi) {
@@ -60,10 +65,42 @@ function addDatePicker() {
     });
 }
 
-var cross = '<div class="d-flex justify-content-between"><i class="fa close fa-times" aria-hidden="true"></i><i class="fa fa-bars" aria-hidden="true"></i></div>';
+var cross = '<div class="d-flex justify-content-between"><i class="fa fa-bars drag-handle" aria-hidden="true"></i><i class="fa close fa-times" aria-hidden="true"></i></div>';
 function addCross(){
     $('.shifts > li').last().prepend(cross);
     $('.close').click(function (e) {
         $(this).parent().remove();
+    });
+}
+
+function addDragFunctionality() {
+    $('.shifts').sortable({
+        handle: '.drag-handle',
+        start: startDrag(),
+        end: endDrag(),
+        scrollSpeed: 10,
+        cursorAt: { top: 0, left: 0 }
+    });
+}
+
+function startDrag() {
+    $('.drag-handle').mousedown(function (e) {
+        isDown = true;
+        $('.shifts li > div:nth-child(2)').each(function (key, el) {
+            $(el).hide();
+            console.log($(el).first().children().eq(1).val());
+        })
+    });
+}
+
+function endDrag() {
+    $(document).mouseup(function (e) {
+        if(isDown) {
+            $('.shifts li > div:nth-child(2)').each(function (key, el) {
+                $(el).show();
+                $(el).addClass('animated').addClass('fadeIn');
+            });
+            isDown = false;
+        }
     });
 }
