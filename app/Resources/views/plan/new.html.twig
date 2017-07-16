@@ -23,9 +23,7 @@
         </div>
         <h3>{% trans %}shifts{% endtrans %}</h3>
         {% if form.vars.errors is not empty %}
-            <div class="alert alert-danger">
-                {{ form_errors(form) }}
-            </div>
+            {{ form_errors(form) }}
         {% endif %}
         <ul class="shifts list-unstyled" data-prototype="{{ form_widget(form.shifts.vars.prototype)|e('html_attr') }}">
             {% for shift in form.shifts %}
