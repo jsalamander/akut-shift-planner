@@ -28,7 +28,7 @@ class Shift
      *
      * @Assert\Length(
      *      min = 3,
-     *      max = 80,
+     *      max = 250,
      *      minMessage = "The title must be at least {{ limit }} characters long",
      *      maxMessage = "The title cannot be longer than {{ limit }} characters",
      * )
@@ -40,7 +40,7 @@ class Shift
      * @var string
      * @Assert\Length(
      *      min = 3,
-     *      max = 80,
+     *      max = 250,
      *      minMessage = "The description must be at least {{ limit }} characters long",
      *      maxMessage = "The description cannot be longer than {{ limit }} characters",
      * )

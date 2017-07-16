@@ -52,7 +52,7 @@ class Plan
      * @Assert\NotBlank(groups={"new_from_template", "Default"})
      * @Assert\Length(
      *      min = 2,
-     *      max = 300,
+     *      max = 500,
      *      minMessage = "The description must be at least {{ limit }} characters long",
      *      maxMessage = "The description cannot be longer than {{ limit }} characters",
      *      groups={"new_from_template", "Default"}
