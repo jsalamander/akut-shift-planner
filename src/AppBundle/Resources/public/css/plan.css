@@ -11,3 +11,7 @@
 .drag-handle {
     cursor: pointer;
 }
+
+.card .fa-bars {
+    margin-left: 0.5rem;
+}

@@ -1,6 +1,5 @@
 $(function() {
     var $collectionHolder;
-    var isDown = false;
 
     // setup an "add a shift" link
     var linkText = Translator.trans('add_shift');
@@ -25,6 +24,7 @@ $(function() {
         addShiftForm($collectionHolder, $newLinkLi);
         addDatePicker();
         addCross();
+        addDragFunctionality();
     });
 
     $('.shifts > li').each(function (key, el) {
@@ -33,7 +33,7 @@ $(function() {
 
     $('.close').each(function (key, el) {
         $(el).click(function (e) {
-            $(this).parent().remove();
+            $(this).parent().parent().remove();
         });
     });
 
@@ -65,13 +65,15 @@ function addDatePicker() {
     });
 }
 
-var cross = '<div class="d-flex justify-content-between"><i class="fa fa-bars drag-handle" aria-hidden="true"></i><i class="fa close fa-times" aria-hidden="true"></i></div>';
+var cross = '<div class="d-flex justify-content-end"><i class="fa close fa-times text-danger" aria-hidden="true"></i><i class="fa fa-bars drag-handle" aria-hidden="true"></i></div>';
+
 function addCross(){
     $('.shifts > li').last().prepend(cross);
     $('.close').click(function (e) {
-        $(this).parent().remove();
+        $(this).parent().parent().remove();
     });
 }
+var isDown = false;
 
 function addDragFunctionality() {
     $('.shifts').sortable({
@@ -79,7 +81,7 @@ function addDragFunctionality() {
         start: startDrag(),
         end: endDrag(),
         scrollSpeed: 10,
-        cursorAt: { top: 0, left: 0 }
+        cursorAt: { top: 0, right: 0 }
     });
 }
 
@@ -88,7 +90,8 @@ function startDrag() {
         isDown = true;
         $('.shifts li > div:nth-child(2)').each(function (key, el) {
             $(el).hide();
-            console.log($(el).first().children().eq(1).val());
+            $('.fa-times').hide();
+            console.log($(el));
         })
     });
 }
@@ -98,6 +101,7 @@ function endDrag() {
         if(isDown) {
             $('.shifts li > div:nth-child(2)').each(function (key, el) {
                 $(el).show();
+                $('.fa-times').show();
                 $(el).addClass('animated').addClass('fadeIn');
             });
             isDown = false;
