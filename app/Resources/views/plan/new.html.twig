@@ -27,7 +27,7 @@
         {% endif %}
         <ul class="shifts list-unstyled" data-prototype="{{ form_widget(form.shifts.vars.prototype)|e('html_attr') }}">
             {% for shift in form.shifts %}
-                <li>{{ form_widget(shift) }}</li>
+                <li class="card">{{ form_widget(shift) }}</li>
             {% endfor %}
         </ul>
         <input class="btn btn-primary" type="submit" value="{% trans %}create{% endtrans %}" />

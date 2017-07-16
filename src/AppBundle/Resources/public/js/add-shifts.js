@@ -26,7 +26,7 @@ $(function() {
         addCross();
     });
     $('.shifts > li').each(function (key, el) {
-      $(el).prepend('<i class="fa close fa-times pull-right" aria-hidden="true"></i>');
+      $(el).prepend(cross);
     })
     $('.close').each(function (key, el) {
         $(el).click(function (e) {
@@ -50,7 +50,7 @@ function addShiftForm($collectionHolder, $newLinkLi) {
     $collectionHolder.data('index', index + 1);
 
     // Display the form in the page in an li, before the "Add a shift" link li
-    var $newFormLi = $('<li class="animated fadeIn"></li>').append(newForm);
+    var $newFormLi = $('<li class="animated fadeIn card"></li>').append(newForm);
     $newLinkLi.before($newFormLi);
 }
 
@@ -60,8 +60,9 @@ function addDatePicker() {
     });
 }
 
+var cross = '<div class="d-flex justify-content-between"><i class="fa close fa-times" aria-hidden="true"></i><i class="fa fa-bars" aria-hidden="true"></i></div>';
 function addCross(){
-    $('.shifts > li').last().prepend('<i class="fa close fa-times pull-right" aria-hidden="true"></i>');
+    $('.shifts > li').last().prepend(cross);
     $('.close').click(function (e) {
         $(this).parent().remove();
     });
