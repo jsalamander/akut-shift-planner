@@ -3,7 +3,7 @@ $(function() {
 
     // setup an "add a shift" link
     var linkText = Translator.trans('add_shift');
-    var $addShiftLink = $('<a class="add_shift_link pull-right btn btn-primary btn-sm" href="#"><i class="fa fa-plus" aria-hidden="true"></i> ' + linkText + '</a>');
+    var $addShiftLink = $('<a class="add_shift_link pull-right btn btn-secondary btn-sm" href="#"><i class="fa fa-plus" aria-hidden="true"></i></a>');
     var $newLinkLi = $('<div></div>').append($addShiftLink);
 
     // Get the ul that holds the collection of shifts
@@ -107,6 +107,7 @@ function startDrag() {
         $('.fa-times').hide();
         var title = $(el).find('input').first().val();
         if(title) {
+            console.log('doing');
             $(el).parent().append('<span class="index-label">'+title+'</span>');
         } else {
             // make sure user won't be confused
