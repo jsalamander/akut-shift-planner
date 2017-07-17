@@ -33,8 +33,3 @@ services:
     # AppBundle\Service\ExampleService:
     #     arguments:
     #         $someArgument: 'some_value'
-
-    twig.extension.sortbyfield:
-            class: Snilius\Twig\SortByFieldExtension
-            tags:
-                - { name: twig.extension }
