@@ -97,7 +97,8 @@ function addDragFunctionality() {
 
 function setOrderIndexes() {
     $('.order-index').each(function (index, value) {
-        $(value).val(index);
+        console.log($(value));
+        $(value).attr('value', index);
     });
 }
 

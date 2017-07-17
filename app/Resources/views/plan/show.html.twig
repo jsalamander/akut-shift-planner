@@ -44,7 +44,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                {% for shift in plan.shifts %}
+                {% for shift in plan.shifts | sortbyfield('orderIndex') %}
                     <tr class="wow fadeInUp">
                         <th scope="row">{{ shift.title }}</th>
                         <td>{{ shift.start|date('H:i') }}</td>

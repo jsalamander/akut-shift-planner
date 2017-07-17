@@ -81,9 +81,9 @@ class Shift
      *
      * Indicates the order of all shifts
      *
-     * @ORM\Column(name="order", type="integer", nullable=true)
+     * @ORM\Column(name="orderIndex", type="integer", nullable=true)
      */
-    private $order;
+    private $orderIndex = 0;
 
 
     /**
@@ -293,17 +293,17 @@ class Shift
     /**
      * @return int
      */
-    public function getOrder()
+    public function getOrderIndex()
     {
-        return $this->order;
+        return $this->orderIndex;
     }
 
     /**
-     * @param int $order
+     * @param int $orderIndex
      */
-    public function setOrder($order)
+    public function setOrderIndex($orderIndex)
     {
-        $this->order = $order;
+        $this->orderIndex = $orderIndex;
     }
 
 

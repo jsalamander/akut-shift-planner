@@ -116,6 +116,7 @@ class NoAuthStrategy implements FormStrategyInterface {
         $clone->setTitle($formPlan->getTitle());
         $clone->setDate($formPlan->getDate());
         $clone->setDescription($formPlan->getDescription());
+        $clone->setOrderIndex($formPlan->getOrderIndex());
         $clone = $this->generateNewUserForPlan($clone, $email, $password);
         return $clone;
     }
