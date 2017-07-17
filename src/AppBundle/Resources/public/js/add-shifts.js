@@ -97,7 +97,6 @@ function addDragFunctionality() {
 
 function setOrderIndexes() {
     $('.order-index').each(function (index, value) {
-        console.log($(value));
         $(value).attr('value', index);
     });
 }
@@ -106,7 +105,14 @@ function startDrag() {
     $('.shifts li > div:nth-child(2)').each(function (key, el) {
         $(el).hide();
         $('.fa-times').hide();
-        $(el).parent().append('<span class="index-label">Plan: '+ key +'</span>');
+        var title = $(el).find('input').first().val();
+        if(title) {
+            $(el).parent().append('<span class="index-label">'+title+'</span>');
+        } else {
+            // make sure user won't be confused
+            var keyToShow = key + 1;
+            $(el).parent().append('<span class="index-label">Plan: '+ keyToShow +'</span>');
+        }
     })
 }
 
