@@ -76,6 +76,15 @@ class Shift
      */
     private $numberPeople;
 
+    /**
+     * @var int
+     *
+     * Indicates the order of all shifts
+     *
+     * @ORM\Column(name="order", type="integer", nullable=true)
+     */
+    private $order;
+
 
     /**
      * @ORM\ManyToOne(targetEntity="Plan", inversedBy="shifts")
@@ -280,6 +289,23 @@ class Shift
     {
         return $this->people;
     }
+
+    /**
+     * @return int
+     */
+    public function getOrder()
+    {
+        return $this->order;
+    }
+
+    /**
+     * @param int $order
+     */
+    public function setOrder($order)
+    {
+        $this->order = $order;
+    }
+
 
     public function __toString() {
         return $this->title;
