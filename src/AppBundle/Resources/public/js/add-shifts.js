@@ -105,6 +105,7 @@ function startDrag() {
     $('.shifts li > div:nth-child(2)').each(function (key, el) {
         $(el).hide();
         $('.fa-times').hide();
+        $(el).parent().append('<span class="index-label">Plan: '+ key +'</span>');
     })
 }
 
@@ -113,5 +114,6 @@ function endDrag() {
         $(el).show();
         $('.fa-times').show();
         $(el).addClass('animated').addClass('fadeIn');
+        $(el).parent().find('.index-label').remove()
     });
 }
