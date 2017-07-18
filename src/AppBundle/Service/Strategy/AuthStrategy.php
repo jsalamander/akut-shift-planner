@@ -86,7 +86,6 @@ class AuthStrategy implements FormStrategyInterface {
         $clone->setDate($formPlan->getDate());
         $clone->setDescription($formPlan->getDescription());
         $clone->setUser($this->user);
-        $clone->setOrderIndex($formPlan->getOrderIndex());
 
         return $clone;
     }
