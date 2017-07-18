@@ -40,12 +40,14 @@ class PlanControllerEditAuthenticatedTest extends WebTestCase
         $values = $form->getPhpValues();
 
         $values['appbundle_plan']['shifts'][0]['title'] = 'new foo';
+        $values['appbundle_plan']['shifts'][0]['orderIndex'] = -5;
 
         $values['appbundle_plan']['shifts'][1]['title'] = 'new shift';
         $values['appbundle_plan']['shifts'][1]['description'] = 'new new';
         $values['appbundle_plan']['shifts'][1]['start'] = '00:05';
         $values['appbundle_plan']['shifts'][1]['end'] = '00:10';
         $values['appbundle_plan']['shifts'][1]['numberPeople'] = 1;
+        $values['appbundle_plan']['shifts'][1]['orderIndex'] = 5;
 
         $this->client->request($form->getMethod(), $form->getUri(), $values, $form->getPhpFiles());
         $this->crawler = $this->client->followRedirect();
