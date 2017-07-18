@@ -364,6 +364,10 @@
                 <source>order_index</source>
                 <target>Order Index</target>
             </trans-unit>
+            <trans-unit id="plan_collection">
+                <source>plan_collection</source>
+                <target>Plan Collections</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

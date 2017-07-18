@@ -25,12 +25,15 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mr-auto">
                 {% if is_granted('ROLE_USER') %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('plan_index') }}"><i class="fa fa-list" aria-hidden="true"></i> {% trans %}plans{% endtrans %}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('plan_tempalte_index') }}"><i class="fa fa-list-alt" aria-hidden="true"></i> {% trans %}templates{% endtrans %}</a>
-                        </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('plan_index') }}"><i class="fa fa-list" aria-hidden="true"></i> {% trans %}plans{% endtrans %}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('plan_tempalte_index') }}"><i class="fa fa-list-alt" aria-hidden="true"></i> {% trans %}templates{% endtrans %}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('plancollection_index') }}"><i class="fa fa-th-list" aria-hidden="true"></i> {% trans %}plan_collection{% endtrans %}</a>
+                    </li>
                 {% endif %}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="{{ path('plan_new') }}" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
