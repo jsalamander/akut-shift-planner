@@ -97,6 +97,12 @@ class Plan
      */
     private $user;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="PlanCollection", inversedBy="plans", cascade={"persist"})
+     * @ORM\JoinColumn(name="plan_collection_title", referencedColumnName="title")
+     */
+    private $planCollection;
+
     public function __construct()
     {
         $this->shifts = new ArrayCollection();
@@ -134,6 +140,22 @@ class Plan
     public function setUser($user)
     {
         $this->user = $user;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPlanCollection()
+    {
+        return $this->planCollection;
+    }
+
+    /**
+     * @param mixed $planCollection
+     */
+    public function setPlanCollection($planCollection)
+    {
+        $this->planCollection = $planCollection;
     }
 
     /**

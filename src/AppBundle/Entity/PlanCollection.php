@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * PlanCollection
@@ -30,6 +31,52 @@ class PlanCollection
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
+
+    /**
+     *
+     * @ORM\OneToMany(targetEntity="Plan", mappedBy="planCollection", cascade={"persist"})
+     */
+    private $plans;
+
+    public function __construct()
+    {
+        $this->plans = new ArrayCollection();
+    }
+
+    /**
+     * Add plan
+     *
+     * @param \AppBundle\Entity\Plan
+     *
+     * @return User
+     */
+    public function addPlan(\AppBundle\Entity\Plan $plan)
+    {
+        $this->plans[] = $plan;
+
+        return $this;
+    }
+
+    /**
+     * Remove plan
+     *
+     * @param \AppBundle\Entity\Plan
+     */
+    public function removePlan(\AppBundle\Entity\Plan $plan)
+    {
+        $this->plans->removeElement($plan);
+    }
+
+    /**
+     * Get plans
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPlans()
+    {
+        return $this->plans;
+    }
+
 
     /**
      * Set title
