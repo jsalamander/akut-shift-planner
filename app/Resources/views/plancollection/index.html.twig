@@ -12,7 +12,7 @@
                     <thead>
                     <tr>
                         <th>{{ knp_pagination_sortable(pagination, 'title'|trans, 'p.title') }} <i class="fa fa-sort" aria-hidden="true"></i></th>
-                        <th>Bearbeiten</th>
+                        <th>{% trans %}actions{% endtrans %}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -20,7 +20,7 @@
                         <tr>
                             <td><a href="{{ path('plancollection_show', { 'title': collection.title }) }}">{{ collection.title }}</a></td>
                             <td>
-                                <a class="btn btn-secondary btn-sm" href="{{ path('plancollection_edit', { 'title': collection.title }) }}">show</a>
+                                <a href="{{ path('plancollection_edit', { 'title': collection.title }) }}">{% trans %}edit{% endtrans %}</a>
                             </td>
                         </tr>
                     {% endfor %}

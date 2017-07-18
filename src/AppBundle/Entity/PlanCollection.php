@@ -4,12 +4,14 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * PlanCollection
  *
  * @ORM\Table(name="plan_collection")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\PlanCollectionRepository")
+ * @UniqueEntity("title")
  */
 class PlanCollection
 {
