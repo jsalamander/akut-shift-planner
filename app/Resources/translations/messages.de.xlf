@@ -366,11 +366,15 @@
             </trans-unit>
             <trans-unit id="plan_collection">
                 <source>plan_collection</source>
-                <target>Plan Sammlungen</target>
+                <target>Plansammlungen</target>
             </trans-unit>
             <trans-unit id="no_plan_collections">
                 <source>no_plan_collections</source>
                 <target>Keine Plan Sammlung erstellt</target>
+            </trans-unit>
+            <trans-unit id="new_plan_collection">
+                <source>new_plan_collection</source>
+                <target>Neue Plansammlung</target>
             </trans-unit>
             <trans-unit id="link">
                 <source>link</source>
