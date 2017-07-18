@@ -6,29 +6,23 @@
     </div>
 
     <div class="col-12">
-        {% if planCollections is not empty %}
+        {% if pagination.items is not empty %}
             <div class="table-responsive">
                 <table class="table">
                     <thead>
                     <tr>
                         <th>{{ knp_pagination_sortable(pagination, 'title'|trans, 'p.title') }} <i class="fa fa-sort" aria-hidden="true"></i></th>
+                        <th>Bearbeiten</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {% for collection in planCollections %}
+                    {% for collection in pagination %}
                         <tr>
-                            <th><a href="{{ path('plancollection_show', { 'id': collection.id }) }}">{{ collection.title }}</a></th>
+                            <td><a href="{{ path('plancollection_show', { 'id': collection.id }) }}">{{ collection.title }}</a></td>
+                            <td>
+                                <a class="btn btn-secondary btn-sm" href="{{ path('plancollection_edit', { 'id': collection.id }) }}">show</a>
+                            </td>
                         </tr>
-                        <td>
-                            <ul>
-                                <li>
-                                    <a href="{{ path('plancollection_show', { 'id': collection.id }) }}">show</a>
-                                </li>
-                                <li>
-                                    <a href="{{ path('plancollection_edit', { 'id': collection.id }) }}">edit</a>
-                                </li>
-                            </ul>
-                        </td>
                     {% endfor %}
                     </tbody>
                 </table>

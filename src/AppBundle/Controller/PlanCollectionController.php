@@ -20,14 +20,25 @@ class PlanCollectionController extends Controller
      * @Route("/", name="plancollection_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
+        $paginator  = $this->get('knp_paginator');
 
-        $planCollections = $em->getRepository('AppBundle:PlanCollection')->findAll();
+        $queryBuilder = $em->getRepository('AppBundle:PlanCollection')->createQueryBuilder('p');
+        $query = $queryBuilder
+            ->where('p.user = :user')
+            ->setParameter('user', $this->getUser()->getId())
+            ->getQuery();
+
+        $pagination = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            10
+        );
 
         return $this->render('plancollection/index.html.twig', array(
-            'planCollections' => $planCollections,
+            'pagination' => $pagination,
         ));
     }
 
@@ -45,6 +56,7 @@ class PlanCollectionController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $planCollection->setUser($this->getUser());
             $em->persist($planCollection);
             $em->flush();
 

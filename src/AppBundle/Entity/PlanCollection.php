@@ -30,6 +30,12 @@ class PlanCollection
 
 
     /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="planCollections", cascade={"persist"})
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
+
+    /**
      * Get id
      *
      * @return int
@@ -61,6 +67,22 @@ class PlanCollection
     public function getTitle()
     {
         return $this->title;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
     }
 }
 
