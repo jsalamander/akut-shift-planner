@@ -32,7 +32,7 @@
         {{ form_start(delete_form) }}
         <input class="btn btn-danger btn-sm pull-right" type="submit" value="{% trans %}delete{% endtrans %}">
         {{ form_end(delete_form) }}
-        <a href="{{ path('plan_edit', { 'id': planCollection.id }) }}" class="btn btn-secondary btn-sm">{% trans %}edit{% endtrans %}</a>
+        <a href="{{ path('plancollection_edit', { 'title': planCollection.title }) }}" class="btn btn-secondary btn-sm">{% trans %}edit{% endtrans %}</a>
     </div>
 {% endif %}
 

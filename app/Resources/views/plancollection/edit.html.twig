@@ -1,21 +1,23 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Plancollection edit</h1>
+    <div class="col-12">
+        <h1>{% trans %}edit{% endtrans %}</h1>
+    </div>
 
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
-    {{ form_end(edit_form) }}
+    <div class="col-12">
+        {{ form_start(edit_form) }}
+        <div class="form_edit-group">
+            {{ form_row(edit_form.title) }}
+            {{ form_row(edit_form.plans) }}
+        </div>
 
-    <ul>
-        <li>
-            <a href="{{ path('plancollection_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+        <input class="btn btn-primary" type="submit" value="{% trans %}save{% endtrans %}" />
+        {{ form_end(edit_form) }}
+    </div>
+    <div class="col-12">
+        {{ form_start(delete_form) }}
+        <input class="btn btn-sm btn-danger pull-right" type="submit" value="{% trans %}delete{% endtrans %}">
+        {{ form_end(delete_form) }}
+    </div>
 {% endblock %}

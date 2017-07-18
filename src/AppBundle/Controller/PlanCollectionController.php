@@ -105,7 +105,7 @@ class PlanCollectionController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('plancollection_edit', array('title' => $planCollection->getTitle()));
+            return $this->redirectToRoute('plancollection_show', array('title' => $planCollection->getTitle()));
         }
 
         return $this->render('plancollection/edit.html.twig', array(
