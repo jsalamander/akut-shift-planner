@@ -1,5 +1,6 @@
 $(function() {
     var $collectionHolder;
+    var sortable;
 
     // setup an "add a shift" link
     var linkText = Translator.trans('add_shift');
@@ -25,6 +26,7 @@ $(function() {
         addDatePicker();
         addCross();
         addDragFunctionality();
+        sortable.sortable( "refresh" );
     });
 
     $('.shifts > li').each(function (key, el) {
@@ -35,6 +37,15 @@ $(function() {
         $(el).click(function (e) {
             $(this).parent().parent().remove();
         });
+    });
+
+    sortable = $('.shifts').sortable({
+        handle: '.drag-handle',
+        scrollSpeed: 10,
+        cursorAt: { top: 0, right: 0 },
+        stop: function( event, ui ) {
+            setOrderIndexes();
+        }
     });
 
     addDragFunctionality();
@@ -66,7 +77,6 @@ function addDatePicker() {
 }
 
 var cross = '<div class="d-flex justify-content-end"><i class="fa close fa-times text-danger" aria-hidden="true"></i><i class="fa fa-bars drag-handle" aria-hidden="true"></i></div>';
-
 function addCross(){
     $('.shifts > li').last().prepend(cross);
     $('.close').click(function (e) {
@@ -75,15 +85,6 @@ function addCross(){
 }
 
 function addDragFunctionality() {
-    $('.shifts').sortable({
-        handle: '.drag-handle',
-        scrollSpeed: 10,
-        cursorAt: { top: 0, right: 0 },
-        stop: function( event, ui ) {
-            setOrderIndexes();
-        }
-    });
-
     $('.drag-handle').mousedown(function (el) {
         startDrag();
     });
@@ -107,7 +108,6 @@ function startDrag() {
         $('.fa-times').hide();
         var title = $(el).find('input').first().val();
         if(title) {
-            console.log('doing');
             $(el).parent().append('<span class="index-label">'+title+'</span>');
         } else {
             // make sure user won't be confused
