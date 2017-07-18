@@ -372,6 +372,10 @@
                 <source>no_plan_collections</source>
                 <target>Keine Plan Sammlung erstellt</target>
             </trans-unit>
+            <trans-unit id="link">
+                <source>link</source>
+                <target>Link</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

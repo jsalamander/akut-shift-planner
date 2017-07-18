@@ -7,17 +7,18 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Titel</th>
-                        <th>Link</th>
+                        <th>{% trans %}title{% endtrans %}</th>
+                        <th>{% trans %}link{% endtrans %}</th>
                     </tr>
                 </thead>
                 <tbody>
-                {{ dump(planCollection) }}
                 {% for plan in planCollection.plans %}
                     <tr>
                         <td>{{ plan.title }}</td>
                         <td>
-                            <a href="{{ path('plan_show', { 'id': plan.id }) }}"> {{ plan.title }}</a>
+                            <a href="{{ path('plan_show', { 'id': plan.id }) }}">
+                                {{ url('plan_show', { 'id': plan.id }) }}
+                            </a>
                         </td>
                     </tr>
                 {% endfor %}
@@ -28,7 +29,7 @@
 
     <div class="col-12">
         {{ form_start(delete_form) }}
-        <input class="btn btn-danger btn-sm pull-right" type="submit" value="Delete">
+        <input class="btn btn-danger btn-sm pull-right" type="submit" value="{% trans %}delete{% endtrans %}">
         {{ form_end(delete_form) }}
     </div>
 {% endblock %}

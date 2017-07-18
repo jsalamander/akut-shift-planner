@@ -376,6 +376,10 @@
                 <source>new_plan_collection</source>
                 <target>New Plan Collection</target>
             </trans-unit>
+            <trans-unit id="link">
+                <source>link</source>
+                <target>Link</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
