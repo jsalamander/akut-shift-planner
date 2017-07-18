@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * PlanCollection
@@ -13,17 +14,10 @@ use Doctrine\ORM\Mapping as ORM;
 class PlanCollection
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
-
-    /**
      * @var string
      *
+     * @Assert\NotBlank()
+     * @ORM\Id
      * @ORM\Column(name="title", type="string", length=255)
      */
     private $title;
@@ -34,16 +28,6 @@ class PlanCollection
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
-
-    /**
-     * Get id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 
     /**
      * Set title

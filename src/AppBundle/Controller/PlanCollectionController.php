@@ -60,7 +60,7 @@ class PlanCollectionController extends Controller
             $em->persist($planCollection);
             $em->flush();
 
-            return $this->redirectToRoute('plancollection_show', array('id' => $planCollection->getId()));
+            return $this->redirectToRoute('plancollection_show', array('title' => $planCollection->getTitle()));
         }
 
         return $this->render('plancollection/new.html.twig', array(
@@ -72,7 +72,7 @@ class PlanCollectionController extends Controller
     /**
      * Finds and displays a planCollection entity.
      *
-     * @Route("/{id}", name="plancollection_show")
+     * @Route("/{title}", name="plancollection_show")
      * @Method("GET")
      */
     public function showAction(PlanCollection $planCollection)
@@ -88,7 +88,7 @@ class PlanCollectionController extends Controller
     /**
      * Displays a form to edit an existing planCollection entity.
      *
-     * @Route("/{id}/edit", name="plancollection_edit")
+     * @Route("/{title}/edit", name="plancollection_edit")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, PlanCollection $planCollection)
@@ -100,7 +100,7 @@ class PlanCollectionController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('plancollection_edit', array('id' => $planCollection->getId()));
+            return $this->redirectToRoute('plancollection_edit', array('title' => $planCollection->getTitle()));
         }
 
         return $this->render('plancollection/edit.html.twig', array(
@@ -113,7 +113,7 @@ class PlanCollectionController extends Controller
     /**
      * Deletes a planCollection entity.
      *
-     * @Route("/{id}", name="plancollection_delete")
+     * @Route("/{title}", name="plancollection_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, PlanCollection $planCollection)
@@ -140,7 +140,7 @@ class PlanCollectionController extends Controller
     private function createDeleteForm(PlanCollection $planCollection)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('plancollection_delete', array('id' => $planCollection->getId())))
+            ->setAction($this->generateUrl('plancollection_delete', array('title' => $planCollection->getTitle())))
             ->setMethod('DELETE')
             ->getForm()
         ;

@@ -18,9 +18,9 @@
                     <tbody>
                     {% for collection in pagination %}
                         <tr>
-                            <td><a href="{{ path('plancollection_show', { 'id': collection.id }) }}">{{ collection.title }}</a></td>
+                            <td><a href="{{ path('plancollection_show', { 'title': collection.title }) }}">{{ collection.title }}</a></td>
                             <td>
-                                <a class="btn btn-secondary btn-sm" href="{{ path('plancollection_edit', { 'id': collection.id }) }}">show</a>
+                                <a class="btn btn-secondary btn-sm" href="{{ path('plancollection_edit', { 'title': collection.title }) }}">show</a>
                             </td>
                         </tr>
                     {% endfor %}
