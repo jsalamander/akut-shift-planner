@@ -27,6 +27,7 @@ $(function() {
         addCross();
         addDragFunctionality();
         sortable.sortable( "refresh" );
+        setOrderIndexes();
     });
 
     $('.shifts > li').each(function (key, el) {
