@@ -97,7 +97,7 @@ class PlanCollectionController extends Controller
         if ($planCollection->getUser() !== $this->getUser()) {
             throw $this->createAccessDeniedException('You can\'t delete this plan' );
         }
-        
+
         $deleteForm = $this->createDeleteForm($planCollection);
         $editForm = $this->createForm('AppBundle\Form\PlanCollectionType', $planCollection);
         $editForm->handleRequest($request);
