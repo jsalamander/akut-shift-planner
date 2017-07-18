@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Plan;
+use AppBundle\Entity\Shift;
 use AppBundle\Service\FormStrategyService;
 use AppBundle\Service\UserService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -89,6 +90,8 @@ class PlanController extends Controller
         FormStrategyService $formService
     ) {
         $plan = new Plan();
+        $shift = new Shift();
+        $plan->setShifts(array($shift));
         $form = $this->createForm($formService->getFormType(), $plan);
         $form->handleRequest($request);
 

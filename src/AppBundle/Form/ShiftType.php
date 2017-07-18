@@ -47,6 +47,11 @@ class ShiftType extends AbstractType
                 'attr'  => array('class' => $classes),
                 'required' => true,
                 'label' => 'number_people'
+            ))
+            ->add('orderIndex', IntegerType::class, array(
+                'attr'  => array('class' => $classes . ' order-index'),
+                'label' => 'order_index',
+                'required' => true
             ));
     }
     

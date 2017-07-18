@@ -97,7 +97,7 @@ class PlanControllerTest extends WebTestCase
         ));
 
         $crawler = $client->submit($form);
-        $this->assertEquals(1, $crawler->filter('.alert')->count());
+        $this->assertEquals(5, $crawler->filter('.alert')->count());
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 

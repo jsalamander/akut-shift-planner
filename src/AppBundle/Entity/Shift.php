@@ -25,7 +25,7 @@ class Shift
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank()
      * @Assert\Length(
      *      min = 3,
      *      max = 250,
@@ -38,6 +38,7 @@ class Shift
 
     /**
      * @var string
+     * @Assert\NotBlank()
      * @Assert\Length(
      *      min = 3,
      *      max = 250,
@@ -52,13 +53,14 @@ class Shift
     /**
      * @var \DateTime
      *
+     * @Assert\NotBlank()
      * @ORM\Column(name="start", type="datetime")
      */
     private $start;
 
     /**
      * @var \DateTime
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="end", type="datetime")
      */
     private $end;
@@ -71,10 +73,19 @@ class Shift
      *      minMessage = "You need at least {{ limit }} person per shift",
      *      maxMessage = "Really a shift with more than 100 people??? nah"
      * )
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="numberPeople", type="integer")
      */
     private $numberPeople;
+
+    /**
+     * @var int
+     *
+     * Indicates the order of all shifts
+     *
+     * @ORM\Column(name="orderIndex", type="integer", nullable=true)
+     */
+    private $orderIndex = 0;
 
 
     /**
@@ -280,6 +291,23 @@ class Shift
     {
         return $this->people;
     }
+
+    /**
+     * @return int
+     */
+    public function getOrderIndex()
+    {
+        return $this->orderIndex;
+    }
+
+    /**
+     * @param int $orderIndex
+     */
+    public function setOrderIndex($orderIndex)
+    {
+        $this->orderIndex = $orderIndex;
+    }
+
 
     public function __toString() {
         return $this->title;

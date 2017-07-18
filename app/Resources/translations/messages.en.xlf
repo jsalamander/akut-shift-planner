@@ -360,6 +360,10 @@
                 <source>no_shifts</source>
                 <target>You have no upcoming shifts</target>
             </trans-unit>
+            <trans-unit id="order_index">
+                <source>order_index</source>
+                <target>Order Index</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

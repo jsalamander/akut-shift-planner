@@ -71,7 +71,7 @@ class Plan
      * )
      *
      * @Assert\Valid
-     *
+     * @ORM\OrderBy({"orderIndex" = "ASC"})
      * @ORM\OneToMany(targetEntity="Shift", mappedBy="plan", cascade={"persist"})
      */
     private $shifts;
