@@ -98,14 +98,14 @@ class Plan
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="PlanCollection", inversedBy="plans", cascade={"persist"})
-     * @ORM\JoinColumn(name="plan_collection_title", referencedColumnName="title")
+     * @ORM\ManyToMany(targetEntity="PlanCollection", inversedBy="plans")
      */
     private $planCollection;
 
     public function __construct()
     {
         $this->shifts = new ArrayCollection();
+        $this->planCollection = new ArrayCollection();
         $this->setId(Uuid::uuid4()->toString());
     }
 

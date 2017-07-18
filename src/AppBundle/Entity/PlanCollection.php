@@ -17,10 +17,18 @@ use Doctrine\Common\Collections\ArrayCollection;
 class PlanCollection
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
      * @var string
      *
      * @Assert\NotBlank()
-     * @ORM\Id
      * @ORM\Column(name="title", type="string", length=255)
      */
     private $title;
@@ -33,8 +41,7 @@ class PlanCollection
     private $user;
 
     /**
-     *
-     * @ORM\OneToMany(targetEntity="Plan", mappedBy="planCollection", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Plan", inversedBy="planCollections")
      */
     private $plans;
 
@@ -44,11 +51,19 @@ class PlanCollection
     }
 
     /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
      * Add plan
      *
      * @param \AppBundle\Entity\Plan
      *
-     * @return User
+     * @return PlanCollection
      */
     public function addPlan(\AppBundle\Entity\Plan $plan)
     {

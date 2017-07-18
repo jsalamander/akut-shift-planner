@@ -43,6 +43,7 @@ class User extends BaseUser
         parent::__construct();
         $this->plans = new ArrayCollection();
         $this->people = new ArrayCollection();
+        $this->planCollections = new ArrayCollection();
     }
 
     /**

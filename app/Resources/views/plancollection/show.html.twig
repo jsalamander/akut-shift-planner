@@ -1,8 +1,29 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="col-12 d-flex justify-content-end">
-        <h1 class="mr-auto p-2">{{ planCollection.title }}</h1>
+    <div class="col-12">
+        <h1>{{ planCollection.title }}</h1>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Titel</th>
+                        <th>Link</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {{ dump(planCollection) }}
+                {% for plan in planCollection.plans %}
+                    <tr>
+                        <td>{{ plan.title }}</td>
+                        <td>
+                            <a href="{{ path('plan_show', { 'id': plan.id }) }}"> {{ plan.title }}</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <div class="col-12">
