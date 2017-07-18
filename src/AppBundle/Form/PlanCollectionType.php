@@ -5,6 +5,8 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+
 
 class PlanCollectionType extends AbstractType
 {
@@ -13,7 +15,13 @@ class PlanCollectionType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('title');
+        $classes = 'form-control';
+
+        $builder
+            ->add('title', TextType::class, array(
+                'attr'  => array('class' => $classes),
+                'label' => 'title'
+            ));
     }
     
     /**
