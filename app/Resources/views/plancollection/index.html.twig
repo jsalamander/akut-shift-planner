@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Plancollections list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for planCollection in planCollections %}
+            <tr>
+                <td><a href="{{ path('plancollection_show', { 'id': planCollection.id }) }}">{{ planCollection.id }}</a></td>
+                <td>{{ planCollection.title }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('plancollection_show', { 'id': planCollection.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('plancollection_edit', { 'id': planCollection.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('plancollection_new') }}">Create a new planCollection</a>
+        </li>
+    </ul>
+{% endblock %}
