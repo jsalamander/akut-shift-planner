@@ -92,8 +92,6 @@ function addDragFunctionality() {
     $(document).mouseup(function (el) {
         endDrag();
     });
-
-    setOrderIndexes();
 }
 
 function setOrderIndexes() {
