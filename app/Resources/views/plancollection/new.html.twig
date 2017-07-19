@@ -7,13 +7,19 @@
     </div>
 
     <div class="col-12">
-        {{ form_start(form) }}
-        <div class="form-group">
-            {{ form_row(form.title) }}
-            {{ form_row(form.plans) }}
-        </div>
-        <button class="btn btn-primary" type="submit">{% trans %}create{% endtrans %}</button>
-        {{ form_end(form) }}
+        {% if form.plans.vars.choices|length > 0 %}
+            {{ form_start(form) }}
+            <div class="form-group">
+                {{ form_row(form.title) }}
+                {{ form_row(form.plans) }}
+            </div>
+            <button class="btn btn-primary" type="submit">{% trans %}create{% endtrans %}</button>
+            {{ form_end(form) }}
+        {% else %}
+            <div class="alert alert-warning" role="alert">
+                <strong>{% trans %}warning{% endtrans %}</strong> {% trans %}no_upcoming_event_plans{% endtrans %}
+            </div>
+        {% endif %}
     </div>
 {% endblock %}
 
