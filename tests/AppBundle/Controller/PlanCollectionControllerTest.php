@@ -2,54 +2,37 @@
 
 namespace AppBundle\Tests\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Liip\FunctionalTestBundle\Test\WebTestCase;
 
 class PlanCollectionControllerTest extends WebTestCase
 {
-    /*
-    public function testCompleteScenario()
+    private $crawler;
+
+    private $client;
+
+    public function setUp()
     {
-        // Create a new client to browse the application
-        $client = static::createClient();
+        $fixtures = $this->loadFixtures(array(
+            'AppBundle\DataFixtures\ORM\LoadCompleteDataSet'
+        ))->getReferenceRepository();
 
-        // Create a new entry in the database
-        $crawler = $client->request('GET', '/plancollection/');
-        $this->assertEquals(200, $client->getResponse()->getStatusCode(), "Unexpected HTTP status code for GET /plancollection/");
-        $crawler = $client->click($crawler->selectLink('Create a new entry')->link());
-
-        // Fill in the form and submit it
-        $form = $crawler->selectButton('Create')->form(array(
-            'appbundle_plancollection[field_name]'  => 'Test',
-            // ... other fields to fill
-        ));
-
-        $client->submit($form);
-        $crawler = $client->followRedirect();
-
-        // Check data in the show view
-        $this->assertGreaterThan(0, $crawler->filter('td:contains("Test")')->count(), 'Missing element td:contains("Test")');
-
-        // Edit the entity
-        $crawler = $client->click($crawler->selectLink('Edit')->link());
-
-        $form = $crawler->selectButton('Update')->form(array(
-            'appbundle_plancollection[field_name]'  => 'Foo',
-            // ... other fields to fill
-        ));
-
-        $client->submit($form);
-        $crawler = $client->followRedirect();
-
-        // Check the element contains an attribute with value equals "Foo"
-        $this->assertGreaterThan(0, $crawler->filter('[value="Foo"]')->count(), 'Missing element [value="Foo"]');
-
-        // Delete the entity
-        $client->submit($crawler->selectButton('Delete')->form());
-        $crawler = $client->followRedirect();
-
-        // Check the entity has been delete on the list
-        $this->assertNotRegExp('/Foo/', $client->getResponse()->getContent());
+        $this->loginAs($fixtures->getReference('admin-user'), 'main');
+        $this->client = $this->makeClient();
+        $this->client->request('GET', '/plancollection');
+        $this->assertEquals(301, $this->client->getResponse()->getStatusCode());
+        $this->crawler = $this->client->followRedirect();
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
     }
 
-    */
+    public function testIndex()
+    {
+        $this->assertContains('Plansammlungen', $this->crawler->filter('.justify-content-end')->text());
+        $this->assertContains('Warnung! Keine Plan Sammlung erstellt', $this->crawler->filter('.alert-warning')->text());
+    }
+
+    public function createACollection()
+    {
+
+    }
+
 }
