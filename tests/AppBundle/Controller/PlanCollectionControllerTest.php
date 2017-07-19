@@ -29,7 +29,6 @@ class PlanCollectionControllerTest extends WebTestCase
     public function testIndex()
     {
         $this->assertContains('Plansammlungen', $this->crawler->filter('.justify-content-end')->text());
-        $this->assertContains('Warnung! Keine Plan Sammlung erstellt', $this->crawler->filter('.alert-warning')->text());
     }
 
     public function testCreateACollection()
@@ -83,6 +82,19 @@ class PlanCollectionControllerTest extends WebTestCase
         $this->assertContains(
             'http://localhost/plan/'.$this->fixtures->getReference('admin-plan-second')->getId(),
             $this->crawler->filter('tbody')->text()
+        );
+    }
+
+    public function testShowCollection()
+    {
+        $this->crawler = $this->client->request('GET', '/plancollection/admincollection');
+        $this->assertContains('admincollection', $this->crawler->filter('h1')->text());
+        $this->assertContains('Schichtpläne', $this->crawler->filter('thead')->text());
+        $this->assertContains('Link', $this->crawler->filter('thead')->text());
+        $this->assertContains('admin plan', $this->crawler->filter('td')->eq(0)->text());
+        $this->assertContains(
+            'http://localhost/plan/'.$this->fixtures->getReference('admin-plan')->getId(),
+            $this->crawler->filter('td')->eq(1)->text()
         );
     }
 
