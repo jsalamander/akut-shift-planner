@@ -28,6 +28,10 @@ class PlanCollection
     /**
      * @var string
      *
+     * @Assert\Regex(
+     *     pattern="/^[a-zA-Z-\d]+$/",
+     *     message="Only letters, numbers and '-' are allowed "
+     * )
      * @Assert\NotBlank()
      * @ORM\Column(name="title", type="string", length=255)
      */

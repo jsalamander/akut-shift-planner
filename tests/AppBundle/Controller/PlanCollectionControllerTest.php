@@ -64,6 +64,18 @@ class PlanCollectionControllerTest extends WebTestCase
         $this->assertEquals(1, $this->crawler->filter('.alert')->count());
     }
 
+    public function testInvalidTitle () {
+        $this->crawler = $this->client->request('GET', '/plancollection/new');
+        $adminPlanId = $this->fixtures->getReference('admin-plan')->getId();
+        $form = $this->crawler->filter('.btn-primary')->form(array(
+            'appbundle_plancollection[title]' => 'asdf asdf&%/&(/)',
+            'appbundle_plancollection[plans]' => array($adminPlanId)
+        ));
+
+        $this->crawler = $this->client->submit($form);
+        $this->assertContains("Only letters, numbers and '-' are allowed", $this->crawler->filter('.alert')->text());
+    }
+
     public function testEditPlanCollection()
     {
         $this->crawler = $this->client->request('GET', '/plancollection/admincollection/edit');
