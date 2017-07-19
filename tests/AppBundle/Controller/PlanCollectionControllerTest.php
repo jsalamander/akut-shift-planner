@@ -44,6 +44,13 @@ class PlanCollectionControllerTest extends WebTestCase
             'http://localhost/plan/'.$this->fixtures->getReference('admin-plan')->getId(),
             $this->crawler->filter('tbody')->text()
         );
+        $this->crawler = $this->client->request('GET', '/logout');
+        $this->crawler = $this->client->request('GET', '/plancollection/testcollection');
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->crawler = $this->client->request('GET', '/plancollection/');
+        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
+        $this->crawler = $this->client->request('GET', '/plancollection/testcollection/edit');
+        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
     }
 
     public function testNoTitle () {
@@ -62,7 +69,7 @@ class PlanCollectionControllerTest extends WebTestCase
     {
         $adminPlanId = $this->fixtures->getReference('admin-plan')->getId();
         $form = $this->crawler->filter('.btn-primary')->form(array(
-            'appbundle_plancollection[title]' => 'test collection',
+            'appbundle_plancollection[title]' => 'testcollection',
             'appbundle_plancollection[plans]' => array($adminPlanId)
         ));
 
