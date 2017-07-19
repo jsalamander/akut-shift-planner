@@ -65,6 +65,27 @@ class PlanCollectionControllerTest extends WebTestCase
         $this->assertEquals(1, $this->crawler->filter('.alert')->count());
     }
 
+    public function testEditPlanCollection()
+    {
+        $this->crawler = $this->client->request('GET', '/plancollection/admincollection/edit');
+        $form = $this->crawler->filter('.btn-primary')->form(array(
+            'appbundle_plancollection[title]' => 'testcollection',
+            'appbundle_plancollection[plans]' => array(
+                $this->fixtures->getReference('admin-plan-second')->getId()
+            )
+        ));
+
+        $this->crawler = $this->client->submit($form);
+        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
+        $this->crawler = $this->client->followRedirect();
+
+        $this->assertContains('admin plan', $this->crawler->filter('tbody')->text());
+        $this->assertContains(
+            'http://localhost/plan/'.$this->fixtures->getReference('admin-plan-second')->getId(),
+            $this->crawler->filter('tbody')->text()
+        );
+    }
+
     public function createACollection()
     {
         $adminPlanId = $this->fixtures->getReference('admin-plan')->getId();
