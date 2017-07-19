@@ -30,7 +30,7 @@
 {% if (is_granted('ROLE_USER') and app.user.id == planCollection.user.id) %}
     <div class="col-12">
         {{ form_start(delete_form) }}
-        <input class="btn btn-danger btn-sm pull-right" type="submit" value="{% trans %}delete{% endtrans %}">
+        <button class="btn btn-danger btn-sm pull-right" type="submit">{% trans %}delete{% endtrans %}</button>
         {{ form_end(delete_form) }}
         <a href="{{ path('plancollection_edit', { 'title': planCollection.title }) }}" class="btn btn-secondary btn-sm">{% trans %}edit{% endtrans %}</a>
     </div>
