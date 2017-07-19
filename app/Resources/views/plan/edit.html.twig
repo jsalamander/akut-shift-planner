@@ -29,12 +29,12 @@
                     <li class="card">{{ form_widget(shift) }}</li>
                 {% endfor %}
             </ul>
-            <input class="btn btn-primary" type="submit" value="{% trans %}save{% endtrans %}" />
+            <button class="btn btn-primary" type="submit">{% trans %}save{% endtrans %}</button>
             {{ form_end(edit_form) }}
         </div>
         <div class="col-12">
             {{ form_start(delete_form) }}
-            <input class="btn btn-sm btn-danger pull-right" type="submit" value="{% trans %}delete{% endtrans %}">
+            <button class="btn btn-sm btn-danger pull-right" type="submit">{% trans %}delete{% endtrans %}</button>
             {{ form_end(delete_form) }}
         </div>
 {% endblock %}

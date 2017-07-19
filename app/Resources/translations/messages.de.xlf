@@ -380,6 +380,10 @@
                 <source>link</source>
                 <target>Link</target>
             </trans-unit>
+            <trans-unit id="sign_up">
+                <source>sign_up</source>
+                <target>Einschreiben</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
