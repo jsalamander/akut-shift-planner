@@ -1,23 +1,21 @@
 {% extends 'base.html.twig' %}
+{% form_theme edit_form 'form/fields.html.twig' %}
 
 {% block body %}
-    <div class="col-12">
-        <h1>Edit {{ person.name }}</h1>
+    <div class="col-12" xmlns="http://www.w3.org/1999/html">
+        <h1>{% trans %}edit{% endtrans %}</h1>
     </div>
 
     <div class="col-12">
         {{ form_start(edit_form) }}
         <div class="form-group">
-            {{ form_row(edit_form.name) }}
-            {{ form_row(edit_form.alias) }}
-            {{ form_row(edit_form.email) }}
-            {{ form_row(edit_form.phone) }}
-        </div>
+            {{ form_row(edit_form.title) }}
+            {{ form_row(edit_form.plans) }}
 
         <button class="btn btn-primary" type="submit">{% trans %}save{% endtrans %}</button>
+        </div>
         {{ form_end(edit_form) }}
     </div>
-
     <div class="col-12">
         {{ form_start(delete_form) }}
         <button class="btn btn-sm btn-danger pull-right" type="submit">{% trans %}delete{% endtrans %}</button>

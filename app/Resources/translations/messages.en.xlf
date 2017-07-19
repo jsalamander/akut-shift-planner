@@ -364,6 +364,22 @@
                 <source>order_index</source>
                 <target>Order Index</target>
             </trans-unit>
+            <trans-unit id="plan_collection">
+                <source>plan_collection</source>
+                <target>Plan Collections</target>
+            </trans-unit>
+            <trans-unit id="no_plan_collections">
+                <source>no_plan_collections</source>
+                <target>No plan collection created</target>
+            </trans-unit>
+            <trans-unit id="new_plan_collection">
+                <source>new_plan_collection</source>
+                <target>New Plan Collection</target>
+            </trans-unit>
+            <trans-unit id="sign_up">
+                <source>sign_up</source>
+                <target>Sign up</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

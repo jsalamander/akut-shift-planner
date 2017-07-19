@@ -364,6 +364,26 @@
                 <source>order_index</source>
                 <target>Sortier-Index</target>
             </trans-unit>
+            <trans-unit id="plan_collection">
+                <source>plan_collection</source>
+                <target>Plansammlungen</target>
+            </trans-unit>
+            <trans-unit id="no_plan_collections">
+                <source>no_plan_collections</source>
+                <target>Keine Plan Sammlung erstellt</target>
+            </trans-unit>
+            <trans-unit id="new_plan_collection">
+                <source>new_plan_collection</source>
+                <target>Neue Plansammlung</target>
+            </trans-unit>
+            <trans-unit id="link">
+                <source>link</source>
+                <target>Link</target>
+            </trans-unit>
+            <trans-unit id="sign_up">
+                <source>sign_up</source>
+                <target>Einschreiben</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

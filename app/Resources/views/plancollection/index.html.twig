@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="col-12 d-flex justify-content-end">
+        <h1 class="mr-auto p-2">{% trans %}plan_collection{% endtrans %}</h1>
+    </div>
+
+    <div class="col-12">
+        {% if pagination.items is not empty %}
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>{{ knp_pagination_sortable(pagination, 'title'|trans, 'p.title') }} <i class="fa fa-sort" aria-hidden="true"></i></th>
+                        <th>{% trans %}actions{% endtrans %}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for collection in pagination %}
+                        <tr>
+                            <td><a href="{{ path('plancollection_show', { 'title': collection.title }) }}">{{ collection.title }}</a></td>
+                            <td>
+                                <a href="{{ path('plancollection_edit', { 'title': collection.title }) }}">{% trans %}edit{% endtrans %}</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="navigation">
+                {{ knp_pagination_render(pagination) }}
+            </div>
+        {% else %}
+            <div class="alert alert-warning" role="alert">
+                <strong>{% trans %}warning{% endtrans %}</strong> {% trans %}no_plan_collections{% endtrans %}
+            </div>
+        {% endif %}
+        <a class="btn btn-primary" href="{{ path('plancollection_new') }}">{% trans %}create{% endtrans %}</a>
+    </div>
+{% endblock %}
+

@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="col-12">
+        <h1>{{ planCollection.title }}</h1>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>{% trans %}plans{% endtrans %}</th>
+                        <th>{% trans %}link{% endtrans %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for plan in planCollection.plans %}
+                    <tr>
+                        <td>{{ plan.title }}</td>
+                        <td>
+                            <a href="{{ path('plan_show', { 'id': plan.id }) }}">
+                                {{ url('plan_show', { 'id': plan.id }) }}
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% if (is_granted('ROLE_USER') and app.user.id == planCollection.user.id) %}
+    <div class="col-12">
+        {{ form_start(delete_form) }}
+        <button class="btn btn-danger btn-sm pull-right" type="submit">{% trans %}delete{% endtrans %}</button>
+        {{ form_end(delete_form) }}
+        <a href="{{ path('plancollection_edit', { 'title': planCollection.title }) }}" class="btn btn-secondary btn-sm">{% trans %}edit{% endtrans %}</a>
+    </div>
+{% endif %}
+
+{% endblock %}
+
+

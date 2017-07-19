@@ -29,3 +29,7 @@ body {
 textarea {
     padding: 5px !important;
 }
+
+.btn {
+    margin: 0px !important;
+}

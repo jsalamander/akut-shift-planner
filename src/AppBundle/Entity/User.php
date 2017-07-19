@@ -27,6 +27,12 @@ class User extends BaseUser
     private $plans;
 
     /**
+     *
+     * @ORM\OneToMany(targetEntity="PlanCollection", mappedBy="user", cascade={"persist"})
+     */
+    private $planCollections;
+
+    /**
      * @var $people
      * @ORM\OneToMany(targetEntity="Person", mappedBy="user")
      */
@@ -37,6 +43,7 @@ class User extends BaseUser
         parent::__construct();
         $this->plans = new ArrayCollection();
         $this->people = new ArrayCollection();
+        $this->planCollections = new ArrayCollection();
     }
 
     /**
@@ -98,6 +105,40 @@ class User extends BaseUser
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getPlans()
+    {
+        return $this->plans;
+    }
+
+    /**
+     * Add planCollection
+     *
+     * @param \AppBundle\Entity\PlanCollection
+     *
+     * @return User
+     */
+    public function addPlanCollection(\AppBundle\Entity\PlanCollection $planCollection)
+    {
+        $this->planCollections[] = $planCollection;
+
+        return $this;
+    }
+
+    /**
+     * Remove planCollection
+     *
+     * @param \AppBundle\Entity\Plan
+     */
+    public function removePlanCollection(\AppBundle\Entity\PlanCollection $planCollection)
+    {
+        $this->planCollections->removeElement($planCollection);
+    }
+
+    /**
+     * Get plansCollections
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPlanCollections()
     {
         return $this->plans;
     }

@@ -9,7 +9,7 @@
         {{ form_row(form.current_password, {'attr': {'class': 'form-control'}}) }}
         {{ form_row(form._token) }}
     </div>
-    <input class="btn btn-primary" type="submit" value="{{ 'profile.edit.submit'|trans }}" />
+    <button class="btn btn-primary" type="submit" value="{{ 'profile.edit.submit'|trans }}">{{ 'profile.edit.submit'|trans }}</button>
     {{ form_end(form) }}
     <a class="pull-right" href="{{ path('fos_user_resetting_request') }}">{{ 'change_password.submit'|trans }}</a>
 </div>

@@ -97,9 +97,15 @@ class Plan
      */
     private $user;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="PlanCollection", inversedBy="plans")
+     */
+    private $planCollection;
+
     public function __construct()
     {
         $this->shifts = new ArrayCollection();
+        $this->planCollection = new ArrayCollection();
         $this->setId(Uuid::uuid4()->toString());
     }
 
@@ -134,6 +140,22 @@ class Plan
     public function setUser($user)
     {
         $this->user = $user;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPlanCollection()
+    {
+        return $this->planCollection;
+    }
+
+    /**
+     * @param mixed $planCollection
+     */
+    public function setPlanCollection($planCollection)
+    {
+        $this->planCollection = $planCollection;
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace AppBundle\DataFixtures\ORM;
 
+use AppBundle\Entity\PlanCollection;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use AppBundle\Entity\User;
@@ -27,6 +28,13 @@ class LoadCompleteDataSet extends AbstractFixture implements FixtureInterface
         $adminPlan->setUser($admin);
         $this->setReference('admin-plan', $adminPlan);
 
+        $adminPlanSecond = new Plan();
+        $adminPlanSecond->setDescription('yolo');
+        $adminPlanSecond->setDate(new \DateTime('2099-01-01 00:01:00'));
+        $adminPlanSecond->setTitle('admin second plan');
+        $adminPlanSecond->setUser($admin);
+        $this->setReference('admin-plan-second', $adminPlan);
+
         $adminShift = new Shift();
         $adminShift->setDescription('meiu asdjffs');
         $adminShift->setTitle('admin shift');
@@ -35,6 +43,12 @@ class LoadCompleteDataSet extends AbstractFixture implements FixtureInterface
         $adminShift->setNumberPeople(2);
         $adminPlan->addShift($adminShift);
         $this->setReference('admin-shift', $adminShift);
+
+        $adminCollection = new PlanCollection();
+        $adminCollection->setTitle('admincollection');
+        $adminCollection->setUser($admin);
+        $adminCollection->addPlan($adminPlan);
+        $this->setReference('admin-collection', $adminCollection);
 
         $adminPlanPast = new Plan();
         $adminPlanPast->setDescription('sfsadfs');
@@ -112,6 +126,8 @@ class LoadCompleteDataSet extends AbstractFixture implements FixtureInterface
         $manager->persist($adminPlanPast);
         $manager->persist($adminTemplateShift);
         $manager->persist($adminTemplate);
+        $manager->persist($adminPlanSecond);
+        $manager->persist($adminCollection);
         $manager->persist($rudolf);
         $manager->persist($rudolfShift);
         $manager->persist($rudolfPlan);

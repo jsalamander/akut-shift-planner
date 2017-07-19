@@ -2,7 +2,7 @@
 
 {% block body %}
     <div class="col-12">
-        <h1>Sign up for this shift</h1>
+        <h1>{% trans %}sign_up{% endtrans %} </h1>
     </div>
 
     <div class="col-12">
@@ -26,7 +26,7 @@
                     {{ form.vars.errors[0].message }}
                 </div>
             {% endif %}
-            <input class="btn btn-primary" type="submit" value="{% trans %}enroll{% endtrans %}" />
+            <button class="btn btn-primary" type="submit">{% trans %}create{% endtrans %}</button>
         {{ form_end(form) }}
     </div>
 {% endblock %}

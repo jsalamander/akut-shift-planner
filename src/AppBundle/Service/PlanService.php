@@ -58,4 +58,12 @@ class PlanService {
         return $qb->orderBy('p.title', 'ASC')->getQuery()->getResult();
     }
 
+    public function getUserPlans()
+    {
+        $queryBuilder = $this->em->getRepository('AppBundle:Plan')->createQueryBuilder('p');
+        $queryBuilder->where('p.user = :user')->setParameter('user', $this->userService->getUser()->getId());
+
+        return $queryBuilder->orderBy('p.title', 'ASC')->getQuery()->getResult();
+    }
+
 }
