@@ -1,4 +1,5 @@
 {% extends 'base.html.twig' %}
+{% form_theme edit_form 'form/fields.html.twig' %}
 
 {% block body %}
     <div class="col-12">
@@ -7,12 +8,12 @@
 
     <div class="col-12">
         {{ form_start(edit_form) }}
-        <div class="form_edit-group">
+        <div class="form-group">
             {{ form_row(edit_form.title) }}
             {{ form_row(edit_form.plans) }}
-        </div>
 
         <input class="btn btn-primary" type="submit" value="{% trans %}save{% endtrans %}" />
+        </div>
         {{ form_end(edit_form) }}
     </div>
     <div class="col-12">
