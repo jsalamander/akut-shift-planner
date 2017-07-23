@@ -10,6 +10,22 @@
                 <source>plan.title.max_length</source>
                 <target>Der Titel darf nicht mehr als {{ limit }} Zeichen enthalten</target>
             </trans-unit>
+            <trans-unit id="plan.description.min_length">
+                <source>plan.description.min_length</source>
+                <target>Die Beschreibung muss mindestens aus {{ limit }} Zeichen bestehen</target>
+            </trans-unit>
+            <trans-unit id="plan.description.max_length">
+                <source>plan.description.max_length</source>
+                <target>Die Beschreibung darf nicht mehr als {{ limit }} Zeichen enthalten</target>
+            </trans-unit>
+            <trans-unit id="plan.shifts.count_min">
+                <source>plan.shifts.count_min</source>
+                <target>Du brauchst mindestens {{ limit }} Schicht</target>
+            </trans-unit>
+            <trans-unit id="plan.shifts.count_max">
+                <source>plan.shifts.count_max</source>
+                <target>Wir erlauben nicht mehr als {{ limit }} Schichten</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

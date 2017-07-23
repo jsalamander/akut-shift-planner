@@ -10,6 +10,22 @@
                 <source>plan.title.max_length</source>
                 <target>The title cannot be longer than {{ limit }} characters</target>
             </trans-unit>
+            <trans-unit id="plan.description.min_length">
+                <source>plan.description.min_length</source>
+                <target>The description must be at least {{ limit }} characters long</target>
+            </trans-unit>
+            <trans-unit id="plan.description.max_length">
+                <source>plan.description.max_length</source>
+                <target>The description cannot be longer than {{ limit }} characters</target>
+            </trans-unit>
+            <trans-unit id="plan.shifts.count_min">
+                <source>plan.shifts.count_min</source>
+                <target>You need at least {{ limit }} shift</target>
+            </trans-unit>
+            <trans-unit id="plan.shifts.count_max">
+                <source>plan.shifts.count_max</source>
+                <target>We don't allow more than {{ limit }} shifts</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
