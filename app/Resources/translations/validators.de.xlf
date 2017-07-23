@@ -34,6 +34,10 @@
                 <source>shift.numberPeople.max</source>
                 <target>Mehr als {{ limit }} Personen sind nicht erlaubt</target>
             </trans-unit>
+            <trans-unit id="person.email">
+                <source>person.email</source>
+                <target>{{ value }} ist keine gültige Email</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

@@ -34,6 +34,10 @@
                 <source>plan.shifts.count_max</source>
                 <target>Really a shift with more than {{ limit }} people??? nope...</target>
             </trans-unit>
+            <trans-unit id="person.email">
+                <source>person.email</source>
+                <target>{{ value }} is not a valid email</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
