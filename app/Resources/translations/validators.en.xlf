@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="plan.title.min_length">
+                <source>plan.title.min_length</source>
+                <target>The title must be at least {{ limit }} characters long</target>
+            </trans-unit>
+            <trans-unit id="plan.title.max_length">
+                <source>plan.title.max_length</source>
+                <target>The title cannot be longer than {{ limit }} characters</target>
+            </trans-unit>
+            <trans-unit id="plan.description.min_length">
+                <source>plan.description.min_length</source>
+                <target>The description must be at least {{ limit }} characters long</target>
+            </trans-unit>
+            <trans-unit id="plan.description.max_length">
+                <source>plan.description.max_length</source>
+                <target>The description cannot be longer than {{ limit }} characters</target>
+            </trans-unit>
+            <trans-unit id="plan.shifts.count_min">
+                <source>plan.shifts.count_min</source>
+                <target>You need at least {{ limit }} shift</target>
+            </trans-unit>
+            <trans-unit id="plan.shifts.count_max">
+                <source>plan.shifts.count_max</source>
+                <target>We don't allow more than {{ limit }} shifts</target>
+            </trans-unit>
+            <trans-unit id="shift.numberPeople.min">
+                <source>shift.numberPeople.min</source>
+                <target>You need at least {{ limit }} person per shift</target>
+            </trans-unit>
+            <trans-unit id="shift.numberPeople.max">
+                <source>plan.shifts.count_max</source>
+                <target>Really a shift with more than {{ limit }} people??? nope...</target>
+            </trans-unit>
+            <trans-unit id="person.email">
+                <source>person.email</source>
+                <target>{{ value }} is not a valid email</target>
+            </trans-unit>
+            <trans-unit id="planCollection.title">
+                <source>planCollection.title</source>
+                <target>Only letters, numbers and '-' are allowed</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

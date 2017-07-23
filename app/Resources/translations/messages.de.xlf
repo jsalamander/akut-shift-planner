@@ -384,6 +384,18 @@
                 <source>sign_up</source>
                 <target>Einschreiben</target>
             </trans-unit>
+            <trans-unit id="person_email">
+                <source>person_email</source>
+                <target>Email (nur für Ersteller_in sichtbar)</target>
+            </trans-unit>
+            <trans-unit id="person_phone">
+                <source>person_phone</source>
+                <target>Telefonnummer (nur für Ersteller_in sichtbar)</target>
+            </trans-unit>
+            <trans-unit id="edit_person">
+                <source>edit_person</source>
+                <target>Bearbeite</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

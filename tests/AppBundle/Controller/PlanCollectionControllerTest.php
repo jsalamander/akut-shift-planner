@@ -73,7 +73,7 @@ class PlanCollectionControllerTest extends WebTestCase
         ));
 
         $this->crawler = $this->client->submit($form);
-        $this->assertContains("Only letters, numbers and '-' are allowed", $this->crawler->filter('.alert')->text());
+        $this->assertContains("Es sind nur Buchstaben, Zahlen und Bindestriche erlaubt", $this->crawler->filter('.alert')->text());
     }
 
     public function testEditPlanCollection()

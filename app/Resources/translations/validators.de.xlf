@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="de" target-language="de" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="plan.title.min_length">
+                <source>plan.title.min_length</source>
+                <target>Der Titel muss mindestens aus {{ limit }} Zeichen bestehen</target>
+            </trans-unit>
+            <trans-unit id="plan.title.max_length">
+                <source>plan.title.max_length</source>
+                <target>Der Titel darf nicht mehr als {{ limit }} Zeichen enthalten</target>
+            </trans-unit>
+            <trans-unit id="plan.description.min_length">
+                <source>plan.description.min_length</source>
+                <target>Die Beschreibung muss mindestens aus {{ limit }} Zeichen bestehen</target>
+            </trans-unit>
+            <trans-unit id="plan.description.max_length">
+                <source>plan.description.max_length</source>
+                <target>Die Beschreibung darf nicht mehr als {{ limit }} Zeichen enthalten</target>
+            </trans-unit>
+            <trans-unit id="plan.shifts.count_min">
+                <source>plan.shifts.count_min</source>
+                <target>Du brauchst mindestens {{ limit }} Schicht</target>
+            </trans-unit>
+            <trans-unit id="plan.shifts.count_max">
+                <source>plan.shifts.count_max</source>
+                <target>Wir erlauben nicht mehr als {{ limit }} Schichten</target>
+            </trans-unit>
+            <trans-unit id="shift.numberPeople.min">
+                <source>shift.numberPeople.min</source>
+                <target>Du brauchst mindestens {{ limit }} person pro Schicht</target>
+            </trans-unit>
+            <trans-unit id="shift.numberPeople.max">
+                <source>shift.numberPeople.max</source>
+                <target>Mehr als {{ limit }} Personen sind nicht erlaubt</target>
+            </trans-unit>
+            <trans-unit id="person.email">
+                <source>person.email</source>
+                <target>{{ value }} ist keine gültige Email</target>
+            </trans-unit>
+            <trans-unit id="planCollection.title">
+                <source>planCollection.title</source>
+                <target>Es sind nur Buchstaben, Zahlen und Bindestriche erlaubt</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

@@ -380,6 +380,18 @@
                 <source>sign_up</source>
                 <target>Sign up</target>
             </trans-unit>
+            <trans-unit id="person_email">
+                <source>person_email</source>
+                <target>Email (non public)</target>
+            </trans-unit>
+            <trans-unit id="person_phone">
+                <source>person_phone</source>
+                <target>Telefonnummer (non public)</target>
+            </trans-unit>
+            <trans-unit id="edit_person">
+                <source>edit_person</source>
+                <target>Edit</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

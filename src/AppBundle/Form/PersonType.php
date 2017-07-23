@@ -33,12 +33,12 @@ class PersonType extends AbstractType
             ->add('email', EmailType::class, array(
                 'attr'  => array('class' => $classes),
                 'required' => false,
-                'label' => 'email'
+                'label' => 'person_email'
             ))
             ->add('phone', PhoneNumberType::class, array(
                 'attr'  => array('class' => $classes),
                 'required' => false,
-                'label' => 'phone',
+                'label' => 'person_phone',
                 'default_region' => 'CH',
                 'format' => PhoneNumberFormat::NATIONAL
             ));

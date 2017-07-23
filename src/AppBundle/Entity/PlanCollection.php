@@ -30,7 +30,7 @@ class PlanCollection
      *
      * @Assert\Regex(
      *     pattern="/^[a-zA-Z-\d]+$/",
-     *     message="Only letters, numbers and '-' are allowed "
+     *     message="planCollection.title"
      * )
      * @Assert\NotBlank()
      * @ORM\Column(name="title", type="string", length=255)

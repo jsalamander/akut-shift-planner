@@ -59,7 +59,7 @@ class PlanControllerEnrollmentTest extends WebTestCase
         ));
 
         $crawler = $this->client->submit($form);
-        $this->assertEquals(4, $crawler->filter('.alert')->count());
+        $this->assertEquals(2, $crawler->filter('.alert')->count());
     }
 
     public function testFullEnrollment()

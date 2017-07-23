@@ -118,8 +118,8 @@ class PlanControllerTest extends WebTestCase
 
         $values = $form->getPhpValues();
 
-        $values['appbundle_plan']['shifts'][0]['description'] = 'w';
-        $values['appbundle_plan']['shifts'][0]['title'] = 'w';
+        $values['appbundle_plan']['shifts'][0]['description'] = '';
+        $values['appbundle_plan']['shifts'][0]['title'] = '';
         $values['appbundle_plan']['shifts'][0]['start'] = '00:00:sdf';
         $values['appbundle_plan']['shifts'][0]['end'] = '00:0:sdf';
         $values['appbundle_plan']['shifts'][0]['numberPeople'] = 0;

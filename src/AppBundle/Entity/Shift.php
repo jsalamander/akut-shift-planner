@@ -27,10 +27,10 @@ class Shift
      * @var string
      * @Assert\NotBlank()
      * @Assert\Length(
-     *      min = 3,
+     *      min = 1,
      *      max = 250,
-     *      minMessage = "The title must be at least {{ limit }} characters long",
-     *      maxMessage = "The title cannot be longer than {{ limit }} characters",
+     *      minMessage = "plan.title.min_length",
+     *      maxMessage = "plan.title.max_length",
      * )
      * @ORM\Column(name="title", type="string", length=255)
      */
@@ -40,10 +40,10 @@ class Shift
      * @var string
      * @Assert\NotBlank()
      * @Assert\Length(
-     *      min = 3,
+     *      min = 1,
      *      max = 250,
-     *      minMessage = "The description must be at least {{ limit }} characters long",
-     *      maxMessage = "The description cannot be longer than {{ limit }} characters",
+     *      minMessage = "plan.description.min_length",
+     *      maxMessage = "plan.description.max_length",
      * )
      *
      * @ORM\Column(name="description", type="text")
@@ -69,9 +69,9 @@ class Shift
      * @var int
      *  @Assert\Range(
      *      min = 1,
-     *      max = 100,
-     *      minMessage = "You need at least {{ limit }} person per shift",
-     *      maxMessage = "Really a shift with more than 100 people??? nah"
+     *      max = 300,
+     *      minMessage = "shift.numberPeople.min",
+     *      maxMessage = "shift.numberPeople.max"
      * )
      * @Assert\NotBlank()
      * @ORM\Column(name="numberPeople", type="integer")
