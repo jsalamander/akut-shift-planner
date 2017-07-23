@@ -26,6 +26,14 @@
                 <source>plan.shifts.count_max</source>
                 <target>We don't allow more than {{ limit }} shifts</target>
             </trans-unit>
+            <trans-unit id="shift.numberPeople.min">
+                <source>shift.numberPeople.min</source>
+                <target>You need at least {{ limit }} person per shift</target>
+            </trans-unit>
+            <trans-unit id="shift.numberPeople.max">
+                <source>plan.shifts.count_max</source>
+                <target>Really a shift with more than {{ limit }} people??? nope...</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

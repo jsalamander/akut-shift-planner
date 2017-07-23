@@ -26,6 +26,14 @@
                 <source>plan.shifts.count_max</source>
                 <target>Wir erlauben nicht mehr als {{ limit }} Schichten</target>
             </trans-unit>
+            <trans-unit id="shift.numberPeople.min">
+                <source>shift.numberPeople.min</source>
+                <target>Du brauchst mindestens {{ limit }} person pro Schicht</target>
+            </trans-unit>
+            <trans-unit id="shift.numberPeople.max">
+                <source>shift.numberPeople.max</source>
+                <target>Mehr als {{ limit }} Personen sind nicht erlaubt</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
