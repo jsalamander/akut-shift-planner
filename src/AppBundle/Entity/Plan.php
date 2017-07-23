@@ -39,6 +39,7 @@ class Plan
 
     /**
      * @var \DateTime
+     * @Assert\NotBlank()
      * @Assert\Date(groups={"new_from_template", "Default"})
      * @Assert\GreaterThan("today", groups={"new_from_template", "Default"})
      *
