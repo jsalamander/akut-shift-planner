@@ -1,22 +1,25 @@
 Schicht-Plan.ch
 ================
 [![Build Status](https://travis-ci.org/fribim/akut-shift-planner.svg?branch=develop)](https://travis-ci.org/fribim/akut-shift-planner)
+[![Issue Stats](http://issuestats.com/github/fribim/akut-shift-planner/badge/pr)](http://issuestats.com/github/fribim/akut-shift-planner)
+[![Issue Stats](http://issuestats.com/github/fribim/akut-shift-planner/badge/issue)](http://issuestats.com/github/fribim/akut-shift-planner)
 
 ## Up and running
 
 1. Clone this repository
-2. Configure all needed values `app/config/parameters.yml`
-3. Create database `php bin/console doctrine:database:create`
-4. Create schema `php bin/console doctrine:schema:update --force`
-5. Create a cron job to run `php bin/console swiftmailer:spool:send --env=prod` frequently
+2. Install Dependencies `composer install`
+3. Configure all needed values `app/config/parameters.yml`
+4. Create database `php bin/console doctrine:database:create`
+5. Create schema `php bin/console doctrine:schema:update --force`
+6. Create a cron job to run `php bin/console swiftmailer:spool:send --env=prod` frequently
 This sends all the mails saved in the spool.
 
-## Functional Test
+## Functional Tests
 
 Run the testsuite with the following command: `composer test`.
 
-Info: The tests will be executed against an own sqlite database, and will not alter any data of yours.
+Info: The tests will be executed against an new sqlite database, and will not alter any data of yours.
 
 ## Deployment
-When merging into `develop` travis automatically deploys the test server.
+When merging into `develop` travis automatically deploys to the test server.
 To create a production release create a `tag`. The new tag will automatically be deployed to production.
