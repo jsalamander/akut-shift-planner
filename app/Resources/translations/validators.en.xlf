@@ -38,6 +38,10 @@
                 <source>person.email</source>
                 <target>{{ value }} is not a valid email</target>
             </trans-unit>
+            <trans-unit id="planCollection.title">
+                <source>planCollection.title</source>
+                <target>Only letters, numbers and '-' are allowed</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

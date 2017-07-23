@@ -38,6 +38,10 @@
                 <source>person.email</source>
                 <target>{{ value }} ist keine gültige Email</target>
             </trans-unit>
+            <trans-unit id="planCollection.title">
+                <source>planCollection.title</source>
+                <target>Es sind nur Buchstaben, Zahlen und Bindestriche erlaubt</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
