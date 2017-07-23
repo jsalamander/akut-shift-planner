@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="plan.title.min_length">
+                <source>plan.title.min_length</source>
+                <target>The title must be at least {{ limit }} characters long</target>
+            </trans-unit>
+            <trans-unit id="plan.title.max_length">
+                <source>plan.title.max_length</source>
+                <target>The title cannot be longer than {{ limit }} characters</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

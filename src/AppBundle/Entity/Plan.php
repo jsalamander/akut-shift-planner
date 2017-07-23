@@ -29,8 +29,8 @@ class Plan
      * @Assert\Length(
      *      min = 2,
      *      max = 80,
-     *      minMessage = "The title must be at least {{ limit }} characters long",
-     *      maxMessage = "The title cannot be longer than {{ limit }} characters",
+     *      minMessage = "plan.title.min_length",
+     *      maxMessage = "plan.title.max_length",
      *      groups={"new_from_template", "Default"}
      * )
      * @ORM\Column(name="title", type="string", length=255)
