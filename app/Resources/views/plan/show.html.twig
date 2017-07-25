@@ -92,6 +92,13 @@
                 </tbody>
             </table>
         </div>
+        <div class="ssk-sm ssk-group">
+            <a href="whatsapp://send?text={{ app.request.uri }}" class="ssk ssk-whatsapp hidden-md-up"></a>
+            <a href="" class="ssk ssk-facebook"></a>
+            <a href="" class="ssk ssk-twitter"></a>
+            <a href="" class="ssk ssk-email"></a>
+            <a href="" class="ssk ssk-google-plus"></a>
+        </div>
         {% else %}
             <div class="alert alert-warning" role="alert">
                 <strong>{% trans %}warning{% endtrans %}!</strong> {% trans %}no_shifts_defined{% endtrans %}
