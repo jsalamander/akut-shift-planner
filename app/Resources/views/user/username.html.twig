@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="col-12">
+        <h1>{% trans %}delete_person{% endtrans %} {{ person.name }}</h1>
+    </div>
+
+    <div class="col-12">
+        {{ form_start(form) }}
+        <div class="form-group">
+            {{ form_row(form.username) }}
+        </div>
+        <button class="btn btn-primary" type="submit">{% trans %}delete{% endtrans %}</button>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

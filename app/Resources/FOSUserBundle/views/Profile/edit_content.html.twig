@@ -12,6 +12,8 @@
     <button class="btn btn-primary" type="submit" value="{{ 'profile.edit.submit'|trans }}">{{ 'profile.edit.submit'|trans }}</button>
     {{ form_end(form) }}
     <br>
-    <a href="{{ path('user_delete') }}" class=" btn btn-sm btn-danger">{{ 'delete'|trans }}</a>
+    {{ form_start(delete_form) }}
+        <button type="submit" class="btn btn-sm btn-danger">{{ 'delete'|trans }}</button>
+    {{ form_end(delete_form) }}
     <a class="pull-right" href="{{ path('fos_user_resetting_request') }}">{{ 'change_password.submit'|trans }}</a>
 </div>
