@@ -22,19 +22,19 @@ class User extends BaseUser
 
     /**
      *
-     * @ORM\OneToMany(targetEntity="Plan", mappedBy="user", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Plan", mappedBy="user", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $plans;
 
     /**
      *
-     * @ORM\OneToMany(targetEntity="PlanCollection", mappedBy="user", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="PlanCollection", mappedBy="user", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $planCollections;
 
     /**
      * @var $people
-     * @ORM\OneToMany(targetEntity="Person", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="Person", mappedBy="user", cascade={"remove"}, orphanRemoval=true)
      */
     private $people;
 
