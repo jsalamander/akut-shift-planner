@@ -29,6 +29,13 @@ class LoadTemplateData extends AbstractFixture implements FixtureInterface
         $template->setUser($admin);
         $this->setReference('admin-template', $template);
 
+        $publicTemplate = new Plan();
+        $publicTemplate->setIsTemplate(1);
+        $publicTemplate->setIsPublic(1);
+        $publicTemplate->setDescription('im public');
+        $publicTemplate->setDate(new \DateTime('1970-01-01 00:01:00'));
+        $publicTemplate->setTitle('public template');
+
 
         $shift = new Shift();
         $shift->setDescription('meiu asdjffs');
@@ -57,6 +64,7 @@ class LoadTemplateData extends AbstractFixture implements FixtureInterface
 
         $manager->persist($privateTemplate);
         $manager->persist($template);
+        $manager->persist($publicTemplate);
         $manager->flush();
     }
 }
