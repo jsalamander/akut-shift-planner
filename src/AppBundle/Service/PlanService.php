@@ -49,12 +49,26 @@ class PlanService {
         $qb = $queryBuilder->where('p.isTemplate = true');
 
         if ($this->userService->getUser()) {
-            $qb->andWhere('p.user = :user')->setParameter('user', $this->userService->getUser()->getId());
-        } else {
-            $qb->andWhere('p.isPublic = true');
-        }
+            $privateTemplates = $qb->andWhere('p.user = :user')
+                ->setParameter('user', $this->userService->getUser()->getId())
+                ->orderBy('p.title', 'ASC')
+                ->getQuery()
+                ->getResult();
 
-        return $qb->orderBy('p.title', 'ASC')->getQuery()->getResult();
+            $publicTemplates = $this->em
+                ->getRepository('AppBundle:Plan')
+                ->createQueryBuilder('p')
+                ->where('p.isTemplate = true')
+                ->andWhere('p.isPublic = true')
+                ->orderBy('p.title', 'ASC')
+                ->getQuery()
+                ->getResult();
+
+            return array_unique(array_merge($privateTemplates, $publicTemplates));
+
+        } else {
+            return $qb->andWhere('p.isPublic = true')->orderBy('p.title', 'ASC')->getQuery()->getResult();
+        }
     }
 
     public function getUserPlans()

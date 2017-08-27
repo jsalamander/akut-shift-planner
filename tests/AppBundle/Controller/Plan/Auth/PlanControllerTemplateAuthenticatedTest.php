@@ -31,6 +31,8 @@ class PlanControllerTemplateAuthenticatedTest extends WebTestCase
             'appbundle_plan[description]' => 'some desc'
         ));
 
+        $this->assertContains('public template', $this->crawler->filter('#appbundle_plan_templates')->text());
+
         $this->client->submit($form);
         $this->assertEquals(0, $this->crawler->filter('.alert')->count());
         $this->crawler = $this->client->followRedirect();
