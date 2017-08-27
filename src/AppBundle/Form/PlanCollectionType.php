@@ -33,6 +33,7 @@ class PlanCollectionType extends AbstractType
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('p')
                         ->where('p.user = :user')
+                        ->andWhere('p.isTemplate = false')
                         ->setParameter('user', $this->userService->getUser()->getId());
                 },
                 'choice_label' => 'title',
