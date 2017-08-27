@@ -32,10 +32,17 @@ class LoadTemplateData extends AbstractFixture implements FixtureInterface
         $publicTemplate = new Plan();
         $publicTemplate->setIsTemplate(1);
         $publicTemplate->setIsPublic(1);
-        $publicTemplate->setDescription('im public');
+        $publicTemplate->setDescription('am public');
         $publicTemplate->setDate(new \DateTime('1970-01-01 00:01:00'));
         $publicTemplate->setTitle('public template');
 
+        $publicShift = new Shift();
+        $publicShift->setDescription('public shift');
+        $publicShift->setTitle('shift');
+        $publicShift->setStart(new \DateTime('1970-01-01 00:01:00'));
+        $publicShift->setEnd(new \DateTime('1970-01-01 00:02:00'));
+        $publicShift->setNumberPeople(2);
+        $publicTemplate->addShift($publicShift);
 
         $shift = new Shift();
         $shift->setDescription('meiu asdjffs');
@@ -62,9 +69,9 @@ class LoadTemplateData extends AbstractFixture implements FixtureInterface
         $this->setReference('public-plan-template', $template);
         $privateTemplate->addShift($secondShift);
 
+        $manager->persist($publicTemplate);
         $manager->persist($privateTemplate);
         $manager->persist($template);
-        $manager->persist($publicTemplate);
         $manager->flush();
     }
 }

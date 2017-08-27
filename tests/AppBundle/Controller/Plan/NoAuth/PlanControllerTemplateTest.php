@@ -39,7 +39,7 @@ class PlanControllerTemplateTest extends WebTestCase
         $this->assertContains('test template', $crawler->filter('.justify-content-end')->text());
         $this->assertContains('20.06.2099', $crawler->filter('.justify-content-end')->text());
         $this->assertContains('some desc', $crawler->filter('blockquote')->text());
-        $this->assertContains('meiu asdjffs', $crawler->filter('tr')->eq(1)->text());
+        $this->assertContains('public shift', $crawler->filter('tr')->eq(1)->text());
         $this->assertContains('shift', $crawler->filter('tr')->eq(1)->text());
         $this->assertContains('00:01', $crawler->filter('tr')->eq(1)->text());
         $this->assertContains('00:02', $crawler->filter('tr')->eq(1)->text());
