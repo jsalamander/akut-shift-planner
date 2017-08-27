@@ -42,17 +42,15 @@ class PlanService {
      *
      * @return ArrayCollection
      */
-    public function getPlans()
+    public function getTemplatePlans()
     {
         $queryBuilder = $this->em->getRepository('AppBundle:Plan')->createQueryBuilder('p');
 
         $qb = $queryBuilder->where('p.isTemplate = true');
+        $qb->andWhere('p.isPublic = true');
 
-        if (!$this->userService->getUser()) {
-            $qb->andWhere('p.isPublic = true');
-        } else {
+        if ($this->userService->getUser()) {
             $qb->andWhere('p.user = :user')->setParameter('user', $this->userService->getUser()->getId());
-            $qb->orWhere('p.isPublic = true');
         }
 
         return $qb->orderBy('p.title', 'ASC')->getQuery()->getResult();

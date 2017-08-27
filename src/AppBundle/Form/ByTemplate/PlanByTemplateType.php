@@ -36,7 +36,7 @@ class PlanByTemplateType extends AbstractType
 
         $builder
             ->add('templates', ChoiceType::class, array(
-                'choices' => $this->planService->getPlans(),
+                'choices' => $this->planService->getTemplatePlans(),
                 'choice_label' => function($plan, $key, $index) {
                     return $plan->getTitle();
                 },

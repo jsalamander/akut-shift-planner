@@ -52,6 +52,7 @@ class PlanControllerTemplateAuthenticatedTest extends WebTestCase
         $this->crawler = $this->client->followRedirect();
         $this->assertContains('test template', $this->crawler->text());
 
+        // make sure new created plan isn't marked as template
         $this->crawler = $this->client->request('GET', '/plan/new-by-template');
         $this->assertNotContains('test template', $this->crawler->filter('#appbundle_plan_templates')->text());
     }
