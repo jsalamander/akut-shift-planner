@@ -47,10 +47,11 @@ class PlanService {
         $queryBuilder = $this->em->getRepository('AppBundle:Plan')->createQueryBuilder('p');
 
         $qb = $queryBuilder->where('p.isTemplate = true');
-        $qb->andWhere('p.isPublic = true');
 
         if ($this->userService->getUser()) {
             $qb->andWhere('p.user = :user')->setParameter('user', $this->userService->getUser()->getId());
+        } else {
+            $qb->andWhere('p.isPublic = true');
         }
 
         return $qb->orderBy('p.title', 'ASC')->getQuery()->getResult();

@@ -13,11 +13,10 @@ class PlanControllerTemplateAuthenticatedTest extends WebTestCase
     public function setUp()
     {
         $fixtures = $this->loadFixtures(array(
-            'AppBundle\DataFixtures\ORM\LoadUserData',
             'AppBundle\DataFixtures\ORM\LoadTemplateData',
         ))->getReferenceRepository();
 
-        $this->loginAs($fixtures->getReference('admin-user'), 'main');
+        $this->loginAs($fixtures->getReference('admin-three-user'), 'main');
         $this->client = $this->makeClient();
         $this->crawler = $this->client->request('GET', '/plan/new-by-template');
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
