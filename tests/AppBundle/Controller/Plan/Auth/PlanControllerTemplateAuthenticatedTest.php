@@ -51,6 +51,9 @@ class PlanControllerTemplateAuthenticatedTest extends WebTestCase
         $this->client->request('GET', '/plan');
         $this->crawler = $this->client->followRedirect();
         $this->assertContains('test template', $this->crawler->text());
+
+        $this->crawler = $this->client->request('GET', '/plan/new-by-template');
+        $this->assertNotContains('test template', $this->crawler->filter('#appbundle_plan_templates')->text());
     }
 
     public function testCreatePlanByTemplateWithError()
