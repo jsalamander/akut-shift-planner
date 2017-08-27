@@ -104,10 +104,11 @@ class PlanCollectionControllerTest extends WebTestCase
         $this->assertContains('admincollection', $this->crawler->filter('h1')->text());
         $this->assertContains('Schichtpläne', $this->crawler->filter('thead')->text());
         $this->assertContains('Link', $this->crawler->filter('thead')->text());
-        $this->assertContains('admin plan', $this->crawler->filter('td')->eq(0)->text());
+        $this->assertContains('admin plan', $this->crawler->filter('tr')->eq(2)->text());
+        $this->assertContains('admin second plan', $this->crawler->filter('tr')->eq(1)->text());
         $this->assertContains(
             'http://localhost/plan/'.$this->fixtures->getReference('admin-plan')->getId(),
-            $this->crawler->filter('td')->eq(2)->text()
+            $this->crawler->filter('tr')->eq(2)->text()
         );
     }
 

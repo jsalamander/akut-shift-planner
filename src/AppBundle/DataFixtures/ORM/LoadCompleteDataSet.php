@@ -30,7 +30,7 @@ class LoadCompleteDataSet extends AbstractFixture implements FixtureInterface
 
         $adminPlanSecond = new Plan();
         $adminPlanSecond->setDescription('yolo');
-        $adminPlanSecond->setDate(new \DateTime('2099-01-01 00:01:00'));
+        $adminPlanSecond->setDate(new \DateTime('2098-01-01 00:01:00'));
         $adminPlanSecond->setTitle('admin second plan');
         $adminPlanSecond->setUser($admin);
         $this->setReference('admin-plan-second', $adminPlan);
@@ -48,6 +48,7 @@ class LoadCompleteDataSet extends AbstractFixture implements FixtureInterface
         $adminCollection->setTitle('admincollection');
         $adminCollection->setUser($admin);
         $adminCollection->addPlan($adminPlan);
+        $adminCollection->addPlan($adminPlanSecond);
         $this->setReference('admin-collection', $adminCollection);
 
         $adminPlanPast = new Plan();
