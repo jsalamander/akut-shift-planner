@@ -39,6 +39,7 @@ class PlanCollectionControllerTest extends WebTestCase
         $this->assertContains('Neue Plansammlung', $this->crawler->filter('h1')->text());
         $this->createACollection();
         $this->assertContains('admin plan', $this->crawler->filter('tbody')->text());
+        $this->assertContains('01.01.2099', $this->crawler->filter('tbody')->text());
         $this->assertContains(
             'http://localhost/plan/'.$this->fixtures->getReference('admin-plan')->getId(),
             $this->crawler->filter('tbody')->text()
@@ -106,7 +107,7 @@ class PlanCollectionControllerTest extends WebTestCase
         $this->assertContains('admin plan', $this->crawler->filter('td')->eq(0)->text());
         $this->assertContains(
             'http://localhost/plan/'.$this->fixtures->getReference('admin-plan')->getId(),
-            $this->crawler->filter('td')->eq(1)->text()
+            $this->crawler->filter('td')->eq(2)->text()
         );
     }
 
