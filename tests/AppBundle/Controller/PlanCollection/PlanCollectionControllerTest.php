@@ -119,6 +119,7 @@ class PlanCollectionControllerTest extends WebTestCase
             'appbundle_plancollection[plans]' => array($adminPlanId)
         ));
 
+        $this->assertNotEquals('admin plan template', $this->crawler->filter('#appbundle_plancollection_plans')->text());
         $this->crawler = $this->client->submit($form);
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
         $this->crawler = $this->client->followRedirect();
