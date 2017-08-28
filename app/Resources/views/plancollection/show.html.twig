@@ -9,7 +9,7 @@
                     <tr>
                         <th>{% trans %}plans{% endtrans %}</th>
                         <th>{% trans %}date{% endtrans %}</th>
-                        <th>{% trans %}people_needed_for_shift{% endtrans %}</th>
+                        <th>{% trans %}enrolled_people{% endtrans %}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -23,7 +23,7 @@
                             {% set total = total + shift.numberPeople %}
                             {% set filled = filled + shift.people.count %}
                         {% endfor  %}
-                        <td> {{ filled }} / {{ total }}</td>
+                        <td> {{ filled }} {{ 'of'|trans }} {{ total }}</td>
                     </tr>
                 {% endfor %}
                 </tbody>
