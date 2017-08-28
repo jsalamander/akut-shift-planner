@@ -9,20 +9,14 @@
                     <tr>
                         <th>{% trans %}plans{% endtrans %}</th>
                         <th>{% trans %}date{% endtrans %}</th>
-                        <th>{% trans %}link{% endtrans %}</th>
                         <th>{% trans %}people_needed_for_shift{% endtrans %}</th>
                     </tr>
                 </thead>
                 <tbody>
                 {% for plan in planCollection.plans | sortbyfield('date') %}
                     <tr>
-                        <td>{{ plan.title }}</td>
+                        <td><a href="{{ path('plan_show', { 'id': plan.id }) }}">{{ plan.title }}</a></td>
                         <td>{{ plan.date|date('d.m.Y') }}</td>
-                        <td>
-                            <a href="{{ path('plan_show', { 'id': plan.id }) }}">
-                                {{ url('plan_show', { 'id': plan.id }) }}
-                            </a>
-                        </td>
                         {% set total = 0 %}
                         {% set filled = 0 %}
                         {% for shift in plan.shifts  %}
