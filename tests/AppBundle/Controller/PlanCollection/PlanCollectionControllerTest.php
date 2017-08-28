@@ -108,7 +108,7 @@ class PlanCollectionControllerTest extends WebTestCase
             $this->crawler->filter('tr')->eq(2)->filter('a')->attr('href'));
         $this->assertContains('admin second plan', $this->crawler->filter('tr')->eq(1)->text());
         $this->assertContains(' 0 / 0', $this->crawler->filter('tbody tr td')->eq(2)->text());
-        $this->assertContains(' 1 / 2', $this->crawler->filter('tbody tr')->eq(1)->filter('tr td')->eq(2)->text());
+        $this->assertContains(' 1 / 3', $this->crawler->filter('tbody tr')->eq(1)->filter('tr td')->eq(2)->text());
     }
 
     public function createACollection()

@@ -60,7 +60,7 @@ class PlanControllerEditAuthenticatedTest extends WebTestCase
         $this->assertContains('new new', $this->crawler->filter('tbody > tr')->eq(1)->text());
         $this->assertContains('00:05', $this->crawler->filter('tbody > tr')->eq(1)->text());
         $this->assertContains('00:10', $this->crawler->filter('tbody > tr')->eq(1)->text());
-        $this->assertContains('/person/new?shift=', $this->crawler->filter('ol > li:nth-child(1) > a')->eq(1)->attr('href'));
+        $this->assertContains('/person/new?shift=', $this->crawler->filter('ol > li:nth-child(1) > a')->attr('href'));
     }
 
     public function testDeletePlan()

@@ -41,7 +41,7 @@ class LoadCompleteDataSet extends AbstractFixture implements FixtureInterface
         $adminShift->setTitle('admin shift');
         $adminShift->setStart(new \DateTime('1970-01-01 00:01:00'));
         $adminShift->setEnd(new \DateTime('1970-01-01 00:02:00'));
-        $adminShift->setNumberPeople(2);
+        $adminShift->setNumberPeople(3);
         $adminPlan->addShift($adminShift);
         $this->setReference('admin-shift', $adminShift);
 
