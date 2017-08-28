@@ -396,9 +396,13 @@
                 <source>edit_person</source>
                 <target>Bearbeite</target>
             </trans-unit>
-            <trans-unit id="people_needed_for_shift">
-                <source>people_needed_for_shift</source>
-                <target>Offene Schichtplätze</target>
+            <trans-unit id="enrolled_people">
+                <source>enrolled_people</source>
+                <target>Eingeschriebene Personen</target>
+            </trans-unit>
+            <trans-unit id="of">
+                <source>of</source>
+                <target>von</target>
             </trans-unit>
         </body>
     </file>

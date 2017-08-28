@@ -392,9 +392,13 @@
                 <source>edit_person</source>
                 <target>Edit</target>
             </trans-unit>
-            <trans-unit id="people_needed_for_shift">
-                <source>people_needed_for_shift</source>
-                <target>People needed</target>
+            <trans-unit id="enrolled_people">
+                <source>enrolled_people</source>
+                <target>Enrolled people</target>
+            </trans-unit>
+            <trans-unit id="of">
+                <source>of</source>
+                <target>of</target>
             </trans-unit>
         </body>
     </file>
