@@ -2,6 +2,7 @@
 
 namespace AppBundle\DataFixtures\ORM;
 
+use AppBundle\Entity\Person;
 use AppBundle\Entity\PlanCollection;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -43,6 +44,12 @@ class LoadCompleteDataSet extends AbstractFixture implements FixtureInterface
         $adminShift->setNumberPeople(2);
         $adminPlan->addShift($adminShift);
         $this->setReference('admin-shift', $adminShift);
+
+        $adminPerson = new Person();
+        $adminPerson->setAlias('alias');
+        $adminPerson->setName('real name');
+        $adminShift->addPerson($adminPerson);
+        $adminPerson->setShift($adminShift);
 
         $adminCollection = new PlanCollection();
         $adminCollection->setTitle('admincollection');
@@ -121,6 +128,7 @@ class LoadCompleteDataSet extends AbstractFixture implements FixtureInterface
 
         //save all the things!
         $manager->persist($admin);
+        $manager->persist($adminPerson);
         $manager->persist($adminShift);
         $manager->persist($adminShiftPast);
         $manager->persist($adminPlan);

@@ -106,6 +106,8 @@ class PlanCollectionControllerTest extends WebTestCase
         $this->assertContains('Link', $this->crawler->filter('thead')->text());
         $this->assertContains('admin plan', $this->crawler->filter('tr')->eq(2)->text());
         $this->assertContains('admin second plan', $this->crawler->filter('tr')->eq(1)->text());
+        $this->assertContains(' 0 / 0', $this->crawler->filter('tbody tr td')->eq(3)->text());
+        $this->assertContains(' 1 / 2', $this->crawler->filter('tbody tr')->eq(1)->filter('tr td')->eq(3)->text());
         $this->assertContains(
             'http://localhost/plan/'.$this->fixtures->getReference('admin-plan')->getId(),
             $this->crawler->filter('tr')->eq(2)->text()
