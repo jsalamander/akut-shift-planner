@@ -72,7 +72,8 @@ class PlanControllerEnrollmentTest extends WebTestCase
     }
 
     private function enrollSamplePerson() {
-        $link = $this->crawler->filter('ol > li > a')->eq(0)->link();
+        //var_dump($this->crawler->filter('ol > li  a')->attr('href'));die;
+        $link = $this->crawler->filter('ol > li  a')->link();
         $this->crawler = $this->client->click($link);
         $form = $this->crawler->filter('.btn')->form(array(
             'appbundle_person[name]' => 'private name',

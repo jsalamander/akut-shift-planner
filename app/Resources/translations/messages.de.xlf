@@ -396,6 +396,10 @@
                 <source>edit_person</source>
                 <target>Bearbeite</target>
             </trans-unit>
+            <trans-unit id="people_needed_for_shift">
+                <source>people_needed_for_shift</source>
+                <target>Offene Schichtplätze</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

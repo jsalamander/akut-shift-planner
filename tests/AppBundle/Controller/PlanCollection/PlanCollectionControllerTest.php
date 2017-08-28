@@ -41,8 +41,8 @@ class PlanCollectionControllerTest extends WebTestCase
         $this->assertContains('admin plan', $this->crawler->filter('tbody')->text());
         $this->assertContains('01.01.2099', $this->crawler->filter('tbody')->text());
         $this->assertContains(
-            'http://localhost/plan/'.$this->fixtures->getReference('admin-plan')->getId(),
-            $this->crawler->filter('tbody')->text()
+            $this->fixtures->getReference('admin-plan')->getId(),
+            $this->crawler->filter('tr')->eq(1)->filter('a')->attr('href')
         );
         $this->crawler = $this->client->request('GET', '/logout');
         $this->crawler = $this->client->request('GET', '/plancollection/testcollection');
@@ -93,8 +93,8 @@ class PlanCollectionControllerTest extends WebTestCase
 
         $this->assertContains('admin plan', $this->crawler->filter('tbody')->text());
         $this->assertContains(
-            'http://localhost/plan/'.$this->fixtures->getReference('admin-plan-second')->getId(),
-            $this->crawler->filter('tbody')->text()
+            $this->fixtures->getReference('admin-plan-second')->getId(),
+            $this->crawler->filter('tr')->eq(1)->filter('a')->attr('href')
         );
     }
 
@@ -103,13 +103,12 @@ class PlanCollectionControllerTest extends WebTestCase
         $this->crawler = $this->client->request('GET', '/plancollection/admincollection');
         $this->assertContains('admincollection', $this->crawler->filter('h1')->text());
         $this->assertContains('Schichtpläne', $this->crawler->filter('thead')->text());
-        $this->assertContains('Link', $this->crawler->filter('thead')->text());
         $this->assertContains('admin plan', $this->crawler->filter('tr')->eq(2)->text());
+        $this->assertContains('/plan/' . $this->fixtures->getReference('admin-plan')->getId(),
+            $this->crawler->filter('tr')->eq(2)->filter('a')->attr('href'));
         $this->assertContains('admin second plan', $this->crawler->filter('tr')->eq(1)->text());
-        $this->assertContains(
-            'http://localhost/plan/'.$this->fixtures->getReference('admin-plan')->getId(),
-            $this->crawler->filter('tr')->eq(2)->text()
-        );
+        $this->assertContains(' 0 / 0', $this->crawler->filter('tbody tr td')->eq(2)->text());
+        $this->assertContains(' 1 / 3', $this->crawler->filter('tbody tr')->eq(1)->filter('tr td')->eq(2)->text());
     }
 
     public function createACollection()
