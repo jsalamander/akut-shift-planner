@@ -10,6 +10,7 @@
                         <th>{% trans %}plans{% endtrans %}</th>
                         <th>{% trans %}date{% endtrans %}</th>
                         <th>{% trans %}link{% endtrans %}</th>
+                        <th>{% trans %}people_needed_for_shift{% endtrans %}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -22,6 +23,13 @@
                                 {{ url('plan_show', { 'id': plan.id }) }}
                             </a>
                         </td>
+                        {% set total = 0 %}
+                        {% set filled = 0 %}
+                        {% for shift in plan.shifts  %}
+                            {% set total = total + shift.numberPeople %}
+                            {% set filled = filled + shift.people.count %}
+                        {% endfor  %}
+                        <td> {{ filled }} / {{ total }}</td>
                     </tr>
                 {% endfor %}
                 </tbody>
