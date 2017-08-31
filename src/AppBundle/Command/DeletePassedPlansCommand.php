@@ -6,7 +6,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\HttpKernel\Kernel;
 use Twig\Environment;
 
 class DeletePassedPlansCommand extends Command
@@ -22,10 +21,6 @@ class DeletePassedPlansCommand extends Command
      */
     private $mailer;
 
-    /**
-     * @var Kernel
-     */
-    private $kernel;
 
     /**
      * @var \Twig_Environment
@@ -36,7 +31,6 @@ class DeletePassedPlansCommand extends Command
      * DeletePassedPlansCommand constructor.
      * @param EntityManagerInterface $em
      * @param \Swift_Mailer $mailer
-     * @param Kernel $kernel
      * @param \Twig_Environment $templating
      */
     public function __construct(
