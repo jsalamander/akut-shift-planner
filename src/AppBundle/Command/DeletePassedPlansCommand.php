@@ -79,12 +79,13 @@ class DeletePassedPlansCommand extends Command
         if ($passedPlans) {
             try {
                 $this->deleteEachPlan($passedPlans);
+                $output->write('<info>Deleted ' . count($passedPlans) . ' plans</info>');
             } catch(\Exception $e){
-                $output->write('deleting failed. Sent error via email to admin');
+                $output->write('<error>Deletion failed. Sent error via email to admin</error>');
                 $this->sendFailedEmail($e->getMessage());
             }
         } else {
-            $output->write('Nothing to delete');
+            $output->write('<info>Nothing to delete</info>');
         }
     }
 
