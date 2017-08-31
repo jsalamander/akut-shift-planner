@@ -64,12 +64,6 @@ class DeletePassedPlansCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln([
-            'Delete passed plans',
-            '===================',
-            '',
-        ]);
-
         $qb = $this->em->getRepository('AppBundle:Plan')->createQueryBuilder('p');
         $passedPlans = $qb->where('p.date < :today')
             ->setParameter('today', new \DateTime())
@@ -79,7 +73,7 @@ class DeletePassedPlansCommand extends Command
         if ($passedPlans) {
             try {
                 $this->deleteEachPlan($passedPlans);
-                $output->write('<info>Deleted ' . count($passedPlans) . ' plans</info>');
+                $output->write('<info>Plans deleted: ' . count($passedPlans) . '</info>');
             } catch(\Exception $e){
                 $output->write('<error>Deletion failed. Sent error via email to admin</error>');
                 $this->sendFailedEmail($e->getMessage());

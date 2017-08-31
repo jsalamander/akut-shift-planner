@@ -13,6 +13,8 @@ Schicht-Plan.ch
 5. Create schema `php bin/console doctrine:schema:update --force`
 6. Create a cron job to run `php bin/console swiftmailer:spool:send --env=prod` frequently
 This sends all the mails saved in the spool.
+7. Create a second cron job for `php bin/console app:delete-passed-plans`
+which should run once per day to delete old plans.
 
 ## Functional Tests
 
