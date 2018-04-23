@@ -68,6 +68,7 @@ swiftmailer:
     encryption: ssl
     port: 465
     auth_mode: login
+    delivery_addresses: ['%admin_email%']
     spool:
         type: file
         path: '%kernel.project_dir%/app/spool'

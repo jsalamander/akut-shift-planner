@@ -95,7 +95,7 @@ class Shift
     private $plan;
 
     /**
-     * @ORM\OneToMany(targetEntity="Person", mappedBy="shift")
+     * @ORM\OneToMany(targetEntity="Person", mappedBy="shift", cascade={"remove"}, orphanRemoval=true)
      */
     private $people;
 
