@@ -12,6 +12,7 @@ use Ramsey\Uuid\Uuid;
  *
  * @ORM\Table(name="plan")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\PlanRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Plan
 {
@@ -46,6 +47,13 @@ class Plan
      * @ORM\Column(name="date", type="datetime")
      */
     private $date;
+
+    /**
+     * @var datetime $created
+     *
+     * @ORM\Column(type="datetime")
+     */
+    protected $created;
 
     /**
      * @var string
@@ -336,5 +344,15 @@ class Plan
             }
             $this->shifts = $mClone;
         }
+    }
+
+    /**
+     * Gets triggered only on insert
+
+     * @ORM\PrePersist
+     */
+    public function onPrePersist()
+    {
+        $this->created = new \DateTime("now");
     }
 }

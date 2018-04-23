@@ -36,7 +36,8 @@ class PlanController extends Controller
             ->where('p.isTemplate = false')
             ->andWhere('p.user = :user')
             ->setParameter('user', $this->getUser()->getId())
-            ->orderBy('p.date', 'ASC')
+            ->orderBy('p.created', 'DESC')
+            ->addOrderBy('p.date', 'ASC')
             ->getQuery();
         $pagination = $paginator->paginate(
             $query,
