@@ -19,3 +19,19 @@
 .add_shift_link {
     margin-top: 0.5rem !important;
 }
+
+.shift-card {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    margin-left: 1rem;
+}
+
+.shift-card > h2 {
+    margin-top: 1rem;
+}
+
+.two-cols {
+    -moz-column-count: 2;
+    -webkit-column-count: 2;
+    column-count:2;
+}
