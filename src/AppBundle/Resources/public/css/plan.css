@@ -35,3 +35,7 @@
     -webkit-column-count: 2;
     column-count:2;
 }
+
+.alias-li {
+    padding: .5rem 1rem;
+}
