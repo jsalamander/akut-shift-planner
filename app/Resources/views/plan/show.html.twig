@@ -87,13 +87,13 @@
                                                     {% if person.email %}
                                                         <li>
                                                             <i class="fa fa-envelope-o" aria-hidden="true"></i>
-                                                            <a href="mailto:{{ person.email }}?Subject=Kontakt Schichtplan: {{ plan.title }} "
+                                                            <a class="mailto" href="mailto:{{ person.email }}?Subject=Kontakt Schichtplan: {{ plan.title }} "
                                                                target="_top">{{ person.email }}
                                                             </a>
                                                         </li>
                                                     {% endif %}
                                                     {% if person.phone %}
-                                                        <li>
+                                                        <li class="phone-number">
                                                             <i class="fa fa-phone" aria-hidden="true"></i> {{ person.phone|phone_number_format('INTERNATIONAL') }}
                                                         </li>
                                                     {% endif %}

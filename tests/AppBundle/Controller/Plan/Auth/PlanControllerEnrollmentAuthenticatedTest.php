@@ -31,16 +31,14 @@ class PlanControllerEnrollmentAuthenticatedTest extends WebTestCase
     public function testSimpleEnrollment()
     {
         $this->assertContains('/person/1/edit', $this->crawler->filter('.edit')->attr('href'));
-        $this->assertContains('private name', $this->crawler->filter('ol > li')->eq(0)->text());
+        $this->assertContains('private name', $this->crawler->filter('.card')->eq(0)->text());
         $this->assertContains('mailto:asdf@asfd.de?Subject=Kontakt Schichtplan: admin plan',
-            $this->crawler->filter('#person-details li > a')->eq(0)->attr('href'));
-        $this->assertContains('+41 979787323', $this->crawler->filter('#person-details li')->eq(1)->text());
-
-        $this->assertContains('+41 979787323', $this->crawler->filter('#person-details:nth-child(2) li')->eq(1)->text());
+            $this->crawler->filter('.mailto')->eq(0)->attr('href'));
+        $this->assertContains('+41 979787323', $this->crawler->filter('.phone-number')->eq(1)->text());
         $this->assertContains('mailto:asdf@asfd.de?Subject=Kontakt Schichtplan: admin plan',
-            $this->crawler->filter('#person-details li > a')->eq(1)->attr('href'));
+            $this->crawler->filter('.mailto')->eq(1)->attr('href'));
         $this->assertContains('/person/2/edit', $this->crawler->filter('.edit')->eq(1)->attr('href'));
-        $this->assertContains('private name', $this->crawler->filter('ol > li')->eq(1)->text());
+        $this->assertContains('private name', $this->crawler->filter('.list-group-item')->eq(1)->text());
     }
 
     public function testEditErrorEnrollment()
@@ -71,9 +69,9 @@ class PlanControllerEnrollmentAuthenticatedTest extends WebTestCase
 
         $this->client->submit($form);
         $this->crawler = $this->client->followRedirect();
-        $this->assertContains('new name', $this->crawler->filter('ol')->eq(0)->text());
-        $this->assertContains('new@email.ch', $this->crawler->filter('ol')->eq(0)->text());
-        $this->assertContains('+41 79 564 32 43', $this->crawler->filter('ol')->eq(0)->text());
+        $this->assertContains('new name', $this->crawler->filter('.list-group-item')->eq(0)->text());
+        $this->assertContains('new@email.ch', $this->crawler->filter('.list-group-item')->eq(0)->text());
+        $this->assertContains('+41 79 564 32 43', $this->crawler->filter('.list-group-item')->eq(0)->text());
     }
 
     public function testDeletePerson()
@@ -85,6 +83,6 @@ class PlanControllerEnrollmentAuthenticatedTest extends WebTestCase
         $this->crawler = $this->client->followRedirect();
         $this->assertContains('/person/2/edit', $this->crawler->filter('.edit')->attr('href'));
         $this->assertContains('/person/new?shift=' . $this->fixtures->getReference('admin-shift')->getId(),
-            $this->crawler->filter('td > ol > li')->eq(1)->filter('a')->attr('href'));
+            $this->crawler->filter('.btn-primary')->eq(0)->attr('href'));
     }
 }

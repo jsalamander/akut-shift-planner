@@ -54,13 +54,13 @@ class PlanControllerEditTemplateAuthenticatedTest extends WebTestCase
         $this->assertContains('edited template', $this->crawler->filter('h1')->text());
         $this->assertNotContains('0.06.2019', $this->crawler->filter('h1')->text());
         $this->assertContains('new template desc', $this->crawler->filter('blockquote')->text());
-        $this->assertContains('new foo', $this->crawler->filter('tbody > tr')->text());
-        $this->assertContains('new shift', $this->crawler->filter('tbody > tr')->eq(1)->text());
-        $this->assertContains('new new', $this->crawler->filter('tbody > tr')->eq(1)->text());
-        $this->assertContains('00:05', $this->crawler->filter('tbody > tr')->eq(1)->text());
-        $this->assertContains('00:10', $this->crawler->filter('tbody > tr')->eq(1)->text());
-        $this->assertContains('Person', $this->crawler->filter('ol > li')->eq(0)->text());
-        $this->assertContains('Person', $this->crawler->filter('ol > li')->eq(1)->text());
+        $this->assertContains('new foo', $this->crawler->filter('.card')->text());
+        $this->assertContains('new shift', $this->crawler->filter('.card')->eq(1)->text());
+        $this->assertContains('new new', $this->crawler->filter('.card')->eq(1)->text());
+        $this->assertContains('00:05', $this->crawler->filter('.card')->eq(1)->text());
+        $this->assertContains('00:10', $this->crawler->filter('.card')->eq(1)->text());
+        $this->assertContains('Person', $this->crawler->filter('.card')->eq(0)->text());
+        $this->assertContains('Person', $this->crawler->filter('.card')->eq(1)->text());
     }
 
     public function testDeleteTemplate()
