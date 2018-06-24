@@ -41,12 +41,12 @@ class PlanControllerTemplateAuthenticatedTest extends WebTestCase
         $this->assertContains('test template', $this->crawler->filter('.justify-content-end')->text());
         $this->assertContains('20.06.2099', $this->crawler->filter('.justify-content-end')->text());
         $this->assertContains('some desc', $this->crawler->filter('blockquote')->text());
-        $this->assertContains('meiu asdjffs', $this->crawler->filter('tr')->eq(1)->text());
-        $this->assertContains('shift', $this->crawler->filter('tr')->eq(1)->text());
-        $this->assertContains('00:01', $this->crawler->filter('tr')->eq(1)->text());
-        $this->assertContains('00:02', $this->crawler->filter('tr')->eq(1)->text());
+        $this->assertContains('meiu asdjffs', $this->crawler->filter('.card')->eq(0)->text());
+        $this->assertContains('shift', $this->crawler->filter('.card')->eq(0)->text());
+        $this->assertContains('00:01', $this->crawler->filter('.card')->eq(0)->text());
+        $this->assertContains('00:02', $this->crawler->filter('.card')->eq(0)->text());
         $this->assertEquals(0, $this->crawler->filter('#passwordPrompt')->count());
-        $this->assertEquals(2, $this->crawler->filter('.container .text-nowrap')->count());
+        $this->assertContains('2', $this->crawler->filter('.progress')->text());
 
         //go to overview page
         $this->client->request('GET', '/plan');

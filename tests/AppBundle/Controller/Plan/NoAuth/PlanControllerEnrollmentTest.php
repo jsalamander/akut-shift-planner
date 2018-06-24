@@ -28,7 +28,7 @@ class PlanControllerEnrollmentTest extends WebTestCase
 
     public function testSimpleEnrollment()
     {
-        $link = $this->crawler->filter('ol > li > a')->eq(0)->link();
+        $link = $this->crawler->filter('.btn-primary')->eq(0)->link();
         $crawler = $this->client->click($link);
         $form = $crawler->filter('.btn')->form(array(
             'appbundle_person[name]' => 'private name',
@@ -40,8 +40,8 @@ class PlanControllerEnrollmentTest extends WebTestCase
         $this->client->submit($form);
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
         $crawler = $this->client->followRedirect();
-        $this->assertContains('alias', $crawler->filter('ol > li')->eq(0)->text());
-        $this->assertNotContains('private name', $crawler->filter('ol > li')->eq(0)->text());
+        $this->assertContains('alias', $crawler->filter('.card')->eq(0)->text());
+        $this->assertNotContains('private name', $crawler->filter('.card')->eq(0)->text());
     }
 
     /**
@@ -49,7 +49,7 @@ class PlanControllerEnrollmentTest extends WebTestCase
      */
     public function testErrorEnrollment()
     {
-        $link = $this->crawler->filter('ol > li > a')->eq(0)->link();
+        $link = $this->crawler->filter('.btn-primary')->eq(0)->link();
         $crawler = $this->client->click($link);
         $form = $crawler->filter('.btn')->form(array(
             'appbundle_person[name]' => 'p',
@@ -66,14 +66,13 @@ class PlanControllerEnrollmentTest extends WebTestCase
     {
         $this->enrollSamplePerson();
         $this->enrollSamplePerson();
-        $this->assertContains('alias', $this->crawler->filter('ol > li')->eq(0)->text());
-        $this->assertContains('alias', $this->crawler->filter('ol > li')->eq(1)->text());
+        $this->assertContains('alias', $this->crawler->filter('.list-group-item')->eq(0)->text());
+        $this->assertContains('alias', $this->crawler->filter('.list-group-item')->eq(1)->text());
         $this->assertEquals(0, $this->crawler->filter('ol > li > a')->count());
     }
 
     private function enrollSamplePerson() {
-        //var_dump($this->crawler->filter('ol > li  a')->attr('href'));die;
-        $link = $this->crawler->filter('ol > li  a')->link();
+        $link = $this->crawler->filter('.btn-primary')->link();
         $this->crawler = $this->client->click($link);
         $form = $this->crawler->filter('.btn')->form(array(
             'appbundle_person[name]' => 'private name',
@@ -85,8 +84,8 @@ class PlanControllerEnrollmentTest extends WebTestCase
         $this->client->submit($form);
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
         $this->crawler = $this->client->followRedirect();
-        $this->assertContains('alias', $this->crawler->filter('ol > li')->eq(0)->text());
-        $this->assertNotContains('private name', $this->crawler->filter('ol > li')->eq(0)->text());
+        $this->assertContains('alias', $this->crawler->filter('.card')->eq(0)->text());
+        $this->assertNotContains('private name', $this->crawler->filter('.card')->eq(0)->text());
     }
 
     public function testTooManyEnrollments()

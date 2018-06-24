@@ -71,12 +71,12 @@ class PlanControllerTest extends WebTestCase
         $this->assertContains('test plan', $crawler->filter('.justify-content-end')->text());
         $this->assertContains('20.06.2099', $crawler->filter('.justify-content-end')->text());
         $this->assertContains('some desc', $crawler->filter('blockquote')->text());
-        $this->assertContains('foo', $crawler->filter('tr')->eq(1)->text());
-        $this->assertContains('bar', $crawler->filter('tr')->eq(1)->text());
-        $this->assertContains('00:00', $crawler->filter('tr')->eq(1)->text());
-        $this->assertContains('00:01', $crawler->filter('tr')->eq(1)->text());
+        $this->assertContains('foo', $crawler->filter('.card')->eq(0)->text());
+        $this->assertContains('bar', $crawler->filter('.card')->eq(0)->text());
+        $this->assertContains('00:00', $crawler->filter('.card')->eq(0)->text());
+        $this->assertContains('00:01', $crawler->filter('.card')->eq(0)->text());
         $this->assertContains('#', $crawler->filter('#passwordPrompt')->attr('href'));
-        $this->assertEquals(3, $crawler->filter('.container .text-nowrap')->count());
+        $this->assertContains('3', $crawler->filter('.progress')->text());
         $this->assertEquals(1, $crawler->filter('.modal-content')->count());
         $this->assertContains('/login_check', $crawler->filter('.modal-content form')->attr('action'));
     }
