@@ -36,7 +36,7 @@
 
     <div class="col-12">
         {% if not isAuth %}
-            <a id="passwordPrompt" href="#"><i class="fa fa-eye" aria-hidden="true"></i> {% trans %}
+            <a class="pull-right" id="passwordPrompt" href="#"><i class="fa fa-eye" aria-hidden="true"></i> {% trans %}
                 show_details{% endtrans %}</a>
         {% endif %}
     </div>
@@ -68,13 +68,12 @@
                                        href="{{ path('person_new', { 'shift': shift.id }) }}">
                                         {% trans %}enroll{% endtrans %}
                                     </a>
-                                    <hr>
                                 {% endif %}
                             {% else %}
                                 <li class="list-group-item">{% trans %}person{% endtrans %}</li>
                             {% endif %}
 
-                            <ul class="row">
+                            <ul class="row people-list">
                                 <div class="col-12">
                                     {% for person in shift.people %}
                                         {% if not plan.isTemplate %}

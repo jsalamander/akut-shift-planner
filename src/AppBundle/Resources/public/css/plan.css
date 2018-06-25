@@ -32,7 +32,11 @@
 }
 
 .card {
-    padding: 8px;
+    padding: .8rem;
+}
+
+.enroll-btn {
+    width: 100%;
 }
 
 #plan-title {
@@ -44,4 +48,8 @@
 
 .progress {
     margin-bottom: .8rem;
+}
+
+.people-list {
+    margin-top: .8rem;
 }
