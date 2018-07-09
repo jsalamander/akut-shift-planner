@@ -33,3 +33,8 @@ textarea {
 .btn {
     margin: 0px !important;
 }
+
+.list-index > li {
+    margin-left: 2.5rem;
+    list-style-type: circle;
+}

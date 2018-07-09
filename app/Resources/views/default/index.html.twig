@@ -4,6 +4,15 @@
     <div class="jumbotron col-12">
         <h1 class="display-3 h1-responsive">Schicht-Plan.ch</h1>
         <h6 class="h6-responsive">{% trans %}home_description{% endtrans %} <a href="https://schichtplan.immerda.ch">schichtplan.immerda.ch</a></h6>
+        <br>
+        <h5>Features</h5>
+        <p>
+            <ul class="list-index">
+                <li>Öffentliche oder private Vorlagen erstellen</li>
+                <li>Plankollektionen (Gruppieren von mehreren Schichtplänen)</li>
+                <li>Wähle beim Einschreiben einen öffentlichen und einen privaten Anzeigenamen</li>
+            </ul>
+        </p>
         <hr>
         <p class="lead">
             <a class="btn btn-md btn-primary" href="{{ path('plan_new') }}" role="button">{% trans %}create_shift_plan{% endtrans %}</a>
