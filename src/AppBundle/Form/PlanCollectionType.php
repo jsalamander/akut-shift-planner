@@ -34,6 +34,7 @@ class PlanCollectionType extends AbstractType
                     return $er->createQueryBuilder('p')
                         ->where('p.user = :user')
                         ->andWhere('p.isTemplate = false')
+                        ->orderBy('p.date', 'ASC')
                         ->setParameter('user', $this->userService->getUser()->getId());
                 },
                 'choice_label' => 'title',
