@@ -15,6 +15,7 @@ parameters:
     mailer_user: no-reply@schicht-plan.ch
     mailer_password: ~
     admin_email: 'jan.friedli@gmx.ch'
+    repo_changelog: 'https://api.github.com/repos/janfriedli/akut-shift-planner/releases'
 
     # A secret key that's used to generate certain security-related tokens
     secret: ThisTokenIsNotSoSecretChangeIt

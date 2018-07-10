@@ -21,7 +21,8 @@ class AppKernel extends Kernel
             new Bazinga\Bundle\JsTranslationBundle\BazingaJsTranslationBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
-            new Misd\PhoneNumberBundle\MisdPhoneNumberBundle()
+            new Misd\PhoneNumberBundle\MisdPhoneNumberBundle(),
+            new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle()
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

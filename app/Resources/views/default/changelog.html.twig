@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2>Releases</h2>
+    {% for release in releases  %}
+        {% if not release.draft  %}
+        <div class="col-12">
+            <h3><b>{{ release.name }}</b></h3>
+            <pre>{{ release.tag_name }}</pre>
+            <p>
+                {{ release.body | markdown }}
+            </p>
+        </div>
+        {% endif %}
+    {% endfor  %}
+{% endblock %}

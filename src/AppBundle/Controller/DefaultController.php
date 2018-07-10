@@ -25,4 +25,15 @@ class DefaultController extends Controller
         return $this->render('default/about.html.twig');
     }
 
+    /**
+     * @Route("/changelog", name="changelog")
+     */
+    public function changeLogAction(Request $request)
+    {
+        $headers = array('Accept' => 'application/json');
+        $response = \Unirest\Request::get($this->container->getParameter('repo_changelog'), $headers);
+        return $this->render('default/changelog.html.twig', [
+            'releases' => $response->body
+        ]);
+    }
 }
