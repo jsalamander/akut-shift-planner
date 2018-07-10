@@ -38,3 +38,8 @@ textarea {
     margin-left: 2.5rem;
     list-style-type: circle;
 }
+
+.fos_user_user_show {
+    float: none;
+    margin: 0 auto;
+}

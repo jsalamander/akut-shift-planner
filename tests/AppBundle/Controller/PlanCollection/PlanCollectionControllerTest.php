@@ -80,6 +80,8 @@ class PlanCollectionControllerTest extends WebTestCase
     public function testEditPlanCollection()
     {
         $this->crawler = $this->client->request('GET', '/plancollection/admincollection/edit');
+        $this->assertContains('admin second plan' ,$this->crawler->filter('option')->eq(0)->text());
+        $this->assertContains('admin plan' ,$this->crawler->filter('option')->eq(1)->text());
         $form = $this->crawler->filter('.btn-primary')->form(array(
             'appbundle_plancollection[title]' => 'testcollection',
             'appbundle_plancollection[plans]' => array(
