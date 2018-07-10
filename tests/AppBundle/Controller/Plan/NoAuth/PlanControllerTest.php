@@ -41,9 +41,10 @@ class PlanControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/plan/new');
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
+        $date = new \DateTime();
         $form = $crawler->filter('.btn')->form(array(
             'appbundle_plan[title]' => 'test plan',
-            'appbundle_plan[date]' => '2099-06-20',
+            'appbundle_plan[date]' => $date->format('Y-m-d'),
             'appbundle_plan[description]' => 'some desc',
             'appbundle_plan[email]' => 'test@test.ch',
             'appbundle_plan[password][first]' => '12345678',
@@ -69,7 +70,7 @@ class PlanControllerTest extends WebTestCase
         $crawler = $client->followRedirect();
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertContains('test plan', $crawler->filter('.justify-content-end')->text());
-        $this->assertContains('20.06.2099', $crawler->filter('.justify-content-end')->text());
+        $this->assertContains($date->format('d.m.Y'), $crawler->filter('.justify-content-end')->text());
         $this->assertContains('some desc', $crawler->filter('blockquote')->text());
         $this->assertContains('foo', $crawler->filter('.card')->eq(0)->text());
         $this->assertContains('bar', $crawler->filter('.card')->eq(0)->text());
