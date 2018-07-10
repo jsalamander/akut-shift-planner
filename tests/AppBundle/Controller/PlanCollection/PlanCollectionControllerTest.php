@@ -119,6 +119,14 @@ class PlanCollectionControllerTest extends WebTestCase
             'appbundle_plancollection[plans]' => array($adminPlanId)
         ));
 
+        // make sure the order is correct and past plans aren't available
+        $this->assertNotContains('admin plan past' ,$this->crawler->filter('option')->eq(0)->text());
+        $this->assertContains('admin second plan' ,$this->crawler->filter('option')->eq(0)->text());
+        $this->assertContains('admin plan' ,$this->crawler->filter('option')->eq(1)->text());
+
+        // var_dump($this->crawler->filter('option'));die;
+
+
         $this->assertNotEquals('admin plan template', $this->crawler->filter('#appbundle_plancollection_plans')->text());
         $this->crawler = $this->client->submit($form);
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());

@@ -34,6 +34,8 @@ class PlanCollectionType extends AbstractType
                     return $er->createQueryBuilder('p')
                         ->where('p.user = :user')
                         ->andWhere('p.isTemplate = false')
+                        ->andWhere('p.date >= :today')
+                        ->setParameter('today', new \DateTime(), \Doctrine\DBAL\Types\Type::DATETIME)
                         ->orderBy('p.date', 'ASC')
                         ->setParameter('user', $this->userService->getUser()->getId());
                 },
