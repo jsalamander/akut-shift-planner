@@ -9,9 +9,17 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 
 class PlanCollectionType extends AbstractType
 {
+    /**
+     * small hack to access the builder
+     * @var
+     */
+    private $builder;
+
     public function __construct(UserService $userService)
     {
         $this->userService = $userService;
@@ -22,6 +30,7 @@ class PlanCollectionType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $this->builder = $builder;
         $classes = 'form-control';
         $builder
             ->add('title', TextType::class, array(
@@ -31,13 +40,20 @@ class PlanCollectionType extends AbstractType
             ->add('plans', EntityType::class, array(
                 'class' => 'AppBundle:Plan',
                 'query_builder' => function (EntityRepository $er) {
-                    return $er->createQueryBuilder('p')
+                    $query = $er->createQueryBuilder('p')
                         ->where('p.user = :user')
                         ->andWhere('p.isTemplate = false')
                         ->andWhere('p.date >= :today')
                         ->setParameter('today', new \DateTime(), \Doctrine\DBAL\Types\Type::DATETIME)
-                        ->orderBy('p.date', 'ASC')
-                        ->setParameter('user', $this->userService->getUser()->getId());
+                        ->setParameter('user', $this->userService->getUser()->getId())
+                        ->orderBy('p.date', 'ASC');
+
+                    if ($this->builder->getData()->getId()) {
+                        $query->orWhere(":collection MEMBER OF p.planCollection")
+                            ->setParameter('collection',$this->builder->getData());
+                    }
+
+                    return $query;
                 },
                 'choice_label' => 'title',
                 'attr'  => array('class' => $classes),
