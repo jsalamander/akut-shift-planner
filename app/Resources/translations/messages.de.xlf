@@ -90,8 +90,8 @@
                 <source>story_text</source>
                 <target>
                     <![CDATA[
-                    Schicht-Plan.ch wurde für das <a href="http://akut-thun.ch">AKuT</a> in Thun entwickelt.<br>
-                    Die Idee war ein Schichtplan Tool, dass einem erlaubt Vorlagen zu speichern, damit externe schnell und einfach einen Schichtplan erstellen können.
+                    Schicht-Plan.ch wurde ursprünglich für das <a href="http://akut-thun.ch">AKuT</a> in Thun entwickelt.<br>
+                    Die Grundidee war ein Schichtplan Tool, welches erlaubt Vorlagen zu speichern, damit Externe schnell und einfach einen Schichtplan erstellen können.
                     ]]>
                 </target>
             </trans-unit>
@@ -103,7 +103,7 @@
                 <source>credits_text</source>
                 <target>
                     <![CDATA[
-                    Entwickelt durch <a href="mailto:jan.friedli@gmx.ch?Subject=Schicht-Plan.ch" target="_top">Jan Friedli</a>.
+                    Entwickelt durch <a href="mailto:jan.friedli@immerda.ch?Subject=Schicht-Plan.ch" target="_top">Jan Friedli</a>.
                     Diese Webseite wurde stark durch <a href="https://schichtplan.immerda.ch">schichtplan.immerda.ch</a> inspiriert.
                     ]]>
                 </target>
@@ -403,6 +403,22 @@
             <trans-unit id="of">
                 <source>of</source>
                 <target>von</target>
+            </trans-unit>
+            <trans-unit id="home_first_bullet">
+                <source>home_first_bullet</source>
+                <target>Öffentliche oder private Vorlagen erstellen</target>
+            </trans-unit>
+            <trans-unit id="home_second_bullet">
+                <source>home_second_bullet</source>
+                <target>Plankollektionen (Gruppieren von mehreren Schichtplänen)</target>
+            </trans-unit>
+            <trans-unit id="home_third_bullet">
+                <source>home_third_bullet</source>
+                <target>Wähle beim Einschreiben einen öffentlichen und einen privaten Anzeigenamen</target>
+            </trans-unit>
+            <trans-unit id="features">
+                <source>features</source>
+                <target>Features</target>
             </trans-unit>
         </body>
     </file>

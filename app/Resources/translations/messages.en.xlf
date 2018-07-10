@@ -400,6 +400,22 @@
                 <source>of</source>
                 <target>of</target>
             </trans-unit>
+            <trans-unit id="home_first_bullet">
+                <source>home_first_bullet</source>
+                <target>Public or private shift plan templates</target>
+            </trans-unit>
+            <trans-unit id="home_second_bullet">
+                <source>home_second_bullet</source>
+                <target>Plan collections (group multiple plans)</target>
+            </trans-unit>
+            <trans-unit id="home_third_bullet">
+                <source>home_third_bullet</source>
+                <target>Choose a public and a private display name</target>
+            </trans-unit>
+            <trans-unit id="features">
+                <source>features</source>
+                <target>Features</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
