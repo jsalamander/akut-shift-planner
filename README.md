@@ -1,8 +1,8 @@
 Schicht-Plan.ch
 ================
-[![Build Status](https://travis-ci.org/fribim/akut-shift-planner.svg?branch=develop)](https://travis-ci.org/fribim/akut-shift-planner)
-[![Issue Stats](http://issuestats.com/github/fribim/akut-shift-planner/badge/pr)](http://issuestats.com/github/fribim/akut-shift-planner)
-[![Issue Stats](http://issuestats.com/github/fribim/akut-shift-planner/badge/issue)](http://issuestats.com/github/fribim/akut-shift-planner)
+[![Build Status](https://travis-ci.org/janfriedli/akut-shift-planner.svg?branch=develop)](https://travis-ci.org/janfriedli/akut-shift-planner)
+[![Issue Stats](http://issuestats.com/github/janfriedli/akut-shift-planner/badge/pr)](http://issuestats.com/github/janfriedli/akut-shift-planner)
+[![Issue Stats](http://issuestats.com/github/janfriedli/akut-shift-planner/badge/issue)](http://issuestats.com/github/janfriedli/akut-shift-planner)
 
 ## Up and running
 
