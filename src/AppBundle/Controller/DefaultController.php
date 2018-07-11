@@ -31,9 +31,18 @@ class DefaultController extends Controller
     public function changeLogAction(Request $request)
     {
         $headers = array('Accept' => 'application/json');
-        $response = \Unirest\Request::get($this->container->getParameter('repo_changelog'), $headers);
+        $error = [];
+        try {
+            $response = \Unirest\Request::get($this->container->getParameter('repo_changelog'), $headers);
+
+        } catch (Exception $e) {
+            $error['msg'] = 'Could not load the release data. Check your internet connection or the api endpoint: ' .
+            $this->container->getParameter('repo_changelog');
+        }
+
         return $this->render('default/changelog.html.twig', [
-            'releases' => $response->body
+            'releases' => $response->body,
+            'error' => $error
         ]);
     }
 }

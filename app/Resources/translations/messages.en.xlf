@@ -424,6 +424,14 @@
                 <source>releases</source>
                 <target>Releases</target>
             </trans-unit>
+            <trans-unit id="release_further_info">
+                <source>release_further_info</source>
+                <target>
+                    <![CDATA[
+                    All releases available on  <a target="_blank" href="https://github.com/janfriedli/akut-shift-planner/releases">Github</a>
+                    ]]>
+                </target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
