@@ -19,7 +19,7 @@ class DefaultControllerTest extends WebTestCase
     public function testNavbar() {
         $client = static::createClient();
         $crawler = $client->request('GET', '/');
-        $this->assertEquals(4, $crawler->filter('.navbar-collapse li')->count());
+        $this->assertEquals(5, $crawler->filter('.navbar-collapse li')->count());
 
     }
 
@@ -36,5 +36,13 @@ class DefaultControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/about');
         $this->assertEquals(3, $crawler->filter('h3')->count());
         $this->assertContains('Schicht-Plan.ch', $crawler->filter('h1')->text());
+    }
+
+    public function testChangelog() {
+        $client = static::createClient();
+        $crawler = $client->request('GET', '/changelog');
+        $this->assertEquals(1, $crawler->filter('h1')->count());
+        $this->assertContains('Releases', $crawler->filter('h1')->text());
+        $this->assertGreaterThan(1, $crawler->filter('.col-12')->count());
     }
 }
