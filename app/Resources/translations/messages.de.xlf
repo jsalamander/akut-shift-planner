@@ -420,6 +420,14 @@
                 <source>features</source>
                 <target>Features</target>
             </trans-unit>
+            <trans-unit id="changelog">
+                <source>changelog</source>
+                <target>Changelog</target>
+            </trans-unit>
+            <trans-unit id="releases">
+                <source>releases</source>
+                <target>Releases</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
