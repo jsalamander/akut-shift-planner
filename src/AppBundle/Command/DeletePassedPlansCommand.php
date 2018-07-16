@@ -2,6 +2,7 @@
 
 namespace AppBundle\Command;
 
+use AppBundle\Entity\Plan;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -73,9 +74,10 @@ class DeletePassedPlansCommand extends Command
         if ($passedPlans) {
             try {
                 $this->deleteEachPlan($passedPlans);
+                $this->deleteEachEmptyCollection();
                 $output->write('<info>Plans deleted: ' . count($passedPlans) . '</info>');
             } catch(\Exception $e){
-                $output->write('<error>Deletion failed. Sent error via email to admin</error>');
+                $output->write('<error>Deletion failed. Sent error via email to admin: ' . $e->getMessage() . '</error>');
                 $this->sendFailedEmail($e->getMessage());
             }
         } else {
@@ -92,6 +94,28 @@ class DeletePassedPlansCommand extends Command
         foreach ($plans as $plan) {
             $this->em->remove($plan);
         }
+        $this->em->flush();
+    }
+
+    /**
+     * remove all empty collections
+     */
+    private function deleteEachEmptyCollection() {
+        $qb = $this->em->createQueryBuilder();
+
+        $q = $qb->select('c')
+            ->from('AppBundle:PlanCollection', 'c')
+            ->leftJoin('c.plans','p')
+            ->having('COUNT(p.id) = 0')
+            ->groupBy('c.id')
+            ->getQuery();
+
+        $emptyCollections = $q->getResult();
+
+        foreach ($emptyCollections as $collection) {
+            $this->em->remove($collection);
+        }
+
         $this->em->flush();
     }
 
