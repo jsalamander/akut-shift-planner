@@ -25,3 +25,27 @@ Info: The tests will be executed against an new sqlite database, and will not al
 ## Deployment
 When merging into `develop` travis automatically deploys to the test server.
 To create a production release create a `tag`. The new tag will automatically be deployed to production.
+
+### Cron Jobs
+This applications has some commands that you need to setup as cron jobs.
+If you don't add these the app wont work as expected.
+
+##### Mailer
+
+```bash 
+	php bin/console swiftmailer:spool:send --env=prod
+```
+You need to run this one quite often. I run it every third minute.
+
+```
+	*/3	*	*	*	*
+```
+
+##### Delete old plans
+
+```bash 
+	php bin/console app:delete-passed-plans -e prod
+```
+
+This command should run at least once a day. It makes sense to run it in the morning or around noon.
+
