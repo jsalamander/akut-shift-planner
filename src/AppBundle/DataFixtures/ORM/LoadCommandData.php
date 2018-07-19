@@ -58,6 +58,13 @@ class LoadCommandData extends AbstractFixture implements FixtureInterface
         $adminPlanPast->setUser($admin);
         $this->setReference('admin-plan-past', $adminPlanPast);
 
+        $adminPlanNow = new Plan();
+        $adminPlanNow->setDescription('today');
+        $adminPlanNow->setDate(new \DateTime());
+        $adminPlanNow->setTitle('admin plan now');
+        $adminPlanNow->setUser($admin);
+        $this->setReference('admin-plan-now', $adminPlanNow);
+
         $adminShiftPast = new Shift();
         $adminShiftPast->setDescription('meiu asdjffs');
         $adminShiftPast->setTitle('admin shift past');
@@ -90,6 +97,7 @@ class LoadCommandData extends AbstractFixture implements FixtureInterface
         $manager->persist($adminPlanSecond);
         $manager->persist($adminCollection);
         $manager->persist($adminCollectionPast);
+        $manager->persist($adminPlanNow);
 
         $manager->flush();
     }

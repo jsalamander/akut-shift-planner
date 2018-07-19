@@ -8,6 +8,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Twig\Environment;
+use Symfony\Component\Console\Input\InputOption;
 
 class DeletePassedPlansCommand extends Command
 {
@@ -53,8 +54,14 @@ class DeletePassedPlansCommand extends Command
         $this
             ->setName('app:delete-passed-plans')
             ->setDescription('Delete passed plans')
-            ->setHelp('Delete all plans which are in the past. Deletes all linked data as well')
-        ;
+            ->setHelp('Delete all plans and collections that are behind a certain time range (default 30 days)')
+            ->addOption(
+                'dueDays',
+                null,
+                InputOption::VALUE_REQUIRED,
+                'Specify the number of days a plan has to pass its due date, to be deleted',
+                30
+            );
     }
 
     /**
@@ -66,8 +73,16 @@ class DeletePassedPlansCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $qb = $this->em->getRepository('AppBundle:Plan')->createQueryBuilder('p');
-        $passedPlans = $qb->where('p.date < :today')
-            ->setParameter('today', new \DateTime())
+        $days =  intval($input->getOption('dueDays'));
+        if ($days < 0) {
+            $days = 0;
+        }
+
+        $dueDate = new \DateTime();
+        $dueDate->sub(new \DateInterval('P' . $days . 'D'));
+
+        $passedPlans = $qb->where('p.date < :dueDate')
+            ->setParameter('dueDate', $dueDate)
             ->getQuery()
             ->getResult();
 
