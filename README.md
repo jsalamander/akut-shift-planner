@@ -47,5 +47,17 @@ You need to run this one quite often. I run it every third minute.
 	php bin/console app:delete-passed-plans -e prod
 ```
 
-This command should run at least once a day. It makes sense to run at night.
+This command should run at least once a day. It makes sense to it run at night.
+
+
+##### Send shift reminders
+
+```bash 
+	php bin/console app:shift-reminder --days=2 -e prod
+```
+
+This command should run once a day. It makes sense to run  it at night.
+The `--days=NR_OF_DAYS_HERE` option lets you  define how many days before the shift the reminders
+will be sent.
+
 
