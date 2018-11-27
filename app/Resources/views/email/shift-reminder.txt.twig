@@ -1,11 +1,10 @@
 Hallo {{ person.getName() }}
 
-Bald findet die Veranstaltung HERENAME statt. Du hast dich für folgende Schicht eingetragen.
+Bald findet die Veranstaltung {{ person.getShift().getPlan().getTitle() }} statt. Du hast dich für folgende Schicht eingetragen.
 
-XXXX
-
-XXX
-
+{{  person.getShift().getTitle() }}
+Start: {{  person.getShift().getStart() | date('d-m-Y: h:m')}}
+End:  {{  person.getShift().getEnd() | date('d-m-Y: h:m') }}
 
 Solidarische Grüsse
 
