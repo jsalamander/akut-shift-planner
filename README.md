@@ -47,5 +47,5 @@ You need to run this one quite often. I run it every third minute.
 	php bin/console app:delete-passed-plans -e prod
 ```
 
-This command should run at least once a day. It makes sense to run it in the morning or around noon.
+This command should run at least once a day. It makes sense to run at night.
 

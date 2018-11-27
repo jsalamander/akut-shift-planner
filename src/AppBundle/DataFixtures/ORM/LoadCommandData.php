@@ -48,15 +48,21 @@ class LoadCommandData extends AbstractFixture implements FixtureInterface
         $adminPerson = new Person();
         $adminPerson->setAlias('alias');
         $adminPerson->setName('real name');
+        $adminPerson->setEmail('tst@tst.ch');
         $adminShift->addPerson($adminPerson);
         $adminPerson->setShift($adminShift);
 
-        $adminPlanPast = new Plan();
-        $adminPlanPast->setDescription('sfsadfs');
-        $adminPlanPast->setDate(new \DateTime('1999-01-01 00:01:00'));
-        $adminPlanPast->setTitle('admin plan past');
-        $adminPlanPast->setUser($admin);
-        $this->setReference('admin-plan-past', $adminPlanPast);
+        $adminPersonTwo = new Person();
+        $adminPersonTwo->setAlias('alias');
+        $adminPersonTwo->setName('no mail');
+        $adminShift->addPerson($adminPerson);
+        $adminPersonTwo->setShift($adminShift);
+
+        $toRemind = new Person();
+        $toRemind->setAlias('alias');
+        $toRemind->setName('real name');
+        $adminShift->addPerson($toRemind);
+        $toRemind->setShift($adminShift);
 
         $adminPlanNow = new Plan();
         $adminPlanNow->setDescription('today');
@@ -65,14 +71,62 @@ class LoadCommandData extends AbstractFixture implements FixtureInterface
         $adminPlanNow->setUser($admin);
         $this->setReference('admin-plan-now', $adminPlanNow);
 
+        $adminPlanUpcoming = new Plan();
+        $adminPlanUpcoming->setDescription('remind me upcoming');
+        $date = new \DateTime();
+        $date->add(new \DateInterval('P30D'));
+
+        $adminPlanUpcoming->setDate($date);
+        $adminPlanUpcoming->setTitle('admin plan upcoming');
+        $adminPlanUpcoming->setUser($admin);
+        $this->setReference('admin-plan-upcoming', $adminPlanUpcoming);
+
+        $adminShiftUpcoming = new Shift();
+        $adminShiftUpcoming->setDescription('meiu asdjffs');
+        $adminShiftUpcoming->setTitle('admin shift past');
+        $adminShiftUpcoming->setStart(new \DateTime('1970-01-01 00:01:00'));
+        $adminShiftUpcoming->setEnd(new \DateTime('1970-01-01 00:02:00'));
+        $adminShiftUpcoming->setNumberPeople(2);
+        $adminPlanUpcoming->addShift($adminShiftUpcoming);
+        $this->setReference('admin-shift-Upcoming', $adminShiftUpcoming);
+
+        $manager->persist($adminPlanUpcoming);
+        $manager->flush();
+
+        $mailReceiver = new Person();
+        $mailReceiver->setName('receives mail');
+        $mailReceiver->setEmail('test@test.de');
+        $mailReceiver->setAlias("wuuup");
+        $mailReceiver->setShift($adminShiftUpcoming);
+
+        $mailReceiverNoMail = new Person();
+        $mailReceiverNoMail->setName("no mailer");
+        $mailReceiverNoMail->setAlias("miau");
+        $mailReceiverNoMail->setShift($adminShiftUpcoming);
+
+        $manager->persist($mailReceiver);
+        $manager->persist($mailReceiverNoMail);
+        $manager->flush();
+
+        $adminShiftUpcoming->addPerson($mailReceiverNoMail);
+        $adminShiftUpcoming->addPerson($mailReceiver);
+
+
         $adminShiftPast = new Shift();
         $adminShiftPast->setDescription('meiu asdjffs');
         $adminShiftPast->setTitle('admin shift past');
         $adminShiftPast->setStart(new \DateTime('1970-01-01 00:01:00'));
         $adminShiftPast->setEnd(new \DateTime('1970-01-01 00:02:00'));
         $adminShiftPast->setNumberPeople(2);
-        $adminPlanPast->addShift($adminShiftPast);
+        $adminPlanNow->addShift($adminShiftPast);
         $this->setReference('admin-shift-past', $adminShiftPast);
+
+        $adminPlanPast = new Plan();
+        $adminPlanPast->setDescription('sfsadfs');
+        $adminPlanPast->setDate(new \DateTime('1999-01-01 00:01:00'));
+        $adminPlanPast->setTitle('admin plan past');
+        $adminPlanPast->setUser($admin);
+        $this->setReference('admin-plan-past', $adminPlanPast);
 
         $adminCollectionPast = new PlanCollection();
         $adminCollectionPast->setTitle('CollectionToBeDeleted');
@@ -90,14 +144,18 @@ class LoadCommandData extends AbstractFixture implements FixtureInterface
         //save all the things!
         $manager->persist($admin);
         $manager->persist($adminPerson);
+        $manager->persist($adminPersonTwo);
+        $manager->persist($toRemind);
         $manager->persist($adminShift);
         $manager->persist($adminShiftPast);
         $manager->persist($adminPlan);
-        $manager->persist($adminPlanPast);
         $manager->persist($adminPlanSecond);
+        $manager->persist($adminPlanNow);
+        $manager->persist($adminPlanUpcoming);
         $manager->persist($adminCollection);
         $manager->persist($adminCollectionPast);
-        $manager->persist($adminPlanNow);
+        $manager->persist($adminPlanPast);
+        $manager->persist($adminPlanUpcoming);
 
         $manager->flush();
     }
