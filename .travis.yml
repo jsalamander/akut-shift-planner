@@ -42,7 +42,7 @@ before_deploy:
 deploy:
   - provider: script
     skip_cleanup: true
-    script: rsync -r --delete-after --links --exlcude=app/spool/ --exclude=.git/ --exclude=app/config/parameters.yml $TRAVIS_BUILD_DIR obcbtld@s017.cyon.net:/home/obcbtld/public_html/dev-schichtplan
+    script: rsync -r --delete-after --links --exlcude='*.message'--exclude=.git/ --exclude=app/config/parameters.yml $TRAVIS_BUILD_DIR obcbtld@s017.cyon.net:/home/obcbtld/public_html/dev-schichtplan
     on:
       branch: develop
       php: 7.1
@@ -54,7 +54,7 @@ deploy:
       php: 7.1
   - provider: script
     skip_cleanup: true
-    script: rsync -r --delete-after --links --exlcude=app/spool/ --exclude=.git/ --exclude=app/config/parameters.yml $TRAVIS_BUILD_DIR obcbtld@s017.cyon.net:/home/obcbtld/public_html/schichtplan
+    script: rsync -r --delete-after --links --exlcude='*.message' --exclude=.git/ --exclude=app/config/parameters.yml $TRAVIS_BUILD_DIR obcbtld@s017.cyon.net:/home/obcbtld/public_html/schichtplan
     on:
       tags: true
       php: 7.1
