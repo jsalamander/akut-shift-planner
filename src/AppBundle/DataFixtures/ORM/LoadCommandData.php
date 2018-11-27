@@ -73,7 +73,8 @@ class LoadCommandData extends AbstractFixture implements FixtureInterface
 
         $adminPlanUpcoming = new Plan();
         $adminPlanUpcoming->setDescription('remind me upcoming');
-        $date = new \DateTime();
+        $now = new \DateTime();
+        $date = new \DateTime($now->format("Y-m-d")." 00:00:00");
         $date->add(new \DateInterval('P30D'));
 
         $adminPlanUpcoming->setDate($date);
