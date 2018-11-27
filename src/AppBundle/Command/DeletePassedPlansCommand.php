@@ -82,7 +82,7 @@ class DeletePassedPlansCommand extends Command
         $dueDate = new \DateTime();
         $dueDate->sub(new \DateInterval('P' . $days . 'D'));
 
-        $passedPlans = $qb->where('p.date < :dueDate')
+        $passedPlans = $qb->where('p.date <= :dueDate')
             ->setParameter('dueDate', $dueDate)
             ->getQuery()
             ->getResult();
