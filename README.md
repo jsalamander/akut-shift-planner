@@ -1,8 +1,6 @@
 Schicht-Plan.ch
 ================
 [![Build Status](https://travis-ci.org/janfriedli/akut-shift-planner.svg?branch=develop)](https://travis-ci.org/janfriedli/akut-shift-planner)
-[![Issue Stats](http://issuestats.com/github/janfriedli/akut-shift-planner/badge/pr)](http://issuestats.com/github/janfriedli/akut-shift-planner)
-[![Issue Stats](http://issuestats.com/github/janfriedli/akut-shift-planner/badge/issue)](http://issuestats.com/github/janfriedli/akut-shift-planner)
 
 ## Up and running
 
@@ -44,7 +42,7 @@ You need to run this one quite often. I run it every third minute.
 ##### Delete old plans
 
 ```bash 
-	php bin/console app:delete-passed-plans -e prod
+	php bin/console app:delete-passed-plans --dueDays=30 -e prod
 ```
 
 This command should run at least once a day. It makes sense to it run at night.
