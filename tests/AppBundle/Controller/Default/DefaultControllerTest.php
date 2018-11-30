@@ -28,7 +28,7 @@ class DefaultControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/');
         $this->assertEquals(2, $crawler->filter('.footer span')->count());
         $this->assertContains('mailto:jan.friedli@gmx.ch', $crawler->filter('.footer span a')->attr('href'));
-        $this->assertContains('https://github.com/fribim/akut-shift-planner', $crawler->filter('.footer span a')->eq(1)->attr('href'));
+        $this->assertContains('https://github.com/janfriedli/akut-shift-planner', $crawler->filter('.footer span a')->eq(1)->attr('href'));
     }
 
     public function testAbout() {
