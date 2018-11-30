@@ -352,6 +352,90 @@
                 <source>template</source>
                 <target>Template</target>
             </trans-unit>
+            <trans-unit id="your_shifts">
+                <source>your_shifts</source>
+                <target>Your upcoming shifts</target>
+            </trans-unit>
+            <trans-unit id="no_shifts">
+                <source>no_shifts</source>
+                <target>You have no upcoming shifts</target>
+            </trans-unit>
+            <trans-unit id="order_index">
+                <source>order_index</source>
+                <target>Order Index</target>
+            </trans-unit>
+            <trans-unit id="plan_collection">
+                <source>plan_collection</source>
+                <target>Plan Collections</target>
+            </trans-unit>
+            <trans-unit id="no_plan_collections">
+                <source>no_plan_collections</source>
+                <target>No plan collection created</target>
+            </trans-unit>
+            <trans-unit id="new_plan_collection">
+                <source>new_plan_collection</source>
+                <target>New Plan Collection</target>
+            </trans-unit>
+            <trans-unit id="sign_up">
+                <source>sign_up</source>
+                <target>Sign up</target>
+            </trans-unit>
+            <trans-unit id="person_email">
+                <source>person_email</source>
+                <target>Email (non public)</target>
+            </trans-unit>
+            <trans-unit id="person_phone">
+                <source>person_phone</source>
+                <target>Telefonnummer (non public)</target>
+            </trans-unit>
+            <trans-unit id="edit_person">
+                <source>edit_person</source>
+                <target>Edit</target>
+            </trans-unit>
+            <trans-unit id="enrolled_people">
+                <source>enrolled_people</source>
+                <target>Enrolled people</target>
+            </trans-unit>
+            <trans-unit id="of">
+                <source>of</source>
+                <target>of</target>
+            </trans-unit>
+            <trans-unit id="home_first_bullet">
+                <source>home_first_bullet</source>
+                <target>Public or private shift plan templates</target>
+            </trans-unit>
+            <trans-unit id="home_second_bullet">
+                <source>home_second_bullet</source>
+                <target>Plan collections (group multiple plans)</target>
+            </trans-unit>
+            <trans-unit id="home_third_bullet">
+                <source>home_third_bullet</source>
+                <target>Choose a public and a private display name</target>
+            </trans-unit>
+            <trans-unit id="features">
+                <source>features</source>
+                <target>Features</target>
+            </trans-unit>
+            <trans-unit id="changelog">
+                <source>changelog</source>
+                <target>Changelog</target>
+            </trans-unit>
+            <trans-unit id="releases">
+                <source>releases</source>
+                <target>Releases</target>
+            </trans-unit>
+            <trans-unit id="release_further_info">
+                <source>release_further_info</source>
+                <target>
+                    <![CDATA[
+                    All releases available on <a target="_blank" href="https://github.com/janfriedli/akut-shift-planner/releases">GitHub</a>
+                    ]]>
+                </target>
+            </trans-unit>
+            <trans-unit id="home_fourth_bullet">
+                <source>home_fourth_bullet</source>
+                <target>Passed plans will be deleted after 30 days</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

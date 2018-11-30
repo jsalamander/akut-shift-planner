@@ -3,8 +3,10 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use libphonenumber\PhoneNumber;
 use Symfony\Component\Validator\Constraints as Assert;
 use AppBundle\Validator\Constraints as AppAssert;
+use Misd\PhoneNumberBundle\Validator\Constraints\PhoneNumber as AssertPhoneNumber;
 
 /**
  * Person
@@ -26,13 +28,7 @@ class Person
     /**
      * @var string
      *
-     * @Assert\Length(
-     *      min = 2,
-     *      max = 30,
-     *      minMessage = "Your name must be at least {{ limit }} characters long",
-     *      maxMessage = "Your name cannot be longer than {{ limit }} characters"
-     * )
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
@@ -40,13 +36,7 @@ class Person
     /**
      * @var string
      *
-     * @Assert\Length(
-     *      min = 2,
-     *      max = 30,
-     *      minMessage = "Your alias must be at least {{ limit }} characters long",
-     *      maxMessage = "Your alias cannot be longer than {{ limit }} characters"
-     * )
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="alias", type="string", length=255)
      */
     private $alias;
@@ -55,7 +45,7 @@ class Person
      * @var string
      *
      * @Assert\Email(
-     *     message = "The email '{{ value }}' is not a valid email.",
+     *     message = "person.email",
      *     checkMX = true
      * )
      *
@@ -64,9 +54,9 @@ class Person
     private $email;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="phone", type="string", length=255, nullable=true)
+     * @var PhoneNumber
+     * @AssertPhoneNumber
+     * @ORM\Column(name="phone", type="phone_number", length=255, nullable=true)
      */
     private $phone;
 
@@ -76,6 +66,32 @@ class Person
      * @ORM\JoinColumn(name="shift_id", referencedColumnName="id")
      */
     private $shift;
+
+    /**
+     * Used when some enrolls when being logged in
+     *
+     * @var $user
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="people")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
+
+    /**
+     * @return User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param User $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+    }
+
 
     /**
      * Get id
@@ -138,7 +154,7 @@ class Person
     /**
      * Set phone
      *
-     * @param string $phone
+     * @param PhoneNumber $phone
      *
      * @return Person
      */
@@ -152,7 +168,7 @@ class Person
     /**
      * Get phone
      *
-     * @return string
+     * @return PhoneNumber
      */
     public function getPhone()
     {

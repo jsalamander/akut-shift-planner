@@ -10,7 +10,7 @@ use Liip\FunctionalTestBundle\Test\WebTestCase;
  * Class PlanControllerTest
  * @package Tests\AppBundle\Controller
  */
-class PlanControllerTestAuthenticated extends WebTestCase
+class PlanControllerAuthenticatedTest extends WebTestCase
 {
 
     private $crawler;
@@ -44,7 +44,7 @@ class PlanControllerTestAuthenticated extends WebTestCase
 
         $form = $this->crawler->filter('.btn')->form(array(
             'appbundle_plan[title]' => 'test plan',
-            'appbundle_plan[date]' => '2017-06-20',
+            'appbundle_plan[date]' => '2099-06-20',
             'appbundle_plan[description]' => 'some desc',
         ));
 
@@ -67,15 +67,15 @@ class PlanControllerTestAuthenticated extends WebTestCase
         $crawler = $this->client->followRedirect();
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         $this->assertContains('test plan', $crawler->filter('.justify-content-end')->text());
-        $this->assertContains('20.06.2017', $crawler->filter('.justify-content-end')->text());
+        $this->assertContains('20.06.2099', $crawler->filter('.justify-content-end')->text());
         $this->assertContains('some desc', $crawler->filter('blockquote')->text());
-        $this->assertContains('foo', $crawler->filter('tr')->eq(1)->text());
-        $this->assertContains('bar', $crawler->filter('tr')->eq(1)->text());
-        $this->assertContains('00:00', $crawler->filter('tr')->eq(1)->text());
-        $this->assertContains('00:01', $crawler->filter('tr')->eq(1)->text());
+        $this->assertContains('foo', $crawler->filter('.card')->eq(0)->text());
+        $this->assertContains('bar', $crawler->filter('.card')->eq(0)->text());
+        $this->assertContains('00:00', $crawler->filter('.card')->eq(0)->text());
+        $this->assertContains('00:01', $crawler->filter('.card')->eq(0)->text());
         $this->assertContains('edit', $crawler->filter('.main-row .col-12')->eq(1)->filter('a')->attr('href'));
         $this->assertEquals(0, $crawler->filter('#passwordPrompt')->count());
-        $this->assertEquals(3, $crawler->filter('.container .text-nowrap')->count());
+        $this->assertContains('3', $crawler->filter('.progress')->eq(0)->text());
 
         //go to overview page
         $this->client->request('GET', '/plan');
@@ -90,7 +90,7 @@ class PlanControllerTestAuthenticated extends WebTestCase
 
         $form = $this->crawler->filter('.btn')->form(array(
             'appbundle_plan[title]' => 'test plan template',
-            'appbundle_plan[date]' => '2017-06-20',
+            'appbundle_plan[date]' => '2099-06-20',
             'appbundle_plan[description]' => 'some desc',
             'appbundle_plan[isTemplate]' => true,
             'appbundle_plan[isPublic]' => true
@@ -113,13 +113,13 @@ class PlanControllerTestAuthenticated extends WebTestCase
         //test plan_show page
         $this->assertContains('test plan template', $crawler->filter('.justify-content-end')->text());
         $this->assertContains('some desc', $crawler->filter('blockquote')->text());
-        $this->assertContains('foo', $crawler->filter('tr')->eq(1)->text());
-        $this->assertContains('bar', $crawler->filter('tr')->eq(1)->text());
-        $this->assertContains('00:00', $crawler->filter('tr')->eq(1)->text());
-        $this->assertContains('00:01', $crawler->filter('tr')->eq(1)->text());
+        $this->assertContains('foo', $crawler->filter('.card')->eq(0)->text());
+        $this->assertContains('bar', $crawler->filter('.card')->eq(0)->text());
+        $this->assertContains('00:00', $crawler->filter('.card')->eq(0)->text());
+        $this->assertContains('00:01', $crawler->filter('.card')->eq(0)->text());
         $this->assertContains('edit', $crawler->filter('.main-row .col-12')->eq(1)->filter('a')->attr('href'));
         $this->assertEquals(0, $crawler->filter('#passwordPrompt')->count());
-        $this->assertEquals(3, $crawler->filter('td > ol > li')->count());
+        $this->assertContains('3', $crawler->filter('.progress')->eq(0)->text());
 
         //go to overview page
         $this->crawler = $this->client->request('GET', '/plan/templates');
@@ -136,12 +136,12 @@ class PlanControllerTestAuthenticated extends WebTestCase
 
         $form = $crawler->filter('.btn')->form(array(
             'appbundle_plan[title]' => 'test plan',
-            'appbundle_plan[date]' => '2017-06-20',
+            'appbundle_plan[date]' => '2099-06-20',
             'appbundle_plan[description]' => 'some desc'
         ));
 
         $crawler = $client->submit($form);
-        $this->assertEquals(1, $crawler->filter('.alert')->count());
+        $this->assertEquals(5, $crawler->filter('.alert')->count());
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
@@ -153,14 +153,14 @@ class PlanControllerTestAuthenticated extends WebTestCase
 
         $form = $crawler->filter('.btn')->form(array(
             'appbundle_plan[title]' => 't',
-            'appbundle_plan[date]' => '340.01.2017',
+            'appbundle_plan[date]' => '03.01.2017',
             'appbundle_plan[description]' => 's'
         ));
 
         $values = $form->getPhpValues();
 
-        $values['appbundle_plan']['shifts'][0]['description'] = 'w';
-        $values['appbundle_plan']['shifts'][0]['title'] = 'w';
+        $values['appbundle_plan']['shifts'][0]['description'] = '';
+        $values['appbundle_plan']['shifts'][0]['title'] = '';
         $values['appbundle_plan']['shifts'][0]['start'] = '00:00:sdf';
         $values['appbundle_plan']['shifts'][0]['end'] = '00:0:sdf';
         $values['appbundle_plan']['shifts'][0]['numberPeople'] = 0;

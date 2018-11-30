@@ -41,9 +41,10 @@ class PlanControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/plan/new');
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
+        $date = new \DateTime();
         $form = $crawler->filter('.btn')->form(array(
             'appbundle_plan[title]' => 'test plan',
-            'appbundle_plan[date]' => '2017-06-20',
+            'appbundle_plan[date]' => $date->format('Y-m-d'),
             'appbundle_plan[description]' => 'some desc',
             'appbundle_plan[email]' => 'test@test.ch',
             'appbundle_plan[password][first]' => '12345678',
@@ -69,14 +70,14 @@ class PlanControllerTest extends WebTestCase
         $crawler = $client->followRedirect();
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertContains('test plan', $crawler->filter('.justify-content-end')->text());
-        $this->assertContains('20.06.2017', $crawler->filter('.justify-content-end')->text());
+        $this->assertContains($date->format('d.m.Y'), $crawler->filter('.justify-content-end')->text());
         $this->assertContains('some desc', $crawler->filter('blockquote')->text());
-        $this->assertContains('foo', $crawler->filter('tr')->eq(1)->text());
-        $this->assertContains('bar', $crawler->filter('tr')->eq(1)->text());
-        $this->assertContains('00:00', $crawler->filter('tr')->eq(1)->text());
-        $this->assertContains('00:01', $crawler->filter('tr')->eq(1)->text());
+        $this->assertContains('foo', $crawler->filter('.card')->eq(0)->text());
+        $this->assertContains('bar', $crawler->filter('.card')->eq(0)->text());
+        $this->assertContains('00:00', $crawler->filter('.card')->eq(0)->text());
+        $this->assertContains('00:01', $crawler->filter('.card')->eq(0)->text());
         $this->assertContains('#', $crawler->filter('#passwordPrompt')->attr('href'));
-        $this->assertEquals(3, $crawler->filter('.container .text-nowrap')->count());
+        $this->assertContains('3', $crawler->filter('.progress')->text());
         $this->assertEquals(1, $crawler->filter('.modal-content')->count());
         $this->assertContains('/login_check', $crawler->filter('.modal-content form')->attr('action'));
     }
@@ -89,7 +90,7 @@ class PlanControllerTest extends WebTestCase
 
         $form = $crawler->filter('.btn')->form(array(
             'appbundle_plan[title]' => 'test plan',
-            'appbundle_plan[date]' => '2017-06-20',
+            'appbundle_plan[date]' => '2099-06-20',
             'appbundle_plan[description]' => 'some desc',
             'appbundle_plan[email]' => 'test1@test.ch',
             'appbundle_plan[password][first]' => '12345678',
@@ -97,7 +98,7 @@ class PlanControllerTest extends WebTestCase
         ));
 
         $crawler = $client->submit($form);
-        $this->assertEquals(1, $crawler->filter('.alert')->count());
+        $this->assertEquals(5, $crawler->filter('.alert')->count());
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
@@ -109,7 +110,7 @@ class PlanControllerTest extends WebTestCase
 
         $form = $crawler->filter('.btn')->form(array(
             'appbundle_plan[title]' => 't',
-            'appbundle_plan[date]' => '340.01.2017',
+            'appbundle_plan[date]' => '10.01.2017',
             'appbundle_plan[description]' => 's',
             'appbundle_plan[email]' => 'test.test.ch',
             'appbundle_plan[password][first]' => '1234567',
@@ -118,8 +119,8 @@ class PlanControllerTest extends WebTestCase
 
         $values = $form->getPhpValues();
 
-        $values['appbundle_plan']['shifts'][0]['description'] = 'w';
-        $values['appbundle_plan']['shifts'][0]['title'] = 'w';
+        $values['appbundle_plan']['shifts'][0]['description'] = '';
+        $values['appbundle_plan']['shifts'][0]['title'] = '';
         $values['appbundle_plan']['shifts'][0]['start'] = '00:00:sdf';
         $values['appbundle_plan']['shifts'][0]['end'] = '00:0:sdf';
         $values['appbundle_plan']['shifts'][0]['numberPeople'] = 0;

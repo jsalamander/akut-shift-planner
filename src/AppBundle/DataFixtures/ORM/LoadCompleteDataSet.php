@@ -2,6 +2,8 @@
 
 namespace AppBundle\DataFixtures\ORM;
 
+use AppBundle\Entity\Person;
+use AppBundle\Entity\PlanCollection;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use AppBundle\Entity\User;
@@ -22,20 +24,55 @@ class LoadCompleteDataSet extends AbstractFixture implements FixtureInterface
 
         $adminPlan = new Plan();
         $adminPlan->setDescription('hmm bli blb blu');
-        $adminPlan->setDate(new \DateTime('1970-01-01 00:01:00'));
+        $adminPlan->setDate(new \DateTime('2099-01-01 00:01:00'));
         $adminPlan->setTitle('admin plan');
         $adminPlan->setUser($admin);
         $this->setReference('admin-plan', $adminPlan);
 
+        $adminPlanSecond = new Plan();
+        $adminPlanSecond->setDescription('yolo');
+        $adminPlanSecond->setDate(new \DateTime('2098-01-01 00:01:00'));
+        $adminPlanSecond->setTitle('admin second plan');
+        $adminPlanSecond->setUser($admin);
+        $this->setReference('admin-plan-second', $adminPlan);
 
         $adminShift = new Shift();
         $adminShift->setDescription('meiu asdjffs');
         $adminShift->setTitle('admin shift');
         $adminShift->setStart(new \DateTime('1970-01-01 00:01:00'));
         $adminShift->setEnd(new \DateTime('1970-01-01 00:02:00'));
-        $adminShift->setNumberPeople(2);
+        $adminShift->setNumberPeople(3);
         $adminPlan->addShift($adminShift);
         $this->setReference('admin-shift', $adminShift);
+
+        $adminPerson = new Person();
+        $adminPerson->setAlias('alias');
+        $adminPerson->setName('real name');
+        $adminShift->addPerson($adminPerson);
+        $adminPerson->setShift($adminShift);
+
+        $adminCollection = new PlanCollection();
+        $adminCollection->setTitle('admincollection');
+        $adminCollection->setUser($admin);
+        $adminCollection->addPlan($adminPlan);
+        $adminCollection->addPlan($adminPlanSecond);
+        $this->setReference('admin-collection', $adminCollection);
+
+        $adminPlanPast = new Plan();
+        $adminPlanPast->setDescription('sfsadfs');
+        $adminPlanPast->setDate(new \DateTime('1999-01-01 00:01:00'));
+        $adminPlanPast->setTitle('admin plan past');
+        $adminPlanPast->setUser($admin);
+        $this->setReference('admin-plan-past', $adminPlanPast);
+
+        $adminShiftPast = new Shift();
+        $adminShiftPast->setDescription('meiu asdjffs');
+        $adminShiftPast->setTitle('admin shift past');
+        $adminShiftPast->setStart(new \DateTime('1970-01-01 00:01:00'));
+        $adminShiftPast->setEnd(new \DateTime('1970-01-01 00:02:00'));
+        $adminShiftPast->setNumberPeople(2);
+        $adminPlanPast->addShift($adminShiftPast);
+        $this->setReference('admin-shift-past', $adminShiftPast);
 
         $adminTemplate = new Plan();
         $adminTemplate->setDescription('hmm bli blb blu');
@@ -91,10 +128,15 @@ class LoadCompleteDataSet extends AbstractFixture implements FixtureInterface
 
         //save all the things!
         $manager->persist($admin);
+        $manager->persist($adminPerson);
         $manager->persist($adminShift);
+        $manager->persist($adminShiftPast);
         $manager->persist($adminPlan);
+        $manager->persist($adminPlanPast);
         $manager->persist($adminTemplateShift);
         $manager->persist($adminTemplate);
+        $manager->persist($adminPlanSecond);
+        $manager->persist($adminCollection);
         $manager->persist($rudolf);
         $manager->persist($rudolfShift);
         $manager->persist($rudolfPlan);

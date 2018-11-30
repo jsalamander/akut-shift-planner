@@ -90,8 +90,8 @@
                 <source>story_text</source>
                 <target>
                     <![CDATA[
-                    Schicht-Plan.ch wurde für das <a href="http://akut-thun.ch">AKuT</a> in Thun entwickelt.<br>
-                    Die Idee war ein Schichtplan Tool, dass einem erlaubt Vorlagen zu speichern, damit externe schnell und einfach einen Schichtplan erstellen können.
+                    Schicht-Plan.ch wurde ursprünglich für das <a href="http://akut-thun.ch">AKuT</a> in Thun entwickelt.<br>
+                    Die Grundidee war ein Schichtplan Tool, welches erlaubt Vorlagen zu speichern, damit Externe schnell und einfach einen Schichtplan erstellen können.
                     ]]>
                 </target>
             </trans-unit>
@@ -103,7 +103,7 @@
                 <source>credits_text</source>
                 <target>
                     <![CDATA[
-                    Entwickelt durch <a href="mailto:jan.friedli@gmx.ch?Subject=Schicht-Plan.ch" target="_top">Jan Friedli</a>.
+                    Entwickelt durch <a href="mailto:jan.friedli@immerda.ch?Subject=Schicht-Plan.ch" target="_top">Jan Friedli</a>.
                     Diese Webseite wurde stark durch <a href="https://schichtplan.immerda.ch">schichtplan.immerda.ch</a> inspiriert.
                     ]]>
                 </target>
@@ -351,6 +351,94 @@
             <trans-unit id="template">
                 <source>template</source>
                 <target>Vorlage</target>
+            </trans-unit>
+            <trans-unit id="your_shifts">
+                <source>your_shifts</source>
+                <target>Deine Schichten</target>
+            </trans-unit>
+            <trans-unit id="no_shifts">
+                <source>no_shifts</source>
+                <target>Du bist in keinen kommenden Schichten eingetragen</target>
+            </trans-unit>
+            <trans-unit id="order_index">
+                <source>order_index</source>
+                <target>Sortier-Index</target>
+            </trans-unit>
+            <trans-unit id="plan_collection">
+                <source>plan_collection</source>
+                <target>Plansammlungen</target>
+            </trans-unit>
+            <trans-unit id="no_plan_collections">
+                <source>no_plan_collections</source>
+                <target>Keine Plan Sammlung erstellt</target>
+            </trans-unit>
+            <trans-unit id="new_plan_collection">
+                <source>new_plan_collection</source>
+                <target>Neue Plansammlung</target>
+            </trans-unit>
+            <trans-unit id="link">
+                <source>link</source>
+                <target>Link</target>
+            </trans-unit>
+            <trans-unit id="sign_up">
+                <source>sign_up</source>
+                <target>Einschreiben</target>
+            </trans-unit>
+            <trans-unit id="person_email">
+                <source>person_email</source>
+                <target>Email (nur für Ersteller_in sichtbar)</target>
+            </trans-unit>
+            <trans-unit id="person_phone">
+                <source>person_phone</source>
+                <target>Telefonnummer (nur für Ersteller_in sichtbar)</target>
+            </trans-unit>
+            <trans-unit id="edit_person">
+                <source>edit_person</source>
+                <target>Bearbeite</target>
+            </trans-unit>
+            <trans-unit id="enrolled_people">
+                <source>enrolled_people</source>
+                <target>Eingeschriebene Personen</target>
+            </trans-unit>
+            <trans-unit id="of">
+                <source>of</source>
+                <target>von</target>
+            </trans-unit>
+            <trans-unit id="home_first_bullet">
+                <source>home_first_bullet</source>
+                <target>Öffentliche oder private Vorlagen erstellen</target>
+            </trans-unit>
+            <trans-unit id="home_second_bullet">
+                <source>home_second_bullet</source>
+                <target>Plankollektionen (Gruppieren von mehreren Schichtplänen)</target>
+            </trans-unit>
+            <trans-unit id="home_third_bullet">
+                <source>home_third_bullet</source>
+                <target>Wähle beim Einschreiben einen öffentlichen und einen privaten Anzeigenamen</target>
+            </trans-unit>
+            <trans-unit id="features">
+                <source>features</source>
+                <target>Features</target>
+            </trans-unit>
+            <trans-unit id="changelog">
+                <source>changelog</source>
+                <target>Changelog</target>
+            </trans-unit>
+            <trans-unit id="releases">
+                <source>releases</source>
+                <target>Releases</target>
+            </trans-unit>
+            <trans-unit id="home_fourth_bullet">
+                <source>home_fourth_bullet</source>
+                <target>Vergangene Schichtpläne werden nach 30 Tagen gelöscht</target>
+            </trans-unit>
+            <trans-unit id="release_further_info">
+                <source>release_further_info</source>
+                <target>
+                    <![CDATA[
+                        Alle Releases findest du auf <a target="_blank" href="https://github.com/janfriedli/akut-shift-planner/releases">GitHub</a>
+                     ]]>
+                </target>
             </trans-unit>
         </body>
     </file>

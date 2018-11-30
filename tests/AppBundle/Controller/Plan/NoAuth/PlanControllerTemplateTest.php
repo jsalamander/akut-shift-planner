@@ -23,7 +23,7 @@ class PlanControllerTemplateTest extends WebTestCase
         $form = $crawler->filter('.btn')->form(array(
             'appbundle_plan[templates]' => 0,
             'appbundle_plan[title]' => 'test template',
-            'appbundle_plan[date]' => '2017-06-20',
+            'appbundle_plan[date]' => '2099-06-20',
             'appbundle_plan[description]' => 'some desc',
             'appbundle_plan[email]' => 'peter@test.ch',
             'appbundle_plan[password][first]' => '12345678',
@@ -37,14 +37,14 @@ class PlanControllerTemplateTest extends WebTestCase
 
         //test plan_show page
         $this->assertContains('test template', $crawler->filter('.justify-content-end')->text());
-        $this->assertContains('20.06.2017', $crawler->filter('.justify-content-end')->text());
+        $this->assertContains('20.06.2099', $crawler->filter('.justify-content-end')->text());
         $this->assertContains('some desc', $crawler->filter('blockquote')->text());
-        $this->assertContains('meiu asdjffs', $crawler->filter('tr')->eq(1)->text());
-        $this->assertContains('shift', $crawler->filter('tr')->eq(1)->text());
-        $this->assertContains('00:01', $crawler->filter('tr')->eq(1)->text());
-        $this->assertContains('00:02', $crawler->filter('tr')->eq(1)->text());
+        $this->assertContains('public shift', $crawler->filter('.card')->eq(0)->text());
+        $this->assertContains('shift', $crawler->filter('.card')->eq(0)->text());
+        $this->assertContains('00:01', $crawler->filter('.card')->eq(0)->text());
+        $this->assertContains('00:02', $crawler->filter('.card')->eq(0)->text());
         $this->assertContains('#', $crawler->filter('#passwordPrompt')->attr('href'));
-        $this->assertEquals(2, $crawler->filter('.container .text-nowrap')->count());
+        $this->assertContains('2', $crawler->filter('.progress')->text());
         $this->assertEquals(1, $crawler->filter('.modal-content')->count());
         $this->assertContains('/login_check', $crawler->filter('.modal-content form')->attr('action'));
     }

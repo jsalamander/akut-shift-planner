@@ -12,6 +12,7 @@ use Ramsey\Uuid\Uuid;
  *
  * @ORM\Table(name="plan")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\PlanRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Plan
 {
@@ -29,8 +30,8 @@ class Plan
      * @Assert\Length(
      *      min = 2,
      *      max = 80,
-     *      minMessage = "The title must be at least {{ limit }} characters long",
-     *      maxMessage = "The title cannot be longer than {{ limit }} characters",
+     *      minMessage = "plan.title.min_length",
+     *      maxMessage = "plan.title.max_length",
      *      groups={"new_from_template", "Default"}
      * )
      * @ORM\Column(name="title", type="string", length=255)
@@ -39,11 +40,20 @@ class Plan
 
     /**
      * @var \DateTime
+     * @Assert\NotBlank()
      * @Assert\Date(groups={"new_from_template", "Default"})
+     * @Assert\GreaterThanOrEqual("today", groups={"new_from_template", "Default"})
      *
      * @ORM\Column(name="date", type="datetime")
      */
     private $date;
+
+    /**
+     * @var datetime $created
+     *
+     * @ORM\Column(type="datetime")
+     */
+    protected $created;
 
     /**
      * @var string
@@ -51,9 +61,9 @@ class Plan
      * @Assert\NotBlank(groups={"new_from_template", "Default"})
      * @Assert\Length(
      *      min = 2,
-     *      max = 300,
-     *      minMessage = "The description must be at least {{ limit }} characters long",
-     *      maxMessage = "The description cannot be longer than {{ limit }} characters",
+     *      max = 500,
+     *      minMessage = "plan.description.min_length",
+     *      maxMessage = "plan.description.max_length",
      *      groups={"new_from_template", "Default"}
      * )
      *
@@ -65,13 +75,13 @@ class Plan
      * @Assert\Count(
      *      min = 1,
      *      max = 100,
-     *      minMessage = "You need at least {{ limit }} shift",
-     *      maxMessage = "We don't allow more than 100 shifts",
+     *      minMessage = "plan.shifts.count_min",
+     *      maxMessage = "plan.shifts.count_max",
      * )
      *
      * @Assert\Valid
-     *
-     * @ORM\OneToMany(targetEntity="Shift", mappedBy="plan", cascade={"persist"})
+     * @ORM\OrderBy({"orderIndex" = "ASC"})
+     * @ORM\OneToMany(targetEntity="Shift", mappedBy="plan", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $shifts;
 
@@ -96,9 +106,15 @@ class Plan
      */
     private $user;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="PlanCollection", inversedBy="plans")
+     */
+    private $planCollection;
+
     public function __construct()
     {
         $this->shifts = new ArrayCollection();
+        $this->planCollection = new ArrayCollection();
         $this->setId(Uuid::uuid4()->toString());
     }
 
@@ -133,6 +149,22 @@ class Plan
     public function setUser($user)
     {
         $this->user = $user;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPlanCollection()
+    {
+        return $this->planCollection;
+    }
+
+    /**
+     * @param mixed $planCollection
+     */
+    public function setPlanCollection($planCollection)
+    {
+        $this->planCollection = $planCollection;
     }
 
     /**
@@ -312,5 +344,15 @@ class Plan
             }
             $this->shifts = $mClone;
         }
+    }
+
+    /**
+     * Gets triggered only on insert
+
+     * @ORM\PrePersist
+     */
+    public function onPrePersist()
+    {
+        $this->created = new \DateTime("now");
     }
 }

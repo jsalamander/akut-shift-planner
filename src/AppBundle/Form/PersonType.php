@@ -2,8 +2,9 @@
 
 namespace AppBundle\Form;
 
+use Misd\PhoneNumberBundle\Form\Type\PhoneNumberType;
+use libphonenumber\PhoneNumberFormat;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -32,12 +33,14 @@ class PersonType extends AbstractType
             ->add('email', EmailType::class, array(
                 'attr'  => array('class' => $classes),
                 'required' => false,
-                'label' => 'email'
+                'label' => 'person_email'
             ))
-            ->add('phone', TextType::class, array(
+            ->add('phone', PhoneNumberType::class, array(
                 'attr'  => array('class' => $classes),
                 'required' => false,
-                'label' => 'phone'
+                'label' => 'person_phone',
+                'default_region' => 'CH',
+                'format' => PhoneNumberFormat::NATIONAL
             ));
     }
     

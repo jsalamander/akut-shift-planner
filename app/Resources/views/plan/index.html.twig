@@ -3,29 +3,30 @@
 {% block body %}
     <div class="col-12 d-flex justify-content-end">
         <h1 class="mr-auto p-2">{% trans %}event_list{% endtrans %}</h1>
-        <a href="{{ path('plan_new') }}"><i class="fa p2 fa-2x fa-plus" aria-hidden="true"></i></a>
     </div>
 
     <div class="col-12">
         {% if pagination.items is not empty %}
-        <table class="table table-responsive">
-            <thead class="thead-default">
-            <tr>
-                <th>{{ knp_pagination_sortable(pagination, 'title'|trans, 'p.title') }} <i class="fa fa-sort" aria-hidden="true"></i></th>
-                <th>{{ knp_pagination_sortable(pagination, 'date'|trans, 'p.date') }} <i class="fa fa-sort" aria-hidden="true"></i></th>
-                <th>{% trans %}description{% endtrans %}</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for plan in pagination %}
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
                 <tr>
-                    <th><a href="{{ path('plan_show', { 'id': plan.id }) }}">{{ plan.title }}</a></th>
-                    <td>{% if plan.date %}{{ plan.date|date('d.m.Y') }}{% endif %}</td>
-                    <td>{{ plan.description }}</td>
+                    <th>{{ knp_pagination_sortable(pagination, 'title'|trans, 'p.title') }} <i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th>{{ knp_pagination_sortable(pagination, 'date'|trans, 'p.date') }} <i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th>{% trans %}description{% endtrans %}</th>
                 </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                {% for plan in pagination %}
+                    <tr>
+                        <th><a href="{{ path('plan_show', { 'id': plan.id }) }}">{{ plan.title }}</a></th>
+                        <td>{% if plan.date %}{{ plan.date|date('d.m.Y') }}{% endif %}</td>
+                        <td>{{ plan.description }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
         <div class="navigation">
             {{ knp_pagination_render(pagination) }}
         </div>

@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="col-12">
+        {% if not error  %}
+
+            <h1>{% trans %}releases{% endtrans %}</h1>
+            <br>
+            {% for release in releases  %}
+                {% if not release.draft  %}
+                    <div class="col-12">
+                        <h3><b>{{ release.name }}</b></h3>
+                        <pre>{{ release.tag_name }}</pre>
+                        <p>
+                            {{ release.body | markdown }}
+                        </p>
+                    </div>
+                {% endif %}
+            {% endfor  %}
+            <div class="alert alert-info">
+                {% trans %}release_further_info{% endtrans %}
+            </div>
+        {% else %}
+            <div class="alert alert-danger">
+                {{ error.msg }}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

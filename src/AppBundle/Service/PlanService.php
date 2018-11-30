@@ -42,20 +42,41 @@ class PlanService {
      *
      * @return ArrayCollection
      */
-    public function getPlans()
+    public function getTemplatePlans()
     {
         $queryBuilder = $this->em->getRepository('AppBundle:Plan')->createQueryBuilder('p');
 
         $qb = $queryBuilder->where('p.isTemplate = true');
 
-        if (!$this->userService->getUser()) {
-            $qb->andWhere('p.isPublic = true');
-        } else {
-            $qb->andWhere('p.user = :user')->setParameter('user', $this->userService->getUser()->getId());
-            $qb->orWhere('p.isPublic = true');
-        }
+        if ($this->userService->getUser()) {
+            $privateTemplates = $qb->andWhere('p.user = :user')
+                ->setParameter('user', $this->userService->getUser()->getId())
+                ->orderBy('p.title', 'ASC')
+                ->getQuery()
+                ->getResult();
 
-        return $qb->orderBy('p.title', 'ASC')->getQuery()->getResult();
+            $publicTemplates = $this->em
+                ->getRepository('AppBundle:Plan')
+                ->createQueryBuilder('p')
+                ->where('p.isTemplate = true')
+                ->andWhere('p.isPublic = true')
+                ->orderBy('p.title', 'ASC')
+                ->getQuery()
+                ->getResult();
+
+            return array_unique(array_merge($privateTemplates, $publicTemplates));
+
+        } else {
+            return $qb->andWhere('p.isPublic = true')->orderBy('p.title', 'ASC')->getQuery()->getResult();
+        }
+    }
+
+    public function getUserPlans()
+    {
+        $queryBuilder = $this->em->getRepository('AppBundle:Plan')->createQueryBuilder('p');
+        $queryBuilder->where('p.user = :user')->setParameter('user', $this->userService->getUser()->getId());
+
+        return $queryBuilder->orderBy('p.title', 'ASC')->getQuery()->getResult();
     }
 
 }

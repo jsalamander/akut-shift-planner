@@ -1,36 +1,5 @@
-a {
-    color: #fe7101;
-}
-
-a:hover {
-    color: #cc5902;
-}
-
-.btn-primary {
-    background-color: #fe7101;
-    border-color: #fe7101;
-}
-
-.btn-primary:hover {
-    background-color: #cc5902;
-    border-color: #cc5902;
-}
-
 .main-row {
     margin-top: 1rem;
-}
-
-.page-item.active .page-link {
-    background-color: #fe7101;
-    border-color: #fe7101;
-}
-
-.page-link  {
-    color: #fe7101;
-}
-
-.page-link:hover  {
-    color: #fe7101;
 }
 
 .error-list > li {
@@ -55,4 +24,22 @@ body {
     height: 60px;
     line-height: 60px; /* Vertically center the text there */
     background-color: #f5f5f5;
+}
+
+textarea {
+    padding: 5px !important;
+}
+
+.btn {
+    margin: 0px !important;
+}
+
+.list-index > li {
+    margin-left: 2.5rem;
+    list-style-type: circle;
+}
+
+.fos_user_user_show {
+    float: none;
+    margin: 0 auto;
 }

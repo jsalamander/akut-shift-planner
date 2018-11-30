@@ -2,7 +2,7 @@
 
 {% block body %}
     <div class="col-12">
-        <h1>Edit {{ person.name }}</h1>
+        <h1>{% trans %}edit_person{% endtrans %} {{ person.name }}</h1>
     </div>
 
     <div class="col-12">
@@ -14,13 +14,13 @@
             {{ form_row(edit_form.phone) }}
         </div>
 
-        <input class="btn btn-primary" type="submit" value="{% trans %}edit{% endtrans %}"/>
+        <button class="btn btn-primary" type="submit">{% trans %}save{% endtrans %}</button>
         {{ form_end(edit_form) }}
     </div>
 
     <div class="col-12">
         {{ form_start(delete_form) }}
-        <input class="btn btn-danger btn-sm pull-right" type="submit" value="{% trans %}delete{% endtrans %}">
+        <button class="btn btn-sm btn-danger pull-right" type="submit">{% trans %}delete{% endtrans %}</button>
         {{ form_end(delete_form) }}
     </div>
 {% endblock %}

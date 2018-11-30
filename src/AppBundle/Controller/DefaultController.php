@@ -10,8 +10,8 @@ use Symfony\Component\HttpFoundation\Request;
 class DefaultController extends Controller
 {
     /**
- * @Route("/", name="homepage")
- */
+     * @Route("/", name="homepage")
+     */
     public function indexAction(Request $request)
     {
         return $this->render('default/index.html.twig');
@@ -25,4 +25,24 @@ class DefaultController extends Controller
         return $this->render('default/about.html.twig');
     }
 
+    /**
+     * @Route("/changelog", name="changelog")
+     */
+    public function changeLogAction(Request $request)
+    {
+        $headers = array('Accept' => 'application/json');
+        $error = [];
+        try {
+            $response = \Unirest\Request::get($this->container->getParameter('repo_changelog'), $headers);
+
+        } catch (Exception $e) {
+            $error['msg'] = 'Could not load the release data. Check your internet connection or the api endpoint: ' .
+            $this->container->getParameter('repo_changelog');
+        }
+
+        return $this->render('default/changelog.html.twig', [
+            'releases' => $response->body,
+            'error' => $error
+        ]);
+    }
 }

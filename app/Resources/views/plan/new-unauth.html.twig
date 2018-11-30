@@ -15,17 +15,16 @@
             {{ form_row(form.password.first) }}
             {{ form_row(form.password.second) }}
         </div>
-        <hr>
         <h3>{% trans %}shifts{% endtrans %}</h3>
         {% if form.vars.errors is not empty %}
             {{ form_errors(form) }}
         {% endif %}
         <ul class="shifts list-unstyled" data-prototype="{{ form_widget(form.shifts.vars.prototype)|e('html_attr') }}">
             {% for shift in form.shifts %}
-                <li>{{ form_widget(shift) }}</li>
+                <li class="card">{{ form_widget(shift) }}</li>
             {% endfor %}
         </ul>
-        <input class="btn btn-primary" type="submit" value="{% trans %}create{% endtrans %}" />
+        <button class="btn btn-primary" type="submit">{% trans %}create{% endtrans %}</button>
         {{ form_end(form) }}
     </div>
 {% endblock %}

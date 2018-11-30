@@ -1,47 +1,43 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Shifts list</h1>
+    <div class="col-12">
+        <h1>{{ 'your_shifts'|trans }}</h1>
+    </div>
 
-    <table class="table-responsive">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Start</th>
-                <th>End</th>
-                <th>Numberpeople</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for shift in shifts %}
-            <tr>
-                <td><a href="{{ path('shift_show', { 'id': shift.id }) }}">{{ shift.id }}</a></td>
-                <td>{{ shift.title }}</td>
-                <td>{{ shift.description }}</td>
-                <td>{% if shift.start %}{{ shift.start|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if shift.end %}{{ shift.end|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ shift.numberPeople }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('shift_show', { 'id': shift.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('shift_edit', { 'id': shift.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('shift_new') }}">Create a new shift</a>
-        </li>
-    </ul>
+    <div class="col-12">
+        {% if pagination|length < 1%}
+            <div class="alert alert-warning" role="alert">
+                {% trans %}no_shifts{% endtrans %}
+            </div>
+        {% else %}
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>{{ knp_pagination_sortable(pagination, 'title'|trans, 's.title') }} <i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th>{{ 'description'|trans }}</th>
+                    <th>{{ 'date'|trans }}</th>
+                    <th>{{ knp_pagination_sortable(pagination, 'start'|trans, 's.start') }} <i class="fa fa-sort" aria-hidden="true"></i></th>
+                    <th>{{ knp_pagination_sortable(pagination, 'end'|trans, 's.end') }} <i class="fa fa-sort" aria-hidden="true"></i></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for shift in pagination %}
+                    <tr>
+                        <td><a href="{{ path('plan_show', { 'id': shift.plan.id }) }}">{{ shift.title }}</a></td>
+                        <td>{{ shift.description }}</td>
+                        <td>{{ shift.plan.date|date('d.m.Y') }}</td>
+                        <td>{% if shift.start %}{{ shift.start|date('H:i') }}{% endif %}</td>
+                        <td>{% if shift.end %}{{ shift.end|date('H:i') }}{% endif %}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="navigation">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+        {% endif %}
+    </div>
 {% endblock %}

@@ -81,6 +81,7 @@ class AuthStrategy implements FormStrategyInterface {
         $formPlan = $form->getData();
         $clone = clone $orgPlan;
         $clone->setId(Uuid::uuid4()->toString());
+        $clone->setIsPublic(false);
         $clone->setIsTemplate(false);
         $clone->setTitle($formPlan->getTitle());
         $clone->setDate($formPlan->getDate());

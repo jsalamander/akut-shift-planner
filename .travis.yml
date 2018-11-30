@@ -12,21 +12,23 @@ matrix:
     - php: 7.1
 
 env:
-  - SYMFONY_VERSION="3.3.*"
+  - SYMFONY_VERSION="3.3.*" DB=mysql
 
-before-install:
-  - composer self-update
+services:
+    - mysql
+
+before_install:
+  - mysql -e 'create database symfony'
 
 install:
-  - composer install
   - cp app/config/parameters.yml.dist app/config/parameters.yml
+  - composer install
 
 script:
   - composer test
-  - rm app/config/parameters.yml
 
 notifications:
-  email: jan.friedli@gmx.ch
+  email: jan.friedli@immerda.ch
 
 addons:
   ssh_known_hosts: s017.cyon.net
@@ -36,28 +38,29 @@ before_deploy:
   - eval "$(ssh-agent -s)"
   - chmod 600 /tmp/deploy_rsa
   - ssh-add /tmp/deploy_rsa
+
 deploy:
   - provider: script
     skip_cleanup: true
-    script: rsync -r --delete-after --links --exclude=.git/ --exclude=app/config/parameters.yml $TRAVIS_BUILD_DIR obcbtld@s017.cyon.net:/home/obcbtld/public_html/dev-schichtplan
+    script: rsync -ra --delete-after --links --exclude='*.message' --exclude=.git/ --exclude=app/config/parameters.yml $TRAVIS_BUILD_DIR obcbtld@s017.cyon.net:/home/obcbtld/public_html/dev-schichtplan
     on:
-      branch: develop
+      branch: master
       php: 7.1
   - provider: script
     skip_cleanup: true
     script: ssh obcbtld@s017.cyon.net 'cd /home/obcbtld/public_html/dev-schichtplan/akut-shift-planner; ./post-deployment-dev.sh'
     on:
-      branch: develop
+      branch: master
       php: 7.1
   - provider: script
     skip_cleanup: true
-    script: rsync -r --delete-after --links --exclude=.git/ --exclude=app/config/parameters.yml $TRAVIS_BUILD_DIR obcbtld@s017.cyon.net:/home/obcbtld/public_html/schichtplan
+    script: rsync -ra --delete-after --links --exclude='*.message' --exclude=.git/ --exclude=app/config/parameters.yml $TRAVIS_BUILD_DIR obcbtld@s017.cyon.net:/home/obcbtld/public_html/schichtplan
     on:
-      branch: master
+      tags: true
       php: 7.1
   - provider: script
     skip_cleanup: true
     script: ssh obcbtld@s017.cyon.net 'cd /home/obcbtld/public_html/schichtplan/akut-shift-planner; ./post-deployment-prod.sh'
     on:
-      branch: master
+      tags: true
       php: 7.1
