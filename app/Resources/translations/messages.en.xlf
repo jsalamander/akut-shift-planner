@@ -428,9 +428,13 @@
                 <source>release_further_info</source>
                 <target>
                     <![CDATA[
-                    All releases available on  <a target="_blank" href="https://github.com/janfriedli/akut-shift-planner/releases">Github</a>
+                    All releases available on <a target="_blank" href="https://github.com/janfriedli/akut-shift-planner/releases">GitHub</a>
                     ]]>
                 </target>
+            </trans-unit>
+            <trans-unit id="home_fourth_bullet">
+                <source>home_fourth_bullet</source>
+                <target>Passed plans will be deleted after 30 days</target>
             </trans-unit>
         </body>
     </file>

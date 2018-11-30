@@ -428,11 +428,15 @@
                 <source>releases</source>
                 <target>Releases</target>
             </trans-unit>
+            <trans-unit id="home_fourth_bullet">
+                <source>home_fourth_bullet</source>
+                <target>Vergangene Schichtpläne werden nach 30 Tagen gelöscht</target>
+            </trans-unit>
             <trans-unit id="release_further_info">
                 <source>release_further_info</source>
                 <target>
                     <![CDATA[
-                        Alle Releases findest du auf  <a target="_blank" href="https://github.com/janfriedli/akut-shift-planner/releases">Github</a>
+                        Alle Releases findest du auf <a target="_blank" href="https://github.com/janfriedli/akut-shift-planner/releases">GitHub</a>
                      ]]>
                 </target>
             </trans-unit>
