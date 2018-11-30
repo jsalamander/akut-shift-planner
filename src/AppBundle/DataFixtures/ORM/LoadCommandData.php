@@ -66,7 +66,9 @@ class LoadCommandData extends AbstractFixture implements FixtureInterface
 
         $adminPlanNow = new Plan();
         $adminPlanNow->setDescription('today');
-        $adminPlanNow->setDate(new \DateTime());
+        $now = new \DateTime();
+        $date = new \DateTime($now->format("Y-m-d")." 00:00:00");
+        $adminPlanNow->setDate($date);
         $adminPlanNow->setTitle('admin plan now');
         $adminPlanNow->setUser($admin);
         $this->setReference('admin-plan-now', $adminPlanNow);
