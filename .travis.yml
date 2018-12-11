@@ -44,7 +44,7 @@ deploy:
     skip_cleanup: true
     script: echo 'php 7.3'
     on:
-      branch: master
+      branch: develop
       php: 7.3
   - provider: script
     skip_cleanup: true
