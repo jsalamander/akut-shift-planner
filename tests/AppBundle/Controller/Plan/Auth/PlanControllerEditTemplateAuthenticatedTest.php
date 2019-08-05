@@ -30,7 +30,7 @@ class PlanControllerEditTemplateAuthenticatedTest extends WebTestCase
 
         $form = $this->crawler->filter('.btn')->form(array(
             'appbundle_plan[title]' => 'edited template',
-            'appbundle_plan[date]' => '2019-06-20',
+            'appbundle_plan[date]' => '2099-06-20',
             'appbundle_plan[description]' => 'new template desc',
         ));
         $this->assertContains('00:01', $form->get('appbundle_plan[shifts][0][start]')->getValue());
@@ -52,7 +52,7 @@ class PlanControllerEditTemplateAuthenticatedTest extends WebTestCase
         $this->crawler = $this->client->followRedirect();
 
         $this->assertContains('edited template', $this->crawler->filter('h1')->text());
-        $this->assertNotContains('0.06.2019', $this->crawler->filter('h1')->text());
+        $this->assertNotContains('20.06.2099', $this->crawler->filter('h1')->text());
         $this->assertContains('new template desc', $this->crawler->filter('blockquote')->text());
         $this->assertContains('new foo', $this->crawler->filter('.card')->text());
         $this->assertContains('new shift', $this->crawler->filter('.card')->eq(1)->text());
