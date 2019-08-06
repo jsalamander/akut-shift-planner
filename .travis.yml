@@ -11,8 +11,7 @@ matrix:
     - php: 7.3
 
 env:
-  - SYMFONY_VERSION="3.4.*" DB=mysql
-  - SYMFONY_DEPRECATIONS_HELPER=disabled=1
+  - SYMFONY_VERSION="3.4.*" DB=mysql SYMFONY_DEPRECATIONS_HELPER=disabled=1
 
 services:
     - mysql
