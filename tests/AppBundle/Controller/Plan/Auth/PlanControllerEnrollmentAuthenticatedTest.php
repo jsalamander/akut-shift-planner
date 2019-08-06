@@ -34,7 +34,7 @@ class PlanControllerEnrollmentAuthenticatedTest extends WebTestCase
         $this->assertContains('private name', $this->crawler->filter('.card')->eq(0)->text());
         $this->assertContains('mailto:asdf@asfd.de?Subject=Kontakt Schichtplan: admin plan',
             $this->crawler->filter('.mailto')->eq(0)->attr('href'));
-        $this->assertContains('+41 979787323', $this->crawler->filter('.phone-number')->eq(1)->text());
+        $this->assertContains('+41 97 978 73 23', $this->crawler->filter('.phone-number')->eq(1)->text());
         $this->assertContains('mailto:asdf@asfd.de?Subject=Kontakt Schichtplan: admin plan',
             $this->crawler->filter('.mailto')->eq(1)->attr('href'));
         $this->assertContains('/person/2/edit', $this->crawler->filter('.edit')->eq(1)->attr('href'));
