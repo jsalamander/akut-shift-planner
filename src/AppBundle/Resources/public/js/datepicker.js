@@ -4,7 +4,8 @@ $(function() {
         format: 'yyyy-mm-dd',
         startDate: start,
         todayHighlight: true,
-        autoclose: true
+        autoclose: true,
+        weekStart: 1
     });
     $('.datepicker').attr('readOnly', true)
 });
