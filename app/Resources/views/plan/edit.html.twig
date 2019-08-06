@@ -30,17 +30,6 @@
                 {% endfor %}
             </ul>
             <button class="btn btn-primary" type="submit">{% trans %}save{% endtrans %}</button>
-            {% if not edit_form.vars.valid %}
-                <ul>
-                    {# Loop through every form item #}
-                    {% for child in edit_form.children %}
-                        {# Display the errors of the form item #}
-                        {%for error in child.vars.errors%}
-                            <li class="debug_error">Error: {{error.message}}</li>
-                        {%endfor%}
-                    {%endfor%}
-                </ul>
-            {%endif%}
             {{ form_end(edit_form) }}
         </div>
         <div class="col-12">
