@@ -8,12 +8,11 @@ cache:
 
 matrix:
   include:
-    - php: 7.0
-    - php: 7.1
     - php: 7.3
 
 env:
   - SYMFONY_VERSION="3.4.*" DB=mysql
+  - SYMFONY_DEPRECATIONS_HELPER=disabled=1
 
 services:
     - mysql
@@ -43,31 +42,25 @@ before_deploy:
 deploy:
   - provider: script
     skip_cleanup: true
-    script: echo 'php 7.3'
-    on:
-      branch: develop
-      php: 7.3
-  - provider: script
-    skip_cleanup: true
     script: rsync -ra --delete-after --links --exclude='*.message' --exclude=.git/ --exclude=app/config/parameters.yml $TRAVIS_BUILD_DIR obcbtld@s017.cyon.net:/home/obcbtld/public_html/dev-schichtplan
     on:
       branch: master
-      php: 7.1
+      php: 7.3
   - provider: script
     skip_cleanup: true
     script: ssh obcbtld@s017.cyon.net 'cd /home/obcbtld/public_html/dev-schichtplan/akut-shift-planner; ./post-deployment-dev.sh'
     on:
       branch: master
-      php: 7.1
+      php: 7.3
   - provider: script
     skip_cleanup: true
     script: rsync -ra --delete-after --links --exclude='*.message' --exclude=.git/ --exclude=app/config/parameters.yml $TRAVIS_BUILD_DIR obcbtld@s017.cyon.net:/home/obcbtld/public_html/schichtplan
     on:
       tags: true
-      php: 7.1
+      php: 7.3
   - provider: script
     skip_cleanup: true
     script: ssh obcbtld@s017.cyon.net 'cd /home/obcbtld/public_html/schichtplan/akut-shift-planner; ./post-deployment-prod.sh'
     on:
       tags: true
-      php: 7.1
+      php: 7.3
