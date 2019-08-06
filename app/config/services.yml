@@ -29,6 +29,11 @@ services:
         public: true
         tags: ['controller.service_arguments']
 
+    # app/services.yaml, keep all the standard defaults above
+    AppBundle\Controller\ProfileController:
+        arguments:
+            $formFactory: '@fos_user.profile.form.factory'
+
     # add more services, or override services that need manual wiring
     # AppBundle\Service\ExampleService:
     #     arguments:
