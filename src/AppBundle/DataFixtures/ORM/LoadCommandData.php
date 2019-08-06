@@ -87,8 +87,8 @@ class LoadCommandData extends AbstractFixture implements FixtureInterface
         $adminShiftUpcoming = new Shift();
         $adminShiftUpcoming->setDescription('meiu asdjffs');
         $adminShiftUpcoming->setTitle('admin shift past');
-        $adminShiftUpcoming->setStart(new \DateTime('1970-01-01 00:01:00'));
-        $adminShiftUpcoming->setEnd(new \DateTime('1970-01-01 00:02:00'));
+        $adminShiftUpcoming->setStart($date);
+        $adminShiftUpcoming->setEnd($date);
         $adminShiftUpcoming->setNumberPeople(2);
         $adminPlanUpcoming->addShift($adminShiftUpcoming);
         $this->setReference('admin-shift-Upcoming', $adminShiftUpcoming);

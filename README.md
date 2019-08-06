@@ -9,7 +9,7 @@ Schicht-Plan.ch
 3. Configure all needed values `app/config/parameters.yml`
 4. Create database `php bin/console doctrine:database:create`
 5. Create schema `php bin/console doctrine:schema:update --force`
-6. Create a cron job to run `php bin/console swiftmailer:spool:send --env=prod` frequently
+6. Create a cron job to run `d` frequently
 This sends all the mails saved in the spool.
 7. Create a second cron job for `php bin/console app:delete-passed-plans`
 which should run once per day to delete old plans.
