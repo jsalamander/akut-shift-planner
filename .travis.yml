@@ -13,7 +13,7 @@ matrix:
     - php: 7.3
 
 env:
-  - SYMFONY_VERSION="3.3.*" DB=mysql
+  - SYMFONY_VERSION="3.4.*" DB=mysql
 
 services:
     - mysql
