@@ -1,5 +1,5 @@
 app:
-    resource: '../src/AppBundle/Controller/'
+    resource: '../src/Controller/'
     type: annotation
 _bazinga_jstranslation:
     resource: "@BazingaJsTranslationBundle/Resources/config/routing/routing.yml"
@@ -7,4 +7,4 @@ fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 fos_user_profile_edit:
     path: /profile/edit
-    controller: AppBundle\Controller\ProfileController::editAction
+    controller: App\Controller\ProfileController::editAction
