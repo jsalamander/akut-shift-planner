@@ -15,9 +15,6 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/components/transition.min.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/components/dropdown.min.css" />
         {% block stylesheets %}{% endblock %}
-        {% stylesheets '@AppBundle/Resources/public/css/*' filter='cssrewrite' %}
-            <link rel="stylesheet" href="{{ asset_url }}" />
-        {% endstylesheets %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.png') }}" />
     </head>
     <body>
@@ -98,9 +95,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/components/transition.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/components/dropdown.min.js"></script>
         <script src="{{ url('bazinga_jstranslation_js') }}"></script>
-        {% javascripts '@AppBundle/Resources/public/js/*' %}
-            <script src="{{ asset_url }}"></script>
-        {% endjavascripts %}
         <!-- Piwik -->
         <script type="text/javascript">
             var _paq = _paq || [];
