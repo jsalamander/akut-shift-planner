@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @Route("plancollection")
  */
-class PlanCollectionController extends Controller
+class PlanCollectionController extends \Symfony\Bundle\FrameworkBundle\Controller\AbstractController
 {
     /**
      * Lists all planCollection entities.

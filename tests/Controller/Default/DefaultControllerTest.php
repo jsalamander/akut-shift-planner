@@ -11,7 +11,7 @@ class DefaultControllerTest extends WebTestCase
         $client = static::createClient();
         $crawler = $client->request('GET', '/');
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertContains('Schicht-Plan.ch', $crawler->filter('.jumbotron')->text());
+        $this->assertSelectorTextContains('.jumbotron', 'Schicht-Plan.ch');
         $this->assertEquals(1, $crawler->filter('.jumbotron .btn')->count());
         $this->assertContains('/plan/new', $crawler->filter('.jumbotron .btn')->attr('href'));
     }
@@ -35,14 +35,14 @@ class DefaultControllerTest extends WebTestCase
         $client = static::createClient();
         $crawler = $client->request('GET', '/about');
         $this->assertEquals(3, $crawler->filter('h3')->count());
-        $this->assertContains('Schicht-Plan.ch', $crawler->filter('h1')->text());
+        $this->assertSelectorTextContains('h1', 'Schicht-Plan.ch');
     }
 
     public function testChangelog() {
         $client = static::createClient();
         $crawler = $client->request('GET', '/changelog');
         $this->assertEquals(1, $crawler->filter('h1')->count());
-        $this->assertContains('Releases', $crawler->filter('h1')->text());
+        $this->assertSelectorTextContains('h1', 'Releases');
         $this->assertGreaterThan(1, $crawler->filter('.col-12')->count());
     }
 }

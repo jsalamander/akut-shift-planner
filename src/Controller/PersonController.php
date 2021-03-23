@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @Route("person")
  */
-class PersonController extends Controller
+class PersonController extends \Symfony\Bundle\FrameworkBundle\Controller\AbstractController
 {
     /**
      * Lists all person entities.

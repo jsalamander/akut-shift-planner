@@ -69,15 +69,15 @@ class PlanControllerTest extends WebTestCase
         //test plan_show page
         $crawler = $client->followRedirect();
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertContains('test plan', $crawler->filter('.justify-content-end')->text());
-        $this->assertContains($date->format('d.m.Y'), $crawler->filter('.justify-content-end')->text());
-        $this->assertContains('some desc', $crawler->filter('blockquote')->text());
+        $this->assertSelectorTextContains('.justify-content-end', 'test plan');
+        $this->assertSelectorTextContains('.justify-content-end', $date->format('d.m.Y'));
+        $this->assertSelectorTextContains('blockquote', 'some desc');
         $this->assertContains('foo', $crawler->filter('.card')->eq(0)->text());
         $this->assertContains('bar', $crawler->filter('.card')->eq(0)->text());
         $this->assertContains('00:00', $crawler->filter('.card')->eq(0)->text());
         $this->assertContains('00:01', $crawler->filter('.card')->eq(0)->text());
         $this->assertContains('#', $crawler->filter('#passwordPrompt')->attr('href'));
-        $this->assertContains('3', $crawler->filter('.progress')->text());
+        $this->assertSelectorTextContains('.progress', '3');
         $this->assertEquals(1, $crawler->filter('.modal-content')->count());
         $this->assertContains('/login_check', $crawler->filter('.modal-content form')->attr('action'));
     }
@@ -97,7 +97,7 @@ class PlanControllerTest extends WebTestCase
             'App_plan[password][second]' => '12345678',
         ));
 
-        $crawler = $client->submit($form);
+        $crawler = $client->submit($form, []);
         $this->assertEquals(5, $crawler->filter('.alert')->count());
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }

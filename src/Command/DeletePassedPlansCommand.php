@@ -71,7 +71,7 @@ class DeletePassedPlansCommand extends Command
      * @return  void
      * @throws \Exception
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $qb = $this->em->getRepository('App:Plan')->createQueryBuilder('p');
         $days =  intval($input->getOption('dueDays'));
@@ -99,6 +99,7 @@ class DeletePassedPlansCommand extends Command
         } else {
             $output->write('<info>Nothing to delete</info>');
         }
+        return 0;
     }
 
 

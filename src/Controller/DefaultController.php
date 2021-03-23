@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 
-class DefaultController extends Controller
+class DefaultController extends \Symfony\Bundle\FrameworkBundle\Controller\AbstractController
 {
     /**
      * @Route("/", name="homepage")

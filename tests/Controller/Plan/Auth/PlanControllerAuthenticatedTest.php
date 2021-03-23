@@ -66,9 +66,9 @@ class PlanControllerAuthenticatedTest extends WebTestCase
         //test plan_show page
         $crawler = $this->client->followRedirect();
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
-        $this->assertContains('test plan', $crawler->filter('.justify-content-end')->text());
-        $this->assertContains('20.06.2099', $crawler->filter('.justify-content-end')->text());
-        $this->assertContains('some desc', $crawler->filter('blockquote')->text());
+        $this->assertSelectorTextContains('.justify-content-end', 'test plan');
+        $this->assertSelectorTextContains('.justify-content-end', '20.06.2099');
+        $this->assertSelectorTextContains('blockquote', 'some desc');
         $this->assertContains('foo', $crawler->filter('.card')->eq(0)->text());
         $this->assertContains('bar', $crawler->filter('.card')->eq(0)->text());
         $this->assertContains('00:00', $crawler->filter('.card')->eq(0)->text());
@@ -111,8 +111,8 @@ class PlanControllerAuthenticatedTest extends WebTestCase
         $crawler = $this->client->followRedirect();
 
         //test plan_show page
-        $this->assertContains('test plan template', $crawler->filter('.justify-content-end')->text());
-        $this->assertContains('some desc', $crawler->filter('blockquote')->text());
+        $this->assertSelectorTextContains('.justify-content-end', 'test plan template');
+        $this->assertSelectorTextContains('blockquote', 'some desc');
         $this->assertContains('foo', $crawler->filter('.card')->eq(0)->text());
         $this->assertContains('bar', $crawler->filter('.card')->eq(0)->text());
         $this->assertContains('00:00', $crawler->filter('.card')->eq(0)->text());
@@ -140,7 +140,7 @@ class PlanControllerAuthenticatedTest extends WebTestCase
             'App_plan[description]' => 'some desc'
         ));
 
-        $crawler = $client->submit($form);
+        $crawler = $client->submit($form, []);
         $this->assertEquals(5, $crawler->filter('.alert')->count());
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }

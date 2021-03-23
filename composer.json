@@ -40,6 +40,7 @@
     "require-dev": {
         "liip/functional-test-bundle": "3.3.0",
         "phpunit/phpunit": "^7.5.0",
+        "rector/rector-prefixed": "^0.10.1",
         "symfony/phpunit-bridge": "^4.0"
     },
     "config": {

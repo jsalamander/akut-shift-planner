@@ -12,7 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
  *
  * @Route("shift")
  */
-class ShiftController extends Controller
+class ShiftController extends \Symfony\Bundle\FrameworkBundle\Controller\AbstractController
 {
     /**
      * Lists all shift entities.

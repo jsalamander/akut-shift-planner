@@ -23,7 +23,7 @@ class UserSeparationTest extends WebTestCase
         $crawler = $client->followRedirect();
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
-        $this->assertContains('admin plan', $crawler->filter('tbody')->text());
+        $this->assertSelectorTextContains('tbody', 'admin plan');
         $this->assertNotContains('rudolf plan', $crawler->filter('tbody')->text());
     }
 
@@ -35,7 +35,7 @@ class UserSeparationTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
         $this->assertNotContains('admin plan', $crawler->filter('tbody')->text());
-        $this->assertContains('rudolf plan', $crawler->filter('tbody')->text());
+        $this->assertSelectorTextContains('tbody', 'rudolf plan');
     }
 
     public function testTemplateAppearOnlyOnOwnProfileAdmin() {
@@ -44,7 +44,7 @@ class UserSeparationTest extends WebTestCase
         $crawler = $client->request('GET', '/plan/templates');
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
-        $this->assertContains('admin plan template', $crawler->filter('tbody')->text());
+        $this->assertSelectorTextContains('tbody', 'admin plan template');
         $this->assertNotContains('rudolf plan template', $crawler->filter('tbody')->text());
     }
 
@@ -55,6 +55,6 @@ class UserSeparationTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
         $this->assertNotContains('admin plan template', $crawler->filter('tbody')->text());
-        $this->assertContains('rudolf plan template', $crawler->filter('tbody')->text());
+        $this->assertSelectorTextContains('tbody', 'rudolf plan template');
     }
 }

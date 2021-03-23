@@ -54,7 +54,7 @@ class ShiftControllerYourShiftTest extends WebTestCase
 
         $this->client->request('GET', '/shift');
         $crawler = $this->client->followRedirect();
-        $this->assertContains('admin shift', $crawler->filter('tbody')->text());
+        $this->assertSelectorTextContains('tbody', 'admin shift');
         $this->assertNotContains('admin shift past', $crawler->filter('tbody')->text());
         $this->assertContains(
             '/plan/' . $this->fixtures->getReference('admin-plan')->getId(),

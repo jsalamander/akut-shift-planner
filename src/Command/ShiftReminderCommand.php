@@ -76,7 +76,7 @@ class ShiftReminderCommand extends Command
      * @return  void
      * @throws \Exception
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $days =  intval($input->getOption('days'));
         if ($days < 0) {
@@ -105,6 +105,7 @@ class ShiftReminderCommand extends Command
         }
 
         $output->write('<info>' . $this->reminderCounter . ' People received a reminder</info>');
+        return 0;
     }
 
 

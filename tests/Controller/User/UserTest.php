@@ -23,7 +23,7 @@ class UserTest extends WebTestCase
             )
         );
 
-        $client->submit($form);
+        $client->submit($form, []);
         $crawler = $client->request('GET', '/profile');
 
         $link = $crawler->filter('.fos_user_user_show .btn-primary')->link();
@@ -36,14 +36,14 @@ class UserTest extends WebTestCase
                 'fos_user_profile_form[current_password]' => '12341234',
             )
         );
-        $crawler = $client->submit($form);
-        $this->assertContains('admin', $crawler->filter('.card-block')->text());
+        $crawler = $client->submit($form, []);
+        $this->assertSelectorTextContains('.card-block', 'admin');
 
         $link = $crawler->filter('.fos_user_user_show .btn-primary')->link();
         $crawler = $client->click($link);
 
         $form = $crawler->filter('.btn-danger')->form();
-        $crawler = $client->submit($form);
+        $crawler = $client->submit($form, []);
         $this->assertEquals('http://localhost/login', $crawler->getUri());
 
         $crawler = $client->request('GET', '/login');
@@ -54,8 +54,8 @@ class UserTest extends WebTestCase
             )
         );
 
-        $crawler = $client->submit($form);
-        $this->assertContains('Fehlerhafte Zugangsdaten.', $crawler->filter('.alert')->text());
+        $crawler = $client->submit($form, []);
+        $this->assertSelectorTextContains('.alert', 'Fehlerhafte Zugangsdaten.');
 
     }
 
@@ -76,7 +76,7 @@ class UserTest extends WebTestCase
             )
         );
 
-        $client->submit($form);
+        $client->submit($form, []);
         $client->request('GET', '/logout');
 
         $crawler = $client->request('GET', '/login');
@@ -87,7 +87,7 @@ class UserTest extends WebTestCase
             )
         );
 
-        $crawler = $client->submit($form);
+        $crawler = $client->submit($form, []);
         $this->assertEquals('http://localhost/plan/', $crawler->getUri());
 
         $crawler = $client->request('GET', '/logout');

@@ -54,7 +54,7 @@ class UserService {
         UserPasswordEncoderInterface $encoder,
         SessionInterface $session,
         \Swift_Mailer $mailer,
-        TranslatorInterface $translator,
+        \Symfony\Contracts\Translation\TranslatorInterface $translator,
         \Twig_Environment $templating,
         EntityManagerInterface $em
     ) {

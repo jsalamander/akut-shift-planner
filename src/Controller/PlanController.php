@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @Route("plan")
  */
-class PlanController extends Controller
+class PlanController extends \Symfony\Bundle\FrameworkBundle\Controller\AbstractController
 {
     /**
      * Lists all plan entities.
