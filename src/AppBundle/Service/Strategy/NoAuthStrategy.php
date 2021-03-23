@@ -6,7 +6,7 @@ use AppBundle\Entity\Plan;
 use AppBundle\Entity\User;
 use AppBundle\Service\Strategy\FormStrategyInterface;
 use AppBundle\Service\UserService;
-use FOS\UserBundle\Doctrine\UserManager;
+use FOS\UserBundle\Model\UserManagerInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Ramsey\Uuid\Uuid;
 
@@ -32,7 +32,7 @@ class NoAuthStrategy implements FormStrategyInterface {
 
     public function __construct(
         UserPasswordEncoderInterface $encoder,
-        UserManager $userManager,
+        UserManagerInterface $userManager,
         UserService $userService
     ) {
         $this->encoder = $encoder;

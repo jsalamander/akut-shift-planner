@@ -7,6 +7,7 @@ imports:
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
+    container.autowiring.strict_mode: true
 
 framework:
     #esi: ~
@@ -71,12 +72,6 @@ swiftmailer:
     spool:
         type: file
         path: '%kernel.project_dir%/app/spool'
-
-assetic:
-    debug:          '%kernel.debug%'
-    use_controller: '%kernel.debug%'
-    filters:
-        cssrewrite: ~
 
 knp_paginator:
     page_range:                 10          # default page range used in pagination control
