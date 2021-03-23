@@ -11,6 +11,9 @@ doctrine:
         default_table_options:
             collate: utf8mb4_unicode_ci
 
+        types:
+            phone_number: Misd\PhoneNumberBundle\Doctrine\DBAL\Types\PhoneNumberType
+
         # backtrace queries in profiler (increases memory usage per request)
         #profiling_collect_backtrace: '%kernel.debug%'
     orm:
@@ -18,7 +21,7 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
         auto_mapping: true
         mappings:
-            App:
+            AppBundle:
                 is_bundle: false
                 type: annotation
                 dir: '%kernel.project_dir%/src/Entity'
