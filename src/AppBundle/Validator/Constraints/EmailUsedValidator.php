@@ -2,7 +2,7 @@
 
 namespace AppBundle\Validator\Constraints;
 
-use FOS\UserBundle\Doctrine\UserManager;
+use FOS\UserBundle\Model\UserManagerInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
@@ -24,7 +24,7 @@ class EmailUsedValidator extends ConstraintValidator
      * EmailUsedValidator constructor.
      * @param UserManager $userManager
      */
-    public function __construct(UserManager $userManager)
+    public function __construct(UserManagerInterface $userManager)
     {
         $this->userManager = $userManager;
     }

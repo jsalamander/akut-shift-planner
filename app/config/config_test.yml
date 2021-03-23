@@ -27,5 +27,5 @@ liip_functional_test:
 doctrine:
     dbal:
         driver:   pdo_sqlite
-        path:     %kernel.cache_dir%/test.db
+        path:     '%kernel.cache_dir%/test.db'
         charset: UTF8

@@ -5,12 +5,12 @@ namespace AppBundle\Service;
 use AppBundle\Entity\Plan;
 use AppBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Symfony\Component\Translation\Translator;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * Provides the User object if authenticated
@@ -52,9 +52,9 @@ class UserService {
     public function __construct(
         TokenStorageInterface $tokenStorage,
         UserPasswordEncoderInterface $encoder,
-        Session $session,
+        SessionInterface $session,
         \Swift_Mailer $mailer,
-        Translator $translator,
+        TranslatorInterface $translator,
         \Twig_Environment $templating,
         EntityManagerInterface $em
     ) {

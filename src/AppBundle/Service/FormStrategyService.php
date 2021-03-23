@@ -5,7 +5,7 @@ namespace AppBundle\Service;
 use AppBundle\Entity\Plan;
 use AppBundle\Service\Strategy\AuthStrategy;
 use AppBundle\Service\Strategy\NoAuthStrategy;
-use FOS\UserBundle\Doctrine\UserManager;
+use FOS\UserBundle\Model\UserManagerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**
@@ -30,7 +30,7 @@ class FormStrategyService {
         NoAuthStrategy $noAuthStrategy,
         TokenStorageInterface $tokenStorage,
         UserService $userService,
-        UserManager $userManager
+        UserManagerInterface $userManager
     ) {
         $this->tokenStorage = $tokenStorage;
         $this->userManager = $userManager;
