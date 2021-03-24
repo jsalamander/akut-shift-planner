@@ -1,17 +1,20 @@
 <?php
 
-namespace Tests\App\Controller;
+namespace App\Tests\Controller;
 
 use Liip\FunctionalTestBundle\Test\WebTestCase;
+use Liip\TestFixturesBundle\Test\FixturesTrait;
 
 /**
  * Test Plan Controller from authenticated perspective
  *
  * Class PlanControllerTest
- * @package Tests\App\Controller
+ * @package App\Tests\Controller
  */
 class PlanControllerAuthenticatedTest extends WebTestCase
 {
+
+    use FixturesTrait;
 
     private $crawler;
 
@@ -20,7 +23,7 @@ class PlanControllerAuthenticatedTest extends WebTestCase
     public function setUp()
     {
         $fixtures = $this->loadFixtures(array(
-            'App\DataFixtures\ORM\LoadUserData'
+            'App\DataFixtures\LoadUserData'
         ))->getReferenceRepository();
 
         $this->loginAs($fixtures->getReference('admin-user'), 'main');

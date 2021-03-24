@@ -1,17 +1,16 @@
 <?php
 
-namespace App\DataFixtures\ORM;
+namespace App\DataFixtures;
 
 use App\Entity\Person;
-use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use App\Entity\User;
 use App\Entity\Plan;
 use App\Entity\Shift;
-use Doctrine\Common\DataFixtures\AbstractFixture;
 use libphonenumber\PhoneNumber;
+use Doctrine\Bundle\FixturesBundle\Fixture;
 
-class LoadPlanWithPeople extends AbstractFixture implements FixtureInterface
+class LoadPlanWithPeople extends Fixture
 {
     public function load(ObjectManager $manager)
     {

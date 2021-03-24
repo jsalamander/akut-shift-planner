@@ -1,13 +1,12 @@
 <?php
 
-namespace App\DataFixtures\ORM;
+namespace App\DataFixtures;
 
-use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use App\Entity\User;
-use Doctrine\Common\DataFixtures\AbstractFixture;
+use Doctrine\Bundle\FixturesBundle\Fixture;
 
-class LoadUserData extends AbstractFixture implements FixtureInterface
+class LoadUserData extends Fixture
 {
     public function load(ObjectManager $manager)
     {

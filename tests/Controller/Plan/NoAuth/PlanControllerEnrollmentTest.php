@@ -1,16 +1,20 @@
 <?php
 
-namespace Tests\App\Controller;
+namespace App\Tests\Controller;
 
 use Liip\FunctionalTestBundle\Test\WebTestCase;
+use Liip\TestFixturesBundle\Test\FixturesTrait;
 
 /**
  * Test Enrollment
  *
- * @package Tests\App\Controller
+ * @package App\Tests\Controller
  */
 class PlanControllerEnrollmentTest extends WebTestCase
 {
+
+    use FixturesTrait;
+
     private $crawler;
 
     private $client;
@@ -19,7 +23,7 @@ class PlanControllerEnrollmentTest extends WebTestCase
 
     public function setUp() {
         $this->fixtures = $this->loadFixtures(array(
-            'App\DataFixtures\ORM\LoadCompleteDataSet'
+            'App\DataFixtures\LoadCompleteDataSet'
         ))->getReferenceRepository();
         $planRef = $this->fixtures->getReference('admin-plan');
         $this->client = $this->makeClient();

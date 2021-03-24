@@ -1,16 +1,20 @@
 <?php
 
-namespace Tests\App\Controller;
+namespace App\Tests\Controller;
+use Liip\TestFixturesBundle\Test\FixturesTrait;
 
 use Liip\FunctionalTestBundle\Test\WebTestCase;
 
 /**
  * Test Enrollment with auth
  *
- * @package Tests\App\Controller
+ * @package App\Tests\Controller
  */
 class PlanControllerEnrollmentAuthenticatedTest extends WebTestCase
 {
+
+    use FixturesTrait;
+
     private $crawler;
 
     private $client;
@@ -20,7 +24,7 @@ class PlanControllerEnrollmentAuthenticatedTest extends WebTestCase
     public function setUp()
     {
         $this->fixtures = $this->loadFixtures(array(
-            'App\DataFixtures\ORM\LoadPlanWithPeople'
+            'App\DataFixtures\LoadPlanWithPeople'
         ))->getReferenceRepository();
         $this->loginAs($this->fixtures->getReference('admin-user'), 'main');
         $planRef = $this->fixtures->getReference('admin-plan');

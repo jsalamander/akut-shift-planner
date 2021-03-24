@@ -1,11 +1,15 @@
 <?php
 
-namespace Tests\App\Controller;
+namespace App\Tests\Controller;
 
 use Liip\FunctionalTestBundle\Test\WebTestCase;
+use Liip\TestFixturesBundle\Test\FixturesTrait;
 
 class UserTest extends WebTestCase
 {
+
+    use FixturesTrait;
+
     public function testUser() {
         // load an empty db
         $this->loadFixtures(array());

@@ -6,15 +6,19 @@ use App\Command\DeletePassedPlansCommand;
 use Liip\FunctionalTestBundle\Test\WebTestCase;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
+use Liip\TestFixturesBundle\Test\FixturesTrait;
 
 class ReminderCommandTest extends WebTestCase
 {
+
+    use FixturesTrait;
+
     private $fixtures;
 
     public function setUp()
     {
         $this->fixtures = $this->loadFixtures(array(
-            'App\DataFixtures\ORM\LoadCommandData'
+            'App\DataFixtures\LoadCommandData'
         ))->getReferenceRepository();
     }
 

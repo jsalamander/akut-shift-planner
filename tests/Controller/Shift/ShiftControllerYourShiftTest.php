@@ -1,24 +1,28 @@
 <?php
 
-namespace Tests\App\Controller;
+namespace App\Tests\Controller;
 
 use Liip\FunctionalTestBundle\Test\WebTestCase;
+use Liip\TestFixturesBundle\Test\FixturesTrait;
 
 /**
  * Test Shifts
  *
  * Class ShiftControllerYourShiftTest
- * @package Tests\App\Controller
+ * @package App\Tests\Controller
  */
 class ShiftControllerYourShiftTest extends WebTestCase
 {
+
+    use FixturesTrait;
+
     private $client;
 
     private $fixtures;
 
     public function setUp() {
         $this->fixtures = $this->loadFixtures(array(
-            'App\DataFixtures\ORM\LoadCompleteDataSet'
+            'App\DataFixtures\LoadCompleteDataSet'
         ))->getReferenceRepository();
 
         $this->loginAs($this->fixtures->getReference('admin-user'), 'main');

@@ -6,9 +6,13 @@ use App\Command\DeletePassedPlansCommand;
 use Liip\FunctionalTestBundle\Test\WebTestCase;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
+use Liip\TestFixturesBundle\Test\FixturesTrait;
 
 class DeletePassedPlansCommandTest extends WebTestCase
 {
+
+    use FixturesTrait;
+
     private $fixtures;
 
     private $fixutreRefs;
@@ -16,7 +20,7 @@ class DeletePassedPlansCommandTest extends WebTestCase
     public function setUp()
     {
         $this->fixtures = $this->loadFixtures(array(
-            'App\DataFixtures\ORM\LoadCommandData'
+            'App\DataFixtures\LoadCommandData'
         ))->getReferenceRepository();
 
         $this->fixutreRefs = [

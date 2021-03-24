@@ -1,17 +1,17 @@
 <?php
 
-namespace App\DataFixtures\ORM;
+namespace App\DataFixtures;
 
 use App\Entity\Person;
 use App\Entity\PlanCollection;
-use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use App\Entity\User;
 use App\Entity\Plan;
 use App\Entity\Shift;
-use Doctrine\Common\DataFixtures\AbstractFixture;
+use Doctrine\Bundle\FixturesBundle\Fixture;
 
-class LoadCompleteDataSet extends AbstractFixture implements FixtureInterface
+
+class LoadCompleteDataSet extends Fixture
 {
     public function load(ObjectManager $manager)
     {

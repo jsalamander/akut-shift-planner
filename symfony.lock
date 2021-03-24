@@ -95,6 +95,9 @@
     "liip/functional-test-bundle": {
         "version": "3.3.0"
     },
+    "liip/test-fixtures-bundle": {
+        "version": "1.11.2"
+    },
     "mashape/unirest-php": {
         "version": "v3.0.4"
     },
@@ -262,6 +265,9 @@
     },
     "symfony/contracts": {
         "version": "v1.1.10"
+    },
+    "symfony/css-selector": {
+        "version": "v4.4.20"
     },
     "symfony/debug": {
         "version": "v4.4.20"

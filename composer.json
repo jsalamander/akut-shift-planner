@@ -7,7 +7,6 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "doctrine/doctrine-bundle": "^1.6",
-        "doctrine/doctrine-fixtures-bundle": "^2.3",
         "doctrine/orm": "^2.5",
         "friendsofsymfony/user-bundle": "~2.0",
         "knplabs/knp-markdown-bundle": "^1.7",
@@ -38,9 +37,13 @@
         "willdurand/js-translation-bundle": "^2.6"
     },
     "require-dev": {
+        "doctrine/doctrine-fixtures-bundle": "^3.4",
         "liip/functional-test-bundle": "3.3.0",
+        "liip/test-fixtures-bundle": "^1.0.0",
         "phpunit/phpunit": "^7.5.0",
         "rector/rector-prefixed": "^0.10.1",
+        "symfony/browser-kit": "4.4.*",
+        "symfony/css-selector": "4.4.*",
         "symfony/phpunit-bridge": "^4.0"
     },
     "config": {
@@ -77,6 +80,9 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
+        ],
+        "test": [
+            "vendor/phpunit/phpunit/phpunit"
         ]
     },
     "conflict": {

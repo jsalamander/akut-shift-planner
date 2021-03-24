@@ -1,18 +1,21 @@
 <?php
 
-namespace Tests\App\Controller;
+namespace App\Tests\Controller;
 
 use Liip\FunctionalTestBundle\Test\WebTestCase;
+use Liip\TestFixturesBundle\Test\FixturesTrait;
 
 class UserSeparationTest extends WebTestCase
 {
+
+    use FixturesTrait;
 
     private $fixtures;
 
     public function setUp()
     {
         $this->fixtures = $this->loadFixtures(array(
-            'App\DataFixtures\ORM\LoadCompleteDataSet'
+            'App\DataFixtures\LoadCompleteDataSet'
         ))->getReferenceRepository();
     }
 

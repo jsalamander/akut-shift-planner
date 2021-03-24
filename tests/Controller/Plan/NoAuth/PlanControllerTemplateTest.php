@@ -1,16 +1,20 @@
 <?php
 
-namespace Tests\App\Controller;
+namespace App\Tests\Controller;
 
 use Liip\FunctionalTestBundle\Test\WebTestCase;
+use Liip\TestFixturesBundle\Test\FixturesTrait;
 
 class PlanControllerTemplateTest extends WebTestCase
 {
+
+    use FixturesTrait;
+
     public function setUp()
     {
         $this->loadFixtures(array(
-            'App\DataFixtures\ORM\LoadTemplateData',
-            'App\DataFixtures\ORM\LoadUserData'
+            'App\DataFixtures\LoadTemplateData',
+            'App\DataFixtures\LoadUserData'
         ));
     }
 

@@ -1,17 +1,20 @@
 <?php
 
-namespace Tests\App\Controller;
+namespace App\Tests\Controller;
 
 use Liip\FunctionalTestBundle\Test\WebTestCase;
+use Liip\TestFixturesBundle\Test\FixturesTrait;
 
 /**
  * Test Plan Controller from no auth perspective
  *
  * Class PlanControllerTest
- * @package Tests\App\Controller
+ * @package App\Tests\Controller
  */
 class PlanControllerTest extends WebTestCase
 {
+
+    use FixturesTrait;
 
     //use an empty db
     public function setUp() {
