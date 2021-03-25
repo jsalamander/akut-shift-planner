@@ -45,8 +45,7 @@ class Person
      * @var string
      *
      * @Assert\Email(
-     *     message = "person.email",
-     *     checkMX = true
+     *     message = "person.email"
      * )
      *
      * @ORM\Column(name="email", type="string", length=255, nullable=true)
