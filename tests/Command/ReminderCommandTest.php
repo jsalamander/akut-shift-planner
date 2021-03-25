@@ -27,9 +27,9 @@ class ReminderCommandTest extends WebTestCase
         $kernel = self::bootKernel();
         $application = new Application($kernel);
 
-        $templating = $this->getContainer()->get('twig');
-        $em =$this->getContainer()->get('doctrine.orm.entity_manager');
-        $mailer =$this->getContainer()->get('mailer');
+        $templating = self::$container->get('twig');
+        $em =self::$container->get('doctrine.orm.entity_manager');
+        $mailer =self::$container->get('mailer');
         $application->add(new DeletePassedPlansCommand($em, $mailer, $templating));
 
         $command = $application->find('app:shift-reminder');
@@ -49,9 +49,9 @@ class ReminderCommandTest extends WebTestCase
         $kernel = self::bootKernel();
         $application = new Application($kernel);
 
-        $templating = $this->getContainer()->get('twig');
-        $em =$this->getContainer()->get('doctrine.orm.entity_manager');
-        $mailer =$this->getContainer()->get('mailer');
+        $templating = self::$container->get('twig');
+        $em =self::$container->get('doctrine.orm.entity_manager');
+        $mailer =self::$container->get('mailer');
         $application->add(new DeletePassedPlansCommand($em, $mailer, $templating));
 
         $command = $application->find('app:shift-reminder');
