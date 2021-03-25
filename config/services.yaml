@@ -5,6 +5,7 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
+    github.changelog.api.url: '%env(GITHUB_CHANGELOG_API_ENDPOINT)%'
 
 services:
     # default configuration for services in *this* file

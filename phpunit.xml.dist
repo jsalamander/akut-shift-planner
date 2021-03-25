@@ -10,7 +10,8 @@
     <php>
         <ini name="error_reporting" value="-1" />
         <server name="KERNEL_CLASS" value="App\Kernel" />
-        <env name="APP_SECRET" value="191a5940854807ee081eaa57aff30562" />
+        <env name="APP_SECRET" value="SomETestingSecret234" />
+        <env name="GITHUB_CHANGELOG_API_ENDPOINT" value="https://api.github.com/repos/janfriedli/akut-shift-planner/releases" />
         <env name="SYMFONY_DEPRECATIONS_HELPER" value="weak" />
 
         <!-- ###+ doctrine/doctrine-bundle ### -->

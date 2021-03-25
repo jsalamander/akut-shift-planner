@@ -33,7 +33,7 @@ class DefaultController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstr
         $headers = array('Accept' => 'application/json');
         $error = [];
         try {
-            $response = \Unirest\Request::get($this->container->getParameter('repo_changelog'), $headers);
+            $response = \Unirest\Request::get($this->getParameter('github.changelog.api.url'), $headers);
 
         } catch (Exception $e) {
             $error['msg'] = 'Could not load the release data. Check your internet connection or the api endpoint: ' .
