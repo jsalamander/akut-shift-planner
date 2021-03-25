@@ -21,6 +21,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use FOS\UserBundle\Controller\RegistrationController as BaseController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use FOS\UserBundle\Form\Factory\FormFactory;
 
 /**
  * Controller managing the user profile.
@@ -30,6 +31,17 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
  */
 class ProfileController extends BaseController
 {
+
+    private $formFactory;
+
+    private $userManager;
+
+    public function __construct(FormFactory $formFactory, UserManagerInterface $userManager)
+    {
+        $this->formFactory = $formFactory;
+        $this->userManager = $userManager;
+    }
+
     /**
      * Show the user.
      */
@@ -69,22 +81,16 @@ class ProfileController extends BaseController
             return $event->getResponse();
         }
 
-        /** @var $formFactory FactoryInterface */
-        $formFactory = $this->get('fos_user.profile.form.factory');
-
-        $form = $formFactory->createForm();
+        $form = $this->formFactory->createForm();
         $form->setData($user);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var $userManager UserManagerInterface */
-            $userManager = $this->get('fos_user.user_manager');
-
             $event = new FormEvent($form, $request);
             $dispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_SUCCESS, $event);
 
-            $userManager->updateUser($user);
+            $this->userManager->updateUser($user);
 
             if (null === $response = $event->getResponse()) {
                 $url = $this->generateUrl('fos_user_profile_show');
