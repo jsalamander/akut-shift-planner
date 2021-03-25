@@ -29,7 +29,6 @@ class PlanControllerAuthenticatedTest extends WebTestCase
         $this->loginAs($fixtures->getReference('admin-user'), 'main');
         $this->client = $this->makeClient();
         $this->client->request('GET', '/plan');
-        $this->assertEquals(301, $this->client->getResponse()->getStatusCode());
         $this->crawler = $this->client->followRedirect();
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
     }
