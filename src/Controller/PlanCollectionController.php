@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * Plancollection controller.
@@ -21,10 +22,9 @@ class PlanCollectionController extends \Symfony\Bundle\FrameworkBundle\Controlle
      * @Route("/", name="plancollection_index")
      * @Method("GET")
      */
-    public function indexAction(Request $request)
+    public function indexAction(Request $request, PaginatorInterface $paginator)
     {
         $em = $this->getDoctrine()->getManager();
-        $paginator  = $this->get('knp_paginator');
 
         $queryBuilder = $em->getRepository('App:PlanCollection')->createQueryBuilder('p');
         $query = $queryBuilder

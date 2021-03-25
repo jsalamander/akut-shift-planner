@@ -12,6 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * Plan controller.
@@ -26,10 +27,9 @@ class PlanController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstract
      * @Route("/", name="plan_index")
      * @Method("GET")
      */
-    public function indexAction(Request $request)
+    public function indexAction(Request $request, PaginatorInterface $paginator)
     {
         $em = $this->getDoctrine()->getManager();
-        $paginator  = $this->get('knp_paginator');
 
         $queryBuilder = $em->getRepository('App:Plan')->createQueryBuilder('p');
         $query = $queryBuilder
@@ -55,11 +55,9 @@ class PlanController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstract
      * @Route("/templates", name="plan_tempalte_index")
      * @Method("GET")
      */
-    public function indexTemplateAction(Request $request)
+    public function indexTemplateAction(Request $request, PaginatorInterface $paginator)
     {
         $em = $this->getDoctrine()->getManager();
-
-        $paginator  = $this->get('knp_paginator');
 
         $queryBuilder = $em->getRepository('App:Plan')->createQueryBuilder('p');
 

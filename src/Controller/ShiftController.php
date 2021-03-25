@@ -6,6 +6,7 @@ use App\Entity\Shift;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * Shift controller.
@@ -20,10 +21,9 @@ class ShiftController extends \Symfony\Bundle\FrameworkBundle\Controller\Abstrac
      * @Route("/", name="shift_index")
      * @Method("GET")
      */
-    public function indexAction(Request $request)
+    public function indexAction(Request $request, PaginatorInterface $paginator)
     {
         $em = $this->getDoctrine()->getManager();
-        $paginator  = $this->get('knp_paginator');
 
         $query = $em
             ->getRepository('App:Shift')

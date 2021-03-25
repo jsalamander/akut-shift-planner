@@ -8,3 +8,4 @@
 * [ ] Linter
 * [ ] Sast
 * [ ] Dependabot
+* [ ] Bug -> when user already exists and I try to create a new plan with same email this throws a 500

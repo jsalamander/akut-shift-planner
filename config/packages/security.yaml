@@ -21,7 +21,7 @@ security:
         main:
             pattern: ^/
             logout_on_user_change: true
-            user_checker: fos_user.user_checker
+            user_checker: security.user_checker
             form_login:
                 provider: fos_userbundle
                 csrf_token_generator: security.csrf.token_manager
