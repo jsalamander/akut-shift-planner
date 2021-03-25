@@ -19,6 +19,7 @@ class DeletePassedPlansCommandTest extends WebTestCase
 
     public function setUp()
     {
+        self::bootKernel();
         $this->fixtures = $this->loadFixtures(array(
             'App\DataFixtures\LoadCommandData'
         ))->getReferenceRepository();
@@ -37,9 +38,9 @@ class DeletePassedPlansCommandTest extends WebTestCase
         $kernel = self::bootKernel();
         $application = new Application($kernel);
 
-        $templating = $this->getContainer()->get('twig');
-        $em =$this->getContainer()->get('doctrine.orm.entity_manager');
-        $mailer =$this->getContainer()->get('mailer');
+        $templating = self::$container->get('twig');
+        $em =self::$container->get('doctrine.orm.entity_manager');
+        $mailer =self::$container->get('mailer');
         $application->add(new DeletePassedPlansCommand($em, $mailer, $templating));
 
         $command = $application->find('app:delete-passed-plans');
@@ -56,7 +57,8 @@ class DeletePassedPlansCommandTest extends WebTestCase
         $storedPlan = $em->getRepository("App:Plan")->findOneById(
             $this->fixtures->getReference('admin-plan-stored')->getId()
         );
-        $this->assertEquals($this->fixtures->getReference('admin-shift'), $storedPlan->getShifts()[0]);
+
+        $this->assertEquals($this->fixtures->getReference('admin-shift')->getId(), $storedPlan->getShifts()[0]->getId());
         $this->assertEquals($storedPlan->getId(), $this->fixtures->getReference('admin-plan-stored')->getId());
 
         $deletedPlan = $em->getRepository("App:Plan")->findOneById(
@@ -89,9 +91,9 @@ class DeletePassedPlansCommandTest extends WebTestCase
         $kernel = self::bootKernel();
         $application = new Application($kernel);
 
-        $templating = $this->getContainer()->get('twig');
-        $em =$this->getContainer()->get('doctrine.orm.entity_manager');
-        $mailer =$this->getContainer()->get('mailer');
+        $templating = self::$container->get('twig');
+        $em =self::$container->get('doctrine.orm.entity_manager');
+        $mailer =self::$container->get('mailer');
         $application->add(new DeletePassedPlansCommand($em, $mailer, $templating));
 
         $command = $application->find('app:delete-passed-plans');
@@ -132,9 +134,9 @@ class DeletePassedPlansCommandTest extends WebTestCase
         $kernel = self::bootKernel();
         $application = new Application($kernel);
 
-        $templating = $this->getContainer()->get('twig');
-        $em =$this->getContainer()->get('doctrine.orm.entity_manager');
-        $mailer =$this->getContainer()->get('mailer');
+        $templating = self::$container->get('twig');
+        $em =self::$container->get('doctrine.orm.entity_manager');
+        $mailer =self::$container->get('mailer');
         $application->add(new DeletePassedPlansCommand($em, $mailer, $templating));
 
         $command = $application->find('app:delete-passed-plans');
