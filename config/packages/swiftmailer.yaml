@@ -1,0 +1,12 @@
+swiftmailer:
+    url: '%env(MAILER_URL)%'
+    spool:
+        type: file
+        path: '%kernel.project_dir%/app/spool'  
+    transport: '%env(MAILER_TRANSPORT)%'
+    host: '%env(MAILER_HOST)%'
+    username: '%env(MAILER_USER)%'
+    password: '%env(MAILER_PASSWORD)%'
+    encryption: ssl
+    port: 465
+    auth_mode: login

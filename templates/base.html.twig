@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale|split('_')[0] }}">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>{% block title %}{% trans %}shift_planning{% endtrans %}{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.3.0/css/mdb.min.css" rel="stylesheet" crossorigin="anonymous">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.min.css" rel="stylesheet" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/clockpicker/0.0.7/bootstrap-clockpicker.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share-kit/1.0.14/css/social-share-kit.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/components/transition.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/components/dropdown.min.css" />
+        <link rel="stylesheet" href="/css/general.css" />
+        <link rel="stylesheet" href="/css/plan.css" />
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.png') }}" />
+    </head>
+    <body>
+        <nav class="navbar navbar-toggleable-sm navbar-inverse bg-inverse text-nowrap">
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="{{ path('homepage') }}"><i class="fa fa-home" aria-hidden="true"></i> {% trans %}home{% endtrans %}</a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mr-auto">
+                {% if is_granted('ROLE_USER') %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('plan_index') }}"><i class="fa fa-list" aria-hidden="true"></i> {% trans %}plans{% endtrans %}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('plan_tempalte_index') }}"><i class="fa fa-list-alt" aria-hidden="true"></i> {% trans %}templates{% endtrans %}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('plancollection_index') }}"><i class="fa fa-th-list" aria-hidden="true"></i> {% trans %}plan_collection{% endtrans %}</a>
+                    </li>
+                {% endif %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="{{ path('plan_new') }}" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-plus" aria-hidden="true"></i> {{ 'create'|trans }}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="{{ path('plan_new') }}">{% trans %}new{% endtrans %}</a>
+                            <a class="dropdown-item" href="{{ path('plan_new_by_template') }}">{% trans %}new_by_template{% endtrans %}</a>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    {% if is_granted('ROLE_USER') %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-user" aria-hidden="true"></i> {{ 'profile'|trans }}
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="{{ path('fos_user_profile_show') }}">{% trans %}profile{% endtrans %}</a>
+                                <a class="dropdown-item" href="{{ path('shift_index') }}">{% trans %}your_shifts{% endtrans %}</a>
+                            </div>
+                        </li>
+                        <li class="nav-item text-nowrap"><a class="nav-link" href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i> {{ 'logout'|trans }}</a></li>
+                    {% else %}
+                        <li class="nav-item text-nowrap"><a class="nav-link" href="{{ path('fos_user_security_login') }}"><i class="fa fa-sign-in" aria-hidden="true"></i> {% trans %}login{% endtrans %}</a></li>
+                        <li class="nav-item text-nowrap"><a class="nav-link" href="{{ path('fos_user_registration_register') }}"><i class="fa fa-user-plus" aria-hidden="true"></i> {% trans %}register{% endtrans %}</a></li>
+                    {% endif %}
+                    <li class="nav-item text-nowrap"><a class="nav-link" href="{{ path('about') }}"><i class="fa fa-question-circle-o" aria-hidden="true"></i> {{ 'about'|trans }}</a></li>
+                    <li class="nav-item text-nowrap"><a class="nav-link" href="{{ path('changelog') }}"><i class="fa fa-terminal" aria-hidden="true"></i> {% trans %}changelog{% endtrans %}</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="container">
+            <div class="row main-row">
+                {% block body %}{% endblock %}
+            </div>
+        </div>
+        <footer class="footer">
+            <div class="container">
+                <span><small>{{ 'footer_text'|trans }} <a href="mailto:jan.friedli@gmx.ch">Jan Friedli</a></small></span>
+                <span class="pull-right"><small>{{ 'footer_source_code'|trans }}: <a href="https://github.com/janfriedli/akut-shift-planner">GitHub</a></small></span>
+            </div>
+        </footer>
+        {% block javascripts %}{% endblock %}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+        <script src="{{ asset('bundles/bazingajstranslation/js/translator.min.js') }}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-sortable/0.9.13/jquery-sortable-min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.3.2/js/mdb.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/clockpicker/0.0.7/bootstrap-clockpicker.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-dateFormat/1.0/jquery.dateFormat.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share-kit/1.0.14/js/social-share-kit.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/components/transition.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/components/dropdown.min.js"></script>
+        <script src="/js/add-shifts.js"></script>
+        <script src="/js/clock-picker.js"></script>
+        <script src="/js/datepicker.js"></script>
+        <script src="/js/global.js"></script>
+        <script src="/js/new-template.js"></script>
+        <script src="/js/plan-password.js"></script>
+        <script src="/js/translator.min.js"></script>
+        <script src="/js/jquery.ui.touch-punch.min.js"></script>
+        <!-- Piwik -->
+        <script type="text/javascript">
+            var _paq = _paq || [];
+            /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+            _paq.push(["setCookieDomain", "*.schicht-plan.ch"]);
+            _paq.push(['trackPageView']);
+            _paq.push(['enableLinkTracking']);
+            (function() {
+                var u="//piwik.schicht-plan.ch/";
+                _paq.push(['setTrackerUrl', u+'piwik.php']);
+                _paq.push(['setSiteId', '3']);
+                var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+                g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+            })();
+        </script>
+        <!-- End Piwik Code -->
+    </body>
+</html>

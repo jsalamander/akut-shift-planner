@@ -1,0 +1,45 @@
+.main-row {
+    margin-top: 1rem;
+}
+
+.error-list > li {
+    background-color: #F2DEDE !important;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 70px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    line-height: 60px; /* Vertically center the text there */
+    background-color: #f5f5f5;
+}
+
+textarea {
+    padding: 5px !important;
+}
+
+.btn {
+    margin: 0px !important;
+}
+
+.list-index > li {
+    margin-left: 2.5rem;
+    list-style-type: circle;
+}
+
+.fos_user_user_show {
+    float: none;
+    margin: 0 auto;
+}

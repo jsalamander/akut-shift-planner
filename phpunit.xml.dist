@@ -9,8 +9,24 @@
 >
     <php>
         <ini name="error_reporting" value="-1" />
-        <server name="KERNEL_CLASS" value="AppKernel" />
+        <server name="KERNEL_CLASS" value="App\Kernel" />
+        <env name="APP_SECRET" value="SomETestingSecret234" />
+        <env name="GITHUB_CHANGELOG_API_ENDPOINT" value="https://api.github.com/repos/janfriedli/akut-shift-planner/releases" />
         <env name="SYMFONY_DEPRECATIONS_HELPER" value="weak" />
+
+        <!-- ###+ doctrine/doctrine-bundle ### -->
+        <!-- Format described at https://www.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/configuration.html#connecting-using-a-url -->
+        <!-- IMPORTANT: You MUST configure your server version, either here or in config/packages/doctrine.yaml -->
+        <!--  -->
+        <env  name="DATABASE_URL" value="sqlite:///%kernel.project_dir%/var/data.db" />
+        <!-- ###- doctrine/doctrine-bundle ### -->
+
+        <!-- ###+ symfony/swiftmailer-bundle ### -->
+        <!-- For Gmail as a transport, use: "gmail://username:password@localhost" -->
+        <!-- For a generic SMTP server, use: "smtp://localhost:25?encryption=&auth_mode=" -->
+        <!-- Delivery is disabled by default via "null://localhost" -->
+        <env name="MAILER_URL" value="null://localhost"/>
+        <!-- ###- symfony/swiftmailer-bundle ### -->
     </php>
 
     <testsuites>

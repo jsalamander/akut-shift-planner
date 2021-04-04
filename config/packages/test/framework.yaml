@@ -1,0 +1,9 @@
+framework:
+    test: true
+    session:
+        storage_id: session.storage.mock_file
+        name: MOCKSESSID
+liip_functional_test:
+    authentication:
+        username: "admin"
+        password: "12345678"

@@ -1,0 +1,55 @@
+.shifts li {
+    padding: 0.5rem;
+    background-color: rgba(3, 169, 244, 0.05);
+    margin-top: 1rem;
+}
+
+.shifts li:nth-child(even)  {
+    background-color: rgba(96, 125, 139, 0.05);
+}
+
+.drag-handle {
+    cursor: pointer;
+}
+
+.add_shift_link {
+    margin-top: 0.5rem !important;
+}
+
+.shift-card {
+    margin-bottom: 2rem;
+}
+
+.alias-li {
+    padding: .5rem 1rem;
+}
+
+.card-title {
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+}
+
+.card {
+    padding: .8rem;
+}
+
+.enroll-btn {
+    width: 100%;
+}
+
+#plan-title {
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+}
+
+.progress {
+    margin-bottom: .8rem;
+}
+
+.people-list {
+    margin-top: .8rem;
+}

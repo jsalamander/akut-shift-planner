@@ -9,19 +9,14 @@ cache:
 matrix:
   include:
     - php: 7.3
+    - php: 7.4
+
 
 env:
-  - SYMFONY_VERSION="3.4.*" DB=mysql
-
-services:
-    - mysql
-
-before_install:
-  - mysql -e 'create database symfony'
+  - SYMFONY_VERSION="4.4.*"
 
 install:
-  - cp app/config/parameters.yml.dist app/config/parameters.yml
-  - composer install
+  - composer install --ignore-platform-reqs
 
 script:
   - composer test
